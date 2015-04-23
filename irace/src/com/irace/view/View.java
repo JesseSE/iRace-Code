@@ -16,7 +16,7 @@ public class View extends ModelAndView {
 	 * @param sectionName --部分名称：一般分为home，admin
 	 * @param modelName  --模块名：系统具体划分的模块
 	 * @param fileName  --模板文件名
-	 * @param title  --模板文件页面的标题
+	 * @param title  --模板文件，页面的标题
 	 */
 	public View(String sectionName,String modelName,String fileName,String title) {
 		super(sectionName+"/"+modelName+"/"+fileName);
