@@ -1,14 +1,6 @@
-*.class
-
-
-
-
-# Package Files #
-
-
-
+# The class directory
+irace/build/class/
+# Package Files
 *.war
-
-
 *.ear
 
