@@ -1,4 +1,4 @@
-﻿/**
+/**
  * 
  */
 package com.irace.entity;
@@ -7,6 +7,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,19 +22,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name="race")
 public class RaceEntity implements IEntity {
-	public RaceEntity(){
 	
-	}
-	
-	private Integer id = null; //涓婚敭	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id = null; //主键	
 	
 	private Integer organizer;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="organizer",insertable=false,updatable=false)
+	private OrganizerEntity organizerEntity;//
+	
 	private String name;
 	
-	private String type;//比赛的分类
+	private Integer type;//外键，比赛的分类
 	
-	private String grade;//比赛的等级
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="type",insertable=false,updatable=false)
+	private TypeEntity typeEntity;
+	
+	private String grade;//比赛的级别
 	
 	@Column(name="pic_url")
 	private String picUrl;
@@ -44,13 +52,55 @@ public class RaceEntity implements IEntity {
 	@Column(name="end_time")
 	private Date endTime;
 	
-	private int numRest;//每个队伍允许的参加人数
+	private int numRest;//比赛所允许的队伍最大人数
 	
-	private String content;//比赛的描述
+	private String content;//比赛简单介绍
 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public RaceEntity(){}
+	
+	/**
+	 * 新建一个赛
+	 * @param organizer ：举办方
+	 * @param name ：比赛的名字
+	 * @param type ：比赛的类型
+	 * @param grade :比赛的 级别
+	 * @param picUrl ：比赛的logo
+	 * @param startTime :比赛的开始时间
+	 * @param endTime ：比赛的结束时间
+	 * @param numRest ：比赛允许的每个队伍的最大人数
+	 * @param content ：比赛的简单介绍
+	 */
+	public RaceEntity(Integer organizer, String name, Integer type, String grade, 
+			String picUrl,Date startTime, Date endTime, int numRest,String content){
+		this.organizer = organizer;
+		this.name = name;
+		this.type = type;
+		this.grade = grade;
+		this.picUrl = picUrl;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.numRest = numRest;
+		this.content = content;
+	}
+	
+	/**
+	 * 新建一个赛
+	 * @param organizer ：举办方
+	 * @param name ：比赛的名字
+	 */
+	public RaceEntity(Integer organizer, String name){
+		this.organizer = organizer;
+		this.name = name;
+		this.type = null;
+		this.grade = null;
+		this.picUrl = null;
+		this.startTime = null;
+		this.endTime = null;
+		this.numRest = 0;
+		this.content = null;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -61,10 +111,10 @@ public class RaceEntity implements IEntity {
 
 	
 	/*
-	 * 添加外键 参考举办方organizerEntity
+	 * ������ �ο��ٰ췽organizerEntity
 	 */
-	@ManyToOne(targetEntity=OrganizerEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=OrganizerEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getOrganizer() {
 		return organizer;
 	}
@@ -81,11 +131,11 @@ public class RaceEntity implements IEntity {
 		this.name = name;
 	}
 
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 
@@ -135,5 +185,13 @@ public class RaceEntity implements IEntity {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public OrganizerEntity getOrganizerEntity() {
+		return organizerEntity;
+	}
+
+	public void setOrganizerEntity(OrganizerEntity organizerEntity) {
+		this.organizerEntity = organizerEntity;
 	}
 }

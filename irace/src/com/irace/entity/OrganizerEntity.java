@@ -1,5 +1,6 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +10,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="organizer")
 public class OrganizerEntity implements IEntity{
-	public OrganizerEntity(){}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id = null; //涓婚敭
+	private Integer id = null; //主键
 	
 	private String username;
 	
@@ -23,7 +23,45 @@ public class OrganizerEntity implements IEntity{
 	
 	private String city;
 	
-	private String comment;//举办方的描述
+	private String comment;//�ٰ췽������
+	
+	@Column(name="pic_url")
+	private String picUrl;//比赛主办方的logo
+	
+	public OrganizerEntity(){}
+	
+	/**
+	 * 新建一个比赛举办方，主要用于比赛举办方注册模块
+	 * @param username ：用户名
+	 * @param pwd ：用户密码
+	 * @param name ：机构名称
+	 * @param city ：所在的城市
+	 * @param comment ：简单的说明
+	 * @param picUrl ：logo的存储位置
+	 */
+	public OrganizerEntity(String username, String pwd, String name, String city, String comment,String picUrl){
+		this.username = username;
+		this.pwd = pwd;
+		this.name = name;
+		this.city = city;
+		this.comment = comment;
+		this.picUrl = picUrl;		
+	}
+	
+	/**
+	 * 新建一个比赛举办方，主要用于比赛举办方注册模块
+	 * @param username ：用户名
+	 * @param pwd ：用户密码
+	 */
+	public OrganizerEntity(String username, String pwd){
+		this.username = username;
+		this.pwd = pwd;
+		this.name = null;
+		this.city = null;
+		this.comment = null;
+		this.picUrl = null;		
+	}
+	
 
 	public Integer getId() {
 		return id;
@@ -71,6 +109,14 @@ public class OrganizerEntity implements IEntity{
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
 	}
 	
 	

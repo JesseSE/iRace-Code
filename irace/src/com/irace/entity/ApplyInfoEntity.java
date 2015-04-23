@@ -1,6 +1,7 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,19 +13,51 @@ import javax.persistence.Table;
 @Table(name="apply_info")
 public class ApplyInfoEntity implements IEntity{
 
-	public ApplyInfoEntity() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer apply;//外键参考报名表
+	private Integer apply;//报名表，实体ApplyEntity
 	
-	private Integer property; //外键参考资料属性
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="apply",insertable=false,updatable=false)
+	private ApplyEntity applyEntity;//报名表，实体ApplyEntity
+	
+	private Integer property; //资料属性，实体PropertyEntity
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="property",insertable=false,updatable=false)
+	private PropertyEntity propertyEntity;//报名表，实体ApplyEntity
 	
 	private String value;
+	
+
+	public ApplyInfoEntity() {}	
+
+	/**
+	 * 创建报名要求实体,资料争对每一个报名的人
+	 * @param apply ：所属的报名项
+	 * @param property :需要填写的项目的编号
+	 * @param value ：填写的内容
+	 */
+	public ApplyInfoEntity(Integer apply, Integer property, String value) {
+		this.apply = apply;
+		this.property = property;
+		this.value = value;
+	}
+	
+	/**
+	 * 创建报名要求实体,资料争对每一个报名的人,内容放弃填写
+	 * @param apply ：所属的报名项
+	 * @param property :需要填写的项目的编号
+	 */
+	public ApplyInfoEntity(Integer apply, Integer property) {
+		this.apply = apply;
+		this.property = property;
+		this.value = null;
+	}
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -34,11 +67,9 @@ public class ApplyInfoEntity implements IEntity{
 		this.id = id;
 	}
 
-	/*
-	 * 表名表有多个报名资料
-	 */
-	@ManyToOne(targetEntity=ApplyEntity.class)
-	@JoinColumn(name="id")
+	
+//	@ManyToOne(targetEntity=ApplyEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getApply() {
 		return apply;
 	}
@@ -49,11 +80,11 @@ public class ApplyInfoEntity implements IEntity{
 
 	
 	/*
-	 * 添加外键 参PropertyEntity
-	 * 多对一
+	 * ������ ��PropertyEntity
+	 * ���һ
 	 */
-	@ManyToOne(targetEntity=PropertyEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=PropertyEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getProperty() {
 		return property;
 	}
@@ -68,6 +99,22 @@ public class ApplyInfoEntity implements IEntity{
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public ApplyEntity getApplyEntity() {
+		return applyEntity;
+	}
+
+	public void setApplyEntity(ApplyEntity applyEntity) {
+		this.applyEntity = applyEntity;
+	}
+
+	public PropertyEntity getPropertyEntity() {
+		return propertyEntity;
+	}
+
+	public void setPropertyEntity(PropertyEntity propertyEntity) {
+		this.propertyEntity = propertyEntity;
 	}
 	
 	

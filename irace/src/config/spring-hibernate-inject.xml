@@ -15,6 +15,39 @@
 	
     
     
+    <!-- ===================== Advertisment ===========================  -->
+    <bean id="advertismentDao" class="com.irace.dao.impl.AdvertismentDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="advertismentServiceBase" class="com.irace.service.impl.AdvertismentServiceImpl">  
+        <property name="advertismentDao" ref="advertismentDao"></property>
+    </bean>
+    <bean name="advertismentService" parent="transactionProxy">
+        <property name="target" ref="advertismentServiceBase"></property>  
+    </bean>
+    
+    <!-- ===================== Race ===========================  -->
+    <bean id="raceDao" class="com.irace.dao.impl.RaceDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="raceServiceBase" class="com.irace.service.impl.RaceServiceImpl">  
+        <property name="raceDao" ref="raceDao"></property>
+    </bean>
+    <bean name="raceService" parent="transactionProxy">
+        <property name="target" ref="raceServiceBase"></property>  
+    </bean>
+    
+    <!-- ===================== Team ===========================  -->
+    <bean id="teamDao" class="com.irace.dao.impl.TeamDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="teamServiceBase" class="com.irace.service.impl.TeamServiceImpl">  
+        <property name="teamDao" ref="teamDao"></property>
+    </bean>
+    <bean name="teamService" parent="transactionProxy">
+        <property name="target" ref="teamServiceBase"></property>  
+    </bean>
+    
     <!-- ===================== User ===========================  -->
     <bean id="userDao" class="com.irace.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  
@@ -25,6 +58,8 @@
     <bean name="userService" parent="transactionProxy">
         <property name="target" ref="userServiceBase"></property>  
     </bean>
+    
+    
     
     
     

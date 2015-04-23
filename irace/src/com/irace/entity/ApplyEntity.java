@@ -1,6 +1,7 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,24 +12,71 @@ import javax.persistence.Table;
 @Entity
 @Table(name="apply")
 public class ApplyEntity implements IEntity{
-
-	public ApplyEntity() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer user;//外键参考用户表usersEntitty
+	private Integer user;//报名比赛的人，实体是usersEntitty
 	
-	private Integer race;//外键参考比赛表
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="user",insertable=false,updatable=false)
+	private UserEntity userEntity;//报名比赛的人，实体是usersEntitty
 	
-	private Integer group;//外键参考比赛组别groupRace
+	private Integer race;//报名的比赛，实体是RaceEntity
 	
-	private Integer team;//外键参考比赛队伍TeamEntity
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="race",insertable=false,updatable=false)
+	private RaceEntity raceEntity;//报名的比赛，实体是RaceEntity
 	
-	private int status;//标示用户报名状态太
+	private Integer group;//报名的比赛的组别groupRace
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="group",insertable=false,updatable=false)
+	private GroupRaceEntity groupRaceEntity;//报名的比赛的组别groupRace
+	
+	private Integer team;//所参加的队伍，可以为空，TeamEntity
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="team",insertable=false,updatable=false)
+	private TeamEntity teamEntity;//所参加的队伍，可以为空，TeamEntity
+	
+	private int status = 0;//报名的状态 , 0:报名但是为参加小组,1报名且已经发出进组申请, 2报名且已经加入一个小组	
+	
+
+	public ApplyEntity() {}
+	
+	/**
+	 * 创建报名，使用全参数
+	 * @param user ：报名比赛的人
+	 * @param race ：报名参加的比赛
+	 * @param group ：报名参加的组别
+	 * @param team ：报名参加的小组
+	 * @param status ：报名后的状态
+	 */
+	public ApplyEntity(Integer user, Integer race, Integer group, Integer team, int status){
+		this.user = user;
+		this.race = race;
+		this.group = group;
+		this.team = team;
+		this.status = status;
+	}
+	
+	/**
+	 * 报名比赛了，但是还未选择参加哪一个小组
+	 * @param user ：报名比赛的人
+	 * @param race ：报名参加的比赛
+	 * @param group ：报名参加的组别
+	 * @param status ：报名的状态 , 0:报名但是为参加小组,1报名且已经发出进组申请, 2报名且已经加入一个小组	
+	 */
+	public ApplyEntity(Integer user, Integer race, Integer group, int status){
+		this.user = user;
+		this.race = race;
+		this.group = group;
+		this.team = null;
+		this.status = status;
+	}
+	
 
 	public Integer getId() {
 		return id;
@@ -38,8 +86,8 @@ public class ApplyEntity implements IEntity{
 		this.id = id;
 	}
 
-	@ManyToOne(targetEntity=UserEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=UserEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getUser() {
 		return user;
 	}
@@ -48,8 +96,8 @@ public class ApplyEntity implements IEntity{
 		this.user = user;
 	}
 
-	@ManyToOne(targetEntity=RaceEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=RaceEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getRace() {
 		return race;
 	}
@@ -58,8 +106,8 @@ public class ApplyEntity implements IEntity{
 		this.race = race;
 	}
 
-	@ManyToOne(targetEntity=GroupRaceEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=GroupRaceEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getGroup() {
 		return group;
 	}
@@ -68,8 +116,8 @@ public class ApplyEntity implements IEntity{
 		this.group = group;
 	}
 
-	@ManyToOne(targetEntity=TeamEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=TeamEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getTeam() {
 		return team;
 	}
@@ -84,6 +132,38 @@ public class ApplyEntity implements IEntity{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
+	public RaceEntity getRaceEntity() {
+		return raceEntity;
+	}
+
+	public void setRaceEntity(RaceEntity raceEntity) {
+		this.raceEntity = raceEntity;
+	}
+
+	public GroupRaceEntity getGroupRaceEntity() {
+		return groupRaceEntity;
+	}
+
+	public void setGroupRaceEntity(GroupRaceEntity groupRaceEntity) {
+		this.groupRaceEntity = groupRaceEntity;
+	}
+
+	public TeamEntity getTeamEntity() {
+		return teamEntity;
+	}
+
+	public void setTeamEntity(TeamEntity teamEntity) {
+		this.teamEntity = teamEntity;
 	}
 	
 

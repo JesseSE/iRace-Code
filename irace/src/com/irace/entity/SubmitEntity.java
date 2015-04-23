@@ -1,7 +1,8 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,13 +13,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="submit")
 public class SubmitEntity implements IEntity{
-	public SubmitEntity(){}
-	
+		
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer stagte;//外键，参考比赛阶段stageEntity
+	private Integer stagte;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="stagte",insertable=false,updatable=false)
+	private StageEntity stageEntity;//���ʵ��	
 	
 	private String name;
 	
@@ -27,6 +31,35 @@ public class SubmitEntity implements IEntity{
 	@Column(name="file_url")
 	private String fileUrl;
 
+	public SubmitEntity(){}
+	
+	/**
+	 * 阶段性提交物,包含附件
+	 * @param stagte ：所属阶段
+	 * @param name ：提交物名称
+	 * @param content ：提交无描述
+	 * @param fileUrl ：提交物存放路径
+	 */
+	public SubmitEntity(Integer stagte, String name, String content, String fileUrl){
+		this.stagte = stagte;
+		this.name = name;
+		this.content = content;
+		this.fileUrl = fileUrl;
+	}
+	
+	/**
+	 * 阶段性提交物,不包含附件
+	 * @param stagte ：所属阶段
+	 * @param name ：提交物名称
+	 * @param content ：提交无描述
+	 */
+	public SubmitEntity(Integer stagte, String name, String content){
+		this.stagte = stagte;
+		this.name = name;
+		this.content = content;
+		this.fileUrl = null;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -36,10 +69,10 @@ public class SubmitEntity implements IEntity{
 	}
 
 	/*
-	 * 多对一关系，一个阶段有多个提交物
+	 * ���һ��ϵ��һ���׶��ж���ύ��
 	 */
-	@ManyToOne(targetEntity=StageEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=StageEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getStagte() {
 		return stagte;
 	}
@@ -70,5 +103,13 @@ public class SubmitEntity implements IEntity{
 
 	public void setFileUrl(String fileUrl) {
 		this.fileUrl = fileUrl;
+	}
+
+	public StageEntity getStageEntity() {
+		return stageEntity;
+	}
+
+	public void setStageEntity(StageEntity stageEntity) {
+		this.stageEntity = stageEntity;
 	}
 }

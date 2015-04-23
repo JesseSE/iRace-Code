@@ -1,7 +1,8 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,17 +12,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="advertisment")
-public class AdvertismentEntity implements IEntity {
+public class AdvertismentEntity implements IEntity{
 
-	public AdvertismentEntity() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer publisher;//外键，参考用户表userEntity
+	private Integer publisher;//发布广告的用户userEntity
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="publisher",insertable=false,updatable=false)	
+	private UserEntity userEntity;//发布广告的用户userEntity
 	
 	private String link;
 	
@@ -30,6 +31,39 @@ public class AdvertismentEntity implements IEntity {
 	
 	private String content;
 
+	
+
+	public AdvertismentEntity() {}
+	
+	/**
+	 * 构造一个新的广告，全参数
+	 * @param publisher :广告的发布者
+	 * @param link :广告的链接
+	 * @param picUrl :广告的图片链接
+	 * @param content :广告的说明
+	 */
+	public AdvertismentEntity(Integer publisher, String link, String picUrl, String content){
+		this.publisher = publisher;
+		this.link = link;
+		this.picUrl = picUrl;
+		this.content = content;	
+	}
+	
+	/**
+	 * 创建一个不带说明的广告
+	 * @param publisher ：广告的发布者
+	 * @param link ：广告的链接
+	 * @param picUrl ：广告的图片
+	 */
+	public AdvertismentEntity(Integer publisher, String link, String picUrl){
+		this.publisher = publisher;
+		this.link = link;
+		this.picUrl = picUrl;
+		this.content = null;	
+	}
+	
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -38,8 +72,8 @@ public class AdvertismentEntity implements IEntity {
 		this.id = id;
 	}
 
-	@ManyToOne(targetEntity=UserEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=UserEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getPublisher() {
 		return publisher;
 	}
@@ -70,6 +104,14 @@ public class AdvertismentEntity implements IEntity {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
 	}
 	
 	

@@ -1,7 +1,11 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -9,22 +13,89 @@ import javax.persistence.Table;
 @Entity
 @Table(name="team")
 public class TeamEntity implements IEntity{
-	public TeamEntity(){}
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer leader; //外键参考user
+	private Integer leader; //队伍的创建者，队长
 	
-	private Integer group;//外键参考raceGroup
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="leader",insertable=false,updatable=false)
+	private UserEntity userEntity;//队伍的创建者，队长
 	
-	private Integer reward;//外键参考reward
+	private Integer group;//队伍所属的比赛的组别raceGroup
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="group",insertable=false,updatable=false)
+	private GroupRaceEntity groupRaceEntity;//队伍所属的比赛的组别raceGroup
+	
+	private Integer reward;//队伍所获得奖项
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="reward",insertable=false,updatable=false)
+	private RewardEntity rewardEntity;//队伍所获得奖项
 	
 	private String name;
 	
 	@Column(name="pic_url")
 	private String picUrl;
 	
-	private String slogan;//团队口号
+	private String slogan;//队伍的口号
+	
+	public TeamEntity(){}
+	
+	/**
+	 * 创建队伍
+	 * @param leader ：队伍的创建者，队长
+	 * @param group ：队伍所属的比赛的组
+	 * @param reward ：队伍所获得的奖项
+	 * @param name ：队伍的名字
+	 * @param picUrl ：队伍的logo
+	 * @param slogan ：队伍的口号
+	 */
+	public TeamEntity(Integer leader, Integer group, Integer reward,
+			String name, String picUrl, String slogan){
+		this.leader = leader;
+		this.group = group;
+		this.reward = reward;
+		this.name = name;
+		this.picUrl = picUrl;
+		this.slogan = slogan;
+	}
+	
+	/**
+	 * 队长创建队伍,未设置获得奖项，为null
+	 * @param leader ：队伍的创建者，队长
+	 * @param group ：队伍所属的比赛的组
+	 * @param name ：队伍的名字
+	 * @param picUrl ：队伍的logo
+	 * @param slogan ：队伍的口号
+	 */
+	public TeamEntity(Integer leader, Integer group,
+			String name, String picUrl, String slogan){
+		this.leader = leader;
+		this.group = group;
+		this.reward = null;
+		this.name = name;
+		this.picUrl = picUrl;
+		this.slogan = slogan;
+	}
+	
+	/**
+	 * 队长创建队伍,未设置获得奖项，为null,未设置队伍logo和口号，都设置为null;
+	 * @param leader ：队伍的创建者，队长
+	 * @param group ：队伍所属的比赛的组
+	 * @param name ：队伍的名字
+	 */
+	public TeamEntity(Integer leader, Integer group,String name){
+		this.leader = leader;
+		this.group = group;
+		this.reward = null;
+		this.name = name;
+		this.picUrl = null;
+		this.slogan = null;
+	}
 
 	public Integer getId() {
 		return id;
@@ -34,8 +105,8 @@ public class TeamEntity implements IEntity{
 		this.id = id;
 	}
 
-	@ManyToOne(targetEntity=UserEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=UserEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getLeader() {
 		return leader;
 	}
@@ -44,8 +115,8 @@ public class TeamEntity implements IEntity{
 		this.leader = leader;
 	}
 
-	@ManyToOne(targetEntity=GroupRaceEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=GroupRaceEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getGroup() {
 		return group;
 	}
@@ -54,8 +125,8 @@ public class TeamEntity implements IEntity{
 		this.group = group;
 	}
 
-	@ManyToOne(targetEntity=RewardEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=RewardEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getReward() {
 		return reward;
 	}
@@ -86,6 +157,30 @@ public class TeamEntity implements IEntity{
 
 	public void setSlogan(String slogan) {
 		this.slogan = slogan;
+	}
+
+	public UserEntity getUserEntity() {
+		return userEntity;
+	}
+
+	public void setUserEntity(UserEntity userEntity) {
+		this.userEntity = userEntity;
+	}
+
+	public GroupRaceEntity getGroupRaceEntity() {
+		return groupRaceEntity;
+	}
+
+	public void setGroupRaceEntity(GroupRaceEntity groupRaceEntity) {
+		this.groupRaceEntity = groupRaceEntity;
+	}
+
+	public RewardEntity getRewardEntity() {
+		return rewardEntity;
+	}
+
+	public void setRewardEntity(RewardEntity rewardEntity) {
+		this.rewardEntity = rewardEntity;
 	}
 	
 	

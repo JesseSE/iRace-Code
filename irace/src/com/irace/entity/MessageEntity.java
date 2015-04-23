@@ -1,8 +1,8 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import java.sql.Date;
-
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,24 +14,78 @@ import javax.persistence.Table;
 @Table(name="message")
 public class MessageEntity implements IEntity{
 
-	public MessageEntity() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer sender;//外键参考用户表
+	private Integer sender;//发送消息的人，外键实体为userEntity
 	
-	private Integer receiver;//外键参考用户表
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="sender",insertable=false,updatable=false)
+	private UserEntity sUserEntity;
+	
+	private Integer receiver;//接收消息的人，外键的实体为userEntity 
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="receiver",insertable=false,updatable=false)
+	private UserEntity rUserEntity;
 	
 	private Date time;
 	
 	private String content;
 	
-	private int status;//标识消息是否已经被查阅
+	private int status;//消息是否已经被阅读0,1
 
+
+	public MessageEntity() {}
+	
+	/**
+	 * 新建一个消息
+	 * @param sender ：发送者
+	 * @param receiver ：消息接受者
+	 * @param time ：消息发送时的时间
+	 * @param content ：消息的内容
+	 * @param status ：消息的状态，是否被阅读
+	 */
+	public MessageEntity(Integer sender, Integer receiver, Date time, String content, int status) {
+		this.sender = sender;
+		this.receiver = receiver;
+		this.time = time;
+		this.content = content;
+		this.status = status;
+	}
+	
+	/**
+	 * 新建一个消息,消息默认尚未阅读，默认是0
+	 * @param sender ：发送者
+	 * @param receiver ：消息接受者
+	 * @param time ：消息发送时的时间
+	 * @param content ：消息的内容
+	 */
+	public MessageEntity(Integer sender, Integer receiver, Date time, String content) {
+		this.sender = sender;
+		this.receiver = receiver;
+		this.time = time;
+		this.content = content;
+		this.status = 0; //任然需要更改
+	}
+	
+	/**
+	 * 新建一个消息,消息默认尚未阅读，默认是0
+	 * 时间是当前系统时间
+	 * @param sender ：发送者
+	 * @param receiver ：消息接受者
+	 * @param content ：消息的内容
+	 */
+	public MessageEntity(Integer sender, Integer receiver, String content) {
+		this.sender = sender;
+		this.receiver = receiver;		
+		this.content = content;
+		this.time = null;//任然需要设置
+		this.status = 0; //任然需要更改
+	}
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -41,10 +95,10 @@ public class MessageEntity implements IEntity{
 	}
 
 	/*
-	 * 添加外键 参考举办方UserEntity
+	 * ������ �ο��ٰ췽UserEntity
 	 */
-	@ManyToOne(targetEntity=UserEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=UserEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getSender() {
 		return sender;
 	}
@@ -54,10 +108,10 @@ public class MessageEntity implements IEntity{
 	}
 
 	/*
-	 * 添加外键 参考举办方UserEntity
+	 * ������ �ο��ٰ췽UserEntity
 	 */
-	@ManyToOne(targetEntity=UserEntity.class)
-	@JoinColumn(name="id")
+//	@ManyToOne(targetEntity=UserEntity.class)
+//	@JoinColumn(name="id")
 	public Integer getReceiver() {
 		return receiver;
 	}
@@ -89,8 +143,21 @@ public class MessageEntity implements IEntity{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
-	
+
+	public UserEntity getsUserEntity() {
+		return sUserEntity;
+	}
+
+	public void setsUserEntity(UserEntity sUserEntity) {
+		this.sUserEntity = sUserEntity;
+	}
+
+	public UserEntity getrUserEntity() {
+		return rUserEntity;
+	}
+
+	public void setrUserEntity(UserEntity rUserEntity) {
+		this.rUserEntity = rUserEntity;
+	}
 	
 }

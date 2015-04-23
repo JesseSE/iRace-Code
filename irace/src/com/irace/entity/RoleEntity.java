@@ -1,4 +1,4 @@
-﻿package com.irace.entity;
+package com.irace.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="role")
 public class RoleEntity implements IEntity{
-	public RoleEntity(){}
-	
+		
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
@@ -18,6 +17,18 @@ public class RoleEntity implements IEntity{
 	private String name;
 	
 	private String privileges;
+	
+	public RoleEntity(){}
+	
+	/**
+	 * 添加一个角色
+	 * @param name :角色的名字
+	 * @param privileges ：字符产类型
+	 */
+	public RoleEntity(String name, String privileges){
+		this.name = name;
+		this.privileges = privileges;
+	}
 
 	public Integer getId() {
 		return id;
