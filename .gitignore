@@ -4,3 +4,5 @@ irace/build/class/
 *.war
 *.ear
 
+*.classpath
+*.project

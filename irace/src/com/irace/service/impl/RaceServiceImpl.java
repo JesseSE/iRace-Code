@@ -10,6 +10,7 @@ import com.irace.dao.RaceDao;
 import com.irace.entity.RaceEntity;
 import com.irace.service.RaceService;
 import com.irace.util.Constants;
+import com.irace.util.JsonUtil;
 
 /**
  * @author Tracy
@@ -54,33 +55,33 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public List getRaceList(Integer pageNo) {
+	public String getRaceList(Integer pageNo) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM);
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
-	public List getRaceList(Integer pageNo, int type) {
+	public String getRaceList(Integer pageNo, int type) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, type);
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, type));
 	}
 
 	@Override
-	public List getRaceList(Integer pageNo, String keyword) {
+	public String getRaceList(Integer pageNo, String keyword) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword);
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword));
 	}
 
 	@Override
-	public List getRaceListByGrade(Integer pageNo, String grade) {
+	public String getRaceListByGrade(Integer pageNo, String grade) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceListByGrade(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, grade);
+		return JsonUtil.listToJSONString(raceDao.getRaceListByGrade(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, grade));
 	}
 
 	@Override
-	public List getRaceListByTime(Integer pageNo, Date startTime, Date endTime) {
+	public String getRaceListByTime(Integer pageNo, Date startTime, Date endTime) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceListByTime(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime);
+		return JsonUtil.listToJSONString(raceDao.getRaceListByTime(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime));
 	}
 
 	@Override
@@ -90,9 +91,9 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public List getRaceListDetail(int pageNo) {
+	public String getRaceListDetail(int pageNo) {
 		// TODO Auto-generated method stub
-		return raceDao.getRaceListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM);
+		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	

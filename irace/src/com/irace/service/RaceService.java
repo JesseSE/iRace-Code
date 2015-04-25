@@ -14,7 +14,7 @@ import com.irace.entity.RaceEntity;
  */
 public interface RaceService {
 
-public Integer addRace(RaceEntity race);	
+	public Integer addRace(RaceEntity race);	
 	
 	public boolean delRace(Integer id);
 	
@@ -24,9 +24,9 @@ public Integer addRace(RaceEntity race);
 	
 	public RaceEntity getRace(Integer id);
 	
-	public List getRaceList(Integer pageNo);
+	public String getRaceList(Integer pageNo);
 	
-	public List getRaceList(Integer pageNo, int type);
+	public String getRaceList(Integer pageNo, int type);
 	
 	/**
 	 * 通过比赛名称关键字查询得到一个List
@@ -34,7 +34,7 @@ public Integer addRace(RaceEntity race);
 	 * @param keyword
 	 * @return
 	 */
-	public List getRaceList(Integer pageNo, String keyword);
+	public String getRaceList(Integer pageNo, String keyword);
 	
 	/**
 	 * 根据比赛级别进行查询 分页返回
@@ -42,7 +42,7 @@ public Integer addRace(RaceEntity race);
 	 * @param grade
 	 * @return
 	 */
-	public List getRaceListByGrade(Integer pageNo, String grade);
+	public String getRaceListByGrade(Integer pageNo, String grade);
 	
 	/**
 	 * 根据时间区间进行查询 分页返回
@@ -51,7 +51,7 @@ public Integer addRace(RaceEntity race);
 	 * @param endTime
 	 * @return
 	 */
-	public List getRaceListByTime(Integer pageNo, Date startTime, Date endTime);
+	public String getRaceListByTime(Integer pageNo, Date startTime, Date endTime);
 	
 	/**
 	 * 获取包括外键实体	
@@ -65,6 +65,6 @@ public Integer addRace(RaceEntity race);
      * @param pageNo 页号
      * @return
      */
-	public List getRaceListDetail(int pageNo);
+	public String getRaceListDetail(int pageNo);
 	
 }
