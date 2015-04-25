@@ -75,28 +75,22 @@
         $(document).ready(function() {
             $("#submit-btn").click(function(){
                 $.ajax({
-               		<%-- url: <%=request.getContextPath()%>+"/user/login", --%>
-               		url: "<%=request.getContextPath()%>/user/login",
+               		<%-- url: <%=request.getContextPath()%>+"/user/login.act", --%>
+               		url: "<%=request.getContextPath()%>/user/login.act",
                		type: "POST",
                		data: { username: $("#username").val(),
                				password: $("#password").val()
                				},
                		dataType: "JSON",
                		success: function(res) {
-               			//var res = eval("("+obj+")");
-               			
-               			location.href = "";    
+               			console.log(res);
                		},
                		error: function(res) {
                			
                			console.log(res);
                			alert('输入错误！请返回重新输入！');
-
-               			/* document.getElementById("username").value = res.username;
-               			document.getElementById("password").value = res.password; */
-               	
                		}
-               	});				                
+               	});	                
             });
             
         });
