@@ -3,8 +3,7 @@
  */
 package com.irace.service;
 
-import java.sql.Date;
-import java.util.List;
+import java.util.Date;
 
 import com.irace.entity.RaceEntity;
 
