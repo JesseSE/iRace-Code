@@ -1,8 +1,13 @@
 package com.irace.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,11 +50,23 @@ public class SortController {
 	@RequestMapping("sortRace.act")
 	public @ResponseBody String sortAction(
 			@RequestParam(value="sortKeyWords",required=true)String sortKeyWords,
-			@RequestParam(value="pageNum",required=true)int pageNum){
+			@RequestParam(value="currentpagenum",required=true)int pageNum){
 		if(sortKeyWords == "" || pageNum < 0 ){
 			return null;
 		}else{
 			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
+			
+			Iterator<RaceEntity> iter = raceEntityList.iterator();  
+			 while(iter.hasNext())  
+		        {  
+				 	RaceEntity d= iter.next();	
+				 	System.out.println(d.getId());  
+		            System.out.println(d.getName()); 
+		            System.out.println(d.getContent());  
+		            System.out.println(d.getStartTime());  
+		            System.out.println(d.getEndTime());  
+		        }  			
+				System.out.println(JsonUtil.listToJSONString(raceEntityList));		
 			return JsonUtil.listToJSONString(raceEntityList);
 		}
 	}

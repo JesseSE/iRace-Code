@@ -3,7 +3,7 @@
  */
 package com.irace.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -52,6 +52,7 @@ public class RaceEntity implements IEntity {
 	@Column(name="end_time")
 	private Date endTime;
 	
+	@Column(name="num_rest")
 	private int numRest;//比赛所允许的队伍最大人数
 	
 	private String content;//比赛简单介绍

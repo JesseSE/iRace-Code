@@ -7,6 +7,11 @@
 <head>
 <title>${ title }</title>
 	<%@ include file="/public/section/header.jsp"%>
+	
+	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+	
+	
 </head>
 <body>
      <div class="header-top">
@@ -33,7 +38,7 @@
 			<div class="header-bottom-left">
 <!--                网站标题logo-->
 				<div class="logo">
-					<a href="index.html"><img src="images/logo1.png" alt=""/></a>
+					<a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
@@ -135,7 +140,7 @@
 <!--            搜索框，标签等-->
 	   <div class="header-bottom-right">
          <div class="search">	  
-				<input type="text" id="searchinput" name="s" class="textbox" value="${keyword }" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索';}">
+				<input type="text" id="searchinput" name="s" class="textbox" value="${keyword }"  onblur="if (this.value == '') {this.value = '搜索';}">
 				<input type="submit" value="Subscribe" id="searchbutton" name="submit">
 				<div id="response"> </div>
 		 </div>
@@ -175,24 +180,24 @@
 			   <a href="single.html">
 				<div id="race1" class="inner_content clearfix">
 					<div class="product_image">
-						<img src="<%=raceEntity.getPicUrl()%>" alt=""/>
+						<img src="" alt=""/>
 						<div class="float-Bar">
-						<div class="float-Bar_left"><%=raceEntity.getGrade() %></div>
+						<div class="float-Bar_left"></div>
 						<div class="float-Bar_right">关注人数：233</div>
 						</div>
 					</div>
                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
                     <div class="price">
 					   <div class="cart-left">
-							<span class="actual"><%=raceEntity.getName()%></span>
+							<span class="actual"></span>
 							
 							<div class="price1">
-							  <span class="actual"><%=raceEntity.getOrganizerEntity().getName() %>></span>
+							  <span class="actual"></span>
 							</div>
 						</div>
-							  <span class="actual">分类：<%=raceEntity.getTypeEntity().getName() %></span>
+							  <span class="actual">分类：</span>
 							<div class="price1">
-							  <span class="actual" font="0.5em"><%=raceEntity.getStartTime() %>-<%=raceEntity.getEndTime() %></span>
+							  <span class="actual" font="0.5em"></span>
 							</div>
 						<div class="clear"></div>
 					 </div>				
@@ -208,19 +213,13 @@
 			<div class="rsidebar span_1_of_left">
 				<div class="top-border"> </div>
 				 <div class="border">
-	             <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
-	             <link href="css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
-				  <script src="js/jquery.nivo.slider.js"></script>
-				    <script type="text/javascript">
-				    $(window).load(function() {
-				        $('#slider').nivoSlider();
-				    });
-				    </script>
+	             
+				  
 				<div class="slider-wrapper theme-default">
 					<div id="slider" class="nivoSlider">
-					<img src="images/bsgg1.jpg"  alt="" />
-					<img src="images/bsgg2.jpg"  alt="" />
-					<img src="images/t-img3.jpg"  alt="" />
+					<img src="<%=request.getContextPath() %>/public/images/bsgg1.jpg"  alt="" />
+					<img src="<%=request.getContextPath() %>/public/images/bsgg2.jpg"  alt="" />
+					<img src="<%=request.getContextPath() %>/public/images/t-img3.jpg"  alt="" />
 					</div>
 				</div>
               <div class="btn"><a href="single.html">查看公告详情</a></div>
@@ -273,9 +272,11 @@
 	     </div>
 	     
 	   
-	   
-	   
-<script type="text/javascript"> 
+	<%@ include file="/public/section/footer.jsp" %>
+	
+	
+	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
+	<script type="text/javascript"> 
 	var totalPageNum;  //文件列表长度
 	var currentPage; //当前页面
 	var eachPageNum; //每页显示个数
@@ -321,14 +322,17 @@
 		//$("#searchkeyword").html(searchKeyWord);
 	    //document.getElementById("searchinput").value = searchKeyWord;
 		//load();
-	    searchRace();
+		
+		$('#slider').nivoSlider();
+		
+	    initValue();
+		searchRace();
+		
 	    //点击查询按钮开始新的搜索
-		$("#searchbutton").clik(function(){
+		$("#searchbutton").click(function(){
 			initValue();
+			searchRace();
 			
-			if(checkKeyWord()){
-				searchRace();
-			}			
 		});
 	    
 	});
@@ -343,10 +347,12 @@
 	}
 	
 	function searchRace(){
-		 $.ajax({
-        		url: $("#appName").val()+"/user/sort",
+		
+		if(checkKeyWord()){
+			$.ajax({
+        		url: $("#appName").val()+"/user/sortRace.act",
         		type: "POST",
-        		data: { searchword: $("#searchinput").val(),
+        		data: { sortKeyWords: $("#searchinput").val(),
         				currentpagenum: currentPage
         			  },
         		dataType: "JSON",
@@ -358,7 +364,9 @@
         			console.log(res);
         			alert('输入错误！请返回重新输入！');
         		}   
-		});
+			});
+		}	
+		 
 		
 	}
 		
