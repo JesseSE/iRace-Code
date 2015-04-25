@@ -194,4 +194,12 @@ public class RaceEntity implements IEntity {
 	public void setOrganizerEntity(OrganizerEntity organizerEntity) {
 		this.organizerEntity = organizerEntity;
 	}
+
+	public TypeEntity getTypeEntity() {
+		return typeEntity;
+	}
+
+	public void setTypeEntity(TypeEntity typeEntity) {
+		this.typeEntity = typeEntity;
+	}
 }
