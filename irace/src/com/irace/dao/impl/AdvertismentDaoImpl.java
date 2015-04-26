@@ -33,7 +33,7 @@ public class AdvertismentDaoImpl extends SDao implements AdvertismentDao{
 
 	@Override
 	public AdvertismentEntity getAdvertismentDetail(int id) {
-		this.hql = "FROM AdvertismentEntity AS a inner join fetch userEntity AS u where a.id=?";
+		this.hql = "FROM AdvertismentEntity AS a inner join fetch a.userEntity AS u where a.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (AdvertismentEntity)query.uniqueResult();	
@@ -50,7 +50,7 @@ public class AdvertismentDaoImpl extends SDao implements AdvertismentDao{
 
 	@Override
 	public List getAdvertismentListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM AdvertismentEntity AS a inner join fetch userEntity AS u";
+		this.hql = "FROM AdvertismentEntity AS a inner join fetch a.userEntity AS u";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

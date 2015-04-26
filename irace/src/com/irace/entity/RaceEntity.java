@@ -60,6 +60,34 @@ public class RaceEntity implements IEntity {
 	
 	public RaceEntity(){}
 	
+	
+	/**
+	 * 新建一个赛
+	 * @param organizer ：举办方
+	 * @param name ：比赛的名字
+	 * @param type ：比赛的类型
+	 * @param grade :比赛的 级别
+	 * @param picUrl ：比赛的logo
+	 * @param startTime :比赛的开始时间
+	 * @param endTime ：比赛的结束时间
+	 * @param numRest ：比赛允许的每个队伍的最大人数
+	 * @param content ：比赛的简单介绍
+	 */
+	public RaceEntity(Integer id, Integer organizer, String name, Integer type, String grade, 
+			String picUrl,Date startTime, Date endTime, int numRest,String content){
+		this.id = id;
+		this.organizer = organizer;
+		this.name = name;
+		this.type = type;
+		this.grade = grade;
+		this.picUrl = picUrl;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.numRest = numRest;
+		this.content = content;
+	}
+	
+	
 	/**
 	 * 新建一个赛
 	 * @param organizer ：举办方

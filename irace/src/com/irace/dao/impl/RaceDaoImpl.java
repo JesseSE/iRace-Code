@@ -3,7 +3,7 @@
  */
 package com.irace.dao.impl;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -56,9 +56,9 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 
 	@Override
 	public List getRaceList(Integer pageNo, Integer pageItemNum, String keyword) {
-		this.hql = "FROM RaceEntity AS r WHERE r.name=?";
+		this.hql = "FROM RaceEntity AS r WHERE r.name like ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setString(0,keyword);
+		query.setString(0,"%"+keyword+"%");
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		return query.list();
@@ -107,7 +107,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	
 	@Override
 	public RaceEntity getRaceDetail(int id){
-		this.hql = "FROM RaceEntity AS r inner join fetch organizerEntity AS o where r.id=?";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o where r.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (RaceEntity)query.uniqueResult();	
@@ -115,7 +115,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	
 	@Override
 	public List getRaceListDetail(int pageNo,int pageItemNum){
-		this.hql = "FROM RaceEntity AS r inner join fetch organizerEntity AS o";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

@@ -33,7 +33,7 @@ public class PropertyDaoImpl extends SDao implements PropertyDao{
 
 	@Override
 	public PropertyEntity getPropertyDetail(int id) {
-		this.hql = "FROM PropertEntity AS p inner join fetch raceEntity AS r where p.id=?";
+		this.hql = "FROM PropertEntity AS p inner join fetch p.raceEntity AS r where p.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (PropertyEntity)query.uniqueResult();	
@@ -50,7 +50,7 @@ public class PropertyDaoImpl extends SDao implements PropertyDao{
 
 	@Override
 	public List getPropertyListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM PropertEntity AS p inner join fetch raceEntity AS r";
+		this.hql = "FROM PropertEntity AS p inner join fetch p.raceEntity AS r";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

@@ -34,7 +34,7 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 
 	@Override
 	public GroupRaceEntity getGroupRaceDetail(int id) {
-		this.hql = "FROM GroupRaceEntity AS g inner join fetch raceEntity AS r where g.id=?";
+		this.hql = "FROM GroupRaceEntity AS g inner join fetch g.raceEntity AS r where g.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (GroupRaceEntity)query.uniqueResult();	
@@ -51,7 +51,7 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 
 	@Override
 	public List getGroupRaceListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM GroupRaceEntity AS g inner join fetch raceEntity AS r";
+		this.hql = "FROM GroupRaceEntity AS g inner join fetch g.raceEntity AS r";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

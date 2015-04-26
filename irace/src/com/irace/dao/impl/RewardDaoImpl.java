@@ -41,7 +41,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 
 	@Override
 	public RewardEntity getRewardDetail(int id) {
-		this.hql = "FROM RewardEntity AS r inner join fetch groupRaceEntity AS g where r.id=?";
+		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g where r.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (RewardEntity)query.uniqueResult();	
@@ -60,7 +60,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 
 	@Override
 	public List getRewardListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM RewardEntity AS r inner join fetch groupRaceEntity AS g";
+		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

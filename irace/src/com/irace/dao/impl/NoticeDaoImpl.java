@@ -42,7 +42,7 @@ public class NoticeDaoImpl extends SDao implements NoticeDao {
 	
 	@Override
 	public NoticeEntity getNoticeDetail(int id) {
-		this.hql = "FROM NoticeEntity AS n inner join fetch raceEntity AS r where n.id=?";
+		this.hql = "FROM NoticeEntity AS n inner join fetch n.raceEntity AS r where n.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (NoticeEntity)query.uniqueResult();	
@@ -62,7 +62,7 @@ public class NoticeDaoImpl extends SDao implements NoticeDao {
 
 	@Override
 	public List getNoticeListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM NoticeEntity AS n inner join fetch raceEntity AS r";
+		this.hql = "FROM NoticeEntity AS n inner join fetch n.raceEntity AS r";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

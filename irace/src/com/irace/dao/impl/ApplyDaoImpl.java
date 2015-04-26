@@ -33,7 +33,7 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 
 	@Override
 	public ApplyEntity getApplyDetail(int id) {
-		this.hql = "FROM ApplyEntity AS a inner join fetch userEntity AS u inner join fetch raceEntity AS r inner join fetch groupRaceEntity AS g left join fetch teamEntity AS t where a.id=?";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity AS u inner join fetch a.raceEntity AS r inner join fetch a.groupRaceEntity AS g left join fetch a.teamEntity AS t where a.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (ApplyEntity)query.uniqueResult();	
@@ -50,7 +50,7 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 
 	@Override
 	public List getApplyListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM ApplyEntity AS a inner join fetch userEntity AS u inner join fetch raceEntity AS r inner join fetch groupRaceEntity AS g left join fetch teamEntity AS t";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity AS u inner join fetch a.raceEntity AS r inner join fetch a.groupRaceEntity AS g left join fetch a.teamEntity AS t";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

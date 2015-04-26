@@ -34,7 +34,7 @@ public class SubmitDaoImpl extends SDao implements SubmitDao{
 
 	@Override
 	public SubmitEntity getSubmitDetail(int id) {
-		this.hql = "FROM SubmitEntity AS s inner join fetch stageEntity AS s where s.id=?";
+		this.hql = "FROM SubmitEntity AS s inner join fetch s.stageEntity AS st where s.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (SubmitEntity)query.uniqueResult();
@@ -51,7 +51,7 @@ public class SubmitDaoImpl extends SDao implements SubmitDao{
 
 	@Override
 	public List getSubmitListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM SubmitEntity AS s inner join fetch stageEntity AS s";
+		this.hql = "FROM SubmitEntity AS s inner join fetch s.stageEntity AS st";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);

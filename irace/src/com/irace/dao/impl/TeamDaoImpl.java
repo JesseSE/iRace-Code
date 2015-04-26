@@ -33,7 +33,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 
 	@Override
 	public TeamEntity getTeamDetail(int id) {
-		this.hql = "FROM TeamEntity AS t inner join fetch userEntity AS u inner join fetch groupRaceEntity AS g left join fetch rewardEntity AS r where t.id=?";
+		this.hql = "FROM TeamEntity AS t inner join fetch t.userEntity AS u inner join fetch t.groupRaceEntity AS g left join fetch t.rewardEntity AS r where t.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (TeamEntity)query.uniqueResult();
@@ -50,7 +50,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 
 	@Override
 	public List getTeamListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM RaceEntity AS r inner join fetch organizerEntity AS oFROM TeamEntity AS t inner join fetch userEntity AS u inner join fetch groupRaceEntity AS g left join fetch rewardEntity AS r";
+		this.hql = "FROM TeamEntity AS t inner join fetch t.userEntity AS u inner join fetch t.groupRaceEntity AS g left join fetch t.rewardEntity AS r";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
