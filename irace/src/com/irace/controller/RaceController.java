@@ -41,29 +41,32 @@ public class RaceController extends SController {
 		if( pageNum < 0 ){
 			return null;
 		}else{
-			System.out.println("开始在数据库中查询");
-			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum);
-			System.out.println(pageNum);  
-			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
-			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
+//			System.out.println("开始在数据库中查询");
+//			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum);
+//			System.out.println(pageNum);  
+//			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
+//			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
+//			
+//			 while(iter.hasNext()) {  				
+//			 	RaceEntity d= iter.next();	
+//			 	System.out.println(d.getId());  
+//		 	    System.out.println(d.getOrganizer());
+//                System.out.println(d.getName()); 
+//	            System.out.println(d.getContent());  
+//	            System.out.println(d.getStartTime());  
+//	            System.out.println(d.getEndTime());  
+//	            
+//	            RaceEntity mRace = new RaceEntity(d.getId(),
+//	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
+//	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
+//	            
+//	            raceEntityList1.add(mRace);
+//	        } 
+//			 
+//			return JsonUtil.listToJSONString(raceEntityList1);
 			
-			 while(iter.hasNext()) {  				
-			 	RaceEntity d= iter.next();	
-			 	System.out.println(d.getId());  
-		 	    System.out.println(d.getOrganizer());
-                System.out.println(d.getName()); 
-	            System.out.println(d.getContent());  
-	            System.out.println(d.getStartTime());  
-	            System.out.println(d.getEndTime());  
-	            
-	            RaceEntity mRace = new RaceEntity(d.getId(),
-	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
-	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
-	            
-	            raceEntityList1.add(mRace);
-	        } 
-			 
-			return JsonUtil.listToJSONString(raceEntityList1);
+			
+			return null;
 		}
 	}
 	
@@ -75,28 +78,29 @@ public class RaceController extends SController {
 		if( pageNum < 0 ){
 			return null;
 		}else{
-			System.out.println("开始在数据库中查询");
-			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum,chooseItem);
-			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
-			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
-			
-			 while(iter.hasNext()) {  				
-			 	RaceEntity d= iter.next();	
-			 	System.out.println(d.getId());  
-		 	    System.out.println(d.getOrganizer());
-                System.out.println(d.getName()); 
-	            System.out.println(d.getContent());  
-	            System.out.println(d.getStartTime());  
-	            System.out.println(d.getEndTime());  
-	            
-	            RaceEntity mRace = new RaceEntity(d.getId(),
-	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
-	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
-	            
-	            raceEntityList1.add(mRace);
-	        } 
-			 
-			return JsonUtil.listToJSONString(raceEntityList1);
+//			System.out.println("开始在数据库中查询");
+//			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum,chooseItem);
+//			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
+//			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
+//			
+//			 while(iter.hasNext()) {  				
+//			 	RaceEntity d= iter.next();	
+//			 	System.out.println(d.getId());  
+//		 	    System.out.println(d.getOrganizer());
+//                System.out.println(d.getName()); 
+//	            System.out.println(d.getContent());  
+//	            System.out.println(d.getStartTime());  
+//	            System.out.println(d.getEndTime());  
+//	            
+//	            RaceEntity mRace = new RaceEntity(d.getId(),
+//	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
+//	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
+//	            
+//	            raceEntityList1.add(mRace);
+//	        } 
+//			 
+//			return JsonUtil.listToJSONString(raceEntityList1);
+			return null;
 		}
 	}
 	
@@ -109,28 +113,29 @@ public class RaceController extends SController {
 		if( pageNum < 0 ){
 			return null;
 		}else{
-			System.out.println("开始在数据库中查询");
-			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum);
-			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
-			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
-			
-			 while(iter.hasNext()) {  				
-			 	RaceEntity d= iter.next();	
-			 	System.out.println(d.getId());  
-		 	    System.out.println(d.getOrganizer());
-                System.out.println(d.getName()); 
-	            System.out.println(d.getContent());  
-	            System.out.println(d.getStartTime());  
-	            System.out.println(d.getEndTime());  
-	            
-	            RaceEntity mRace = new RaceEntity(d.getId(),
-	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
-	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
-	            
-	            raceEntityList1.add(mRace);
-	        } 
-			 
-			return JsonUtil.listToJSONString(raceEntityList1);
+//			System.out.println("开始在数据库中查询");
+//			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum);
+//			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
+//			Iterator<RaceEntity> iter = raceEntityList.iterator();  			 
+//			
+//			 while(iter.hasNext()) {  				
+//			 	RaceEntity d= iter.next();	
+//			 	System.out.println(d.getId());  
+//		 	    System.out.println(d.getOrganizer());
+//                System.out.println(d.getName()); 
+//	            System.out.println(d.getContent());  
+//	            System.out.println(d.getStartTime());  
+//	            System.out.println(d.getEndTime());  
+//	            
+//	            RaceEntity mRace = new RaceEntity(d.getId(),
+//	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
+//	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
+//	            
+//	            raceEntityList1.add(mRace);
+//	        } 
+//			 
+//			return JsonUtil.listToJSONString(raceEntityList1);
+			return null;
 		}
 	}
 }

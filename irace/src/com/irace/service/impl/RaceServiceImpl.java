@@ -19,7 +19,7 @@ import com.irace.util.JsonUtil;
 public class RaceServiceImpl implements RaceService {
 
 	RaceDao raceDao = null;
-	
+
 	public void setRaceDao(RaceDao raceDao) {
 		this.raceDao = raceDao;
 	}
@@ -57,31 +57,36 @@ public class RaceServiceImpl implements RaceService {
 	@Override
 	public String getRaceList(Integer pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
 	public String getRaceList(Integer pageNo, int type) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, type));
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, type));
 	}
 
 	@Override
 	public String getRaceList(Integer pageNo, String keyword) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword));
+		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, keyword));
 	}
 
 	@Override
 	public String getRaceListByGrade(Integer pageNo, String grade) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceListByGrade(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, grade));
+		return JsonUtil.listToJSONString(raceDao.getRaceListByGrade(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, grade));
 	}
 
 	@Override
 	public String getRaceListByTime(Integer pageNo, Date startTime, Date endTime) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceListByTime(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime));
+		return JsonUtil.listToJSONString(raceDao.getRaceListByTime(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime));
 	}
 
 	@Override
@@ -93,9 +98,60 @@ public class RaceServiceImpl implements RaceService {
 	@Override
 	public String getRaceListDetail(int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
+		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
-	
+	@Override
+	public String getRaceListDetail(int pageNo, String keyword) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, keyword));
+	}
+
+	@Override
+	public String getRaceListBySortedStartTime(int pageNo, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedStartTime(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc));
+	}
+
+	@Override
+	public String getRaceListBySortedEndTime(int pageNo, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedEndTime(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc));
+	}
+
+	@Override
+	public String getRaceListBySortedHotPoint(int pageNo, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedHotPoint(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc));
+	}
+
+	@Override
+	public String getRaceListBySortedStartTime(int pageNo, String keyword,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedStartTime(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc));
+	}
+
+	@Override
+	public String getRaceListBySortedEndTime(int pageNo, String keyword,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedEndTime(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc));
+	}
+
+	@Override
+	public String getRaceListBySortedHotPoint(int pageNo, String keyword,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedHotPoint(
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc));
+	}
 
 }

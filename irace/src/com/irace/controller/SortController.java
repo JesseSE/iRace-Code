@@ -56,7 +56,7 @@ public class SortController {
 		
 		if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
 				orderByXX != 3 && orderByXX != 4) || (orderByAD !=1 && orderByAD !=2) ){
-			return null;
+			return null;  //这个地方有问题  不应该这样写
 		}else{
 			System.out.println(sortKeyWords);
 			System.out.println(pageNum);
@@ -64,22 +64,24 @@ public class SortController {
 			System.out.println(orderByAD);
 			System.out.println("开始在数据库中查询");
 			
-			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
-			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
-			Iterator<RaceEntity> iter = raceEntityList.iterator();  
-			
-			
-			 while(iter.hasNext()) {  				
-			 	RaceEntity d= iter.next();	
-	            
-	            RaceEntity mRace = new RaceEntity(d.getId(),
-	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
-	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
-	            
-	            raceEntityList1.add(mRace);
-	        } 
-			 
-			return JsonUtil.listToJSONString(raceEntityList1);
+//			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
+//			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
+//			Iterator<RaceEntity> iter = raceEntityList.iterator();  
+//			
+//			
+//			 while(iter.hasNext()) {  				
+//			 	RaceEntity d= iter.next();	
+//	            
+//	            RaceEntity mRace = new RaceEntity(d.getId(),
+//	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
+//	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
+//	            
+//	            raceEntityList1.add(mRace);
+//	        } 
+//			 
+//			return JsonUtil.listToJSONString(raceEntityList1);
+			//这个地方为了简化你们控制层  我把从list到json串的封装写到了Service层
+			return raceService.getRaceList(pageNum, sortKeyWords);
 		}
 	}
 	

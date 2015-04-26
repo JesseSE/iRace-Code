@@ -66,4 +66,60 @@ public interface RaceService {
      */
 	public String getRaceListDetail(int pageNo);
 	
+	/**
+	 * 通过关键字获取包括外键实体list的json串
+	 * @param pageNo
+	 * @param keyword
+	 * @return
+	 */
+	public String getRaceListDetail(int pageNo, String keyword);
+	
+	/**
+	 * 通过开始时间的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedStartTime(int pageNo, boolean isAsc);
+	
+	/**
+	 * 通过结束时间的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedEndTime(int pageNo, boolean isAsc);
+	
+	/**
+	 * 通过热度的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedHotPoint(int pageNo, boolean isAsc);
+	
+	/**
+	 * 通过开始时间的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedStartTime(int pageNo, String keyword, boolean isAsc);
+	
+	/**
+	 * 通过结束时间的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedEndTime(int pageNo, String keyword, boolean isAsc);
+	
+	/**
+	 * 通过热度的排序方式和页码得到实体类list的json串
+	 * @param pageNo
+	 * @param isAsc 是否按照升序
+	 * @return
+	 */
+	public String getRaceListBySortedHotPoint(int pageNo, String keyword, boolean isAsc);
+	
 }

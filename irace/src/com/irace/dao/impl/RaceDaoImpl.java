@@ -121,4 +121,55 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
+
+	@Override
+	public List getRaceListDetail(int pageNo, Integer pageItemNum,
+			String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
+			boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
+			String keyword, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
+			String keyword, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
+			String keyword, boolean isAsc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }
