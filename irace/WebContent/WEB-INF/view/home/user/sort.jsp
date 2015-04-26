@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>- 
+	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,12 +38,12 @@
 			<div class="header-bottom-left">
 <!--                网站标题logo-->
 				<div class="logo">
-					<a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
+					<a href="<%=request.getContextPath() %>/index.jsp"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
 	            <ul class="megamenu skyblue">
-			<li class="active grid"><a href="index.html">主页</a></li>
+			<li class="active grid"><a href="<%=request.getContextPath() %>/index.jsp">主页</a></li>
 			<li><a class="color4" href="#">理学类</a>
 				<div class="megapanel">
 					<div class="row">
@@ -158,53 +158,26 @@
                	<div class="sort-by">
 				    <h2 class="head" style = "display:inline;">热门比赛</h2>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 按属性排序：</label>
-		            <select style="margin-left:10px;">
-		                            <option value=""> 热度</option>
-                                    <option value=""> 开始时间 </option>
-		                            <option value="">结束时间 </option>
-									<option value="">级别 </option>
+		            <select id="orderBy" style="margin-left:10px;">
+		                            <option value="1"> 热度</option>
+                                    <option value="2"> 开始时间 </option>
+		                            <option value="3">结束时间 </option>
+									<option value="4">级别 </option>
 
 		            </select>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 排序方式：</label>
-		            <select style="margin-left:10px;">
-		                            <option value=""> 正序</option>
-                                    <option value=""> 倒序 </option>
+		            <select id="orderByAD" style="margin-left:10px;">
+		                            <option value="1"> 正序</option>
+                                    <option value="2"> 倒序 </option>
 		            </select>
                </div>
     		</div>
 
 			<!--第一排-->
-			<div class="top-box">
+		<!-- 	<div class="top-box" id="raceContent"> -->
+		<div id="raceContent">
 			
-			 <div class="col_1_of_3 span_1_of_3"> 
-			   <a href="single.html">
-				<div id="race1" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left"></div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual"></span>
-							
-							<div class="price1">
-							  <span class="actual"></span>
-							</div>
-						</div>
-							  <span class="actual">分类：</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em"></span>
-							</div>
-						<div class="clear"></div>
-					 </div>				
-                   </div>
-                 </a>
-				</div>	
-			</div>
+		</div>
 			
 			<div class="clear"></div>
 		  </div>
@@ -218,7 +191,7 @@
 				<div class="slider-wrapper theme-default">
 					<div id="slider" class="nivoSlider">
 					<img src="<%=request.getContextPath() %>/public/images/bsgg1.jpg"  alt="" />
-					<img src="<%=request.getContextPath() %>/public/images/bsgg2.jpg"  alt="" />
+					<img src="<%=request.getContextPath() %>/public/images/bsgg1.jpg"  alt="" />
 					<img src="<%=request.getContextPath() %>/public/images/t-img3.jpg"  alt="" />
 					</div>
 				</div>
@@ -240,16 +213,14 @@
 	</div>
 	<!--分页-->
 				<div align = "center" >
-				<a href="#" class="myButton">上一页</a>
-				<select class="" name="" id="page">
-				<option id="jumppage" value="0">请选择页码</option>
-		                            <option value="1">1</option>
-                                    <option value="2">2</option>
-		                            <option value="3">3</option>
-									<option value="4">4</option>
-
+				<a href="#" class="myButton" id="prePage">上一页</a>
+				<select class="" name="" id="jumppage">					
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+					<option value="4">4</option>
 		        </select>
-				<a href="#" class="myButton">下一页</a>
+				<a href="#" class="myButton" id="nextPage">下一页</a>
 				</div>
 	</div>
 	</div>
@@ -294,34 +265,44 @@
 	
 	//前一页
 	function prePage(){
-		if(currentPage > 1)
+		if(currentPage > 1){
 			currentPage = currentPage -1;
-		else
-			Alert("已经是第一页了哦！");
+			document.getElementById("jumppage").value = currentPage;
+			return true;
+		}else{
+			alert("已经是第一页了哦！");
+			return false;
+		}
 	}
 	
 	//下一页
 	function nextPage(){
-		if(currentPage < totalPageNum)
-			currentPage++;
-		else
-			Alert("已经是最后一页了哦！")
+		if(currentPage < totalPageNum){
+			currentPage = currentPage + 1;
+			document.getElementById("jumppage").value = currentPage;
+			return true;
+		}else{
+			alert("已经是最后一页了哦！");
+			return false;
+		}
+			
 	}
 	
 	//跳转到XXX页
 	function goToPage(){
-		currentPage = document.getElementById("jumppage").value;
+		var selectPage = document.getElementById("jumppage").value;
+		if(selectPage < totalPageNum){
+			currentPage = selectPage;
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	
 	
 	//Ajax函数
-	$(document).ready(function(){
-		//获取主页传递过来的查询关键字
-		//searchKeyWord = seesion.get("searchkeywordfromindex");
-		//$("#searchkeyword").html(searchKeyWord);
-	    //document.getElementById("searchinput").value = searchKeyWord;
-		//load();
+	$(document).ready(function(){		
 		
 		$('#slider').nivoSlider();
 		
@@ -331,11 +312,47 @@
 	    //点击查询按钮开始新的搜索
 		$("#searchbutton").click(function(){
 			initValue();
-			searchRace();
-			
+			if(checkKeyWord()){
+				searchRace();
+			}else
+				alert("请输入关键字！");
 		});
 	    
+	    //点击前一页
+	    $("#prePage").click(function(){
+	    	if(prePage())
+	    		searchRace();
+	    });
+	  //点击后一页
+	    $("#nextPage").click(function(){
+	    	if(nextPage())	    	
+	    		searchRace();
+	    });
+	  //选择页面
+	    $("#jumppage").change(function(){
+	    	if(goToPage())	    	
+	    		searchRace();
+	    });
+	  //点击排序方式方式
+	    $("#orderBy").change(function(){	    	
+	    	initValue();
+			if(checkKeyWord()){
+				searchRace();
+			}else
+				alert("请输入关键字！");
+	    });
+	  
+	    //点击升序降序排序搜索结果
+	    $("#orderByAD").change(function(){	    	
+	    	initValue();
+			if(checkKeyWord()){
+				searchRace();
+			}else
+				alert("请输入关键字！");
+	    });
+	    
 	});
+	
 	
 	function checkKeyWord(){
 		if($("#searchinput").val() == ""){
@@ -346,28 +363,81 @@
 			return true;
 	}
 	
+	
 	function searchRace(){
+		//排序选项
+		var orderByXX = document.getElementById("orderBy").value;			
+		//升序降序
+		var orderByAD = document.getElementById("orderByAD").value;		
+		
 		
 		if(checkKeyWord()){
 			$.ajax({
         		url: $("#appName").val()+"/user/sortRace.act",
         		type: "POST",
         		data: { sortKeyWords: $("#searchinput").val(),
-        				currentpagenum: currentPage
+        				currentpagenum: currentPage,
+        				orderByXX: orderByXX,
+        				orderByAD: orderByAD
         			  },
         		dataType: "JSON",
-        		success: function(res) {
-        			
-        			console.log(res); 
+        		success: function(res) {           		
+        			showResult(res);        			
         		},
         		error: function(res) {        			
         			console.log(res);
         			alert('输入错误！请返回重新输入！');
         		}   
 			});
-		}	
-		 
+		}
+	}
+	
+	function showResult(res){		
+		var race = eval(res);  
+		console.log(res);        	
 		
+		var htmlText = "";
+		var cursor = 0;
+		for(var i=0;i<2;i++){
+			 htmlText = htmlText + "<div class='top-box'>";
+			for(var j=0;j<3;j++){
+				if(cursor<race.length){
+				   htmlText = htmlText + 
+       				 "<div class='col_1_of_3 span_1_of_3'>"+
+   					 "<a href='single.html'>"+
+   					 "<div id='race1' class='inner_content clearfix'>"+
+   					 "<div class='product_image'>"+
+   					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
+   					 "<div class='float-Bar'>"+
+   					 "<div class='float-Bar_left'>"+race[cursor].grade+"</div>"+
+   					 "<div class='float-Bar_right'>关注人数：233</div>"+
+   					 "</div></div>"+
+   					 "<div class='sale-box'><span class='on_sale title_shop'>New</span></div>"+
+   					 "<div class='price'>"+
+   					 "<div class='cart-left'>"+
+   					 "<span class='actual'>"+race[cursor].name+"</span>"+
+   					 "<div class='price1'>"+
+   					 "<span class='actual'>"+race[cursor].organizer+"</span>"+
+   					 "</div> </div>"+
+   					 "<span class='actual'>分类："+race[cursor].type+"</span>"+
+   					 "<div class='price1'>"+
+   					 "<span class='actual' font='0.5em'>"+race[cursor].startTime.date+"</span>"+
+   					 "</div>"+
+   					 "<div class='clear'></div>"+
+   					 "</div></div></a></div>";
+   					 
+				   cursor++;
+				}
+				
+				htmlText = htmlText + "</div>";
+					
+			}
+			
+		}
+		if(htmlText =="")
+			$("#raceContent").html(	"没有内容哦");
+		else
+			$("#raceContent").html(htmlText);
 	}
 		
 </script> 

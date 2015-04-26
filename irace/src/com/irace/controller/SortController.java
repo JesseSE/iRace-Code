@@ -7,16 +7,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.dao.impl.RaceDaoImpl;
 import com.irace.entity.RaceEntity;
 import com.irace.service.RaceService;
-import com.irace.util.InfoCode;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
@@ -45,29 +43,44 @@ public class SortController {
 	 * 查询处理方法
 	 * @param sortKeyKords	
 	 * @param pageNum
+	 * @param orderByAD 按照升序降序排列（1 2）
+	 * @param orderByXX 按照热度，时间，等级等排序（1 2 3 4）
 	 * @return
 	 */
 	@RequestMapping("sortRace.act")
 	public @ResponseBody String sortAction(
 			@RequestParam(value="sortKeyWords",required=true)String sortKeyWords,
-			@RequestParam(value="currentpagenum",required=true)int pageNum){
-		if(sortKeyWords == "" || pageNum < 0 ){
+			@RequestParam(value="currentpagenum",required=true)int pageNum,
+			@RequestParam(value="orderByXX",required=true)int orderByXX,
+			@RequestParam(value="orderByAD",required=true)int orderByAD){
+		
+		if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
+				orderByXX != 3 && orderByXX != 4) || (orderByAD !=1 && orderByAD !=2) ){
 			return null;
 		}else{
-			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
+			System.out.println(sortKeyWords);
+			System.out.println(pageNum);
+			System.out.println(orderByXX);
+			System.out.println(orderByAD);
+			System.out.println("开始在数据库中查询");
 			
+			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
+			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
 			Iterator<RaceEntity> iter = raceEntityList.iterator();  
-			 while(iter.hasNext())  
-		        {  
-				 	RaceEntity d= iter.next();	
-				 	System.out.println(d.getId());  
-		            System.out.println(d.getName()); 
-		            System.out.println(d.getContent());  
-		            System.out.println(d.getStartTime());  
-		            System.out.println(d.getEndTime());  
-		        }  			
-				System.out.println(JsonUtil.listToJSONString(raceEntityList));		
-			return JsonUtil.listToJSONString(raceEntityList);
+			
+			
+			 while(iter.hasNext()) {  				
+			 	RaceEntity d= iter.next();	
+	            
+	            RaceEntity mRace = new RaceEntity(d.getId(),
+	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
+	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
+	            
+	            raceEntityList1.add(mRace);
+	        } 
+			 
+			return JsonUtil.listToJSONString(raceEntityList1);
 		}
 	}
+	
 }
