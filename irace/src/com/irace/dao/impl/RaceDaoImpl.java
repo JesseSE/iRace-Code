@@ -125,50 +125,105 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListDetail(int pageNo, Integer pageItemNum,
 			String keyword) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.name likes ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0,"%"+keyword+"%");
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	@Override
 	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.startTime ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.startTime DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	@Override
 	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.endTime ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.endTime DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
-
+    //目前数据库里无此项
 	@Override
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.hot ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity ORDER BY r.hot DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	@Override
 	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.startTime ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.startTime DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, "%"+keyword+"%");
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	@Override
 	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.endTime ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.endTime DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, "%"+keyword+"%");
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	@Override
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
-		// TODO Auto-generated method stub
-		return null;
+		if(isAsc){
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.hot ASC";
+		}
+		else{
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.keyword like ? ORDER BY r.hot DESC";
+		}
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setString(0, "%"+keyword+"%");
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 
 	
