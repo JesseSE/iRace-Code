@@ -17,7 +17,7 @@ public class BigTypeEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id; //比赛大分类分类的主键	
 	private String name; //比赛大分类分类的名字
-	private Set<TypeEntity> typeEntities = new HashSet<TypeEntity>();  
+	//private Set<TypeEntity> typeEntities = new HashSet<TypeEntity>();  
 
 	public BigTypeEntity() {}
 	
@@ -44,13 +44,13 @@ public class BigTypeEntity {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy="bigTypeEntity")  
+	/*@OneToMany(mappedBy="bigTypeEntity")  
 	public Set<TypeEntity> getTypeEntities() {
 		return typeEntities;
 	}
 
 	public void setTypeEntities(Set<TypeEntity> typeEntities) {
 		this.typeEntities = typeEntities;
-	}
+	}*/
 
 }
