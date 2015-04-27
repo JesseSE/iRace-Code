@@ -7,6 +7,10 @@
 <head>
 <title>${ title }</title>
 	<%@ include file="/public/section/header.jsp"%>
+	
+	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+	
 </head>
 <body>
 	
@@ -15,8 +19,8 @@
 		<div class="wrap">
 			<div class="cssmenu">
 				<ul>
-					<li><a href="login.html">登录</a></li> |
-					<li><a href="register.html">注册</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
+					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -76,7 +80,7 @@
             $("#submit-btn").click(function(){
                 $.ajax({
                		<%-- url: <%=request.getContextPath()%>+"/user/login.act", --%>
-               		url: "<%=request.getContextPath()%>/user/login.act",
+               		url: $("#appName").val()+"/user/login.act",
                		type: "POST",
                		data: { username: $("#username").val(),
                				password: $("#password").val()

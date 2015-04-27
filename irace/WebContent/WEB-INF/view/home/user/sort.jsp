@@ -24,8 +24,8 @@
 					<li><a href="checkout.html">Wishlist</a></li> |
 					<li><a href="checkout.html">Checkout</a></li> |
 -->
-					<li><a href="login.html">登录</a></li> |
-					<li><a href="register.html">注册</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
+					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>

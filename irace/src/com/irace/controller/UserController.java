@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class UserController extends SController {
 	UserService userService;
 	
 	/**
-	 * 控制器测试
+	 * 鎺у埗鍣ㄦ祴璇�
 	 * @return
 	 */
 	@RequestMapping("test")
@@ -42,7 +43,7 @@ public class UserController extends SController {
 	
 	
 	/**
-	 * 登录页面
+	 * 鐧诲綍椤甸潰
 	 * @return
 	 */
 	@RequestMapping("login")
@@ -51,7 +52,7 @@ public class UserController extends SController {
 	}
 	
 	/**
-	 * 登录处理方法
+	 * 鐧诲綍澶勭悊鏂规硶
 	 * @param username
 	 * @param pwd
 	 * @return
@@ -59,17 +60,25 @@ public class UserController extends SController {
 	@RequestMapping("login.act")
 	public @ResponseBody String loginAction(
 			@RequestParam(value="username",required=true)String username,
-			@RequestParam(value="password",required=true)String password){
+			@RequestParam(value="password",required=true)String password,
+			HttpSession session){
 		
 		
 		
 		//userService = new UserService(username);
 		UserEntity user = userService.getUser(username);
+		boolean flag = userService.login(username, password, session);
+		if(flag){
+			return JsonUtil.getJsonInfoOK();
+		}else{
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"UNKNOWN");
+		}
+		
 		
 		//int result=InfoCode.OK;
 		//PrintWriter out = response.getWriter();
 		
-		if(user == null){
+		/*if(user == null){
 			//out.print("{\"username\":"+username+", \"password\":\""+password+"\"}");
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"UNKNOWN");
 		}else{
@@ -78,22 +87,22 @@ public class UserController extends SController {
 				return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"OTHER_ERROR");
 			}else{
 				//out.print(result);
-				return JsonUtil.getJsonInfo(InfoCode.OK,"OK");
+				return JsonUtil.getJsonInfoOK();
 			}
-		}
+		}*/
 	}
 	
 	/**
-	 * 注册页面
+	 * 娉ㄥ唽椤甸潰
 	 * @return
 	 */
 	@RequestMapping("register")
 	public View registPage() {
-		return new View("home", "user", "regist", "注册");
+		return new View("home", "user", "register", "用户注册");
 	}
 	
 	/**
-	 * 注册处理方法
+	 * 娉ㄥ唽澶勭悊鏂规硶
 	 * @param username
 	 * @param pwd
 	 * @return

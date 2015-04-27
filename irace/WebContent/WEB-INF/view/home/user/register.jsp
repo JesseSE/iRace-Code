@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>注册页面</title>
-<meta name="viewport"
+<!-- <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="/irace/public/css/style.css" rel="stylesheet" type="text/css"
@@ -19,7 +19,7 @@
 	href='/irace/public/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css'
 	rel='stylesheet' type='text/css'>
 
-<!-- start menu -->
+start menu
 <link href="/irace/public/css/megamenu.css" rel="stylesheet"
 	type="text/css" media="all" />
 <script type="text/javascript" src="/irace/public/js/megamenu.js"></script>
@@ -33,19 +33,28 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){$(".megamenu").megamenu();});
-</script>
+</script> -->
+
+<%@ include file="/public/section/header.jsp"%>
+
+<link href="<%=request.getContextPath()%>/public/css/default.css"
+	rel="stylesheet" type="text/css" media="all" />
+<link href="<%=request.getContextPath()%>/public/css/nivo-slider.css"
+	rel="stylesheet" type="text/css" media="all" />
+
+
 </head>
 <body>
 	<%
 		request.setCharacterEncoding("UTF-8");
 	%>
-	<input type="hidden" name="appName" id="appName" value="<% %>" />
+	<%-- <input type="hidden" name="appName" id="appName" value="<% %>" /> --%>
 	<div class="header-top">
 		<div class="wrap">
 			<div class="cssmenu">
 				<ul>
-					<li><a href="login.html">登录</a></li> |
-					<li><a href="register.html">注册</a></li>
+					<li><a href="<%=request.getContextPath()%>/user/login">登录</a></li>
+					<li><a href="<%=request.getContextPath()%>/user/register">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -153,7 +162,7 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="button" class="grey" id="submit-btn">提交</button>
+						<button type="submit" class="grey" id="submit-btn">提交</button>
 						<button type="reset" class="grey" style="margin-left: 20px;">重置</button>
 						<!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 					</div>
@@ -168,11 +177,11 @@
 				            	if (yanzheng() != 1) {
 									//document.getElementById("joinus").submit();
 									alert("提交失败，请重新操作！");
-									return;
+									location.href = $("#appName").val()+"/user/register";
 								}
 				                $.ajax({
 			                		<%-- url: <%=request.getContextPath()%>+"/user/regist", --%>
-			                		url: $("#appName").val()+"/user/register",
+			                		url: $("#appName").val()+"/user/register.act",
 			                		type: "POST",
 			                		data: { username: $("#username").val(),
 			                				password: $("#password").val(),
