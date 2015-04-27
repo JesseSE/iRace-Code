@@ -10,7 +10,7 @@
 	
 	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
-	
+
 	
 </head>
 <body>
@@ -24,8 +24,8 @@
 					<li><a href="checkout.html">Wishlist</a></li> |
 					<li><a href="checkout.html">Checkout</a></li> |
 -->
-					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
-					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
+					<li><a href="login.html">登录</a></li> |
+					<li><a href="register.html">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -42,99 +42,87 @@
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
-	            <ul class="megamenu skyblue">
-			<li class="active grid"><a href="<%=request.getContextPath() %>/index.jsp">主页</a></li>
-			<li><a class="color4" href="#">理学类</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>数学</h4>
-								<ul>
-									<li><a href="womens.html">金牌杯数学竞赛</a></li>
-									<li><a href="womens.html">中国奥林匹克大赛</a></li>
-									<li><a href="womens.html">全国高中数学联赛</a></li>
-									<li><a href="womens.html">全国研究生数学竞赛</a></li>
-								</ul>	
-							</div>							
+	            <ul class="megamenu skyblue" id="addMenu">
+	            
+	            
+	            <li class="active grid"><a href="index.html">主页</a></li>
+				<li><a class="color4" href="#">理学类</a>
+					<div class="megapanel">
+						<div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
+						  <div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
 						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>物理</h4>
-								<ul>
-									<li><a href="womens.html">全国中学生物理大赛</a></li>
-									<li><a href="womens.html">全国物理实验大赛</a></li>
-								</ul>	
-							</div>							
+					</li>		
+					
+					<li><a class="color4" href="#">工学类</a>
+					<div class="megapanel">
+						<div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
+						  <div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
 						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>生物</h4>
-								<ul>
-									<li><a href="womens.html">全国生物竞赛</a></li>
-									<li><a href="womens.html">生物研究大赛</a></li>
-									<li><a href="womens.html">亚洲生物医学未来领袖大赛</a></li>
-								</ul>	
-							</div>												
-						</div>
-					  </div>
-					</div>
-				</li>				
-				<li><a class="color5" href="#">工学类</a>
-				<div class="megapanel">
-					<div class="col1">
-							<div class="h_nav">
-								<h4>电子信息</h4>
-								<ul>
-									<li><a href="mens.html">电子信息科技大赛</a></li>
-									<li><a href="mens.html">光电科学大赛</a></li>
-									<li><a href="mens.html">电子知识大赛</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>土木建筑</h4>
-								<ul>
-									<li><a href="mens.html">土木创新大赛</a></li>
-									<li><a href="mens.html">建筑创新设计大赛</a></li>
-									<li><a href="mens.html">Round-Shaped</a></li>
-									<li><a href="mens.html">Oval-Shaped</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>计算机</h4>
-								<ul>
-									<li><a href="mens.html">软件杯创新大赛</a></li>
-									<li><a href="mens.html">服务外包大赛</a></li>
-									<li><a href="mens.html">新软攀峰大赛</a></li>
-									<li><a href="mens.html">Hi-index</a></li>
-									<li><a href="mens.html">Progressive</a></li>
-								</ul>	
-							</div>												
-						</div>
-					</div>
-				</li>
-				<li><a class="color6" href="other.html">综合类</a>
-				<div class="megapanel">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>国家级</h4>
-								<ul>
-									<li><a href="mens.html">大学生创业大赛</a></li>
-									<li><a href="mens.html">国家知识竞赛</a></li>
-									<li><a href="mens.html">电子商务大赛</a></li>
-									<li><a href="mens.html">Hi-index</a></li>
-									<li><a href="mens.html">Progressive</a></li>
-								</ul>	
-							</div>												
-						</div>
-				</div>
-				</li>
-				<li><a class="color7" href="other.html">关注</a></li>
-			</ul>
+					</li>			
+	            
+	            
+			
+				</ul>
 			</div>
 		</div>
 <!--            搜索框，标签等-->
@@ -303,9 +291,13 @@
 	
 	//Ajax函数
 	$(document).ready(function(){		
+		$(".inner_content").hover(function() {
+	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
+	    });
 		
 		$('#slider').nivoSlider();
-		
+		//testMenu();
+		getMenu();
 	    initValue();
 		searchRace();
 		
@@ -393,7 +385,7 @@
 	}
 	
 	function showResult(res){		
-		var race = eval(res);  
+		var race = eval(res);   
 		console.log(res);        	
 		
 		var htmlText = "";
@@ -405,7 +397,7 @@
 				   htmlText = htmlText + 
        				 "<div class='col_1_of_3 span_1_of_3'>"+
    					 "<a href='single.html'>"+
-   					 "<div id='race1' class='inner_content clearfix'>"+
+   					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
    					 "<div class='float-Bar'>"+
@@ -417,7 +409,7 @@
    					 "<div class='cart-left'>"+
    					 "<span class='actual'>"+race[cursor].name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual'>"+race[cursor].organizer+"</span>"+
+   					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
    					 "</div> </div>"+
    					 "<span class='actual'>分类："+race[cursor].type+"</span>"+
    					 "<div class='price1'>"+
@@ -439,10 +431,119 @@
 		else
 			$("#raceContent").html(htmlText);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	function getMenu(){	
+		$.ajax({
+       		url: $("#appName").val()+"/user/getMenu.act",
+       		type: "POST",
+       		data: {},
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showMenu(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('菜单栏加载失败');
+       		}   
+		});
+	}
+	
+	
+	function showMenu(res){		
+		console.log(res);   
+		var menuList = eval(res);  	
+		var menuText = "<li class='active grid'><a href='index.html'>主页</a></li>";
+		var consor = 0;
 		
+		for(var i=0; i< menuList.length;i++){
+			consor = 0;
+			menuText = menuText +
+				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
+				"<div class='megapanel'>";
+			for(var j=0; j<((menuList[i].length/2)+1);j++){
+				menuText = menuText + "<div class='row'>";
+					
+				if(consor < menuList[i].length){
+					menuText = menuText +
+						"<div class='col1'>" +
+						"<div class='h_nav'>" +
+						"<ul>" +
+						"<li><a href='womens.html'><h4>"+ menuList[i].organizerEntity.name  +"</h4></a></li>" +
+						"</ul>" +
+						"</div>" +
+						"</div>";
+					consor ++;
+				}
+				if(consor < menuList[i].length){
+					menuText = menuText +
+						"<div class='col1'>" +
+						"<div class='h_nav'>" +
+						"<ul>" +
+						"<li><a href='womens.html'><h4>"+  menuList[i].organizerEntity.name +"</h4></a></li>" +
+						"</ul>" +
+						"</div>" +
+						"</div>";
+					consor ++;
+				}				
+				menuText = menuText + "</div>";
+			}
+			menuText = menuText + "</div>";			
+			menuText = menuText + "</li>" ;
+		}
+		
+		
+		if(menuText =="")
+			$("#addMenu").html("没有内容哦");
+		else
+			$("#addMenu").html(menuText);
+	} 
+	
+	function testMenu(){		
+		//console.log(res);   
+		//var menuList = eval(res);  	
+		var menuText = "";
+		
+		menuText = menuText +
+			"<li class='active grid'><a href='index.html'>主页</a></li>" +
+			"<li><a class='color4' href='index.html'>理学类</a>" +
+			"<div class='megapanel'>" +
+			"<div class='row'>" +
+			"<div class='col1'>" +
+			"<div class='h_nav'>" +
+			"<ul>" +
+			"<li><a href='womens.html'><h4>金</h4></a></li>" +
+			"</ul>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col1'>" +
+			"<div class='h_nav'>" +
+			"<ul>" +
+			"<li><a href='womens.html'><h4>金牌竞赛</h4></a></li>" +
+			"</ul>" +
+			"</div>"
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"</li>" ;
+		
+			
+		if(menuText =="")
+			$("#addMenu").html("没有内容哦");
+		else
+			$("#addMenu").html(menuText);
+	}
+	
+	
+	
+	
 </script> 
 	
-     
-	     
 </body>
 </html>
