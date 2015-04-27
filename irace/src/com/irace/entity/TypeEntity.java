@@ -1,9 +1,13 @@
 package com.irace.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,27 +19,25 @@ public class TypeEntity {
     private Integer id; //比赛分类的主键	
 	private String name; //比赛分类的名字
 	
-//	private Integer inType; //该分类属于哪一个分类，参考TypeEntity，外键	
-//	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="in_type",insertable=false,updatable=false)
-//	private TypeEntity inTypeEntity; //分类所属外键，参考自己
-//	
-//	@OneToMany
-//	private List hasTypeEntity;//该分类拥有的
-//	
+	@Column(name="big_type")
+	private Integer bigType; //比赛大分类外键
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="big_type",insertable=false,updatable=false)
+	private BigTypeEntity bigTypeEntity; //大分类实体
+	
 	public TypeEntity() {}
-//	
-//	/**
-//	 * 增加比赛分类
-//	 * @param name ：分类的名字
-//	 * @param inType ：分类的父分类
-//	 */
-//	public TypeEntity(String name, Integer inType) {
-//		this.name = name;
-//		this.inType = inType;
-//	}
-//
+	
+	/**
+	 * 新建小分类
+	 * @param name
+	 * @param bigType
+	 */
+	public TypeEntity(String name, Integer bigType) {
+		this.name = name;
+		this.bigType = bigType;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -51,21 +53,20 @@ public class TypeEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-//
-//	public Integer getInType() {
-//		return inType;
-//	}
-//
-//	public void setInType(Integer inType) {
-//		this.inType = inType;
-//	}
-//
-//	public TypeEntity getInTypeEntity() {
-//		return inTypeEntity;
-//	}
-//
-//	public void setInTypeEntity(TypeEntity inTypeEntity) {
-//		this.inTypeEntity = inTypeEntity;
-//	}
-	
+
+	public Integer getBigType() {
+		return bigType;
+	}
+
+	public void setBigType(Integer bigType) {
+		this.bigType = bigType;
+	}
+
+	public BigTypeEntity getBigTypeEntity() {
+		return bigTypeEntity;
+	}
+
+	public void setBigTypeEntity(BigTypeEntity bigTypeEntity) {
+		this.bigTypeEntity = bigTypeEntity;
+	}
 }
