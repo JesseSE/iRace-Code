@@ -25,8 +25,8 @@
 <!--           登录注册菜单模块-->
 			 <div class="cssmenu">
 				<ul>
-					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
-					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
+					<li><a href="login.html">登录</a></li> |
+					<li><a href="register.html">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -43,50 +43,83 @@
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
-	            <ul class="megamenu skyblue">
-			<li class="active grid"><a href="index.html">主页</a></li>
-			<li><a class="color4" href="#">理学类</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>数学</h4>
-								<h4>物理</h4>	
-								<h4>生物</h4>
-							</div>							
+	          <ul class="megamenu skyblue" id="addMenu">
+    
+	            <li class="active grid"><a href="index.html">主页</a></li>
+				<li><a class="color4" href="#">理学类</a>
+					<div class="megapanel">
+						<div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
+						  <div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
 						</div>
-					  </div>
-					</div>
-				</li>				
-				<li><a class="color5" href="#">工学类</a>
-				<div class="megapanel">
-					<div class="col1">
-							<div class="h_nav">
-								<h4>电子信息</h4>	
-							</div>							
+					</li>		
+					
+					<li><a class="color4" href="#">工学类</a>
+					<div class="megapanel">
+						<div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
+						  <div class="row">
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>
+							<div class="col1">
+								<div class="h_nav">							
+									<ul>
+										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
+									</ul>	
+								</div>							
+							</div>					
+						  </div>
 						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>土木建筑</h4>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>计算机</h4>	
-							</div>												
-						</div>
-					</div>
-				</li>
-				<li><a class="color6" href="other.html">综合类</a>
-				<div class="megapanel">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>国家级</h4>
-							</div>												
-						</div>
-				</div>
-				</li>
-			</ul>
+					</li>					
+				</ul>
 			</div>
 		</div>
 <!--            搜索框，标签等-->
@@ -152,16 +185,16 @@
 				    <h2 class="head" style = "display:inline;">热门比赛</h2>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 按属性排序：</label>
 		            <select id="orderBy" style="margin-left:10px;">
-		                            <option value=""> 热度</option>
-                                    <option value=""> 开始时间 </option>
-		                            <option value="">结束时间 </option>
-									<option value="">级别 </option>
+		                            <option value="3"> 热度</option>
+                                    <option value="1"> 开始时间 </option>
+		                            <option value="2">结束时间 </option>
+									<option value="4">级别 </option>
 
 		            </select>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 排序方式：</label>
 		            <select id="orderByAD" style="margin-left:10px;">
-		                            <option value=""> 正序</option>
-                                    <option value=""> 倒序 </option>
+		                            <option value="1"> 正序</option>
+                                    <option value="0"> 倒序 </option>
 		            </select>
                </div>
     		</div>
@@ -301,7 +334,11 @@
 		$('#slider').nivoSlider();	
 	    initValue();
 	    load();
-	    });
+	    
+		testMenu();
+		//getMenu();
+	    initValue();
+		searchRace();
 	    		
 	    //点击查询按钮开始新的搜索
 		$("#searchbutton").click(function(){
@@ -337,10 +374,10 @@
 	    //点击升序降序排序搜索结果
 	    $("#orderByAD").change(function(){	    	
 	    	initValue();
-				load();s
+				load();
 	    });
 	    
-	    
+	 });  
 
 	    	
 	function checkKeyWord(){
@@ -356,7 +393,7 @@
 			$.ajax({
         		url: $("#appName").val()+"/user/homepageShow.act",
         		type: "POST",
-        		data: {currentpagenum: currentPage},
+        		data: {currentpagenum:currentPage},
         		dataType: "JSON",
         		success: function(res) {   
         			showResult(res);
@@ -369,6 +406,28 @@
         		}   
 			});		
 	}
+	
+	function jump(){
+		var orderByType = document.getElementById("orderBy").value;			
+		var orderByAD = document.getElementById("orderByAD").value;	
+		$.ajax({
+    		url: $("#appName").val()+"/user/homepageJump.act",
+    		type: "POST",
+    		data: {currentpagenum:currentPage,
+    			   orderByType:orderByType,
+    			   orderByAD:orderByAD},
+    		dataType: "JSON",
+    		success: function(res) {   
+    			showResult(res);
+    	
+    			
+    		},
+    		error: function(res) {        			
+    			console.log(res);
+    			alert('你访问的页面出错了！');
+    		}   
+		});		
+}
 	
 	function showResult(res){		
 		var race = eval(res);  
@@ -416,6 +475,107 @@
 			$("#raceContent").html(	"没有内容哦");
 		else
 			$("#raceContent").html(htmlText);
+	}
+	
+	function getMenu(){	
+		$.ajax({
+       		url: $("#appName").val()+"/user/getMenu.act",
+       		type: "POST",
+       		data: {},
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showMenu(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('菜单栏加载失败');
+       		}   
+		});
+	}
+	
+	
+	function showMenu(res){		
+		console.log(res);   
+		var menuList = eval(res);  	
+		var menuText = "<li class='active grid'><a href='index.html'>主页</a></li>";
+		var consor = 0;
+		
+		for(var i=0; i< menuList.length;i++){
+			consor = 0;
+			menuText = menuText +
+				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
+				"<div class='megapanel'>";
+			for(var j=0; j<((menuList[i].length/2)+1);j++){
+				menuText = menuText + "<div class='row'>";
+					
+				if(consor < menuList[i].length){
+					menuText = menuText +
+						"<div class='col1'>" +
+						"<div class='h_nav'>" +
+						"<ul>" +
+						"<li><a href='womens.html'><h4>"+ menuList[i].organizerEntity.name  +"</h4></a></li>" +
+						"</ul>" +
+						"</div>" +
+						"</div>";
+					consor ++;
+				}
+				if(consor < menuList[i].length){
+					menuText = menuText +
+						"<div class='col1'>" +
+						"<div class='h_nav'>" +
+						"<ul>" +
+						"<li><a href='womens.html'><h4>"+  menuList[i].organizerEntity.name +"</h4></a></li>" +
+						"</ul>" +
+						"</div>" +
+						"</div>";
+					consor ++;
+				}				
+				menuText = menuText + "</div>";
+			}
+			menuText = menuText + "</div>";			
+			menuText = menuText + "</li>" ;
+		}
+		
+		
+		if(menuText =="")
+			$("#addMenu").html("没有内容哦");
+		else
+			$("#addMenu").html(menuText);
+	} 
+	
+	function testMenu(){		
+		//console.log(res);   
+		//var menuList = eval(res);  	
+		var menuText = "";
+		
+		menuText = menuText +
+			"<li class='active grid'><a href='index.html'>主页</a></li>" +
+			"<li><a class='color4' href='index.html'>理学类</a>" +
+			"<div class='megapanel'>" +
+			"<div class='row'>" +
+			"<div class='col1'>" +
+			"<div class='h_nav'>" +
+			"<ul>" +
+			"<li><a href='womens.html'><h4>金</h4></a></li>" +
+			"</ul>" +
+			"</div>" +
+			"</div>" +
+			"<div class='col1'>" +
+			"<div class='h_nav'>" +
+			"<ul>" +
+			"<li><a href='womens.html'><h4>金牌竞赛</h4></a></li>" +
+			"</ul>" +
+			"</div>"
+			"</div>" +
+			"</div>" +
+			"</div>" +
+			"</li>" ;
+		
+			
+		if(menuText =="")
+			$("#addMenu").html("没有内容哦");
+		else
+			$("#addMenu").html(menuText);
 	}
 			
 </script> 	     
