@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="type")
 public class TypeEntity {
@@ -23,7 +24,7 @@ public class TypeEntity {
 	private Integer bigType; //比赛大分类外键
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="big_type",insertable=false,updatable=false)
+	@JoinColumn(name="big_type",insertable=false,updatable=false) 
 	private BigTypeEntity bigTypeEntity; //大分类实体
 	
 	public TypeEntity() {}
@@ -62,6 +63,9 @@ public class TypeEntity {
 		this.bigType = bigType;
 	}
 
+
+	//@ManyToOne(cascade=CascadeType.ALL)
+	//@JoinColumn(name="bigTypeEntityId")
 	public BigTypeEntity getBigTypeEntity() {
 		return bigTypeEntity;
 	}

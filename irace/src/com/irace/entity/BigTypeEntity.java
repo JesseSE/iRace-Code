@@ -3,10 +3,14 @@ package com.irace.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,7 +21,9 @@ public class BigTypeEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id; //比赛大分类分类的主键	
 	private String name; //比赛大分类分类的名字
-	//private Set<TypeEntity> typeEntities = new HashSet<TypeEntity>();  
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=TypeEntity.class, cascade=CascadeType.ALL, mappedBy="bigTypeEntity")
+	//@JoinColumns(value={@JoinColumn(name="id",referencedColumnName="id")})  
+	private Set<TypeEntity> typeEntities = new HashSet<TypeEntity>();  
 
 	public BigTypeEntity() {}
 	
@@ -44,13 +50,15 @@ public class BigTypeEntity {
 		this.name = name;
 	}
 
-	/*@OneToMany(mappedBy="bigTypeEntity")  
+	//@OneToMany(mappedBy="bigTypeEntity", targetEntity=TypeEntity.class)
+	//@JoinColumn(name="bigTypeEntityId")
+	
 	public Set<TypeEntity> getTypeEntities() {
 		return typeEntities;
 	}
 
 	public void setTypeEntities(Set<TypeEntity> typeEntities) {
 		this.typeEntities = typeEntities;
-	}*/
+	}
 
 }
