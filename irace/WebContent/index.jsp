@@ -25,8 +25,8 @@
 <!--           登录注册菜单模块-->
 			 <div class="cssmenu">
 				<ul>
-					<li><a href="login.html">登录</a></li> |
-					<li><a href="register.html">注册</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
+					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
