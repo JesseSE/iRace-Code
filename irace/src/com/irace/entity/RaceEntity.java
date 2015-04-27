@@ -56,6 +56,9 @@ public class RaceEntity implements IEntity {
 	private int numRest;//比赛所允许的队伍最大人数
 	
 	private String content;//比赛简单介绍
+	
+	@Column(name="focus_num")
+	private int focusNum = 0;//比赛的关注人数
 
 	
 	public RaceEntity(){}
@@ -72,9 +75,10 @@ public class RaceEntity implements IEntity {
 	 * @param endTime ：比赛的结束时间
 	 * @param numRest ：比赛允许的每个队伍的最大人数
 	 * @param content ：比赛的简单介绍
+	 * @param foucsNum :比赛的关注人数
 	 */
 	public RaceEntity(Integer id, Integer organizer, String name, Integer type, String grade, 
-			String picUrl,Date startTime, Date endTime, int numRest,String content){
+			String picUrl,Date startTime, Date endTime, int numRest,String content,int focusNum){
 		this.id = id;
 		this.organizer = organizer;
 		this.name = name;
@@ -85,6 +89,7 @@ public class RaceEntity implements IEntity {
 		this.endTime = endTime;
 		this.numRest = numRest;
 		this.content = content;
+		this.focusNum = focusNum;
 	}
 	
 	
@@ -230,5 +235,15 @@ public class RaceEntity implements IEntity {
 
 	public void setTypeEntity(TypeEntity typeEntity) {
 		this.typeEntity = typeEntity;
+	}
+
+
+	public int getFocusNum() {
+		return focusNum;
+	}
+
+
+	public void setFocusNum(int focusNum) {
+		this.focusNum = focusNum;
 	}
 }
