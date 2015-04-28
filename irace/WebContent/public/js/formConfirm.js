@@ -14,7 +14,7 @@
 			//alert("用户名输入不合法，请输入用户名！");
 			document.getElementById("warnUsername").innerHTML = '用户名输入不合法，请输入用户名！';
 			document.getElementById("username").value = "";
-			//document.getElementById("username").focus();
+			document.getElementById("username").focus();
 			return(1);
 			//document.getElementById("username").focus();
 		}else{
@@ -40,8 +40,11 @@
 		var password = document.getElementById("password").value;
 		if (password == "") {
 			document.getElementById("warnPassword").innerHTML = '密码为空，请输入！';
+			document.getElementById("password").focus();
 			return(1);
-		} 
+		} else {
+			document.getElementById("warnPassword").innerHTML = '';
+		}
 		return(0);
 	}
 
@@ -52,6 +55,7 @@
 		repassword = trim(repassword);
 		if (repassword == "") {
 			document.getElementById("warnrePassword").innerHTML = '重复密码为空，请输入！';
+			document.getElementById("repassword").focus();
 			return(1);
 		}else{
 			document.getElementById("warnrePassword").innerHTML = '';
@@ -59,7 +63,7 @@
 		if (password !== repassword) {
 			//alert("两次密码输入不一致，请重新输入");
 			document.getElementById("warnrePassword").innerHTML = '两次密码输入不一致，请重新输入!';
-			//document.getElementById("repassword").focus();
+			document.getElementById("repassword").focus();
 			return(1);
 		}else{
 			document.getElementById("warnrePassword").innerHTML = '';
@@ -74,7 +78,7 @@
 		if (email_test(emailad)) {
 			//alert("邮箱地址输入不规范，请重新输入！");
 			document.getElementById("warnEmail").innerHTML = '邮箱地址输入不规范，请重新输入！';
-			//document.getElementById("email").focus();
+			document.getElementById("email").focus();
 			return(1);
 		}else{
 			document.getElementById("warnEmail").innerHTML = '';

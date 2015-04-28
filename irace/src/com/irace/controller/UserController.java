@@ -71,7 +71,7 @@ public class UserController extends SController {
 		if(flag){
 			return JsonUtil.getJsonInfoOK();
 		}else{
-			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"UNKNOWN");
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户名或者密码错误，请重新登录！");
 		}
 		
 		
@@ -111,6 +111,7 @@ public class UserController extends SController {
 	public @ResponseBody String registAction(
 			@RequestParam(value="username",required=true)String username,
 			@RequestParam(value="password",required=true)String password,
+			@RequestParam(value="repassword",required=true)String repassword,
 			@RequestParam(value="nickname",required=true)String nickname,
 			@RequestParam(value="email",required=true)String email,
 			@RequestParam(value="phone",required=true)String phone,
@@ -135,6 +136,9 @@ public class UserController extends SController {
 		if(userTest != null){
 			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"UserName has been taken!");
 		}
+		if(!password.equals(repassword)){
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"密码输入不一致！");
+		}
 		
 		boolean flag = userService.register(userentity);
 		
@@ -147,12 +151,13 @@ public class UserController extends SController {
 		if(flag){
 			//out.print(result);
 			userService.login(username, password, session);
-			return JsonUtil.getJsonInfo(InfoCode.OK,"OK");
+			return JsonUtil.getJsonInfoOK();
 		}else{
 			//out.print("{\"username\":"+username+", \"password\":\""+password+"\",\"repassword\":\""+password+"\", "
 			//		+ "\"nickname\":\""+nickname+"\",\"email\":\""+email+"\",\"phone\":\""+phone+"\",\"qq\":\""+qq+"\","
 			//				+ "\"school\":\""+school+"\",\"major\":\""+major+"\"}");
-			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"注册失败，请重新操作！");
+			
+			return JsonUtil.objectToJSONString(userentity);
 		}
 	}
 	

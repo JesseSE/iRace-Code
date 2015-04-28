@@ -170,23 +170,17 @@ start menu
 			</form>
 		</div>
 	</div>
+	<%@ include file="/public/section/footer.jsp" %>
 	<script type="text/javascript">
 						
 				        $(document).ready(function() {
 				            $("#submit-btn").click(function(){
-				            	alert("test");
-				            	if (yanzheng() != 1) {
-									//document.getElementById("joinus").submit();
-									alert("提交失败，请重新操作！");
-									console.log("登陆失败!");
-									location.href = $("#appName").val()+"/user/register";
-									
-								}
 				                $.ajax({
 			                		url: $("#appName").val()+"/user/register.act",
 			                		type: "POST",
 			                		data: { username: $("#username").val(),
 			                				password: $("#password").val(),
+			                				repassword: $("#repassword").val(),
 			                				nickname: $("#nickname").val(),
 			                				email: $("#email").val(),
 			                				phone: $("#phone").val(),

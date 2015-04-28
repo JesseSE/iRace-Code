@@ -24,8 +24,8 @@
 					<li><a href="checkout.html">Wishlist</a></li> |
 					<li><a href="checkout.html">Checkout</a></li> |
 -->
-					<li><a href="login.html">登录</a></li> |
-					<li><a href="register.html">注册</a></li>
+					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
+					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -216,14 +216,14 @@
 	<div class="footer-middle">
 			<div class="wrap">
 	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
+			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="">IRACE</a></p>
 		         </div>
 				<div class="f-list2">
 				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
+					<li class="active"><a href="">团队介绍</a></li> |
+					<li><a href="">网站加盟</a></li> |
+					<li><a href="">工程介绍</a></li> |
+					<li><a href="">联系我们</a></li> 
 				 </ul>
 			    </div>
 			    <div class="clear"></div>
