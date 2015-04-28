@@ -39,7 +39,7 @@
     
     <!-- ===================== Race ===========================  -->
     <bean id="raceDao" class="com.irace.dao.impl.RaceDaoImpl">
-        <property name="sessionFactory" ref="bigTypeServiceBase"></property>  
+        <property name="sessionFactory" ref="sessionFactory"></property>  
     </bean>
     <bean id="raceServiceBase" class="com.irace.service.impl.RaceServiceImpl">  
         <property name="raceDao" ref="raceDao"></property>
