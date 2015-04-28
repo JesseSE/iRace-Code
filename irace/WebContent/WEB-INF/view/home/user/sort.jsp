@@ -411,9 +411,9 @@
    					 "<div class='price1'>"+
    					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
    					 "</div> </div>"+
-   					 "<span class='actual'>分类："+race[cursor].type+"</span>"+
+   					 "<span class='actual'>分类："+race[cursor].typeEntity.name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual' font='0.5em'>"+race[cursor].startTime.date+"</span>"+
+   					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"</span>"+
    					 "</div>"+
    					 "<div class='clear'></div>"+
    					 "</div></div></a></div>";
@@ -467,26 +467,30 @@
 			menuText = menuText +
 				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
 				"<div class='megapanel'>";
-			for(var j=0; j<((menuList[i].length/2)+1);j++){
+				
+				var innerList = eval(menuList[i]); 	
+				console.log(innerList);
+				console.log(innerList.length);
+			for(var j=0; j<(innerList.length/2+1);j++){
 				menuText = menuText + "<div class='row'>";
 					
-				if(consor < menuList[i].length){
+				if(consor < innerList.length){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+ menuList[i].organizerEntity.name  +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+ innerList.organizerEntity.name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
 					consor ++;
 				}
-				if(consor < menuList[i].length){
+				if(consor < innerList.length){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+  menuList[i].organizerEntity.name +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+  innerList.organizerEntity.name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";

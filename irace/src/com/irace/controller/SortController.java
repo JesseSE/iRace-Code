@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.entity.BigTypeEntity;
 import com.irace.entity.OrganizerEntity;
 import com.irace.entity.RaceEntity;
+import com.irace.entity.TypeEntity;
+import com.irace.service.BigTypeService;
 import com.irace.service.RaceService;
+import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
 @Controller
@@ -26,6 +30,8 @@ public class SortController {
 
 	@Resource(name="raceService")
 	RaceService raceService;	
+	@Resource(name="bigTypeService")
+	BigTypeService bigTypeService;
 	
 	/**
 	 * 查询比赛页面
@@ -64,26 +70,7 @@ public class SortController {
 			System.out.println(pageNum);
 			System.out.println(orderByXX);
 			System.out.println(orderByAD);
-			System.out.println("开始在数据库中查询");
-			
-//			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum, sortKeyWords);
-//			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
-//			Iterator<RaceEntity> iter = raceEntityList.iterator();  
-//			
-//			
-//			 while(iter.hasNext()) {  				
-//			 	RaceEntity d= iter.next();	
-//	            
-//	            RaceEntity mRace = new RaceEntity(d.getId(),
-//	            		d.getOrganizer(),d.getName(),d.getType(),d.getGrade(),d.getPicUrl(),
-//	            		d.getStartTime(),d.getEndTime(),d.getNumRest(),d.getContent());
-//	            
-//	            raceEntityList1.add(mRace);
-//	        } 
-//			 
-//			return JsonUtil.listToJSONString(raceEntityList1);
-			//这个地方为了简化你们控制层  我把从list到json串的封装写到了Service层
-			
+			System.out.println("开始在数据库中查询");			
 			
 			/*if(orderByAD == 1){//升序排列				
 				if(orderByXX == 1){//按照热度升序排列					
@@ -112,35 +99,8 @@ public class SortController {
 				return raceService.getRaceListDetail(pageNum, sortKeyWords);
 		}*/
 			
-			
-			
-			Date d = new Date();
-			
-			OrganizerEntity organizerEntity = new OrganizerEntity("ddddd", "ddvd", "fsvfs", "dfsd", "fdgfd", "dfdf");
-			RaceEntity r1 = new RaceEntity();
-			r1.setId(1);
-			r1.setName("dfdfdfdfdf");
-			r1.setStartTime(d);
-			r1.setEndTime(d);
-			r1.setPicUrl("/irace/public/images/pic2.jpg");
-			r1.setOrganizerEntity(organizerEntity);
-			RaceEntity r2 = new RaceEntity();
-			r2.setId(2);
-			r2.setName("dfdfdfdfdf");
-			r2.setStartTime(d);
-			r2.setEndTime(d);
-			List<RaceEntity> raceEntityList = new ArrayList<RaceEntity>();
-			raceEntityList.add(r1);
-			raceEntityList.add(r2);
-			r2.setName("dfdfdfdfdf");
-			r2.setOrganizerEntity(organizerEntity);
-			
-			JSONArray arr = new JSONArray();
-			for(Object obj : raceEntityList) {
-				arr.add(JSONObject.fromObject(obj));
-			}
-			
-			return arr.toString();
+			//调用测试方法
+			return testRace();
 		}
 	}
 	
@@ -152,51 +112,43 @@ public class SortController {
 	public @ResponseBody String getMenu(){
 		System.out.println("开始去数据库获取菜单");
 		
-		Date d = new Date();
+		//调用获取菜单的方法
+		//return JsonUtil.listToJSONString(bigTypeService.getBigTypeListDetail());
 		
-		OrganizerEntity organizerEntity = new OrganizerEntity("ddddd", "ddvd", "fsvfs", "dfsd", "fdgfd", "dfdf");
+		//这个是测试
+		return testRace();
+	}
+	
+	
+	
+	/**
+	 * 这是一个用来测试显示比赛的方法
+	 */
+	private String testRace(){
+		Date d = new Date();		
+		OrganizerEntity organizerEntity = new OrganizerEntity("北京交通大学", "ddvd", "北京交通大学", "北京", "中国", "dfdf");
 		RaceEntity r1 = new RaceEntity();
-		r1.setId(1);
-		r1.setName("dfdfdfdfdf");
-		r1.setStartTime(d);
-		r1.setEndTime(d);
-		r1.setOrganizerEntity(organizerEntity);
-		RaceEntity r2 = new RaceEntity();
-		r2.setId(2);
-		r2.setName("dfdfdfdfdf");
-		r2.setStartTime(d);
-		r2.setEndTime(d);
-		r2.setOrganizerEntity(organizerEntity);
+		TypeEntity type = new TypeEntity("计算机", 1);
 		List<RaceEntity> raceEntityList = new ArrayList<RaceEntity>();
-		raceEntityList.add(r1);
-		raceEntityList.add(r2);		
-		
-		RaceEntity r3 = new RaceEntity();
-		r3.setId(3);
-		r3.setName("dfdfdfdfdf");
-		r3.setStartTime(d);
-		r3.setEndTime(d);
-		r3.setOrganizerEntity(organizerEntity);
-		RaceEntity r4 = new RaceEntity();
-		r4.setId(4);
-		r4.setName("dfdfdfdfdf");
-		r4.setStartTime(d);
-		r4.setEndTime(d);
-		r4.setOrganizerEntity(organizerEntity);
-		raceEntityList.add(r3);
-		raceEntityList.add(r4);
-		
-		
+		for(int i=0;i<15;i++){
+			r1.setId(i);
+			r1.setName("服务外包大赛");
+			r1.setContent("这是一个测试用的比赛");
+			r1.setFocusNum(200);
+			r1.setGrade("国家级");
+			r1.setNumRest(5);
+			r1.setTypeEntity(type);
+			r1.setType(1);
+			r1.setStartTime(d);
+			r1.setEndTime(d);
+			r1.setPicUrl("/irace/public/images/pic2.jpg");
+			r1.setOrganizerEntity(organizerEntity);
+			raceEntityList.add(r1);
+		}		
 		JSONArray arr = new JSONArray();
 		for(Object obj : raceEntityList) {
 			arr.add(JSONObject.fromObject(obj));
-		}
-		
-		
-		
-		
-		
+		}		
 		return arr.toString();
 	}
-	
 }
