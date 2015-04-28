@@ -6,3 +6,4 @@ irace/build/class/
 
 *.classpath
 *.project
+irace/src/com/irace/controller/TestController.java

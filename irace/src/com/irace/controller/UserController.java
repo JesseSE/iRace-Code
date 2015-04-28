@@ -35,10 +35,11 @@ public class UserController extends SController {
 	@RequestMapping("test")
 	public @ResponseBody String test() {
 		
-		UserEntity user = userService.getUser(1);
-		String res = JsonUtil.listToJSONString(userService.getUserList(1));
-		String res2 = JsonUtil.objectToJSONString(user);
-		return  res;
+//		UserEntity user = userService.getUser(1);
+//		String res = JsonUtil.listToJSONString(userService.getUserList(1));
+//		String res2 = JsonUtil.objectToJSONString(user);
+//		return  res;
+		return null;
 	}
 	
 	
@@ -157,7 +158,7 @@ public class UserController extends SController {
 			//		+ "\"nickname\":\""+nickname+"\",\"email\":\""+email+"\",\"phone\":\""+phone+"\",\"qq\":\""+qq+"\","
 			//				+ "\"school\":\""+school+"\",\"major\":\""+major+"\"}");
 			
-			return JsonUtil.objectToJSONString(userentity);
+			return JsonUtil.objectToJSONString(userentity, null);
 		}
 	}
 	

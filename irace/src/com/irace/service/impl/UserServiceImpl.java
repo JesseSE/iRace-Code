@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String getUserListJson(Integer pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(userDao.getUserList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
+		return JsonUtil.listToJSONString(userDao.getUserList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), null);
 	}
 
 
