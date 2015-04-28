@@ -171,16 +171,18 @@ start menu
 		</div>
 	</div>
 	<script type="text/javascript">
+						
 				        $(document).ready(function() {
-				        	
 				            $("#submit-btn").click(function(){
+				            	alert("test");
 				            	if (yanzheng() != 1) {
 									//document.getElementById("joinus").submit();
 									alert("提交失败，请重新操作！");
+									console.log("登陆失败!");
 									location.href = $("#appName").val()+"/user/register";
+									
 								}
 				                $.ajax({
-			                		<%-- url: <%=request.getContextPath()%>+"/user/regist", --%>
 			                		url: $("#appName").val()+"/user/register.act",
 			                		type: "POST",
 			                		data: { username: $("#username").val(),
@@ -196,12 +198,15 @@ start menu
 			                		dataType: "JSON",
 			                		success: function(res) {
 			                			//var res = eval("("+obj+")");
-		                				location.href = "";        			
+			                			console.log("登陆success!");
+		                				location.href = $("#appName").val()+"/user/index";        			
 			                		},
 			                		error: function(res) {
 			                			
 			                			console.log(res);
+			                			console.log("unsuccess!");
 			                			alert('输入错误！请返回重新输入！');
+			                			location.href = $("#appName").val()+"/user/register"
 
 			                			/* document.getElementById("username").value = res.username;
 			                			document.getElementById("password").value = res.password;

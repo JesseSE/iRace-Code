@@ -117,8 +117,8 @@ public class UserController extends SController {
 			@RequestParam(value="sexRadioOptions",required=true)String sexRadioOptions,
 			@RequestParam(value="qq",required=true)String qq,
 			@RequestParam(value="school",required=true)String school,
-			@RequestParam(value="major",required=true)String major){
-		
+			@RequestParam(value="major",required=true)String major,
+			HttpSession session){
 		
 		UserEntity userentity = new UserEntity();
 		userentity.setUsername(username);
@@ -128,20 +128,31 @@ public class UserController extends SController {
 		userentity.setTel(phone);
 		userentity.setQq(qq);
 		
-		UserDaoImpl userdao = new UserDaoImpl();
-		int flag = userdao.addUser(userentity);
+		System.out.println(userentity.toString());
+		
+		UserEntity userTest = userService.getUser(username);
+		
+		if(userTest != null){
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"UserName has been taken!");
+		}
+		
+		boolean flag = userService.register(userentity);
+		
+		//UserDaoImpl userdao = new UserDaoImpl();
+		//int flag = userdao.addUser(userentity);
 		
 		//int result=InfoCode.OK;
 		//PrintWriter out = response.getWriter();
 		
-		if(flag != 0){
+		if(flag){
 			//out.print(result);
+			userService.login(username, password, session);
 			return JsonUtil.getJsonInfo(InfoCode.OK,"OK");
 		}else{
 			//out.print("{\"username\":"+username+", \"password\":\""+password+"\",\"repassword\":\""+password+"\", "
 			//		+ "\"nickname\":\""+nickname+"\",\"email\":\""+email+"\",\"phone\":\""+phone+"\",\"qq\":\""+qq+"\","
 			//				+ "\"school\":\""+school+"\",\"major\":\""+major+"\"}");
-			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"OTHER_ERROR");
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"注册失败，请重新操作！");
 		}
 	}
 	
