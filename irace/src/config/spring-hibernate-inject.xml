@@ -26,6 +26,18 @@
         <property name="target" ref="advertismentServiceBase"></property>  
     </bean>
     
+    <!-- ===================== Apply ===========================  -->
+    <bean id="applyDao" class="com.irace.dao.impl.ApplyDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="applyServiceBase" class="com.irace.service.impl.ApplyServiceImpl">  
+        <property name="applyDao" ref="applyDao"></property>
+        <property name="messageDao" ref="messageDao"></property>
+    </bean>
+    <bean name="applyService" parent="transactionProxy">
+        <property name="target" ref="applyServiceBase"></property>  
+    </bean>
+    
     <!-- ===================== BigType ===========================  -->
     <bean id="bigTypeDao" class="com.irace.dao.impl.BigTypeDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  
@@ -36,6 +48,18 @@
     <bean name="bigTypeService" parent="transactionProxy">
         <property name="target" ref="bigTypeServiceBase"></property>  
     </bean>
+    
+    <!-- ===================== Message ===========================  -->
+    <bean id="messageDao" class="com.irace.dao.impl.MessageDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="messageServiceBase" class="com.irace.service.impl.MessageServiceImpl">  
+        <property name="messageDao" ref="messageDao"></property>
+    </bean>
+    <bean name="messageService" parent="transactionProxy">
+        <property name="target" ref="messageServiceBase"></property>  
+    </bean>
+    
     
     <!-- ===================== Race ===========================  -->
     <bean id="raceDao" class="com.irace.dao.impl.RaceDaoImpl">
@@ -65,6 +89,7 @@
     </bean>
     <bean id="userServiceBase" class="com.irace.service.impl.UserServiceImpl">  
         <property name="userDao" ref="userDao"></property>
+        <property name="raceDao" ref="raceDao"></property>
     </bean>
     <bean name="userService" parent="transactionProxy">
         <property name="target" ref="userServiceBase"></property>  

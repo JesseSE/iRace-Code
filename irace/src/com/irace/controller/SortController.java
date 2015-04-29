@@ -138,7 +138,7 @@ public class SortController {
 			r1.setGrade("国家级");
 			r1.setNumRest(5);
 			r1.setTypeEntity(type);
-			r1.setType(1);
+			r1.setTypeId(1);
 			r1.setStartTime(d);
 			r1.setEndTime(d);
 			r1.setPicUrl("/irace/public/images/pic2.jpg");

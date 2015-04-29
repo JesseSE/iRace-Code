@@ -16,4 +16,13 @@ public class InfoCode {
 	public static final Integer PERMISSION_DENIED = 201; //权限不足
 	
 	
+	/************************报名状态*************************/
+	
+	/**************报名状态：已报名 **************/
+	public static final Integer APPLY_STATUS_REGISTERED = 0;
+	/**************报名状态：已提交入队申请 **************/
+	public static final Integer APPLY_STATUS_APPLYED = 1;
+	/**************报名状态：已加入队伍 **************/
+	public static final Integer APPLY_STATUS_REVIEW_PASS = 2; 
+	
 }

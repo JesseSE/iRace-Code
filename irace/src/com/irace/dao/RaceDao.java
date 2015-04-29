@@ -18,6 +18,8 @@ public interface RaceDao {
 	
 	public RaceEntity getRace(Integer id);
 	
+	public List getRaceListByUser(Integer pageNo, Integer pageItemNum, int userID);
+	
 	public List getRaceList(Integer pageNo, Integer pageItemNum);
 	
 	public List getRaceList(Integer pageNo, Integer pageItemNum, int type);

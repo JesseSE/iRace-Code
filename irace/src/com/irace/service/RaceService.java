@@ -25,6 +25,14 @@ public interface RaceService {
 	
 	public String getRaceList(Integer pageNo);
 	
+	/**
+	 * 查询用户参加的所有比赛
+	 * @param pageNo
+	 * @param userID
+	 * @return
+	 */
+	public String getRaceListByUser(Integer pageNo, int userID);
+	
 	public String getRaceList(Integer pageNo, int type);
 	
 	/**

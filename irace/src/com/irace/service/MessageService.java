@@ -23,7 +23,7 @@ public interface MessageService {
 	
 	public List getMessageList(int pageNo); //获取不包括外键实体
 	
-	public List getMessageListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	public List getMessageListDetail(int pageNo); //获取包括外键实体
 	
 	public boolean updateMessage(MessageEntity message);
 }

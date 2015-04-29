@@ -60,37 +60,42 @@ public class RaceServiceImpl implements RaceService {
 	@Override
 	public String getRaceList(Integer pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM),new String[]{"typeEntity","organizerEntity"});
-		
+		return JsonUtil.listToJSONString(
+				raceDao.getRaceList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM),
+				new String[] { "typeEntity", "organizerEntity" });
+
 	}
 
 	@Override
 	public String getRaceList(Integer pageNo, int type) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, type),new String[]{"typeEntity","organizerEntity"});
+				Constants.DEFAULT_PAGE_ITEM_NUM, type), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceList(Integer pageNo, String keyword) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, keyword),new String[]{"typeEntity","organizerEntity"});
+				Constants.DEFAULT_PAGE_ITEM_NUM, keyword), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceListByGrade(Integer pageNo, String grade) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListByGrade(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, grade),new String[]{"typeEntity","organizerEntity"});
+				Constants.DEFAULT_PAGE_ITEM_NUM, grade), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceListByTime(Integer pageNo, Date startTime, Date endTime) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListByTime(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime),new String[]{"typeEntity","organizerEntity"});
+				Constants.DEFAULT_PAGE_ITEM_NUM, startTime, endTime),
+				new String[] { "typeEntity", "organizerEntity" });
 	}
 
 	@Override
@@ -103,35 +108,39 @@ public class RaceServiceImpl implements RaceService {
 	public String getRaceListDetail(int pageNo) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM),null);
+				Constants.DEFAULT_PAGE_ITEM_NUM), null);
 	}
 
 	@Override
 	public String getRaceListDetail(int pageNo, String keyword) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListDetail(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, keyword),new String[]{"typeEntity","organizerEntity"});
+				Constants.DEFAULT_PAGE_ITEM_NUM, keyword), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceListBySortedStartTime(int pageNo, boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedStartTime(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceListBySortedEndTime(int pageNo, boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedEndTime(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
 	public String getRaceListBySortedHotPoint(int pageNo, boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedHotPoint(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isAsc), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 	@Override
@@ -139,7 +148,8 @@ public class RaceServiceImpl implements RaceService {
 			boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedStartTime(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),
+				new String[] { "typeEntity", "organizerEntity" });
 	}
 
 	@Override
@@ -147,7 +157,8 @@ public class RaceServiceImpl implements RaceService {
 			boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedEndTime(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),
+				new String[] { "typeEntity", "organizerEntity" });
 	}
 
 	@Override
@@ -155,7 +166,16 @@ public class RaceServiceImpl implements RaceService {
 			boolean isAsc) {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceListBySortedHotPoint(
-				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),new String[]{"typeEntity","organizerEntity"});
+				pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, keyword, isAsc),
+				new String[] { "typeEntity", "organizerEntity" });
+	}
+
+	@Override
+	public String getRaceListByUser(Integer pageNo, int userID) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(raceDao.getRaceListByUser(pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, userID), new String[] {
+				"typeEntity", "organizerEntity" });
 	}
 
 }

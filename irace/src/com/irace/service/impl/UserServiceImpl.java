@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import com.irace.dao.RaceDao;
 import com.irace.dao.UserDao;
 import com.irace.entity.UserEntity;
 import com.irace.service.UserService;
@@ -14,9 +15,14 @@ import com.irace.util.JsonUtil;
 public class UserServiceImpl implements UserService {
 
 	private UserDao userDao = null;
+	private RaceDao raceDao = null;
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	public void setRaceDao(RaceDao raceDao) {
+		this.raceDao = raceDao;
 	}
 
 
