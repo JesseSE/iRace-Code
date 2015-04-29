@@ -10,11 +10,10 @@
 	
 	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
-	
+	<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/formConfirm.js"></script>
 </head>
 <body>
 	
-	<input type="hidden" name="appName" id="appName" value="<%%>" />
 	<div class="header-top">
 		<div class="wrap">
 			<div class="cssmenu">
@@ -46,7 +45,7 @@
 		<div class="login_account">
 			<div class="wrap">
 				<h4 class="title">登陆</h4>
-				<form class="form-horizontal" action="" method="post" id="joinus"
+				<form class="form-horizontal" id="joinus"
 					name="joinus">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">账号</label>
@@ -65,7 +64,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="grey" id="submit-btn">登陆</button>
+							<button type="button" class="grey" id="submit-btn">登陆</button>
 							<button type="reset" class="grey" style="margin-left: 20px;">找回密码</button>
 							<!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 						</div>
@@ -78,8 +77,9 @@
 	<script type="text/javascript">
         $(document).ready(function() {
             $("#submit-btn").click(function(){
+            	
                 $.ajax({
-               		<%-- url: <%=request.getContextPath()%>+"/user/login.act", --%>
+               		<%-- url: "<%=request.getContextPath()%>/user/login.act", --%>
                		url: $("#appName").val()+"/user/login.act",
                		type: "POST",
                		data: { username: $("#username").val(),
@@ -88,6 +88,7 @@
                		dataType: "JSON",
                		success: function(res) {
                			console.log(res);
+               			location.href = $("#appName").val() + "/user/index";
                		},
                		error: function(res) {
                			

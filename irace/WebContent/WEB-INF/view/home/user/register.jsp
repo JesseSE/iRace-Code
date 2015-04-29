@@ -41,13 +41,13 @@ start menu
 	rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath()%>/public/css/nivo-slider.css"
 	rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/public/js/formConfirm.js"></script>
 
 
 </head>
 <body>
-	<%
-		request.setCharacterEncoding("UTF-8");
-	%>
+	
 	<%-- <input type="hidden" name="appName" id="appName" value="<% %>" /> --%>
 	<div class="header-top">
 		<div class="wrap">
@@ -77,7 +77,7 @@ start menu
 	<div class="register_account">
 		<div class="wrap">
 			<h4 class="title">新用户注册</h4>
-			<form class="form-horizontal" action="" method="post" id="joinus"
+			<form class="form-horizontal" id="joinus"
 				name="joinus">
 				<div class="form-group">
 					<label for="username" class="col-sm-2 control-label">账号</label>
@@ -132,9 +132,9 @@ start menu
 					<label class="col-sm-2 control-label">性别</label>
 					<div class="col-sm-4">
 						<label class="radio-inline"> <input type="radio"
-							name="sexRadio" id="sexRadio" value="0"> 男
+							name="sexRadio" id="sexManRadio" > 男
 						</label> <label class="radio-inline"> <input type="radio"
-							name="sexRadio" id="sexRadio" value="1"> 女
+							name="sexRadio" id="sexWomanRadio"> 女
 						</label>
 					</div>
 				</div>
@@ -162,7 +162,7 @@ start menu
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="grey" id="submit-btn">提交</button>
+						<button type="button" class="grey" id="submit-btn">提交</button>
 						<button type="reset" class="grey" style="margin-left: 20px;">重置</button>
 						<!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 					</div>
@@ -170,53 +170,50 @@ start menu
 			</form>
 		</div>
 	</div>
-	<%@ include file="/public/section/footer.jsp" %>
+	<%@ include file="/public/section/footer.jsp"%>
 	<script type="text/javascript">
-						
-				        $(document).ready(function() {
-				            $("#submit-btn").click(function(){
-				                $.ajax({
-			                		url: $("#appName").val()+"/user/register.act",
-			                		type: "POST",
-			                		data: { username: $("#username").val(),
-			                				password: $("#password").val(),
-			                				repassword: $("#repassword").val(),
-			                				nickname: $("#nickname").val(),
-			                				email: $("#email").val(),
-			                				phone: $("#phone").val(),
-			                				sexRadio: $("#sexRadio").val(),
-			                				qq: $("#qq").val(),
-			                				school: $("#school").val(),
-			                				major: $("#major").val()
-			                				},
-			                		dataType: "JSON",
-			                		success: function(res) {
-			                			//var res = eval("("+obj+")");
-			                			console.log("登陆success!");
-		                				location.href = $("#appName").val()+"/user/index";        			
-			                		},
-			                		error: function(res) {
-			                			
-			                			console.log(res);
-			                			console.log("unsuccess!");
-			                			alert('输入错误！请返回重新输入！');
-			                			location.href = $("#appName").val()+"/user/register"
+		$(document).ready(function() {
+			$("#submit-btn").click(function() {
+				if (yanzheng() != 1) {
+					alert("提交失败，请重新操作！");
+					return;
+				};
+				if(document.getElementById("sexManRadio").checked){
+					var sex = 'Man';
+				}else{
+					var sex = 'Woman';
+				}
+				$.ajax({
+					url : $("#appName").val() + "/user/register.act",
+					type : "POST",
+					data : {
+						username : $("#username").val(),
+						password : $("#password").val(),
+						repassword : $("#repassword").val(),
+						nickname : $("#nickname").val(),
+						email : $("#email").val(),
+						phone : $("#phone").val(),
+						sexRadio : sex,
+						qq : $("#qq").val(),
+						school : $("#school").val(),
+						major : $("#major").val()
+					},
+					dataType : "JSON",
+					success : function(res) {
+						//var res = eval("("+obj+")");
+						console.log("登陆success!");
+						location.href = $("#appName").val() + "/user/index";
+					},
+					error : function(res) {
 
-			                			/* document.getElementById("username").value = res.username;
-			                			document.getElementById("password").value = res.password;
-			                			document.getElementById("repassword").value = res.repassword;
-			                			document.getElementById("nickname").value = res.nickname;
-			                			document.getElementById("phone").value = res.phone;
-			                			document.getElementById("email").value = res.email;
-			                			document.getElementById("qq").value = res.qq;	
-			                			document.getElementById("school").value = res.school;	
-			                			document.getElementById("major").value = res.major; */
-			                				    
-			                		}
-			                	});				                
-				            });
-				            
-				        });
-				    </script>
+						console.log(res);
+						console.log("unsuccess!");
+						//alert('输入错误！请返回重新输入！');
+					}
+				});
+			});
+
+		});
+	</script>
 </body>
 </html>

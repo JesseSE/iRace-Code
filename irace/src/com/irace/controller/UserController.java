@@ -116,11 +116,13 @@ public class UserController extends SController {
 			@RequestParam(value="nickname",required=true)String nickname,
 			@RequestParam(value="email",required=true)String email,
 			@RequestParam(value="phone",required=true)String phone,
-			@RequestParam(value="sexRadioOptions",required=true)String sexRadioOptions,
+			@RequestParam(value="sexRadio",required=true)String sexRadioOptions,
 			@RequestParam(value="qq",required=true)String qq,
 			@RequestParam(value="school",required=true)String school,
 			@RequestParam(value="major",required=true)String major,
 			HttpSession session){
+		
+		System.out.println("test!!!!!!!");
 		
 		UserEntity userentity = new UserEntity();
 		userentity.setUsername(username);
@@ -129,14 +131,18 @@ public class UserController extends SController {
 		userentity.setEmail(email);
 		userentity.setTel(phone);
 		userentity.setQq(qq);
+		userentity.setRole(1);
 		
-		System.out.println(userentity.toString());
+		//System.out.println(userentity.toString());
 		
 		UserEntity userTest = userService.getUser(username);
+		
+		//System.out.println(userTest.getNickname()+"123123");
 		
 		if(userTest != null){
 			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"UserName has been taken!");
 		}
+		
 		if(!password.equals(repassword)){
 			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"密码输入不一致！");
 		}
@@ -148,6 +154,7 @@ public class UserController extends SController {
 		
 		//int result=InfoCode.OK;
 		//PrintWriter out = response.getWriter();
+		System.out.println(flag);
 		
 		if(flag){
 			//out.print(result);
