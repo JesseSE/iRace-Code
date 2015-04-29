@@ -18,11 +18,13 @@ public class SubmitEntity implements IEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer stagte;
+	@Column(name="stage_id")
+	private Integer stageId;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="stagte",insertable=false,updatable=false)
-	private StageEntity stageEntity;//���ʵ��	
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=StageRaceEntity.class)	
+	@JoinColumn(name="stage_id",insertable=false,updatable=false)
+	private StageRaceEntity stageEntity;
+	
 	
 	private String name;
 	
@@ -40,8 +42,8 @@ public class SubmitEntity implements IEntity{
 	 * @param content ：提交无描述
 	 * @param fileUrl ：提交物存放路径
 	 */
-	public SubmitEntity(Integer stagte, String name, String content, String fileUrl){
-		this.stagte = stagte;
+	public SubmitEntity(Integer stageId, String name, String content, String fileUrl){
+		this.stageId = stageId;
 		this.name = name;
 		this.content = content;
 		this.fileUrl = fileUrl;
@@ -53,8 +55,8 @@ public class SubmitEntity implements IEntity{
 	 * @param name ：提交物名称
 	 * @param content ：提交无描述
 	 */
-	public SubmitEntity(Integer stagte, String name, String content){
-		this.stagte = stagte;
+	public SubmitEntity(Integer stageId, String name, String content){
+		this.stageId = stageId;
 		this.name = name;
 		this.content = content;
 		this.fileUrl = null;
@@ -68,17 +70,13 @@ public class SubmitEntity implements IEntity{
 		this.id = id;
 	}
 
-	/*
-	 * ���һ��ϵ��һ���׶��ж���ύ��
-	 */
-//	@ManyToOne(targetEntity=StageEntity.class)
-//	@JoinColumn(name="id")
+
 	public Integer getStagte() {
-		return stagte;
+		return stageId;
 	}
 
-	public void setStagte(Integer stagte) {
-		this.stagte = stagte;
+	public void setStagte(Integer stageId) {
+		this.stageId = stageId;
 	}
 
 	public String getName() {
@@ -105,11 +103,19 @@ public class SubmitEntity implements IEntity{
 		this.fileUrl = fileUrl;
 	}
 
-	public StageEntity getStageEntity() {
+	public StageRaceEntity getStageEntity() {
 		return stageEntity;
 	}
 
-	public void setStageEntity(StageEntity stageEntity) {
+	public void setStageEntity(StageRaceEntity stageEntity) {
 		this.stageEntity = stageEntity;
+	}
+
+	public Integer getStageId() {
+		return stageId;
+	}
+
+	public void setStageId(Integer stageId) {
+		this.stageId = stageId;
 	}
 }

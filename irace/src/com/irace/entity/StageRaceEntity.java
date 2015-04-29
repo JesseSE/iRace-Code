@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="stage")
-public class StageEntity implements IEntity{
+@Table(name="stagerace")
+public class StageRaceEntity implements IEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class StageEntity implements IEntity{
 	@Column(name="end_time")
 	private Date endTime;
 	
-	public StageEntity(){}
+	public StageRaceEntity(){}
 	
 	/**
 	 * 为比赛的一个分组添加一个阶段
@@ -47,7 +47,7 @@ public class StageEntity implements IEntity{
 	 * @param startTime ：阶段的开始时间
 	 * @param endTime ：阶段的结束时间
 	 */
-	public StageEntity(Integer group, String name, String content, Date startTime, Date endTime){
+	public StageRaceEntity(Integer group, String name, String content, Date startTime, Date endTime){
 		this.group = group;
 		this.name = name;
 		this.content = content;
@@ -61,7 +61,7 @@ public class StageEntity implements IEntity{
 	 * @param name :阶段的名字
 	 * @param content ：阶段的简单介绍
 	 */
-	public StageEntity(Integer group, String name, String content){
+	public StageRaceEntity(Integer group, String name, String content){
 		this.group = group;
 		this.name = name;
 		this.content = content;

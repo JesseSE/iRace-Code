@@ -12,8 +12,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="type")
-public class TypeEntity {
+@Table(name="typerace")
+public class TypeRaceEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,14 +27,14 @@ public class TypeEntity {
 	@JoinColumn(name="big_type",insertable=false,updatable=false) 
 	private BigTypeEntity bigTypeEntity; //大分类实体
 	
-	public TypeEntity() {}
+	public TypeRaceEntity() {}
 	
 	/**
 	 * 新建小分类
 	 * @param name
 	 * @param bigType
 	 */
-	public TypeEntity(String name, Integer bigType) {
+	public TypeRaceEntity(String name, Integer bigType) {
 		this.name = name;
 		this.bigType = bigType;
 	}

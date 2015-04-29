@@ -6,12 +6,12 @@ import org.hibernate.Query;
 
 import com.irace.dao.StageDao;
 import com.irace.entity.RaceEntity;
-import com.irace.entity.StageEntity;
+import com.irace.entity.StageRaceEntity;
 
 public class StageDaoImpl extends SDao implements StageDao{
 
 	@Override
-	public Integer addStage(StageEntity stage) {
+	public Integer addStage(StageRaceEntity stage) {
 		return (Integer)this.sessionFactory.getCurrentSession().save(stage);
 	}
 
@@ -24,19 +24,19 @@ public class StageDaoImpl extends SDao implements StageDao{
 	}
 
 	@Override
-	public StageEntity getStage(int id) {
+	public StageRaceEntity getStage(int id) {
 		this.hql = "FROM StageEntity AS s WHERE s.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
-		return (StageEntity) query.uniqueResult();
+		return (StageRaceEntity) query.uniqueResult();
 	}
 
 	@Override
-	public StageEntity getStageDetail(int id) {
+	public StageRaceEntity getStageDetail(int id) {
 		this.hql = "FROM StageEntity AS s inner join fetch s.groupRaceEntity AS g where s.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
-		return (StageEntity)query.uniqueResult();	
+		return (StageRaceEntity)query.uniqueResult();	
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class StageDaoImpl extends SDao implements StageDao{
 	}
 
 	@Override
-	public boolean updateStage(StageEntity stage) {
+	public boolean updateStage(StageRaceEntity stage) {
 		sessionFactory.getCurrentSession().update(stage);
 		return true;
 	}

@@ -6,7 +6,7 @@ import org.hibernate.Query;
 
 import com.irace.dao.SubmitDao;
 import com.irace.entity.RaceEntity;
-import com.irace.entity.StageEntity;
+import com.irace.entity.StageRaceEntity;
 import com.irace.entity.SubmitEntity;
 
 public class SubmitDaoImpl extends SDao implements SubmitDao{
