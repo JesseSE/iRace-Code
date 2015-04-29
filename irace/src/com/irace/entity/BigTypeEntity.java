@@ -21,9 +21,9 @@ public class BigTypeEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id; //比赛大分类分类的主键	
 	private String name; //比赛大分类分类的名字
-	@OneToMany(fetch = FetchType.EAGER,targetEntity=TypeEntity.class, cascade=CascadeType.ALL, mappedBy="bigTypeEntity")
+	@OneToMany(fetch = FetchType.EAGER,targetEntity=TypeRaceEntity.class, cascade=CascadeType.ALL, mappedBy="bigTypeEntity")
 	//@JoinColumns(value={@JoinColumn(name="id",referencedColumnName="id")})  
-	private Set<TypeEntity> typeEntities = new HashSet<TypeEntity>();  
+	private Set<TypeRaceEntity> typeEntities = new HashSet<TypeRaceEntity>();  
 
 	public BigTypeEntity() {}
 	
@@ -53,11 +53,11 @@ public class BigTypeEntity {
 	//@OneToMany(mappedBy="bigTypeEntity", targetEntity=TypeEntity.class)
 	//@JoinColumn(name="bigTypeEntityId")
 	
-	public Set<TypeEntity> getTypeEntities() {
+	public Set<TypeRaceEntity> getTypeEntities() {
 		return typeEntities;
 	}
 
-	public void setTypeEntities(Set<TypeEntity> typeEntities) {
+	public void setTypeEntities(Set<TypeRaceEntity> typeEntities) {
 		this.typeEntities = typeEntities;
 	}
 

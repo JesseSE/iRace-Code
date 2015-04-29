@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.irace.entity.BigTypeEntity;
 import com.irace.entity.OrganizerEntity;
 import com.irace.entity.RaceEntity;
-import com.irace.entity.TypeEntity;
+import com.irace.entity.TypeRaceEntity;
 import com.irace.service.BigTypeService;
 import com.irace.service.RaceService;
 import com.irace.util.JsonUtil;
@@ -72,7 +72,7 @@ public class SortController {
 			System.out.println(orderByAD);
 			System.out.println("开始在数据库中查询");			
 			
-			/*if(orderByAD == 1){//升序排列				
+			if(orderByAD == 1){//升序排列				
 				if(orderByXX == 1){//按照热度升序排列					
 					return raceService.getRaceListBySortedHotPoint(pageNum, sortKeyWords,true);
 				}else if(orderByXX == 2){//按时间升序排列
@@ -97,11 +97,11 @@ public class SortController {
 			}else
 				//错误选择，默认排序
 				return raceService.getRaceListDetail(pageNum, sortKeyWords);
-		}*/
+		}
 			
 			//调用测试方法
-			return testRace();
-		}
+			//return testRace();
+		//}
 	}
 	
 	/**
@@ -128,7 +128,7 @@ public class SortController {
 		Date d = new Date();		
 		OrganizerEntity organizerEntity = new OrganizerEntity("北京交通大学", "ddvd", "北京交通大学", "北京", "中国", "dfdf");
 		RaceEntity r1 = new RaceEntity();
-		TypeEntity type = new TypeEntity("计算机", 1);
+		TypeRaceEntity type = new TypeRaceEntity("计算机", 1);
 		List<RaceEntity> raceEntityList = new ArrayList<RaceEntity>();
 		for(int i=0;i<15;i++){
 			r1.setId(i);

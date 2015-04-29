@@ -35,11 +35,12 @@ public class RaceEntity implements IEntity {
 	
 	private String name;
 	
-	private Integer type;//外键，比赛的分类
+	@Column(name="type_id")
+	private Integer typeId;//外键，比赛的分类
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="type",insertable=false,updatable=false)
-	private TypeEntity typeEntity;
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=TypeRaceEntity.class)	
+	@JoinColumn(name="type_id",insertable=false,updatable=false)
+	private TypeRaceEntity typeEntity;
 	
 	private String grade;//比赛的级别
 	
@@ -77,12 +78,12 @@ public class RaceEntity implements IEntity {
 	 * @param content ：比赛的简单介绍
 	 * @param foucsNum :比赛的关注人数
 	 */
-	public RaceEntity(Integer id, Integer organizer, String name, Integer type, String grade, 
+	public RaceEntity(Integer id, Integer organizer, String name, Integer typeId, String grade, 
 			String picUrl,Date startTime, Date endTime, int numRest,String content,int focusNum){
 		this.id = id;
 		this.organizer = organizer;
 		this.name = name;
-		this.type = type;
+		this.typeId = typeId;
 		this.grade = grade;
 		this.picUrl = picUrl;
 		this.startTime = startTime;
@@ -105,11 +106,11 @@ public class RaceEntity implements IEntity {
 	 * @param numRest ：比赛允许的每个队伍的最大人数
 	 * @param content ：比赛的简单介绍
 	 */
-	public RaceEntity(Integer organizer, String name, Integer type, String grade, 
+	public RaceEntity(Integer organizer, String name, Integer typeId, String grade, 
 			String picUrl,Date startTime, Date endTime, int numRest,String content){
 		this.organizer = organizer;
 		this.name = name;
-		this.type = type;
+		this.typeId = typeId;
 		this.grade = grade;
 		this.picUrl = picUrl;
 		this.startTime = startTime;
@@ -126,7 +127,7 @@ public class RaceEntity implements IEntity {
 	public RaceEntity(Integer organizer, String name){
 		this.organizer = organizer;
 		this.name = name;
-		this.type = null;
+		this.typeId = null;
 		this.grade = null;
 		this.picUrl = null;
 		this.startTime = null;
@@ -163,14 +164,6 @@ public class RaceEntity implements IEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
 	}
 
 	public String getGrade() {
@@ -229,11 +222,11 @@ public class RaceEntity implements IEntity {
 		this.organizerEntity = organizerEntity;
 	}
 
-	public TypeEntity getTypeEntity() {
+	public TypeRaceEntity getTypeEntity() {
 		return typeEntity;
 	}
 
-	public void setTypeEntity(TypeEntity typeEntity) {
+	public void setTypeEntity(TypeRaceEntity typeEntity) {
 		this.typeEntity = typeEntity;
 	}
 
@@ -245,5 +238,15 @@ public class RaceEntity implements IEntity {
 
 	public void setFocusNum(int focusNum) {
 		this.focusNum = focusNum;
+	}
+
+
+	public Integer getTypeId() {
+		return typeId;
+	}
+
+
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 }

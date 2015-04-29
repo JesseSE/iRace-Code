@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.irace.dao.TeamDao;
-import com.irace.entity.StageEntity;
+import com.irace.entity.StageRaceEntity;
 import com.irace.entity.TeamEntity;
 
 public class TeamDaoImpl extends SDao implements TeamDao{
