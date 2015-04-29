@@ -138,4 +138,10 @@ public class RaceController extends SController {
 			return null;
 		}
 	}
+	
+	@RequestMapping("single")
+	public View singlePage() {
+		View view = new View("home","user", "single", "详细信息");		
+		return view;
+	}
 }

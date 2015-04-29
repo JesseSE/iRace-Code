@@ -106,11 +106,6 @@
 			//alert("2用户名输入不合法，请输入用户名！");
 			return(0);
 		};
-		if (check_usernum()) {
-			//alert("2学号必须输入！请输入学号！");
-			document.getElementById("usernum").focus();
-			return(0);
-		};
 		if (check_password()) {
 			//alert("2两次密码输入不一致，请重新输入");
 			document.getElementById("password").focus();
