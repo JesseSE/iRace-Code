@@ -166,14 +166,6 @@ public class RaceEntity implements IEntity {
 		this.name = name;
 	}
 
-	public Integer getType() {
-		return typeId;
-	}
-
-	public void setType(Integer typeId) {
-		this.typeId = typeId;
-	}
-
 	public String getGrade() {
 		return grade;
 	}
@@ -246,5 +238,15 @@ public class RaceEntity implements IEntity {
 
 	public void setFocusNum(int focusNum) {
 		this.focusNum = focusNum;
+	}
+
+
+	public Integer getTypeId() {
+		return typeId;
+	}
+
+
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 }
