@@ -2,39 +2,46 @@ package com.irace.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+
 import com.irace.dao.BigTypeDao;
+import com.irace.entity.ApplyInfoEntity;
 import com.irace.entity.BigTypeEntity;
 
 public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 
 	@Override
 	public Integer addBigType(BigTypeEntity bigType) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Integer)this.sessionFactory.getCurrentSession().save(bigType);
 	}
 
 	@Override
 	public boolean delBigType(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		this.hql = "DELETE FROM BigTypeEntity AS b WHERE b.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return query.executeUpdate() > 0;
 	}
 
 	@Override
 	public BigTypeEntity getBigType(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM BigTypeEntity AS b WHERE b.id=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, id);
+		return (BigTypeEntity)query.uniqueResult();
 	}
 
 	@Override
 	public List getBigTypeListDetail() {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM BigTypeEntity";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		return query.list();
 	}
 
 	@Override
 	public boolean updateBigType(BigTypeEntity bigType) {
-		// TODO Auto-generated method stub
-		return false;
+		sessionFactory.getCurrentSession().update(bigType);
+		return true;
 	}
 
 }

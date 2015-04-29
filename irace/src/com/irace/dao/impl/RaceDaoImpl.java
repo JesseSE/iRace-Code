@@ -107,7 +107,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	
 	@Override
 	public RaceEntity getRaceDetail(int id){
-		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeEntity AS t where r.id=?";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t where r.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (RaceEntity)query.uniqueResult();	
@@ -115,7 +115,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	
 	@Override
 	public List getRaceListDetail(int pageNo,int pageItemNum){
-		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeEntity AS t";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
@@ -125,7 +125,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListDetail(int pageNo, Integer pageItemNum,
 			String keyword) {
-		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.name likes ?";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.name likes ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0,"%"+keyword+"%");
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -137,10 +137,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.startTime ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.startTime ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.startTime DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.startTime DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -152,10 +152,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.endTime ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.endTime ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.endTime DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.endTime DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -167,10 +167,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.foucsNum ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.foucsNum ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t ORDER BY r.foucsNum DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.foucsNum DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -182,10 +182,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedStartTime(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.startTime ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.startTime ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.startTime DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.startTime DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, "%"+keyword+"%");
@@ -198,10 +198,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedEndTime(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.endTime ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.endTime ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.endTime DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.endTime DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, "%"+keyword+"%");
@@ -214,10 +214,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			String keyword, boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.foucsNum ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.foucsNum ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeEntity AS t WHERE r.keyword like ? ORDER BY r.foucsNum DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t WHERE r.keyword like ? ORDER BY r.foucsNum DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setString(0, "%"+keyword+"%");
