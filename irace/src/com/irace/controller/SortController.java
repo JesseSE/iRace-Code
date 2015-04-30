@@ -61,7 +61,7 @@ public class SortController {
 			@RequestParam(value="orderByXX",required=true)int orderByXX,
 			@RequestParam(value="orderByAD",required=true)int orderByAD){
 		
-		if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
+	/*	if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
 				orderByXX != 3 && orderByXX != 4) || (orderByAD !=1 && orderByAD !=2) ){
 			//出现错误选择默认排序
 			return raceService.getRaceListDetail(pageNum, sortKeyWords);
@@ -97,11 +97,12 @@ public class SortController {
 			}else
 				//错误选择，默认排序
 				return raceService.getRaceListDetail(pageNum, sortKeyWords);
-		}
+		}*/
 			
 			//调用测试方法
 			//return testRace();
 		//}
+		return raceService.getRaceListDetail(pageNum, sortKeyWords);
 	}
 	
 	/**
@@ -137,7 +138,7 @@ public class SortController {
 			r1.setFocusNum(200);
 			r1.setGrade("国家级");
 			r1.setNumRest(5);
-			r1.setTypeEntity(type);
+			r1.setTypeRaceEntity(type);
 			r1.setTypeId(1);
 			r1.setStartTime(d);
 			r1.setEndTime(d);

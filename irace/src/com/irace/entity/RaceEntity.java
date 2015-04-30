@@ -40,7 +40,7 @@ public class RaceEntity implements IEntity {
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=TypeRaceEntity.class)	
 	@JoinColumn(name="type_id",insertable=false,updatable=false)
-	private TypeRaceEntity typeEntity;
+	private TypeRaceEntity typeRaceEntity;
 	
 	private String grade;//比赛的级别
 	
@@ -222,15 +222,6 @@ public class RaceEntity implements IEntity {
 		this.organizerEntity = organizerEntity;
 	}
 
-	public TypeRaceEntity getTypeEntity() {
-		return typeEntity;
-	}
-
-	public void setTypeEntity(TypeRaceEntity typeEntity) {
-		this.typeEntity = typeEntity;
-	}
-
-
 	public int getFocusNum() {
 		return focusNum;
 	}
@@ -248,5 +239,15 @@ public class RaceEntity implements IEntity {
 
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
+	}
+
+
+	public TypeRaceEntity getTypeRaceEntity() {
+		return typeRaceEntity;
+	}
+
+
+	public void setTypeRaceEntity(TypeRaceEntity typeRaceEntity) {
+		this.typeRaceEntity = typeRaceEntity;
 	}
 }
