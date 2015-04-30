@@ -33,11 +33,9 @@ public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 	@Override
 	public List getBigTypeListDetail() {
 		System.out.println("sdfdsf");
-		this.hql = "FROM BigTypeEntity AS b left join fetch b.typeEntities";
+		this.hql = "FROM BigTypeEntity AS b";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		System.out.println("esfsdf");
 		Test(query.list());
-		System.out.println("esfsdf");
 		return query.list();
 	}
 
@@ -51,9 +49,9 @@ public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 		Iterator<BigTypeEntity> it = list.iterator();
 		while(it.hasNext()){
 		    BigTypeEntity race = it.next();
-		    System.out.println("sdfdsf");
 		    System.out.println("bigType"+race.getId());
-			System.out.println(race.getName());		
+			System.out.println(race.getName());	
+			System.out.println("name"+race.getTypeEntities().iterator().next().getBigTypeEntity().getTypeEntities().iterator().next().getName());
 		}
 	}
 
