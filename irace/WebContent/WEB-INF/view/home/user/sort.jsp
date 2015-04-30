@@ -297,7 +297,7 @@
 		
 		$('#slider').nivoSlider();
 		//testMenu();
-		getMenu();
+		//getMenu();
 	    initValue();
 		searchRace();
 		
@@ -411,7 +411,7 @@
    					 "<div class='price1'>"+
    					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
    					 "</div> </div>"+
-   					 "<span class='actual'>分类："+race[cursor].typeEntity.name+"</span>"+
+   					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
    					 "<div class='price1'>"+
    					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"</span>"+
    					 "</div>"+
