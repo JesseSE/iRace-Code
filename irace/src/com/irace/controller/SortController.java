@@ -61,10 +61,12 @@ public class SortController {
 			@RequestParam(value="orderByXX",required=true)int orderByXX,
 			@RequestParam(value="orderByAD",required=true)int orderByAD){
 		
-	/*	if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
-				orderByXX != 3 && orderByXX != 4) || (orderByAD !=1 && orderByAD !=2) ){
-			//出现错误选择默认排序
-			return raceService.getRaceListDetail(pageNum, sortKeyWords);
+		String relult = "";
+		
+		if(sortKeyWords == "" || pageNum < 0 || (orderByXX != 1 && orderByXX != 2 &&
+					orderByXX != 3 && orderByXX != 4) || (orderByAD !=1 && orderByAD !=2) ){
+				//出现错误选择默认排序
+			relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
 		}else{
 			System.out.println(sortKeyWords);
 			System.out.println(pageNum);
@@ -74,35 +76,40 @@ public class SortController {
 			
 			if(orderByAD == 1){//升序排列				
 				if(orderByXX == 1){//按照热度升序排列					
-					return raceService.getRaceListBySortedHotPoint(pageNum, sortKeyWords,true);
+					relult = raceService.getRaceListBySortedHotPoint(pageNum, sortKeyWords,true);
 				}else if(orderByXX == 2){//按时间升序排列
-					return raceService.getRaceListBySortedStartTime(pageNum, sortKeyWords,true);
+					relult = raceService.getRaceListBySortedStartTime(pageNum, sortKeyWords,true);
 				}else if(orderByXX == 3){//按结束时间升序排列
-					return raceService.getRaceListBySortedEndTime(pageNum, sortKeyWords,true);
+					relult = raceService.getRaceListBySortedEndTime(pageNum, sortKeyWords,true);
 				}else if(orderByXX == 4){//按照等级升序排列
-					return raceService.getRaceListDetail(pageNum, sortKeyWords);
+					relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
 				}else
-					return raceService.getRaceListDetail(pageNum, sortKeyWords);
+					relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
 			}else if(orderByAD == 2){//倒叙排列
 				if(orderByXX == 1){//按照热度倒叙排列				
-					return raceService.getRaceListBySortedHotPoint(pageNum, sortKeyWords,false);
+					relult = raceService.getRaceListBySortedHotPoint(pageNum, sortKeyWords,false);
 				}else if(orderByXX == 2){//按时间倒叙排列
-					return raceService.getRaceListBySortedStartTime(pageNum, sortKeyWords,false);
+					relult = raceService.getRaceListBySortedStartTime(pageNum, sortKeyWords,false);
 				}else if(orderByXX == 3){//按结束时间倒叙排列
-					return raceService.getRaceListBySortedEndTime(pageNum, sortKeyWords,false);
+					relult = raceService.getRaceListBySortedEndTime(pageNum, sortKeyWords,false);
 				}else if(orderByXX == 4){//按照等级倒叙排列,目前默认
-					return raceService.getRaceListDetail(pageNum, sortKeyWords);
+					relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
 				}else//默认排序
-					return raceService.getRaceListDetail(pageNum, sortKeyWords);
+					relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
 			}else
 				//错误选择，默认排序
-				return raceService.getRaceListDetail(pageNum, sortKeyWords);
-		}*/
+				relult = raceService.getRaceListDetail(pageNum, sortKeyWords);
+		}
+		
+		if(relult == "")
+			return raceService.getRaceListDetail(pageNum, sortKeyWords);
+		else
+			return relult;
 			
 			//调用测试方法
 			//return testRace();
 		//}
-		return raceService.getRaceListDetail(pageNum, sortKeyWords);
+		//return raceService.getRaceListDetail(pageNum, sortKeyWords);
 	}
 	
 	/**
@@ -114,10 +121,10 @@ public class SortController {
 		System.out.println("开始去数据库获取菜单");
 		
 		//调用获取菜单的方法
-		//return JsonUtil.listToJSONString(bigTypeService.getBigTypeListDetail());
+		return bigTypeService.getBigTypeListDetail();
 		
 		//这个是测试
-		return testRace();
+		//return testRace();
 	}
 	
 	

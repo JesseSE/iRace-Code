@@ -250,4 +250,6 @@ public class RaceEntity implements IEntity {
 	public void setTypeRaceEntity(TypeRaceEntity typeRaceEntity) {
 		this.typeRaceEntity = typeRaceEntity;
 	}
+	
+	
 }

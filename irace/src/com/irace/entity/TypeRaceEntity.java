@@ -23,7 +23,7 @@ public class TypeRaceEntity {
 	@Column(name="big_type")
 	private Integer bigType; //比赛大分类外键
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="big_type",insertable=false,updatable=false) 
 	private BigTypeEntity bigTypeEntity; //大分类实体
 	
