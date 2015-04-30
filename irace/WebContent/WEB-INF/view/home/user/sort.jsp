@@ -457,7 +457,7 @@
 	
 	
 	function showMenu(res){		
-		console.log(res);   
+		//console.log(res);   
 		var menuList = eval(res);  	
 		var menuText = "<li class='active grid'><a href='index.html'>主页</a></li>";
 		var consor = 0;
@@ -466,38 +466,36 @@
 			consor = 0;
 			menuText = menuText +
 				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
-				"<div class='megapanel'>";
-				
-				var innerList = eval(menuList[i]); 	
-				console.log(innerList);
-				console.log(innerList.length);
-			for(var j=0; j<(innerList.length/2+1);j++){
-				menuText = menuText + "<div class='row'>";
-					
-				if(consor < innerList.length){
+				"<div class='megapanel'>";				
+				//console.log(menuList[i].typeEntities);
+				var inLength = menuList[i].typeEntities.length;
+			
+			for(var j=0; j<(inLength/2+1);j++){
+				menuText = menuText + "<div class='row'>";				
+				if(consor < inLength){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+ innerList.organizerEntity.name  +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
 					consor ++;
 				}
-				if(consor < innerList.length){
+				if(consor < inLength){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+  innerList.organizerEntity.name +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
 					consor ++;
 				}				
 				menuText = menuText + "</div>";
-			}
+			} 
 			menuText = menuText + "</div>";			
 			menuText = menuText + "</li>" ;
 		}
