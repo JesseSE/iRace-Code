@@ -8,6 +8,7 @@ import java.util.List;
 import com.irace.dao.BigTypeDao;
 import com.irace.entity.BigTypeEntity;
 import com.irace.service.BigTypeService;
+import com.irace.util.JsonUtil;
 
 /**
  * @author Tracy
@@ -44,9 +45,9 @@ public class BigTypeServiceImpl implements BigTypeService {
 
 	
 	@Override
-	public List getBigTypeListDetail() {
+	public String getBigTypeListDetail() {
 		// TODO Auto-generated method stub
-		return bigTypeDao.getBigTypeListDetail();
+		return JsonUtil.listToJSONString(bigTypeDao.getBigTypeListDetail(), new String[]{"typeEntities"});
 	}
 
 	

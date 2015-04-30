@@ -23,7 +23,7 @@ public interface BigTypeService {
 	 * 一次性获取全部的分类 此方法会将大分类下的小分类一起获取
 	 * @return
 	 */
-	public List getBigTypeListDetail();
+	public String getBigTypeListDetail();
 	
 	public boolean updateBigType(BigTypeEntity bigType);
 }
