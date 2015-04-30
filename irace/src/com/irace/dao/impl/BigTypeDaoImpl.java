@@ -32,10 +32,8 @@ public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 
 	@Override
 	public List getBigTypeListDetail() {
-		System.out.println("sdfdsf");
 		this.hql = "FROM BigTypeEntity AS b";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		Test(query.list());
 		return query.list();
 	}
 
