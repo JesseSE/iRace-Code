@@ -4,6 +4,7 @@
 package com.irace.dao.impl;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -130,6 +131,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 		query.setString(0,"%"+keyword+"%");
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
+		Test(query.list());
 		return query.list();
 	}
 
@@ -233,5 +235,17 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 		return null;
 	}
 
-	
+	public void Test(List list){
+		Iterator<RaceEntity> it = list.iterator();
+		while(it.hasNext()){
+		    RaceEntity race = it.next();
+		    System.out.println(race.getId());
+			System.out.println(race.getName());
+			System.out.println(race.getStartTime());
+			System.out.println(race.getOrganizerEntity().getName());
+			System.out.println(race.getTypeRaceEntity().getName());
+			System.out.println(" ");
+			
+		}
+	}
 }
