@@ -47,7 +47,7 @@ public class BigTypeServiceImpl implements BigTypeService {
 	@Override
 	public String getBigTypeListDetail() {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(bigTypeDao.getBigTypeListDetail(), new String[]{"typeEntities"});
+		return JsonUtil.listToJSONString(bigTypeDao.getBigTypeListDetail(), new String[]{"bigTypeEntity"});
 	}
 
 	
