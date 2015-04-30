@@ -110,9 +110,36 @@ public class RaceController extends SController {
 			@RequestParam(value="orderByType",required=true)int orderByType,
 			@RequestParam(value="orderByAD",required=true)int orderByAD)
 	{
-		if( pageNum < 0 ){
-			return null;
-		}else{
+		switch(orderByType){
+		case 1:
+			if(orderByAD == 1)
+				raceService.getRaceListBySortedHotPoint(pageNum, true);		
+			else
+				raceService.getRaceListBySortedHotPoint(pageNum, false);
+			break;
+		case 2:
+			if(orderByAD == 2)
+				raceService.getRaceListBySortedStartTime(pageNum, true);		
+			else
+				raceService.getRaceListBySortedStartTime(pageNum, false);
+			break;
+		case 3:
+			if(orderByAD == 1)
+				raceService.getRaceListBySortedEndTime(pageNum, true);		
+			else
+				raceService.getRaceListBySortedEndTime(pageNum, false);
+			break;
+		case 4:
+			if(orderByAD == 1)
+				raceService.getRaceListDetail(pageNum);		
+			else
+				raceService.getRaceListDetail(pageNum);	
+			break;
+		default :
+			raceService.getRaceListDetail(pageNum);	
+			break;
+	
+		}
 //			System.out.println("开始在数据库中查询");
 //			List<RaceEntity> raceEntityList = raceService.getRaceList(pageNum);
 //			List<RaceEntity> raceEntityList1 = new ArrayList<RaceEntity>();		
@@ -136,7 +163,6 @@ public class RaceController extends SController {
 //			 
 //			return JsonUtil.listToJSONString(raceEntityList1);
 			return null;
-		}
 	}
 	
 	@RequestMapping("single")

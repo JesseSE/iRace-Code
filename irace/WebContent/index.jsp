@@ -185,9 +185,9 @@
 				    <h2 class="head" style = "display:inline;">热门比赛</h2>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 按属性排序：</label>
 		            <select id="orderBy" style="margin-left:10px;">
-		                            <option value="3"> 热度</option>
-                                    <option value="1"> 开始时间 </option>
-		                            <option value="2">结束时间 </option>
+		                            <option value="1"> 热度</option>
+                                    <option value="2"> 开始时间 </option>
+		                            <option value="3">结束时间 </option>
 									<option value="4">级别 </option>
 
 		            </select>

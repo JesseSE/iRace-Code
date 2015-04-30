@@ -1,11 +1,10 @@
 package com.irace.dao.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
-
 import com.irace.dao.BigTypeDao;
-import com.irace.entity.ApplyInfoEntity;
 import com.irace.entity.BigTypeEntity;
 
 public class BigTypeDaoImpl extends SDao implements BigTypeDao {
@@ -33,8 +32,12 @@ public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 
 	@Override
 	public List getBigTypeListDetail() {
-		this.hql = "FROM BigTypeEntity";
+		System.out.println("sdfdsf");
+		this.hql = "FROM BigTypeEntity AS b left join fetch b.typeEntities";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		System.out.println("esfsdf");
+		Test(query.list());
+		System.out.println("esfsdf");
 		return query.list();
 	}
 
@@ -42,6 +45,16 @@ public class BigTypeDaoImpl extends SDao implements BigTypeDao {
 	public boolean updateBigType(BigTypeEntity bigType) {
 		sessionFactory.getCurrentSession().update(bigType);
 		return true;
+	}
+	
+	public void Test(List list){
+		Iterator<BigTypeEntity> it = list.iterator();
+		while(it.hasNext()){
+		    BigTypeEntity race = it.next();
+		    System.out.println("sdfdsf");
+		    System.out.println("bigType"+race.getId());
+			System.out.println(race.getName());		
+		}
 	}
 
 }
