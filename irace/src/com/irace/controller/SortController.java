@@ -121,10 +121,10 @@ public class SortController {
 		System.out.println("开始去数据库获取菜单");
 		
 		//调用获取菜单的方法
-		//return bigTypeService.getBigTypeListDetail();
+		return bigTypeService.getBigTypeListDetail();
 		
 		//这个是测试
-		return testRace();
+		//return testRace();
 	}
 	
 	

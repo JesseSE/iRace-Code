@@ -297,7 +297,7 @@
 		
 		$('#slider').nivoSlider();
 		//testMenu();
-		//getMenu();
+		getMenu();
 	    initValue();
 		searchRace();
 		
