@@ -334,11 +334,8 @@
 		$('#slider').nivoSlider();	
 	    initValue();
 	    load();
-	    
-		testMenu();
-		//getMenu();
+		getMenu();
 	    initValue();
-		searchRace();
 	    		
 	    //点击查询按钮开始新的搜索
 		$("#searchbutton").click(function(){
@@ -368,13 +365,13 @@
 	  //点击排序方式方式
 	    $("#orderBy").change(function(){	    	
 	    	initValue();
-				load();
+				jump();
 	    });
 	  
 	    //点击升序降序排序搜索结果
 	    $("#orderByAD").change(function(){	    	
 	    	initValue();
-				load();
+				jump();
 	    });
 	    
 	 });  
@@ -413,14 +410,11 @@
 		$.ajax({
     		url: $("#appName").val()+"/user/homepageJump.act",
     		type: "POST",
-    		data: {currentpagenum:currentPage,
-    			   orderByType:orderByType,
+    		data: {orderByType:orderByType,
     			   orderByAD:orderByAD},
     		dataType: "JSON",
     		success: function(res) {   
-    			showResult(res);
-    	
-    			
+    			showResult(res);	
     		},
     		error: function(res) {        			
     			console.log(res);
@@ -430,7 +424,7 @@
 }
 	
 	function showResult(res){		
-		var race = eval(res);  
+		var race = eval(res);   
 		console.log(res);        	
 		
 		var htmlText = "";
@@ -441,8 +435,8 @@
 				if(cursor<race.length){
 				   htmlText = htmlText + 
        				 "<div class='col_1_of_3 span_1_of_3'>"+
-   					 "<a href='"+$("#appName").val()+"/user/single'>"+
-   					 "<div id='race1' class='inner_content clearfix'>"+
+   					 "<a href='single.html'>"+
+   					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
    					 "<div class='float-Bar'>"+
@@ -454,11 +448,11 @@
    					 "<div class='cart-left'>"+
    					 "<span class='actual'>"+race[cursor].name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual'>"+race[cursor].organizer+"</span>"+
+   					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
    					 "</div> </div>"+
-   					 "<span class='actual'>分类："+race[cursor].type+"</span>"+
+   					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual' font='0.5em'>"+race[cursor].startTime.date+"</span>"+
+   					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"</span>"+
    					 "</div>"+
    					 "<div class='clear'></div>"+
    					 "</div></div></a></div>";
@@ -495,7 +489,7 @@
 	
 	
 	function showMenu(res){		
-		console.log(res);   
+		//console.log(res);   
 		var menuList = eval(res);  	
 		var menuText = "<li class='active grid'><a href='index.html'>主页</a></li>";
 		var consor = 0;
@@ -504,34 +498,35 @@
 			consor = 0;
 			menuText = menuText +
 				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
-				"<div class='megapanel'>";
-			for(var j=0; j<((menuList[i].length/2)+1);j++){
-				menuText = menuText + "<div class='row'>";
-					
-				if(consor < menuList[i].length){
+				"<div class='megapanel'>";				
+				var inLength = menuList[i].typeEntities.length;
+			
+			for(var j=0; j<(inLength/2+1);j++){
+				menuText = menuText + "<div class='row'>";				
+				if(consor < inLength){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+ menuList[i].organizerEntity.name  +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
 					consor ++;
 				}
-				if(consor < menuList[i].length){
+				if(consor < inLength){
 					menuText = menuText +
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+  menuList[i].organizerEntity.name +"</h4></a></li>" +
+						"<li><a href='womens.html'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
 					consor ++;
 				}				
 				menuText = menuText + "</div>";
-			}
+			} 
 			menuText = menuText + "</div>";			
 			menuText = menuText + "</li>" ;
 		}
@@ -543,9 +538,7 @@
 			$("#addMenu").html(menuText);
 	} 
 	
-	function testMenu(){		
-		//console.log(res);   
-		//var menuList = eval(res);  	
+	function testMenu(){			
 		var menuText = "";
 		
 		menuText = menuText +

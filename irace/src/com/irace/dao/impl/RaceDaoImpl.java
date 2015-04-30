@@ -169,10 +169,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.foucsNum ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.foucsNum DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
