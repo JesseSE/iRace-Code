@@ -33,8 +33,8 @@ public class RaceController extends SController {
 	BigTypeService bigTypeService;
 	
 	@RequestMapping("index")
-	public View sortPage() {
-		View view = new View("home","user", "sort", "主页");		
+	public View RacePage() {
+		View view = new View("home","user", "index", "主页");		
 		return view;
 	}
 	
