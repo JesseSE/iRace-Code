@@ -396,7 +396,7 @@
 				if(cursor<race.length){
 				   htmlText = htmlText + 
        				 "<div class='col_1_of_3 span_1_of_3'>"+
-   					 "<a href='single.html'>"+
+       				"<a href='"+$("#appName").val()+"/user/single'>"+
    					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
@@ -549,3 +549,4 @@
 	
 </body>
 </html>
+\ No newline at end of file
