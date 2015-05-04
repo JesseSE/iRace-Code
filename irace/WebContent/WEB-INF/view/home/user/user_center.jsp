@@ -8,6 +8,10 @@
 <title>${ title }</title>
 	<%@ include file="/public/section/header.jsp"%>
 	
+	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+
+	
 </head>
 <body>
      <div class="header-top">
@@ -15,7 +19,7 @@
 			  <div class="header-top-left">
 			  	  <div class="box">
                      <div class="logo" style="margin-top:8px;">
-					   <a href="index.html"><img src="images/logo1.png" alt=""/></a>
+					   <a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
 				     </div>
                   </div>
                    <div class="clear"></div> 
@@ -24,9 +28,9 @@
             <!--用户头像-->
 			 <div class="cssmenu" role="navigation">
 				<ul>
-                    <li><image src="images/message.png"></image></li> 
+                    <li><image src="<%=request.getContextPath() %>/public/images/message.png"></image></li> 
 					<li><a href="##">消息</a></li>|                   
-					<li><image src="images/userican.png"></image></li>
+					<li><image src="<%=request.getContextPath() %>/public/images/userican.png"></image></li>
                     
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -86,67 +90,20 @@
               
 			<div class="top-box" name="my_race">
                 <ul class="nav nav-tabs">
-                  <li role="presentation" class="active"><a href="#race_default"><h4>正在进行</h4></a></li>
-                  <li role="presentation" class="active"><a href="#race_done"><h4>已经结束</h4></a></li> 
+                  <li role="presentation" class="active" id="helding"><a href="#race_default"><h4>正在进行</h4></a></li>
+                  <li role="presentation" class="active" id="helded"><a href="#race_done"><h4>已经结束</h4></a></li> 
                 </ul>  
 <!--                正在进行-->
-			    <div class="panel panel-default">
+			    <div class="panel panel-default" id="heldingRace">
                     <a name="race_default"></a>
-                      <div class="panel-body">
-                          <div class="list-group">
-                              <a class="list-group-item list-group-item-success" href="##">
-                                  <h3>中共中央软件杯</h3></a>
-                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。
-                              </a>
-                              
-                                <span class="label label-default">北京市教育委员会主办</span>
-                                <span class="label label-primary">国家级赛事</span>
-                                <span class="label label-success">计算机</span>
-                                <span class="label label-info">时间：2016-3至2017-8</span>
-                        </div>
-                          
-                          
-                        <div class="list-group">
-                              <a class="list-group-item list-group-item-success" href="##">
-                                  <h3>中共中央软件杯</h3></a>
-                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。</a>
-                              
-                                <span class="label label-default">北京市教育委员会主办</span>
-                                <span class="label label-primary">国家级赛事</span>
-                                <span class="label label-success">计算机</span>
-                                <span class="label label-info">时间：2016-3至2017-8</span>
-                        </div>
+                      <div class="panel-body"> 
                       </div>
                 </div>    
-                
-                
+                                
 <!--                已结束-->
-                <div class="panel panel-default">
+                <div class="panel panel-default" id="heldedRace">
                     <a name="race_done"></a>
                       <div class="panel-body">
-                          <div class="list-group">
-                              <a class="list-group-item disabled" href="##">
-                                  <h3>中共中央软件杯</h3></a>
-                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。</a>
-                              
-                               <span class="label label-default">北京市教育委员会主办</span>
-                                <span class="label label-primary">国家级赛事</span>
-                                <span class="label label-success">计算机</span>
-                                <span class="label label-info">时间：2016-3至2017-8</span>
-                        </div>                      
-                        
-                          
-                          
-                         <div class="list-group">
-                              <a class="list-group-item disabled" href="##">
-                                  <h3>中共中央软件杯</h3></a>
-                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。</a>
-                              
-                               <span class="label label-default">北京市教育委员会主办</span>
-                                <span class="label label-primary">国家级赛事</span>
-                                <span class="label label-success">计算机</span>
-                                <span class="label label-info">时间：2016-3至2017-8</span>
-                        </div>   
                           
                       </div>
                 </div>  
@@ -158,7 +115,7 @@
                 <nav style="text-align:center">
                   <ul class="pagination">
                     <li>
-                      <a href="#" aria-label="Previous">
+                      <a href="#" aria-label="Previous" id="prePage">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
@@ -168,7 +125,7 @@
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
                     <li>
-                      <a href="#" aria-label="Next">
+                      <a href="#" aria-label="Next" id="nextPage">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
@@ -179,96 +136,16 @@
 				
               
 			
-		  <h2 class="head">猜你喜欢</h2>
-			  <div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race1" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
+		<h2 class="head">猜你喜欢</h2>
+		<div class="top-box" id="recommendation"> 
+			  
+			  
+		</div>
               
-				<div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race2" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
-              
-				<div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race3" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
-				<div class="clear"></div>
-			</div>	            		 						 			    
-		  </div>
+				
+		<div class="clear"></div>
+		</div>	            		 						 			    
+		</div>
             
             
             
@@ -276,9 +153,9 @@
 			<div class="rsidebar span_1_of_left">
 				<div class="top-border"> </div>
 				 <div class="border">
-	             <link href="css/default.css" rel="stylesheet" type="text/css" media="all" />
-	             <link href="css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
-				  <script src="js/jquery.nivo.slider.js"></script>
+	             <link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
+	             <link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+				  <script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 				    <script type="text/javascript">
 				    $(window).load(function() {
 				        $('#slider').nivoSlider();
@@ -286,9 +163,9 @@
 				    </script>
 		    <div class="slider-wrapper theme-default">
               <div id="slider" class="nivoSlider">
-                <img src="images/t-img1.jpg"  alt="" />
-               	<img src="images/t-img2.jpg"  alt="" />
-                <img src="images/t-img3.jpg"  alt="" />
+                <img src="<%=request.getContextPath() %>/public/images/t-img1.jpg"  alt="" />
+               	<img src="<%=request.getContextPath() %>/public/images/t-img2.jpg"  alt="" />
+                <img src="<%=request.getContextPath() %>/public/images/t-img3.jpg"  alt="" />
               </div>
              </div>
               <div class="btn"><a href="single.html">Check it Out</a></div>
@@ -329,5 +206,258 @@
 		      </div>
 	     </div>
 	</div>
+	
+		   
+	<%@ include file="/public/section/footer.jsp" %>
+	
+	
+	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
+	<script type="text/javascript"> 
+	var totalPageNum;  //文件列表长度
+	var currentPage; //当前页面
+	var eachPageNum; //每页显示个数
+	var isHeldNow;
+	var userID; //用户的ID
+	
+	//初始化值
+	function initValue(){
+		totalPageNum = 1000;
+		currentPage = 1;
+		eachPageNum = 6;
+		isHeldNow = true;
+		userID = 1;
+	}
+	
+	//前一页
+	function prePage(){
+		if(currentPage > 1){
+			currentPage = currentPage -1;			
+			return true;
+		}else{
+			alert("已经是第一页了哦！");
+			return false;
+		}
+	}
+	
+	//下一页
+	function nextPage(){
+		if(currentPage < totalPageNum){
+			currentPage = currentPage + 1;
+			return true;
+		}else{
+			alert("已经是最后一页了哦！");
+			return false;
+		}
+			
+	}
+	
+	
+	//Ajax函数
+	$(document).ready(function(){		
+		$(".inner_content").hover(function() {
+	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
+	    });		
+		$('#slider').nivoSlider();
+		
+		//初始化
+	    initValue();
+	    document.getElementById("heldingRace").style.display="";
+    	document.getElementById("heldedRace").style.display="none";
+	    getHedingRace();
+	    getReconmmendation();
+	    
+	    //点击正在参加的比赛
+	    $("#helding").click(function(){
+	    	document.getElementById("heldingRace").style.display="";
+	    	document.getElementById("heldedRace").style.display="none";
+	    	initValue();
+		    getHedingRace();
+	    });
+	    //点击以前参加的比赛
+	    $("#helded").click(function(){
+	    	document.getElementById("heldingRace").style.display="none";
+	    	document.getElementById("heldedRace").style.display="";
+	    	initValue();
+	    	isHeldNow = false;
+	    	getHeldedRace();
+	    });
+	
+	    //点击前一页
+	    $("#prePage").click(function(){
+	    	if(prePage())
+	    		if(isHeldNow)
+	    			getHedingRace();
+	    		else
+	    			getHeldedRace();
+	    });
+	   //点击后一页
+	    $("#nextPage").click(function(){
+	    	if(nextPage())
+	    		if(isHeldNow)
+	    			getHedingRace();
+	    		else
+	    			getHeldedRace();
+	    });	 
+	});
+	
+	
+	function getHedingRace(){	
+		$.ajax({
+       		url: $("#appName").val()+"/user/getHedingRace.act",
+       		type: "POST",
+       		data: {
+       				currentpagenum: currentPage,
+       				userId: userID
+       			  },
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showHedingRace(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});		
+	}
+	
+	function showHedingRace(res){		
+		var race = eval(res);   
+		console.log(res);        	
+		
+		var htmlText = " <a name='race_default'></a>" +
+			"<div class='panel-body'>";
+		for(var i=0; i<race.length;i++){
+			htmlText = htmlText + 
+				"<div class='list-group'>" +
+				" <a class='list-group-item list-group-item-success' href='##'>" +
+				" <h3>" + race[i].name + "</h3></a>" +
+				" <a class='list-group-item'>" + race[i].content + "</a>" +
+				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
+				" <span class='label label-primary'>" + race[i].grade + "</span>" +
+				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
+				"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
+				"</div>";			
+		}	
+		
+			
+		htmlText = htmlText + "</div>";
+		
+		if(htmlText =="")
+			$("#heldingRace").html(	"没有内容哦");
+		else
+			$("#heldingRace").html(htmlText);
+	}
+	
+	function getHeldedRace(){	
+		$.ajax({
+       		url: $("#appName").val()+"/user/getHeldedRace.act",
+       		type: "POST",
+       		data: {
+       				currentpagenum: currentPage,
+       				userId: userID
+       			  },
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showHededRace(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});		
+	}
+	
+	function showHededRace(res){		
+		var race = eval(res);   
+		console.log(res);        	
+		
+		var htmlText = " <a name='race_done'></a>" +
+			"<div class='panel-body'>";
+		for(var i=0; i<race.length;i++)	{
+			htmlText = htmlText + 
+			"<div class='list-group'>" +
+			" <a class='list-group-item disabled' href='##'>" +
+			" <h3>" + race[i].name + "</h3></a>" +
+			" <a class='list-group-item'>" + race[i].content + "</a>" +
+			"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
+			" <span class='label label-primary'>" + race[i].grade + "</span>" +
+			"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
+			"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
+			"</div>";
+		}
+		
+			
+		htmlText = htmlText + "</div>";
+		
+		if(htmlText =="")
+			$("#heldedRace").html(	"没有内容哦");
+		else
+			$("#heldedRace").html(htmlText);
+	}
+	
+	
+	function getReconmmendation(){	
+		$.ajax({
+    		url: $("#appName").val()+"/user/getReconmmendation.act",
+    		type: "POST",
+    		data: { currentpagenum: 1},
+    		dataType: "JSON",
+    		success: function(res) {           		
+    			showReconmmendation(res);        			
+    		},
+    		error: function(res) {        			
+    			console.log(res);
+    			alert('输入错误！请返回重新输入！');
+    		}   
+		});
+	}
+	
+	function showReconmmendation(res){		
+		var race = eval(res);   
+		console.log(res);        	
+		
+		var htmlText = "";
+		var cursor = 0;	
+		
+		for(var j=0;j<3;j++){
+			if(cursor<race.length){
+			   htmlText = htmlText + 
+    				 "<div class='col_1_of_3 span_1_of_3'>"+
+					 "<a href='single.html'>"+
+					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
+					 "<div class='product_image'>"+
+					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
+					 "<div class='float-Bar'>"+
+					 "<div class='float-Bar_left'>"+race[cursor].grade+"</div>"+
+					 "<div class='float-Bar_right'>关注人数：233</div>"+
+					 "</div></div>"+
+					 "<div class='sale-box'><span class='on_sale title_shop'>New</span></div>"+
+					 "<div class='price'>"+
+					 "<div class='cart-left'>"+
+					 "<span class='actual'>"+race[cursor].name+"</span>"+
+					 "<div class='price1'>"+
+					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
+					 "</div> </div>"+
+					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
+					 "<div class='price1'>"+
+					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "</div>"+
+					 "<div class='clear'></div>"+
+					 "</div></div></a></div>";  					 
+			   cursor++;
+			}		
+							
+		}
+			
+		
+		if(htmlText =="")
+			$("#recommendation").html(	"没有内容哦");
+		else
+			$("#recommendation").html(htmlText);
+	}
+	
+</script> 
+	
+	
 </body>
 </html>
