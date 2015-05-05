@@ -241,6 +241,7 @@
 	var eachPageNum; //每页显示个数
 	var isFirstESearch; //是否为第一次查询
 	var searchKeyWord;
+	var menuId = -1;
 	
 	//初始化值
 	function initValue(){
@@ -248,6 +249,7 @@
 		currentPage = 1;
 		eachPageNum = 9;
 		isFirstESearch = true;
+		menuId = -1;
 		//searchKeyWord = null;
 	}
 	
@@ -313,17 +315,26 @@
 	    //点击前一页
 	    $("#prePage").click(function(){
 	    	if(prePage())
-	    		searchRace();
+	    		if(menuId < 0)
+	    			searchRace();
+	    		else
+	    			getRaceByMenu(menuId);	    			
 	    });
 	  //点击后一页
 	    $("#nextPage").click(function(){
-	    	if(nextPage())	    	
-	    		searchRace();
+	    	if(nextPage())	
+	    		if(menuId < 0)
+	    			searchRace();
+	    		else
+	    			getRaceByMenu(menuId);	
 	    });
 	  //选择页面
 	    $("#jumppage").change(function(){
-	    	if(goToPage())	    	
-	    		searchRace();
+	    	if(goToPage())	
+	    		if(menuId < 0)
+	    			searchRace();
+	    		else
+	    			getRaceByMenu(menuId);	
 	    });
 	  //点击排序方式方式
 	    $("#orderBy").change(function(){	    	
@@ -342,7 +353,6 @@
 			}else
 				alert("请输入关键字！");
 	    });
-	    
 	});
 	
 	
@@ -465,7 +475,7 @@
 		for(var i=0; i< menuList.length;i++){
 			consor = 0;
 			menuText = menuText +
-				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
+				"<li><a class='color4' href='#'>"+ menuList[i].name +"</a>" +
 				"<div class='megapanel'>";				
 				//console.log(menuList[i].typeEntities);
 				var inLength = menuList[i].typeEntities.length;
@@ -477,7 +487,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -488,7 +498,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -543,6 +553,23 @@
 	}
 	
 	
+	function getRaceByMenu(typeId){
+		menuId = typeId;
+		$.ajax({
+       		url: $("#appName").val()+"/user/getRaceByMenu.act",
+       		type: "POST",
+       		data: {raceType: typeId,
+       			currentpagenum: currentPage},
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showResult(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('菜单栏加载失败------');
+       		}   
+		});
+	}
 	
 	
 </script> 
