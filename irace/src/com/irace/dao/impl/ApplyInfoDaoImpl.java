@@ -62,5 +62,9 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 		sessionFactory.getCurrentSession().update(applyInfo);
 		return true;
 	}
+	
+	public List<Object> searchTeam(){
+		return null;	
+	}
 
 }

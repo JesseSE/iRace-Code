@@ -9,12 +9,6 @@
 <link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
 
-<!--start slider -->
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/public/css/fwslider.css" media="all">
-    <script src="<%=request.getContextPath() %>/public/js/jquery-ui.min.js"></script>
-	<script src="<%=request.getContextPath() %>/public/js/jQuery-self.js"></script>
-    <script src="<%=request.getContextPath() %>/public/js/css3-mediaqueries.js"></script>
-    <script src="<%=request.getContextPath() %>/public/js/fwslider.js"></script>
 </head>
 <body>
 <div class="header-top">
@@ -31,9 +25,9 @@
             <!--用户头像-->
 			 <div class="cssmenu" role="navigation">
 				<ul>
-                    <li><image src="images/message.png"></image></li> 
+                    <li><image src="<%=request.getContextPath() %>/public/images/message.png"></image></li> 
 					<li><a href="##">消息</a></li>|                   
-					<li><image src="images/userican.png"></image></li>
+					<li><image src="<%=request.getContextPath() %>/public/images/userican.png"></image></li>
                     
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -90,7 +84,8 @@
 <div class="main" style="margin-top:-25px;">
 	<div class="wrap">
 		<div class="section group">            
-		  <div class="cont span_2_of_3">
+		  <div class="cont span_2_of_3" id = "teamShow">
+              
               <h2 class="head">队伍一（组长视角）</h2>
 		      <div class="top-box1">
                   
@@ -241,100 +236,17 @@
 				<div class="clear"></div>
 			</div>	
 			
-			
+		<h2 class="head">猜你喜欢</h2>
+		<div class="top-box" id="recommendation"> 
+			  
+			  
+		</div>
+              
 				
-              
-			
-		  <h2 class="head">猜你喜欢</h2>
-			  <div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race1" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
-              
-				<div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race2" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
-              
-				<div class="col_1_of_3 span_1_of_3"> 
-			    <a href="single.html">
-				<div id="race3" class="inner_content clearfix">
-					<div class="product_image">
-						<img src="images/fwwb_cover.jpg" alt=""/>
-						<div class="float-Bar">
-						<div class="float-Bar_left">国家级比赛</div>
-						<div class="float-Bar_right">关注人数：233</div>
-						</div>
-					</div>
-                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
-                    <div class="price">
-					   <div class="cart-left">
-							<span class="actual">软件杯创新大赛</span>
-							
-							<div class="price1">
-							  <span class="actual">北京交通大学</span>
-							</div>
-						</div>
-							  <span class="actual">分类：计算机</span>
-							<div class="price1">
-							  <span class="actual" font="0.5em">2015/4-2015/9</span>
-							</div>
-						<div class="clear"></div>
-					 </div>	
-				</div>	
-                </a>
-				</div>
-				<div class="clear"></div>
-			</div>	            		 						 			    
-		  </div>
+		<div class="clear"></div>
+		</div>	            		 						 			    
+		</div>
+            
             
             
             
@@ -396,12 +308,165 @@
 	     </div>
 	</div>
 	<%@ include file="/public/section/footer.jsp" %>
-	<script type="text/javascript">
 	
-	$(document).ready(function(){
+	
+	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
+	<script type="text/javascript"> 
+	var totalPageNum;  //文件列表长度
+	var currentPage; //当前页面
+	var eachPageNum; //每页显示个数
+	var isHeldNow;
+	var userID; //用户的ID
+	function initValue(){
+		totalPageNum = 1000;
+		currentPage = 1;
+		eachPageNum = 6;
+		isHeldNow = true;
+		userID = 1;
+	}
+	
+	function getReconmmendation(){	
+		$.ajax({
+    		url: $("#appName").val()+"/user/getReconmmendation.act",
+    		type: "POST",
+    		data: { currentpagenum: 1},
+    		dataType: "JSON",
+    		success: function(res) {           		
+    			showReconmmendation(res);        			
+    		},
+    		error: function(res) {        			
+    			console.log(res);
+    			alert('输入错误！请返回重新输入！');
+    		}   
+		});
+	}
+	
+	function showReconmmendation(res){		
+		var race = eval(res);   
+		console.log(res);        	
 		
+		var htmlText = "";
+		var cursor = 0;	
+		
+		for(var j=0;j<3;j++){
+			if(cursor<race.length){
+			   htmlText = htmlText + 
+    				 "<div class='col_1_of_3 span_1_of_3'>"+
+					 "<a href='single.html'>"+
+					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
+					 "<div class='product_image'>"+
+					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
+					 "<div class='float-Bar'>"+
+					 "<div class='float-Bar_left'>"+race[cursor].grade+"</div>"+
+					 "<div class='float-Bar_right'>关注人数：233</div>"+
+					 "</div></div>"+
+					 "<div class='sale-box'><span class='on_sale title_shop'>New</span></div>"+
+					 "<div class='price'>"+
+					 "<div class='cart-left'>"+
+					 "<span class='actual'>"+race[cursor].name+"</span>"+
+					 "<div class='price1'>"+
+					 "<span class='actual'>"+race[cursor].organizerEntity.name+"</span>"+
+					 "</div> </div>"+
+					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
+					 "<div class='price1'>"+
+					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "</div>"+
+					 "<div class='clear'></div>"+
+					 "</div></div></a></div>";  					 
+			   cursor++;
+			}		
+							
+		}
+			
+		
+		if(htmlText =="")
+			$("#recommendation").html(	"没有内容哦");
+		else
+			$("#recommendation").html(htmlText);
+	}
 	
+	function load(){
+		var session = null; 
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeam.act",
+			type:"post",
+			data: {
+   				session:session
+   			  },
+   			success: function(res) {           		
+       			showTeam(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});
+	}
+	
+	function showTeam(res){
+		var teamList = eval(res);   
+		console.log(res);
+		var html = null;
+		for(var team in teamList){
+			html = html + "<h2 class='head'>"+teamList[team].teamName+"</h2><div class='top-box1'>";
+			//判断是否为队长
+			if(teamList[user] == 1){
+				for(var member in teamList[team]){
+					html = html + "<div class = 'col_1_of_3 span_1_of_3' style = 'backgroud:#39A0B9;'>"+
+					"<div name='teamer_con'><div class='team_member'>"+
+					"<img src='"+teamList[team].teamMember[member].pic+"' alt=''/>"+
+					"</div>"+
+					"<h1 class='state_container'>"teamList[team].teamMember[member].judge+"</h1>"+
+					"<a href='##'>"+
+					"<ul class='list-group'>"+
+					"<li class='list-group-item'><h3>"+teamList[team].teamMember[member].name+"</h3></li>"+
+					"<li class='list-group-item'>电话："+teamList[team].teamMember[member].telephone+"</li>"+
+					"<li class='list-group-item'>邮箱："+teamList[team].teamMember[member].mail+"</li>"+
+					" </ul></a></div> "+	
+					" <div class='delete-container'>";
+					//判断是否为申请
+					if(teamList[team].teamMember[member].apply== 1){
+						html = html+" <img class='delete_image' onclick='alert("+"'确认同意该组员加入？'"+") src='"+<%=request.getContextPath() %>+"/public/images/yes.jpg' alt=''/> "+
+						" <img class='delete_image' onclick='alert("+"'确认删除该组员？'"+") src='"+<%=request.getContextPath() %>+"/public/images/no.jpg' alt=''/> ";
+					}
+					else{
+						html = html + " <img class='delete_image' onclick='alert("+"'确认删除该组员？'"+") src='"+<%=request.getContextPath() %>+"/public/images/no.jpg' alt=''/> ";
+					}
+					html = html +" </div> </div> </div>";
+				}				
+			}
+			else{
+				for(var member in teamList[team]){
+					html = html + "<div class = 'col_1_of_3 span_1_of_3' style = 'backgroud:#39A0B9;'>"+
+					"<div name='teamer_con'><div class='team_member'>"+
+					"<img src='"+teamList[team].teamMember[member].pic+"' alt=''/>"+
+					"</div>"+
+					"<h1 class='state_container'>"teamList[team].teamMember[member].judge+"</h1>"+
+					"<a href='##'>"+
+					"<ul class='list-group'>"+
+					"<li class='list-group-item'><h3>"+teamList[team].teamMember[member].name+"</h3></li>"+
+					"<li class='list-group-item'>电话："+teamList[team].teamMember[member].telephone+"</li>"+
+					"<li class='list-group-item'>邮箱："+teamList[team].teamMember[member].mail+"</li>"+
+					" </ul></a></div> </div> </div>";
+				}		
+			}			
+		}
+		if(htmlText =="")
+			$("#recommendation").html(	"没有内容哦");
+		else
+			$("#recommendation").html(htmlText);
+		
+	}
+	
+	$(document).ready(function(){	
+		$(".inner_content").hover(function() {
+	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
+	    });		
+		$('#slider').nivoSlider();
+	    initValue();
+	    getReconmmendation();	
 	});
+	
 	</script>
 </body>
 </html>
