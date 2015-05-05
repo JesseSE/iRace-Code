@@ -19,4 +19,6 @@ public interface UserDao {
 	public List getUserList(Integer pageNo, Integer pageItemNum);
 	
 	public boolean updateUser(UserEntity user);
+	
+	public List getTeamMemberListByUser(int uid);
 }

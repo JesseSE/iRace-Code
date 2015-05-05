@@ -16,22 +16,13 @@
     <script src="<%=request.getContextPath() %>/public/js/css3-mediaqueries.js"></script>
     <script src="<%=request.getContextPath() %>/public/js/fwslider.js"></script>
 
-<title>${ title }</title>
+	<title>${ title }</title>
+
 </head>
 <body >
 
-<div class="header-top">
-	   <div class="wrap"> 
-<!--           登录注册菜单模块-->
-			 <div class="cssmenu">
-				<ul>
-					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
-					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
- 		</div>
-	</div>
+	<!-- 用户登录信息div -->
+	<%@ include file="/public/section/user-div.jsp"%>
     
 <!--    网站标题、选择菜单、搜索框模块-->
 	<div class="header-bottom">

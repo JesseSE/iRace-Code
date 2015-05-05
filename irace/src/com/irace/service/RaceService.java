@@ -130,4 +130,5 @@ public interface RaceService {
 	 */
 	public String getRaceListBySortedHotPoint(int pageNo, String keyword, boolean isAsc);
 	
+	
 }

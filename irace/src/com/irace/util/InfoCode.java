@@ -14,7 +14,7 @@ public class InfoCode {
 	public static final Integer UNKNOWN = -1; //未知的错误
 	public static final Integer OTHER_ERROR = 0; //其他信息
 	public static final Integer PERMISSION_DENIED = 201; //权限不足
-	
+	public static final Integer LOGIN_TIMEOUT = 202; //登录超时
 	
 	/************************报名状态*************************/
 	
