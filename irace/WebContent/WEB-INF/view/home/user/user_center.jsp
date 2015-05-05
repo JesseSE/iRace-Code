@@ -329,7 +329,7 @@
 		for(var i=0; i<race.length;i++){
 			htmlText = htmlText + 
 				"<div class='list-group'>" +
-				" <a class='list-group-item list-group-item-success' href='##'>" +
+				" <a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/user/single'>"+ 
 				" <h3>" + race[i].name + "</h3></a>" +
 				" <a class='list-group-item'>" + race[i].content + "</a>" +
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
@@ -376,7 +376,7 @@
 		for(var i=0; i<race.length;i++)	{
 			htmlText = htmlText + 
 			"<div class='list-group'>" +
-			" <a class='list-group-item disabled' href='##'>" +
+			" <a class='list-group-item disabled' href=' " +$("#appName").val()+ "/user/single'>"+ 
 			" <h3>" + race[i].name + "</h3></a>" +
 			" <a class='list-group-item'>" + race[i].content + "</a>" +
 			"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
@@ -423,7 +423,7 @@
 			if(cursor<race.length){
 			   htmlText = htmlText + 
     				 "<div class='col_1_of_3 span_1_of_3'>"+
-					 "<a href='single.html'>"+
+					 "<a href=' " +$("#appName").val()+ "/user/single'>"+ 
 					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
 					 "<div class='product_image'>"+
 					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+

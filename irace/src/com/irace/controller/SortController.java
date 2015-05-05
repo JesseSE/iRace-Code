@@ -127,6 +127,19 @@ public class SortController {
 		//return testRace();
 	}
 	
+	/**
+	 * 通过菜单栏选择比赛,通过比赛的类型查询比赛
+	 * @return
+	 */
+	@RequestMapping("getRaceByMenu.act")
+	public @ResponseBody String getRaceByMenu(
+			@RequestParam(value="raceType",required=true)int raceType,
+			@RequestParam(value="currentpagenum",required=true)int pageNum){
+		
+		System.out.println("开始按照菜单栏查找比赛" + raceType);
+		return raceService.getRaceList(pageNum, raceType);
+			
+	}
 	
 	
 	/**
