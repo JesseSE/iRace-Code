@@ -231,9 +231,28 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListByUser(Integer pageNo, Integer pageItemNum,
 			int userID) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM RaceEntity AS r UserEntity AS u ApplyEntity AS a inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t WHERE a.user=u.id and a.race=r.id and u.id = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, userID);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
+	
+	public List getRaceListByUser(int userID){
+		this.hql = "FROM RaceEntity AS r UserEntity AS u ApplyEntity AS a inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t WHERE a.user=u.id and a.race=r.id and u.id = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, userID);
+		return query.list();
+	}
+	
+	public List getTeamMemberListByRaceId(int RaceID){
+		this.hql = "";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, RaceID);
+		return query.list();		
+	}
+	
 
 	public void Test(List list){
 		Iterator<RaceEntity> it = list.iterator();

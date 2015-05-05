@@ -79,174 +79,27 @@
     
     
     
-    
+
 <!--显示-->
 <div class="main" style="margin-top:-25px;">
 	<div class="wrap">
 		<div class="section group">            
-		  <div class="cont span_2_of_3" id = "teamShow">
-              
-              <h2 class="head">队伍一（组长视角）</h2>
-		      <div class="top-box1">
-                  
-
-                  <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">待审核</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-						 <div class="delete-container">
-                                  <img class="delete_image" onclick="alert('确认同意该组员加入？')" src="<%=request.getContextPath() %>/public/images/yes.jpg" alt=""/> 
-                                  <img class="delete_image" onclick="alert('确认删除该组员？')" src="<%=request.getContextPath() %>/public/images/no.jpg" alt=""/> 
-						 </div>
-                       </div>
-                    </div>
-
-
-                     <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">已加入</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-						 <div class="delete-container">
-                                  <!--img class="delete_image" onclick="alert('确认同意该组员加入？')" src="<%=request.getContextPath() %>/public/images/yes.jpg" alt=""/--> 
-                                  <img class="delete_image" onclick="alert('确认删除该组员？')" src="<%=request.getContextPath() %>/public/images/no.jpg" alt=""/> 
-						 </div>
-                       </div>
-                    </div>
-
-                    <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">已加入</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-						 <div class="delete-container">
-                                  <!--img class="delete_image" onclick="alert('确认同意该组员加入？')" src="<%=request.getContextPath() %>/public/images/yes.jpg" alt=""/--> 
-                                  <img class="delete_image" onclick="alert('确认删除该组员？')" src="<%=request.getContextPath() %>/public/images/no.jpg" alt=""/> 
-						 </div>
-                       </div>
-                    </div>
-                  
-				<div class="clear"></div>
-			</div>	
-              
-              
-              
-               <h2 class="head">队伍二（组员视角）</h2>
-		      <div class="top-box1">
-                  
-
-                  <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">待审核</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-                       </div>
-                    </div>
-
-
-                     <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">已加入</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-                       </div>
-                    </div>
-
-                     <div class="col_1_of_3 span_1_of_3" style="background:#39A0B9;">
-                     
-                     <div class="inner_content clearfix">
-                         <div name="teamer_con" >
-                            <div class="team_member" >
-                                <img src="<%=request.getContextPath() %>/public/images/a-img1.jpg" alt=""/> 
-                            </div>
-							
-							<h1 class="state_container">已加入</h1>
-							<a href="##">
-                             <ul class="list-group">
-                                  <li class="list-group-item">  <h3>刘嵩</h3></li>
-                                  <li class="list-group-item">电话：18811234098</li>
-                                  <li class="list-group-item">邮箱：12300@126.com</li>
-                              </ul>
-							</a>
-                         </div> 
-                       </div>
-                    </div>
-                  
-				<div class="clear"></div>
-			</div>	
-			
+		  <div class="cont span_2_of_3">
+		  
+		  <div id = "teamShow">
+		  </div>
+        			
 		<h2 class="head">猜你喜欢</h2>
 		<div class="top-box" id="recommendation"> 
-			  
-			  
+		  
 		</div>
               
 				
 		<div class="clear"></div>
 		</div>	            		 						 			    
 		</div>
-            
+        
+
             
             
             
@@ -312,18 +165,16 @@
 	
 	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript"> 
-	var totalPageNum;  //文件列表长度
-	var currentPage; //当前页面
-	var eachPageNum; //每页显示个数
-	var isHeldNow;
-	var userID; //用户的ID
-	function initValue(){
-		totalPageNum = 1000;
-		currentPage = 1;
-		eachPageNum = 6;
-		isHeldNow = true;
-		userID = 1;
-	}
+
+	
+	//Ajax函数
+	$(document).ready(function(){	
+		$(".inner_content").hover(function() {
+	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
+	    });		
+		$('#slider').nivoSlider();
+	    getReconmmendation();	
+	});
 	
 	function getReconmmendation(){	
 		$.ajax({
@@ -376,9 +227,7 @@
 			   cursor++;
 			}		
 							
-		}
-			
-		
+		}	
 		if(htmlText =="")
 			$("#recommendation").html(	"没有内容哦");
 		else
@@ -386,7 +235,6 @@
 	}
 	
 	function load(){
-		var session = null; 
 		$.ajax({
 			url:$("#appName").val()+"/user/getTeam.act",
 			type:"post",
@@ -406,67 +254,10 @@
 	function showTeam(res){
 		var teamList = eval(res);   
 		console.log(res);
-		var html = null;
-		for(var team in teamList){
-			html = html + "<h2 class='head'>"+teamList[team].teamName+"</h2><div class='top-box1'>";
-			//判断是否为队长
-			if(teamList[user] == 1){
-				for(var member in teamList[team]){
-					html = html + "<div class = 'col_1_of_3 span_1_of_3' style = 'backgroud:#39A0B9;'>"+
-					"<div name='teamer_con'><div class='team_member'>"+
-					"<img src='"+teamList[team].teamMember[member].pic+"' alt=''/>"+
-					"</div>"+
-					"<h1 class='state_container'>"teamList[team].teamMember[member].judge+"</h1>"+
-					"<a href='##'>"+
-					"<ul class='list-group'>"+
-					"<li class='list-group-item'><h3>"+teamList[team].teamMember[member].name+"</h3></li>"+
-					"<li class='list-group-item'>电话："+teamList[team].teamMember[member].telephone+"</li>"+
-					"<li class='list-group-item'>邮箱："+teamList[team].teamMember[member].mail+"</li>"+
-					" </ul></a></div> "+	
-					" <div class='delete-container'>";
-					//判断是否为申请
-					if(teamList[team].teamMember[member].apply== 1){
-						html = html+" <img class='delete_image' onclick='alert("+"'确认同意该组员加入？'"+") src='"+<%=request.getContextPath() %>+"/public/images/yes.jpg' alt=''/> "+
-						" <img class='delete_image' onclick='alert("+"'确认删除该组员？'"+") src='"+<%=request.getContextPath() %>+"/public/images/no.jpg' alt=''/> ";
-					}
-					else{
-						html = html + " <img class='delete_image' onclick='alert("+"'确认删除该组员？'"+") src='"+<%=request.getContextPath() %>+"/public/images/no.jpg' alt=''/> ";
-					}
-					html = html +" </div> </div> </div>";
-				}				
-			}
-			else{
-				for(var member in teamList[team]){
-					html = html + "<div class = 'col_1_of_3 span_1_of_3' style = 'backgroud:#39A0B9;'>"+
-					"<div name='teamer_con'><div class='team_member'>"+
-					"<img src='"+teamList[team].teamMember[member].pic+"' alt=''/>"+
-					"</div>"+
-					"<h1 class='state_container'>"teamList[team].teamMember[member].judge+"</h1>"+
-					"<a href='##'>"+
-					"<ul class='list-group'>"+
-					"<li class='list-group-item'><h3>"+teamList[team].teamMember[member].name+"</h3></li>"+
-					"<li class='list-group-item'>电话："+teamList[team].teamMember[member].telephone+"</li>"+
-					"<li class='list-group-item'>邮箱："+teamList[team].teamMember[member].mail+"</li>"+
-					" </ul></a></div> </div> </div>";
-				}		
-			}			
-		}
-		if(htmlText =="")
-			$("#recommendation").html(	"没有内容哦");
-		else
-			$("#recommendation").html(htmlText);
-		
+		var htmlText = null;
+
 	}
-	
-	$(document).ready(function(){	
-		$(".inner_content").hover(function() {
-	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
-	    });		
-		$('#slider').nivoSlider();
-	    initValue();
-	    getReconmmendation();	
-	});
-	
-	</script>
+		
+</script> 
 </body>
 </html>

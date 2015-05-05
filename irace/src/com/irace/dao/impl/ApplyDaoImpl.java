@@ -62,5 +62,7 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 		sessionFactory.getCurrentSession().update(apply);
 		return true;
 	}
+	
+	
 
 }

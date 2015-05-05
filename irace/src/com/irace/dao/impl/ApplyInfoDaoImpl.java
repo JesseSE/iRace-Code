@@ -63,8 +63,7 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 		return true;
 	}
 	
-	public List<Object> searchTeam(){
-		return null;	
-	}
+
+	
 
 }
