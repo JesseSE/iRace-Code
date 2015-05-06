@@ -60,4 +60,9 @@ public class JsonUtil {
 	public static String getJsonInfoOK() {
 		return getJsonInfo(InfoCode.OK,"OK");
 	}
+	
+	public static String getJsonLoginTimeOut() {
+		return getJsonInfo(InfoCode.LOGIN_TIMEOUT,"登录超时");
+	}
+	
 }

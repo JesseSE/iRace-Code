@@ -71,4 +71,10 @@ public class UserDaoImpl extends SDao implements UserDao {
 		return true;
 	}
 
+	@Override
+	public List getTeamMemberListByUser(int uid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

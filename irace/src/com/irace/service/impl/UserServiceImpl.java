@@ -102,6 +102,12 @@ public class UserServiceImpl implements UserService {
 		}
 		
 	}
+
+	@Override
+	public String getTeamMemberListByUser(int uid) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(userDao.getTeamMemberListByUser(uid), new String[]{});
+	}
 	
 	
 }

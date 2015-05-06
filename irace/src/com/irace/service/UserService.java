@@ -74,4 +74,12 @@ public interface UserService {
 	 * @return json格式字符串有两个属性code和msg, code=200表示操作成功  code等于其他表示失败 此时可查看msg里的信息 
 	 */
 	public String modifyPassword(int id, String oldPwd, String newPwd);
+	
+	
+	/**
+	 * 通过user id查找相关的比赛成员
+	 * @param uid
+	 * @return
+	 */
+	public String getTeamMemberListByUser(int uid);
 }

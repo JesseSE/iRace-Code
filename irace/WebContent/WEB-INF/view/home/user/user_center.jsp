@@ -29,7 +29,7 @@
 			 <div class="cssmenu" role="navigation">
 				<ul>
                     <li><image src="<%=request.getContextPath() %>/public/images/message.png"></image></li> 
-					<li><a href="##">消息</a></li>|                   
+					<li><a href="##">消息</a></li>
 					<li><image src="<%=request.getContextPath() %>/public/images/userican.png"></image></li>
                     
                     <li class="dropdown">
