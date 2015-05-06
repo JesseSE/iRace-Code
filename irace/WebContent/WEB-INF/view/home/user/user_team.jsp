@@ -255,7 +255,10 @@
 		var teamList = eval(res);   
 		console.log(res);
 		var htmlText = null;
-
+	}
+	
+	function load(){
+		
 	}
 		
 </script> 
