@@ -67,7 +67,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	
 	@Override
 	public List getRaceList(Integer pageNo, Integer pageItemNum, int type) {
-		this.hql = "FROM RaceEntity AS r WHERE r.typeId=?";
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t WHERE r.typeId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0,type);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -169,10 +169,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public List getRaceListBySortedHotPoint(int pageNo, Integer pageItemNum,
 			boolean isAsc) {
 		if(isAsc){
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum ASC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum ASC";
 		}
 		else{
-			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum DESC";
+			this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t ORDER BY r.focusNum DESC";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -231,30 +231,26 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListByUser(Integer pageNo, Integer pageItemNum,
 			int userID) {
-		this.hql = "FROM RaceEntity AS r UserEntity AS u ApplyEntity AS a inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t WHERE a.user=u.id and a.race=r.id and u.id = ?";
+		this.hql = "SELECT r FROM RaceEntity AS r, UserEntity AS u ,ApplyEntity AS a inner join fetch r.organizerEntity  inner join fetch r.typeRaceEntity WHERE a.user=u.id and a.race=r.id and u.id = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userID);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
+		Test(query.list());
 		return query.list();
 	}
 	
-	public List getRaceListByUser(int userID){
-		this.hql = "FROM RaceEntity AS r UserEntity AS u ApplyEntity AS a inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t WHERE a.user=u.id and a.race=r.id and u.id = ?";
+	public List getTeamMemberListByUser(int userID){
+		this.hql = "SELECT r.name FROM RaceEntity AS r,UserEntity AS u ,ApplyEntity AS,";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userID);
-		return query.list();
-	}
-	
-	public List getTeamMemberListByRaceId(int RaceID){
-		this.hql = "";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, RaceID);
 		return query.list();		
 	}
 	
 
 	public void Test(List list){
+		if(list.isEmpty())
+			System.out.print("null");
 		Iterator<RaceEntity> it = list.iterator();
 		while(it.hasNext()){
 		    RaceEntity race = it.next();

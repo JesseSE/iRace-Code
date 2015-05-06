@@ -17,7 +17,7 @@ public class UserTeamController extends SController{
 	@Resource(name="raceService")
 	RaceService raceService;	
 	
-	@RequestMapping("user_team")
+	@RequestMapping("userTeam")
 	public View UserTeamPage() {
 		View view = new View("home","user", "user_team", "个人中心");		
 		return view;

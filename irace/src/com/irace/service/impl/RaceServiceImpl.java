@@ -71,7 +71,7 @@ public class RaceServiceImpl implements RaceService {
 		// TODO Auto-generated method stub
 		return JsonUtil.listToJSONString(raceDao.getRaceList(pageNo,
 				Constants.DEFAULT_PAGE_ITEM_NUM, type), new String[] {
-				"typeRaceEntity", "organizerEntity" });
+				"typeEntities"});
 	}
 
 	@Override

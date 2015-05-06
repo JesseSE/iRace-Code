@@ -497,8 +497,9 @@
 		for(var i=0; i< menuList.length;i++){
 			consor = 0;
 			menuText = menuText +
-				"<li><a class='color4' href='index.html'>"+ menuList[i].name +"</a>" +
+				"<li><a class='color4' href='#'>"+ menuList[i].name +"</a>" +
 				"<div class='megapanel'>";				
+				//console.log(menuList[i].typeEntities);
 				var inLength = menuList[i].typeEntities.length;
 			
 			for(var j=0; j<(inLength/2+1);j++){
@@ -508,7 +509,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -519,7 +520,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='womens.html'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -538,7 +539,9 @@
 			$("#addMenu").html(menuText);
 	} 
 	
-	function testMenu(){			
+	function testMenu(){		
+		//console.log(res);   
+		//var menuList = eval(res);  	
 		var menuText = "";
 		
 		menuText = menuText +
@@ -569,6 +572,25 @@
 			$("#addMenu").html("没有内容哦");
 		else
 			$("#addMenu").html(menuText);
+	}
+	
+	
+	function getRaceByMenu(typeId){
+		menuId = typeId;
+		$.ajax({
+       		url: $("#appName").val()+"/user/getRaceByMenu.act",
+       		type: "POST",
+       		data: {raceType: typeId,
+       			currentpagenum: currentPage},
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			showResult(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('菜单栏加载失败------');
+       		}   
+		});
 	}
 			
 </script> 	     

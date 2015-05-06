@@ -58,8 +58,9 @@ public class UserCenterController extends SController {
 		
 		//applyService.
 		System.out.println("用户中心------" + pageNum);
-		//return raceService.getRaceListDetail(pageNum, "服务");	
+		//return raceService.getRaceListDetail(pageNum, "服务");
 		return raceService.getRaceListByUser(pageNum, userId);
+		
 	}
 	
 	/**
