@@ -73,7 +73,7 @@
 									<li><a href="womens.html">全国生物竞赛</a></li>
 									<li><a href="womens.html">生物研究大赛</a></li>
 									<li><a href="womens.html">亚洲生物医学未来领袖大赛</a></li>
-								</ul>	
+								</ul>
 							</div>												
 						</div>
 					  </div>

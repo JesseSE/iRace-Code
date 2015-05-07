@@ -23,109 +23,8 @@
 
 	<!-- 用户登录信息div -->
 	<%@ include file="/public/section/user-div.jsp"%>
-    
-<!--    网站标题、选择菜单、搜索框模块-->
-	<div class="header-bottom">
-	    <div class="wrap">
-			<div class="header-bottom-left">
-<!--                网站标题logo-->
-				<div class="logo">
-					<a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
-				</div>
-<!--                菜单栏， 内容分类-->
-				<div class="menu">
-	          <ul class="megamenu skyblue" id="addMenu">
-    
-	            <li class="active grid"><a href="index.html">主页</a></li>
-				<li><a class="color4" href="#">理学类</a>
-					<div class="megapanel">
-						<div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						  <div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						</div>
-					</li>		
-					
-					<li><a class="color4" href="#">工学类</a>
-					<div class="megapanel">
-						<div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						  <div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						</div>
-					</li>					
-				</ul>
-			</div>
-		</div>
-<!--            搜索框，标签等-->
-	   <div class="header-bottom-right">
-         <div class="search">	  
-				<input type="text" id="searchinput" name="s" class="textbox" value="${keyword }"  onblur="if (this.value == '') {this.value = '搜索';}">
-				<input type="submit" value="Subscribe" id="searchbutton" name="submit">
-				<div id="response"> </div>
-		 </div>
-<!--           标签，暂时无用-->
-
-    </div>
-     <div class="clear"></div>
-     </div>
-	</div>
+    <!-- 盗汗菜单div -->
+	<%@ include file="/public/section/menu-div.jsp"%>
     
   <!-- 开始幻灯片广告 -->
     <div id="fwslider">
@@ -171,7 +70,7 @@
 	<div class="wrap">
 		<div class="section group">
 		  <div class="cont span_2_of_3">
-		  	<div class="sort">			
+		  	<div class="sort">
                	<div class="sort-by">
 				    <h2 class="head" style = "display:inline;">热门比赛</h2>
 		            <label class="" style="margin-left:100px; font-size:1.3em;"> 按属性排序：</label>

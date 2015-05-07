@@ -29,7 +29,7 @@ public class SortController {
 	public SortController() {}
 
 	@Resource(name="raceService")
-	RaceService raceService;	
+	RaceService raceService;
 	@Resource(name="bigTypeService")
 	BigTypeService bigTypeService;
 	
