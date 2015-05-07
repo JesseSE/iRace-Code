@@ -38,6 +38,8 @@ public class UserEntity implements IEntity {
 	@Column(name="pic_url")
 	private String picUrl;	
 	
+	private String gender;
+	
 	
 	public UserEntity() {}
 	
@@ -181,6 +183,14 @@ public class UserEntity implements IEntity {
 
 	public void setRoleEntity(RoleEntity roleEntity) {
 		this.roleEntity = roleEntity;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	
 }
