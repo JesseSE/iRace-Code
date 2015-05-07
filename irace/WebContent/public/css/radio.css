@@ -1,0 +1,9 @@
+
+.hRadio
+{
+padding-left: 22px; display: inline-block;
+background: transparent url(../../../img/radio.png) no-repeat left top;
+height: 19px; line-height:20px;
+cursor:pointer;vertical-align:middle;
+}
+.hRadio_Checked { background-position: left bottom;}

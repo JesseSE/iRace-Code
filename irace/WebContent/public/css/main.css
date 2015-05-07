@@ -1,0 +1,53 @@
+.teamer_con{
+    text-align: center;    
+    vertical-align:middle;   
+}
+.state_container{
+	
+	margin-top:-75px;
+	margin-bottom:40px;
+	margin-left:120px;
+	width:120px;
+	color:#ff0000;
+	border: 2px solid #ff0000;
+	border-radius:7%; 
+	position:relative;
+
+}
+
+.team_member{
+    border-radius:100%; 
+    overflow:hidden;
+    width:100px;
+    height: 100px;
+}
+.delete-container{
+
+	float:right;
+
+}
+.delete_image{
+    border-radius:100%;
+    overflow:hidden;
+    width:50px;
+    height: 50px;
+	margin-right:50px;
+}
+
+.delete-member {
+	height: 50px;
+	width: 100px;
+	margin-left:80px;
+	float:left;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+
+	top: 30px;
+}
+
+.dropdown-btn{
+	background: #AFR;
+	font-family:"微软雅黑";
+
+}
