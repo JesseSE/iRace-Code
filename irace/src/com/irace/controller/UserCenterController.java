@@ -75,4 +75,21 @@ public class UserCenterController extends SController {
 		System.out.println("按照热度获取推介内容----" + pageNum);		
 		return raceService.getRaceListBySortedHotPoint(pageNum, true);	
 	}
+	
+	/**
+	 *账号管理
+	 */
+	@RequestMapping("userAccount")
+	public View userAccount() {
+		return new View("home", "user", "user_account", "账号管理");
+	}
+	
+	/**
+	 *用户信息
+	 */
+	@RequestMapping("userAccount")
+	public View userInfo() {
+		return new View("home", "user", "user_info", "用户信息");
+	}
+	
 }
