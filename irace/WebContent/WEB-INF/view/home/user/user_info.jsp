@@ -3,25 +3,30 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>iRace</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>${ title }</title>
+<%@ include file="/public/section/header.jsp"%>
+	
+	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href='css/family.css' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="js/jquery1.min.js"></script>
-<!-- start menu -->
+start menu
 
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    新 Bootstrap 核心 CSS 文件
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
-<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+可选的Bootstrap主题文件（一般不用引入）
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+jQuery文件。务必在bootstrap.min.js 之前引入
 <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+最新的 Bootstrap 核心 JavaScript 文件
 <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="js/formConfirm.js"></script>
@@ -34,30 +39,33 @@
 
 
 <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<script type="text/javascript" src="js/megamenu.js"></script> -->
+
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-<script type="text/javascript" src="js/jquery1.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery1.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-<!-- start menu -->
+start menu
 <link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<script type="text/javascript" src="js/megamenu.js"></script> -->
+
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+
 <!--start slider -->
-    <link rel="stylesheet" href="css/fwslider.css" media="all">
+   <!--  <link rel="stylesheet" href="css/fwslider.css" media="all">
     <script src="js/jquery-ui.min.js"></script>
 	<script src="js/jQuery-self.js"></script>
     <script src="js/css3-mediaqueries.js"></script>
-    <script src="js/fwslider.js"></script>
+    <script src="js/fwslider.js"></script> -->
 <!--end slider -->
-<script src="js/jquery.easydropdown.js"></script>
+<!-- <script src="js/jquery.easydropdown.js"></script>
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/form.css" rel="stylesheet" type="text/css" media="all" /> -->
 <!--testlink-->
-		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/myButton.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" /> -->
 		
 <script text="text/javascript">
 function info_edit()
