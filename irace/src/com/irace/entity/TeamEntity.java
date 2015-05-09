@@ -43,6 +43,8 @@ public class TeamEntity implements IEntity{
 	
 	private String slogan;//队伍的口号
 	
+	private int status;
+	
 	public TeamEntity(){}
 	
 	/**
@@ -181,6 +183,14 @@ public class TeamEntity implements IEntity{
 
 	public void setRewardEntity(RewardEntity rewardEntity) {
 		this.rewardEntity = rewardEntity;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	
