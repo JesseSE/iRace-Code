@@ -1,15 +1,20 @@
 package com.irace.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.entity.UserEntity;
 import com.irace.service.ApplyService;
 import com.irace.service.BigTypeService;
 import com.irace.service.RaceService;
+import com.irace.service.UserService;
+import com.irace.util.InfoCode;
+import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
 @Controller
@@ -19,7 +24,9 @@ public class UserCenterController extends SController {
 	@Resource(name="applyService")
 	ApplyService applyService;	
 	@Resource(name="raceService")
-	RaceService raceService;	
+	RaceService raceService;
+	@Resource(name="userService")
+	UserService userService;
 
 	/**
 	 *用户中心
@@ -82,6 +89,41 @@ public class UserCenterController extends SController {
 	@RequestMapping("userAccount")
 	public View userAccount() {
 		return new View("home", "user", "user_account", "账号管理");
+	}
+	
+	/**
+	 * 个人信息管理提交修改
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("getReconmmendation.act")
+	public @ResponseBody String submitChange(		
+			@RequestParam(value="username",required=true)String username,
+			@RequestParam(value="nickname",required=true)String nickname,
+			@RequestParam(value="email",required=true)String email,
+			@RequestParam(value="phone",required=true)String phone,
+			@RequestParam(value="sexRadio",required=true)String sexRadio,
+			@RequestParam(value="qq",required=true)String qq,
+			@RequestParam(value="school",required=true)String school,
+			@RequestParam(value="major",required=true)String major){
+		
+		UserEntity user = userService.getUser(username);
+		if(user == null){
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+		}else{
+			user.setEmail(email);
+			user.setNickname(nickname);
+			user.setQq(qq);
+			user.setTel(phone);
+			user.setGender(sexRadio);
+			
+			boolean flag = userService.updateUser(user);
+			if(flag){
+				return JsonUtil.getJsonInfoOK();
+			}else{
+				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+			}
+		}
 	}
 	
 	/**
