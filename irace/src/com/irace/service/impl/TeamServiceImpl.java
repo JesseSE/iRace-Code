@@ -61,23 +61,23 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public String getCreatedTeamList(int pageNo) {
+	public String getCreatedTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getCreatedTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+		return JsonUtil.listToJSONString(teamDao.getCreatedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
 				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 
 	@Override
-	public String getJoinedTeamList(int pageNo) {
+	public String getJoinedTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getJoinedTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+		return JsonUtil.listToJSONString(teamDao.getJoinedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
 				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 
 	@Override
-	public String getApplyingTeamList(int pageNo) {
+	public String getApplyingTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getApplyingTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+		return JsonUtil.listToJSONString(teamDao.getApplyingTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
 				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 

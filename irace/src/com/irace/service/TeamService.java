@@ -27,27 +27,29 @@ public interface TeamService {
 	
 	/**
 	 * 自己创建的队伍列表
+	 * @param userId
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	public String getCreatedTeamList(int pageNo);
+	public String getCreatedTeamList(int userId, int pageNo);
 	
 	/**
 	 * 已经加入的队伍列表
+	 * @param userId
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	public String getJoinedTeamList(int pageNo);
+	public String getJoinedTeamList(int userId, int pageNo);
 	
 	/**
 	 * 正在申请加入的队伍列表
+	 * @param userId
 	 * @param pageNo
-	 * @param pageItemNum
 	 * @return
 	 */
-	public String getApplyingTeamList(int pageNo);
+	public String getApplyingTeamList(int userId, int pageNo);
 	
 	public boolean updateTeam(TeamEntity team);
 }
