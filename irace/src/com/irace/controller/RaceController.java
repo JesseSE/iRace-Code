@@ -10,12 +10,14 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.entity.RaceEntity;
 import com.irace.service.BigTypeService;
+import com.irace.service.GroupRaceService;
 import com.irace.service.RaceService;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
@@ -31,6 +33,8 @@ public class RaceController extends SController {
 	RaceService raceService;
 	@Resource(name="bigTypeService")
 	BigTypeService bigTypeService;
+	@Resource(name="groupRaceService")
+	GroupRaceService groupRaceService;
 	
 	@RequestMapping("index")
 	public View RacePage() {
@@ -98,12 +102,18 @@ public class RaceController extends SController {
 			break;
 	
 		}
-			return returnString;
+		return returnString;
 	}
 	
-	@RequestMapping("single")
-	public View singlePage() {
-		View view = new View("home","user", "single", "详细信息");		
+	@RequestMapping("detail/{id}")
+	public View singlePage(@PathVariable(value = "id")Integer id) {
+		View view = new View("home","race", "detail", "详细信息");
+		RaceEntity race = raceService.getRaceDetail(id);
+		List groupList= groupRaceService.getGroupRaceList(id);
+		
+		
+		view.addObject("race", race);
+		view.addObject("groupList", groupList);
 		return view;
 	}
 }

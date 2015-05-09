@@ -63,4 +63,22 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		return true;
 	}
 
+	@Override
+	public List getCreatedTeamList(int userId, int pageNo, int pageItemNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getJoinedTeamList(int userId, int pageNo, int pageItemNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getApplyingTeamList(int userId, int pageNo, int pageItemNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

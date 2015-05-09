@@ -96,42 +96,42 @@ public class UserCenterController extends SController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping("getReconmmendation.act")
-	public @ResponseBody String submitChange(		
-			@RequestParam(value="username",required=true)String username,
-			@RequestParam(value="nickname",required=true)String nickname,
-			@RequestParam(value="email",required=true)String email,
-			@RequestParam(value="phone",required=true)String phone,
-			@RequestParam(value="sexRadio",required=true)String sexRadio,
-			@RequestParam(value="qq",required=true)String qq,
-			@RequestParam(value="school",required=true)String school,
-			@RequestParam(value="major",required=true)String major){
-		
-		UserEntity user = userService.getUser(username);
-		if(user == null){
-			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
-		}else{
-			user.setEmail(email);
-			user.setNickname(nickname);
-			user.setQq(qq);
-			user.setTel(phone);
-			user.setGender(sexRadio);
-			
-			boolean flag = userService.updateUser(user);
-			if(flag){
-				return JsonUtil.getJsonInfoOK();
-			}else{
-				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
-			}
-		}
-	}
+//	@RequestMapping("getReconmmendation.act")
+//	public @ResponseBody String submitChange(		
+//			@RequestParam(value="username",required=true)String username,
+//			@RequestParam(value="nickname",required=true)String nickname,
+//			@RequestParam(value="email",required=true)String email,
+//			@RequestParam(value="phone",required=true)String phone,
+//			@RequestParam(value="sexRadio",required=true)String sexRadio,
+//			@RequestParam(value="qq",required=true)String qq,
+//			@RequestParam(value="school",required=true)String school,
+//			@RequestParam(value="major",required=true)String major){
+//		
+//		UserEntity user = userService.getUser(username);
+//		if(user == null){
+//			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+//		}else{
+//			user.setEmail(email);
+//			user.setNickname(nickname);
+//			user.setQq(qq);
+//			user.setTel(phone);
+//			user.setGender(sexRadio);
+//			
+//			boolean flag = userService.updateUser(user);
+//			if(flag){
+//				return JsonUtil.getJsonInfoOK();
+//			}else{
+//				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+//			}
+//		}
+//	}
 	
 	/**
 	 *用户信息
 	 */
-	@RequestMapping("userAccount")
-	public View userInfo() {
-		return new View("home", "user", "user_info", "用户信息");
-	}
+//	@RequestMapping("userAccount")
+//	public View userInfo() {
+//		return new View("home", "user", "user_info", "用户信息");
+//	}
 	
 }

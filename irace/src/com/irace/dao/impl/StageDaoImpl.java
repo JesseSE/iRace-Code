@@ -40,20 +40,20 @@ public class StageDaoImpl extends SDao implements StageDao{
 	}
 
 	@Override
-	public List getStageList(int pageNo, int pageItemNum) {
-		this.hql = "FROM StageRaceEntity";
+	public List getStageList(int groupId) {
+		this.hql = "FROM StageRaceEntity as s where s.group=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
+		query.setInteger(0, groupId);
 		return query.list();
 	}
 
 	@Override
-	public List getStageListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM StageRaceEntity AS s inner join fetch s.groupRaceEntity AS g";
+	public List getStageListDetail(int groupId) {
+		this.hql = "FROM StageRaceEntity AS s inner join fetch s.groupRaceEntity AS g where s.group=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
+		query.setInteger(0, groupId);
+//		query.setFirstResult((pageNo - 1) * pageItemNum);
+//		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
 
