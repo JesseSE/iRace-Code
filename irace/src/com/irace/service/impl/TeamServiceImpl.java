@@ -6,6 +6,7 @@ import com.irace.dao.TeamDao;
 import com.irace.entity.TeamEntity;
 import com.irace.service.TeamService;
 import com.irace.util.Constants;
+import com.irace.util.JsonUtil;
 
 public class TeamServiceImpl implements TeamService {
 
@@ -40,21 +41,46 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List getTeamList(int pageNo) {
+	public String getTeamList(int pageNo) {
 		// TODO Auto-generated method stub
-		return teamDao.getTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM);
+		return JsonUtil.listToJSONString(teamDao.getTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 
 	@Override
-	public List getTeamListDetail(int pageNo, int pageItemNum) {
+	public String getTeamListDetail(int pageNo, int pageItemNum) {
 		// TODO Auto-generated method stub
-		return teamDao.getTeamListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM);
+		return JsonUtil.listToJSONString(teamDao.getTeamListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 
 	@Override
 	public boolean updateTeam(TeamEntity team) {
 		// TODO Auto-generated method stub
-		return false;
+		return teamDao.updateTeam(team);
 	}
+
+	@Override
+	public String getCreatedTeamList(int pageNo) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(teamDao.getCreatedTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+	}
+
+	@Override
+	public String getJoinedTeamList(int pageNo) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(teamDao.getJoinedTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+	}
+
+	@Override
+	public String getApplyingTeamList(int pageNo) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(teamDao.getApplyingTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+	}
+
+
 
 }

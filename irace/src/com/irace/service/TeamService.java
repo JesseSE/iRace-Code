@@ -21,9 +21,33 @@ public interface TeamService {
 	
 	public TeamEntity getTeamDetail(int id); //获取包括外键实体
 	
-	public List getTeamList(int pageNo); //获取不包括外键实体
+	public String getTeamList(int pageNo); //获取不包括外键实体
 	
-	public List getTeamListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	public String getTeamListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	
+	/**
+	 * 自己创建的队伍列表
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public String getCreatedTeamList(int pageNo);
+	
+	/**
+	 * 已经加入的队伍列表
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public String getJoinedTeamList(int pageNo);
+	
+	/**
+	 * 正在申请加入的队伍列表
+	 * @param pageNo
+	 * @param pageItemNum
+	 * @return
+	 */
+	public String getApplyingTeamList(int pageNo);
 	
 	public boolean updateTeam(TeamEntity team);
 }
