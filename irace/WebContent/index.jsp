@@ -232,7 +232,7 @@
 		$("#searchbutton").click(function(){
 			initValue();
 			if(checkKeyWord()){
-				window.location.href=$("#appName").val()+"/user/sort?sortKeyWords="+ $("#searchinput").val();
+				window.location.href=$("#appName").val()+"/race/sort?sortKeyWords="+ $("#searchinput").val();
 			}else
 				alert("请输入关键字！");
 		});
@@ -279,7 +279,7 @@
 	
 	function load(){
 			$.ajax({
-        		url: $("#appName").val()+"/user/homepageShow.act",
+        		url: $("#appName").val()+"/homepageShow.act",
         		type: "POST",
         		data: {currentpagenum:currentPage},
         		dataType: "JSON",
@@ -299,7 +299,7 @@
 		var orderByType = document.getElementById("orderBy").value;			
 		var orderByAD = document.getElementById("orderByAD").value;	
 		$.ajax({
-    		url: $("#appName").val()+"/user/homepageJump.act",
+    		url: $("#appName").val()+"/homepageJump.act",
     		type: "POST",
     		data: {orderByType:orderByType,
     			   orderByAD:orderByAD},
@@ -366,7 +366,7 @@
 	
 	function getMenu(){	
 		$.ajax({
-       		url: $("#appName").val()+"/user/getMenu.act",
+       		url: $("#appName").val()+"/race/getMenu.act",
        		type: "POST",
        		data: {},
        		dataType: "JSON",
@@ -394,7 +394,6 @@
 			menuText = menuText +
 				"<li><a class='color4' href='#' onmouseover='openMenuList("+ menuList[i].id+ ")'>"+ menuList[i].name +"</a>" +
 				"<div class='megapanel' id='"+ divid +"' onmouseover='openMenuList("+ menuList[i].id +")' onmouseout='closeMenuList("+ menuList[i].id +")'>";				
-				//console.log(menuList[i].typeEntities);
 				var inLength = menuList[i].typeEntities.length;
 			
 			for(var j=0; j<(inLength/2+1);j++){
@@ -438,7 +437,7 @@
 	function getRaceByMenu(typeId){
 		menuId = typeId;
 		$.ajax({
-       		url: $("#appName").val()+"/user/getRaceByMenu.act",
+       		url: $("#appName").val()+"/race/getRaceByMenu.act",
        		type: "POST",
        		data: {raceType: typeId,
        			currentpagenum: currentPage},

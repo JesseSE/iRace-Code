@@ -72,9 +72,11 @@ public class UserDaoImpl extends SDao implements UserDao {
 	}
 
 	@Override
-	public List getTeamMemberListByUser(int uid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List getTeamMemberListByUser(int teamId) {
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.teamEntity.id = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, teamId);
+		return query.list();
 	}
 
 }

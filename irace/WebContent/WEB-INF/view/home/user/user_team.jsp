@@ -8,7 +8,29 @@
 <%@ include file="/public/section/header.jsp"%>
 <link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+<style type="text/css">
+.team-state-submit {
+	color:#4F7F90;
+	float:right;
+	cursor:pointer;
+}
+.team-state-submit:hover
+{
+	text-decoration:underline;
+	color:#7A5555;
+}
+.team-state-wait {
+	color:#7A5555;
+	float:right;
+}
+.team-operate {
+	cursor:pointer;
+}
+</style>
+		
+<script type="text/javascript">	
 
+</script>	
 </head>
 <body>
 <div class="header-top">
@@ -86,8 +108,32 @@
 		<div class="section group">            
 		  <div class="cont span_2_of_3">
 		  
-		  <div id = "teamShow">
-		  </div>
+		 <ul class="nav nav-tabs">
+                  <li role="presentation" class="active"><a href="#" id="tab1"  style="background-color:#DFF0D8;"><h4>我创建的</h4></a></li>
+                  <li role="presentation" class="active"><a href="#" id="tab2" ><h4>我加入的</h4></a></li> 
+                  <li role="presentation" class="active"><a href="#" id="tab3" ><h4>正在申请的</h4></a></li> 
+                </ul>  
+				
+			    <div class="panel panel-default" style="font-family:微软雅黑;">
+				
+				
+                <!--我创建的小组-->
+				<div id="create" style="display:block">
+				</div>	
+				
+				
+				
+				<!--我加入的小组-->
+				<div id="join" style="display:none">   				
+                </div>
+					
+					
+					
+				<!--待审核的小组-->
+				<div id="wait" style="display:none">
+				</div>			
+                
+                </div>
         			
 		<h2 class="head">猜你喜欢</h2>
 		<div class="top-box" id="recommendation"> 
@@ -165,15 +211,51 @@
 	
 	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript"> 
-
-	
+	var tab1= document.getElementById("tab1");
+	var tab2= document.getElementById("tab2");
+	var tab3= document.getElementById("tab3");
+	var teamDiv1 = document.getElementById("create");
+	var teamDiv2 = document.getElementById("join");
+	var teamDiv3 = document.getElementById("wait");
 	//Ajax函数
+	
 	$(document).ready(function(){	
 		$(".inner_content").hover(function() {
 	        $(".inner_content#"+this.id+" .product_image .float-Bar").slideToggle();
 	    });		
 		$('#slider').nivoSlider();
-	    getReconmmendation();	
+	    getReconmmendation();
+	    loadCreate();
+	    
+	    $("#tab1").click(function(){
+	    	tab1.style.backgroundColor="#DFF0D8";
+			tab2.style.backgroundColor="";
+			tab3.style.backgroundColor="";
+			teamDiv1.style.display="block";
+			teamDiv2.style.display="none";
+			teamDiv3.style.display="none";
+			loadCreate();
+	    } );
+	    
+        $("#tab2").click(function(){
+        	tab2.style.backgroundColor="#DFF0D8";
+    		tab1.style.backgroundColor="";
+    		tab3.style.backgroundColor="";
+    		teamDiv1.style.display="none";
+    		teamDiv2.style.display="block";
+    		teamDiv3.style.display="none";
+    		loadJoin();
+	    } );
+        
+        $("#tab3").click(function(){
+        	tab3.style.backgroundColor="#DFF0D8";
+    		tab2.style.backgroundColor="";
+    		tab1.style.backgroundColor="";
+    		teamDiv1.style.display="none";
+    		teamDiv2.style.display="none";
+    		teamDiv3.style.display="block";
+    		loadWait();
+	    } );
 	});
 	
 	function getReconmmendation(){	
@@ -234,15 +316,16 @@
 			$("#recommendation").html(htmlText);
 	}
 	
-	function load(){
+	function loadCreate(){
 		$.ajax({
-			url:$("#appName").val()+"/user/getTeam.act",
+			url:$("#appName").val()+"/user/getTeamCreate.act",
 			type:"post",
+			//测试 userID 为1 
 			data: {
-   				session:session
+   				userID:1
    			  },
-   			success: function(res) {           		
-       			showTeam(res);        			
+   			success: function(res) {
+       			showTeamCreate(res);        			
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -251,16 +334,294 @@
 		});
 	}
 	
-	function showTeam(res){
-		var teamList = eval(res);   
+	function showTeamCreate(res){
+		var apply = eval(res);   
 		console.log(res);
-		var htmlText = null;
+		var htmlCreate = null;
+		for(var number = 0;number < apply.length;number++){
+			htmlCreate = htmlCreate + "<a name = 'i_create'></a>"+
+			"<div class = 'panel-body'>"+
+			"<div class ='list-group'>";
+			//根据team状态判断，1正在组队，可以对队员的状态进行判断
+			if(apply[number].teamEntity.status == 1){
+				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' href='##' onclick='upDownTeamLeader("+apply[number].teamEntity.id+");'>";
+			}
+			else{
+				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamEntity.id+");'>";
+			}
+
+			htmlCreate = htmlCreate +"<h3>"+apply[number].teamEntity.name+"</h3></a>"+
+			"<a class='list-group-item'>"+
+			"<div id ='"+apply[number].teamEntity.id+"' style='display:none'>"+"</div>"+
+			"<span class = 'label label-default'>"+apply[number].RaceEntity.name+"</span>"+
+			"<span class = 'label label-primary'>"+apply[number].teamEntity.UserEntity.name+"</span>"+
+			"<span class = 'label label-default'>"+apply[number].teamEntity.slogan+"</span>"+
+			"<span class = 'label label-info'>"+apply[number].teamEntity.rewardEntity.name+"</span>";
+			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行，点击提交阶段产物
+			if(apply[number].teamEntity.status == 1){
+				htmlCreate = htmlCreate+"<h3 class='team-state-submit onclick = 'applyTeam();''>未提交审核，点击提交审核</h3>";
+			}
+			else if(apply[number].teamEntity.status == 2){
+				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
+			}
+			else{
+				htmlCreate = htmlCreate+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+			}
+			htmlCreate = htmlCreate +"</a></div></div>";
+		}
+		$("#create").html(htmlCreate);
 	}
 	
-	function load(){
-		
+	function loadJoin(){
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamJoin.act",
+			type:"post",
+			data: {
+   				userID:userID
+   			  },
+   			success: function(res) {           		
+       			showTeamJoin(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});
 	}
+	
+	function showTeamJoin(){
+		var apply = eval(res);   
+		console.log(res);
+		var htmlJoin = null;
+		for(var number = 0;number < apply.length;number++){
+			htmlJoin = htmlJoin + "<a name = 'i_join'></a>"+
+			"<div class = 'panel-body'>"+
+			"<div class ='list-group'>"+
+			//upDown need changed
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamEntity.id+","+apply[number].teamEntity.status+");'>"+
+			"<h3>"+apply[number].teamEntity.name+"</h3></a>"+
+			"<a class='list-group-item'>"+
+			"<div id ='"+apply[number].teamEntity.id+"' style='display:none>'"+"</div>"+
+			"<span class = 'label label-default'>"+apply[number].RaceEntity.name+"</span>"+
+			"<span class = 'label label-primary'>"+apply[number].teamEntity.UserEntity.name+"</span>"+
+			"<span class = 'label label-default'>"+apply[number].teamEntity.slogan+"</span>"+
+			"<span class = 'label label-info'>"+apply[number].teamEntity.rewardEntity.name+"</span>";
+			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行
+			if(apply[number].teamEntity.status == 1){
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>正在组队</h3>";
+			}
+			else if(apply[number].teamEntity.status == 2){
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在等待审核通过</h3>";
+			}
+			else{
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在进行比赛</h3>";
+			}
+			htmlJoin = htmlJoin +"</a></div></div>";
+		}
+		$("#join").html(htmlJoin);		
+	}
+	
+	function loadWait(){
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamWait.act",
+			type:"post",
+			data: {
+   				userID:userID
+   			  },
+   			success: function(res) {           		
+       			showTeamWait(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});
+	}
+	
+	function showTeamWait(){
+		var apply = eval(res);   
+		console.log(res);
+		var htmlJoin = null;
+		for(var number = 0;number < apply.length;number++){
+			htmlWait = htmlWait + "<a name = 'wait_pass'></a>"+
+			"<div class = 'panel-body'>"+
+			"<div class ='list-group'>"+
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamEntity.id+","+apply[number].teamEntity.status+");'>"+
+			"<h3>"+apply[number].teamEntity.name+"</h3></a>"+
+			"<a class='list-group-item'>"+
+			"<div id ='"+apply[number].teamEntity.id+"' style='display:none'>"+"</div>"+
+			"<span class = 'label label-default'>"+apply[number].RaceEntity.name+"</span>"+
+			"<span class = 'label label-primary'>"+apply[number].teamEntity.UserEntity.name+"</span>"+
+			"<span class = 'label label-default'>"+apply[number].teamEntity.slogan+"</span>"+
+			"<span class = 'label label-info'>"+apply[number].teamEntity.rewardEntity.name+"</span>"+
+			"<h3 class='team-state-wait'>正在组队</h3>"+"</a></div></div>";
+		}
+		$("#wait").html(htmlWait);
+		//$("#wait").html("aaaaa");
+	}
+					
+	function upDown(id)
+	{
+		var content = document.getElementById(id);
+		if(content.style.display=="none")
+		{
+			content.style.display="block";
+		}
+		else
+		{content.style.display="none";}
 		
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamMember.act",
+			type:"post",
+			data: {
+   				teamID:id
+   			  },
+   			success: function(res) {           		
+       			showTeamMember(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});	
+	}
+	
+	function showTeamMember(res){
+		var apply = eval(res); 
+		var htmlMember = null;
+		htmlMember = htmlMember +"<div class='panel panel-default'>"+
+		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
+		"<thead style='font-weight:bold;'>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th></tr></thead>"+
+		"<tbody>";
+		for(var number = 0;number < apply.length;number++){
+			htmlMember = htmlMember + "<tr>"+
+			"<th scope = 'row>'"+ (number+1)+"</th>"+
+			"<td>"+apply[number].userEntity.name+"</td>"+
+			"<td>"+apply[number].userEntity.email+"</td>"+
+			"<td>"+apply[number].userEntity.tel+"</td>";
+			//对队员的状态进行判断 2 提交等待审核 可以通过或者拒绝 其他，可以删除
+			if(apply[number].status == 2){
+				htmlMember = htmlMember + "<td>待审核</td>";
+			}
+			else{
+				htmlMember = htmlMember + "<td>已加入</td>";
+			}
+		}
+		htmlMember = htmlMember +"</tbody></table></div>";
+		var name = "#"+apply[0].teamEntity.id;
+		$(name).html(htmlMember);
+	}
+	
+	function upDownTeamLeader(id)
+	{
+		var content = document.getElementById(id);
+		if(content.style.display=="none")
+		{
+			content.style.display="block";
+		}
+		else
+		{content.style.display="none";}
+		
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamMemberLeader.act",
+			type:"post",
+			data: {
+   				teamID:id
+   			  },
+   			success: function(res) {           		
+       			showTeamMemberLeader(res);        			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});	
+	}
+	
+	function showTeamMemberLeader(res){
+		var apply = eval(res); 
+		var htmlMember = null;
+		htmlMember = htmlMember +"<div class='panel panel-default'>"+
+		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
+		"<thead style='font-weight:bold;'>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th><th>操作</th></tr></thead>"+
+		"<tbody>";
+		for(var number = 0;number < apply.length;number++){
+			htmlMember = htmlMember + "<tr>"+
+			"<th scope = 'row>'"+ (number+1)+"</th>"+
+			"<td>"+apply[number].userEntity.name+"</td>"+
+			"<td>"+apply[number].userEntity.email+"</td>"+
+			"<td>"+apply[number].userEntity.tel+"</td>";
+			//对队员的状态进行判断 2 提交等待审核 可以通过或者拒绝 其他，可以删除
+			if(apply[number].status == 2){
+				htmlMember = htmlMember + "<td>待审核</td>"+
+				"<td><a class='team-operate' onclick = 'chooseAgree("+apply[number].teamEntity.id+");'>同意</a><a class='team-operate' onclick = 'chooseRefuse("+apply[number].teamEntity.id+")'>拒绝</a></td><tr>";
+			}
+			else{
+				htmlMember = htmlMember + "<td>已加入</td>"+
+				"<a class='team-operate' onclick = 'chooseDelete("+apply[number].teamEntity.id+");'>删除</a>";
+			}
+		}
+		htmlMember = htmlMember +"</tbody></table></div>";
+		var name = "#"+apply[0].teamEntity.id;
+		$(name).html(htmlMember);
+	}
+	
+	function chooseAgree(id){
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamChooseAgree.act",
+			type:"post",
+			data: {
+   				applyID:id
+   			  },
+   			success: function(res) {  
+   				var apply = eval(res);
+   				upDownTeamLeader(apply.teamEntity.id);  			       			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});	
+	}
+	
+	function chooseRefuse(id){
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamchooseRefuse.act",
+			type:"post",
+			data: {
+				applyID:id
+   			  },
+   			success: function(res) {           		
+   				var apply = eval(res);
+   				upDownTeamLeader(apply.teamEntity.id);    			
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});	
+	}
+	
+	function chooseDelete(id){
+		$.ajax({
+			url:$("#appName").val()+"/user/getTeamchooseDelete.act",
+			type:"post",
+			data: {
+				applyID:id
+   			  },
+   			success: function(res) {           		
+   				var apply = eval(res);
+   				upDownTeamLeader(apply.teamEntity.id);  		
+       		},
+       		error: function(res) {        			
+       			console.log(res);
+       			alert('输入错误！请返回重新输入！');
+       		}   
+		});	
+	}
+	
 </script> 
 </body>
 </html>

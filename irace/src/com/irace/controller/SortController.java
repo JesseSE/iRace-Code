@@ -24,7 +24,7 @@ import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/race/*")
 public class SortController {	
 	public SortController() {}
 
@@ -40,7 +40,7 @@ public class SortController {
 	@RequestMapping("sort")
 	public View sortPage(
 			@RequestParam(value="sortKeyWords",required=true)String keyword) {
-		View view = new View("home","user", "sort", "查询");
+		View view = new View("home","race", "sort", "查询");
 		view.addObject("keyword", keyword);
 		
 		return view;
@@ -141,35 +141,4 @@ public class SortController {
 			
 	}
 	
-	
-	/**
-	 * 这是一个用来测试显示比赛的方法
-	 */
-	private String testRace(){
-		Date d = new Date();		
-		OrganizerEntity organizerEntity = new OrganizerEntity("北京交通大学", "ddvd", "北京交通大学", "北京", "中国", "dfdf");
-		RaceEntity r1 = new RaceEntity();
-		TypeRaceEntity type = new TypeRaceEntity("计算机", 1);
-		List<RaceEntity> raceEntityList = new ArrayList<RaceEntity>();
-		for(int i=0;i<15;i++){
-			r1.setId(i);
-			r1.setName("服务外包大赛");
-			r1.setContent("这是一个测试用的比赛");
-			r1.setFocusNum(200);
-			r1.setGrade("国家级");
-			r1.setNumRest(5);
-			r1.setTypeRaceEntity(type);
-			r1.setTypeId(1);
-			r1.setStartTime(d);
-			r1.setEndTime(d);
-			r1.setPicUrl("/irace/public/images/pic2.jpg");
-			r1.setOrganizerEntity(organizerEntity);
-			raceEntityList.add(r1);
-		}		
-		JSONArray arr = new JSONArray();
-		for(Object obj : raceEntityList) {
-			arr.add(JSONObject.fromObject(obj));
-		}		
-		return arr.toString();
-	}
 }

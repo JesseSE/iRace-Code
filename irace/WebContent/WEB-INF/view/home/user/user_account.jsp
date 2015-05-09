@@ -305,7 +305,7 @@ function showimg() {
              </div>
 			 </div>
 			 
-		    	<form class="form-horizontal" action="" method="post" id="joinus" name="joinus" style="float:right; width:64%; margin-left:0px;margin-top:45px;">
+		    	<form class="form-horizontal" id="joinus" name="joinus" style="float:right; width:64%; margin-left:0px;margin-top:45px;">
 				<div id="userInfo" style="margin-top:60px;margin-left:100px;">
 				<table class="formTable" style="width:300px;text-align:justify;">
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
