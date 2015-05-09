@@ -25,7 +25,7 @@ import com.irace.view.View;
  *
  */
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/*")
 public class RaceController extends SController {
 	@Resource(name="raceService")
 	RaceService raceService;
