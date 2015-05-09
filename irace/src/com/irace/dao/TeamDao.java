@@ -20,27 +20,30 @@ public interface TeamDao {
 	
 	/**
 	 * 自己创建的队伍列表
+	 * @param userId
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List getCreatedTeamList(int pageNo, int pageItemNum);
+	public List getCreatedTeamList(int userId, int pageNo, int pageItemNum);
 	
 	/**
 	 * 已经加入的队伍列表
+	 * @param userId
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List getJoinedTeamList(int pageNo, int pageItemNum);
+	public List getJoinedTeamList(int userId, int pageNo, int pageItemNum);
 	
 	/**
 	 * 正在申请加入的队伍列表
+	 * @param userId
 	 * @param pageNo
 	 * @param pageItemNum
 	 * @return
 	 */
-	public List getApplyingTeamList(int pageNo, int pageItemNum);
+	public List getApplyingTeamList(int userId, int pageNo, int pageItemNum);
 	
 	public boolean updateTeam(TeamEntity team);
 }
