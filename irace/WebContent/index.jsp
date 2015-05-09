@@ -324,13 +324,15 @@
 			 htmlText = htmlText + "<div class='top-box'>";
 			for(var j=0;j<3;j++){
 				if(cursor<race.length){
+					//生成动态id
+					var raceBarId = "raceBar" + race[cursor].id;
 				   htmlText = htmlText + 
-       				 "<div class='col_1_of_3 span_1_of_3'>"+
+				   "<div class='col_1_of_3 span_1_of_3' onmouseover='openRaceInd("+ race[cursor].id + ")' onmouseout='closeRaceInd("+ race[cursor].id + ")'>"+
    					 "<a href='single.html'>"+
    					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
-   					 "<div class='float-Bar'>"+
+   					"<div class='float-Bar' id='"+ raceBarId +"'>"+ //添加动态id
    					 "<div class='float-Bar_left'>"+race[cursor].grade+"</div>"+
    					 "<div class='float-Bar_right'>关注人数：233</div>"+
    					 "</div></div>"+
@@ -468,6 +470,18 @@
 		
 		var dividStr = "megapanel" + divId;
 		document.getElementById(dividStr).style.display="none";    	
+	}
+	
+	//打开比赛关注级别
+	function openRaceInd(raceDiv){
+		var raceBarId = "raceBar" + raceDiv;
+		document.getElementById(raceBarId).style.opacity=0.3;
+		document.getElementById(raceBarId).style.display="block";  		
+	}
+	//关闭比赛关注级别
+	function closeRaceInd(raceDiv){
+		var raceBarId = "raceBar" + raceDiv;
+		document.getElementById(raceBarId).style.display="none";   
 	}
 </script> 	     
 </body>
