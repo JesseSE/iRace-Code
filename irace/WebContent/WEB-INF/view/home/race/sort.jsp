@@ -299,7 +299,7 @@
 		
 		if(checkKeyWord()){
 			$.ajax({
-        		url: $("#appName").val()+"/user/sortRace.act",
+        		url: $("#appName").val()+"/race/sortRace.act",
         		type: "POST",
         		data: { sortKeyWords: $("#searchinput").val(),
         				currentpagenum: currentPage,
@@ -377,7 +377,7 @@
 	
 	function getMenu(){	
 		$.ajax({
-       		url: $("#appName").val()+"/user/getMenu.act",
+       		url: $("#appName").val()+"/race/getMenu.act",
        		type: "POST",
        		data: {},
        		dataType: "JSON",
@@ -448,7 +448,7 @@
 	function getRaceByMenu(typeId){
 		menuId = typeId;
 		$.ajax({
-       		url: $("#appName").val()+"/user/getRaceByMenu.act",
+       		url: $("#appName").val()+"/race/getRaceByMenu.act",
        		type: "POST",
        		data: {raceType: typeId,
        			currentpagenum: currentPage},
