@@ -84,6 +84,32 @@ public class UserCenterController extends SController {
 	}
 	
 	/**
+	 * 账号管理提交修改
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("userPasswordChange.act")
+	public @ResponseBody String passwordChange(		
+			@RequestParam(value="username",required=true)String username,
+			@RequestParam(value="password",required=true)String password
+			){
+		
+		UserEntity user = userService.getUser(username);
+		if(user == null){
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+		}else{
+			
+			
+			boolean flag = userService.updateUser(user);
+			if(flag){
+				return JsonUtil.getJsonInfoOK();
+			}else{
+				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+			}
+		}
+	}
+	
+	/**
 	 *账号管理
 	 */
 	@RequestMapping("userAccount")
@@ -96,8 +122,8 @@ public class UserCenterController extends SController {
 	 * @param 
 	 * @return
 	 */
-	@RequestMapping("getReconmmendation.act")
-	public @ResponseBody String submitChange(		
+	@RequestMapping("userInfoChange.act")
+	public @ResponseBody String infoChange(		
 			@RequestParam(value="username",required=true)String username,
 			@RequestParam(value="nickname",required=true)String nickname,
 			@RequestParam(value="email",required=true)String email,
@@ -129,7 +155,7 @@ public class UserCenterController extends SController {
 	/**
 	 *用户信息
 	 */
-	@RequestMapping("userAccount")
+	@RequestMapping("userInfo")
 	public View userInfo() {
 		return new View("home", "user", "user_info", "用户信息");
 	}
