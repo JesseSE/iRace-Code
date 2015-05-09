@@ -21,9 +21,13 @@ public interface RewardService {
 	
 	public RewardEntity getRewardDetail(int id); //获取包括外键实体
 	
-	public List getRewardList(int pageNo); //获取不包括外键实体
+	public List getRewardListByGroup(int groupId); //获取不包括外键实体
 	
-	public List getRewardListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	public List getRewardListDetailByGroup(int groupId); //获取包括外键实体
+	
+	public List getRewardListByUser(int userId); //获取不包括外键实体
+	
+	public List getRewardListDetailByUser(int userId); //获取包括外键实体
 	
 	public boolean updateReward(RewardEntity reward);
 }

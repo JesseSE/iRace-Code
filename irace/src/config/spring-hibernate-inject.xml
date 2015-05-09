@@ -84,6 +84,18 @@
     </bean>
     
     
+    <!-- ===================== Reward ===========================  -->
+    <bean id="rewardDao" class="com.irace.dao.impl.RewardDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="rewardServiceBase" class="com.irace.service.impl.RewardServiceImpl">  
+        <property name="rewardDao" ref="rewardDao"></property>
+    </bean>
+    <bean name="rewardService" parent="transactionProxy">
+        <property name="target" ref="rewardServiceBase"></property>  
+    </bean>
+    
+    
     <!-- ===================== Stage ===========================  -->
     <bean id="stageDao" class="com.irace.dao.impl.StageDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  

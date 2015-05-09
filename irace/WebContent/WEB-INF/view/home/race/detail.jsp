@@ -193,13 +193,22 @@
 			<p class="m_text2">>>比赛说明</p>
 	     	<p class="m_text" style="text-indent: 25px;">${race.getContent() }</p>
 			<p class="m_text2">>>阶段安排</p>
-			<p class="m_text">A组：</p>
-			<p class="m_text">B组：</p>
-			<p class="m_text">C组：</p>
+			<c:forEach var="stage" items="${stageList }">
+				<ul class="m_text" data="${stage.gid }">${stage.gname }
+					<c:forEach var="s" items="${stage.slist }">
+					<li>${s.getStartTime() } ~ ${s.getEndTime() } ${s.getName() } ----- ${s.getContent() }</li>
+					</c:forEach>
+				</ul>
+			</c:forEach>
+			
 			<p class="m_text2">>>奖项设置</p>
-			<p class="m_text">A组：</p>
-			<p class="m_text">B组：</p>
-			<p class="m_text">C组：</p>
+			<c:forEach var="reward" items="${rewardList }">
+				<ul class="m_text" data="${reward.gid }">${reward.gname }
+					<c:forEach var="r" items="${reward.rlist }">
+					<li>${r.getName() } ===== ${r.getContent() }</li>
+					</c:forEach>
+				</ul>
+			</c:forEach>
 		 </div>
 	 
 	 

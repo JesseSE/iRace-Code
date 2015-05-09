@@ -46,33 +46,30 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 		query.setInteger(0, id);				
 		return (RewardEntity)query.uniqueResult();	
 	}
-
-
-	@Override
-	public List getRewardList(int pageNo, int pageItemNum) {
-		this.hql = "FROM RewardEntity";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return query.list();
-	}
-	
-
-	@Override
-	public List getRewardListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g";
-		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
-		return query.list();
-	}
-
 	
 	@Override
 	public boolean updateReward(RewardEntity reward) {
 		// TODO Auto-generated method stub
 		this.sessionFactory.getCurrentSession().update(reward);
 		return true;
+	}
+
+	@Override
+	public List getRewardListByGroup(int groupId) {
+		// TODO Auto-generated method stub
+		this.hql = "FROM RewardEntity AS r where r.group=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupId);
+		return query.list();
+	}
+
+	@Override
+	public List getRewardListDetailByGroup(int groupId) {
+		// TODO Auto-generated method stub
+		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g where r.group=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupId);
+		return query.list();
 	}
 
 }

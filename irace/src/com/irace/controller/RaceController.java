@@ -4,8 +4,10 @@
 package com.irace.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.entity.GroupRaceEntity;
 import com.irace.entity.RaceEntity;
 import com.irace.service.BigTypeService;
 import com.irace.service.GroupRaceService;
 import com.irace.service.RaceService;
+import com.irace.service.RewardService;
+import com.irace.service.StageService;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
@@ -27,7 +32,7 @@ import com.irace.view.View;
  *
  */
 @Controller
-@RequestMapping("/*")
+@RequestMapping("/race/*")
 public class RaceController extends SController {
 	@Resource(name="raceService")
 	RaceService raceService;
@@ -35,6 +40,11 @@ public class RaceController extends SController {
 	BigTypeService bigTypeService;
 	@Resource(name="groupRaceService")
 	GroupRaceService groupRaceService;
+	@Resource(name="rewardService")
+	RewardService rewardService;
+	@Resource(name="stageService")
+	StageService stageService;
+	
 	
 	@RequestMapping("index")
 	public View RacePage() {
@@ -107,13 +117,32 @@ public class RaceController extends SController {
 	
 	@RequestMapping("detail/{id}")
 	public View singlePage(@PathVariable(value = "id")Integer id) {
-		View view = new View("home","race", "detail", "详细信息");
+		
 		RaceEntity race = raceService.getRaceDetail(id);
-		List groupList= groupRaceService.getGroupRaceList(id);
+		List<GroupRaceEntity> groupList= groupRaceService.getGroupRaceList(id);
+		List<Map<String,Object>> rewardList = new ArrayList<Map<String,Object>>();
+		for(GroupRaceEntity g : groupList) {
+			Map<String,Object> m = new HashMap<String,Object>();
+			m.put("gid", g.getId());
+			m.put("gname", g.getName());
+			m.put("rlist", rewardService.getRewardListByGroup(g.getId()));
+			rewardList.add(m);
+		}
 		
+		List<Map<String,Object>> stageList = new ArrayList<Map<String,Object>>();
+		for(GroupRaceEntity g : groupList) {
+			Map<String,Object> m = new HashMap<String,Object>();
+			m.put("gid", g.getId());
+			m.put("gname", g.getName());
+			m.put("slist", stageService.getStageList(g.getId()));
+			stageList.add(m);
+		}
 		
+		View view = new View("home","race", "detail", race.getName());
 		view.addObject("race", race);
 		view.addObject("groupList", groupList);
+		view.addObject("rewardList", rewardList);
+		view.addObject("stageList", stageList);
 		return view;
 	}
 }

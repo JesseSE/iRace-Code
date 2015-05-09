@@ -279,7 +279,7 @@
 	
 	function load(){
 			$.ajax({
-        		url: $("#appName").val()+"/homepageShow.act",
+        		url: $("#appName").val()+"/race/homepageShow.act",
         		type: "POST",
         		data: {currentpagenum:currentPage},
         		dataType: "JSON",
@@ -299,7 +299,7 @@
 		var orderByType = document.getElementById("orderBy").value;			
 		var orderByAD = document.getElementById("orderByAD").value;	
 		$.ajax({
-    		url: $("#appName").val()+"/homepageJump.act",
+    		url: $("#appName").val()+"/race/homepageJump.act",
     		type: "POST",
     		data: {orderByType:orderByType,
     			   orderByAD:orderByAD},
@@ -328,7 +328,7 @@
 					var raceBarId = "raceBar" + race[cursor].id;
 				   htmlText = htmlText + 
 				   "<div class='col_1_of_3 span_1_of_3' onmouseover='openRaceInd("+ race[cursor].id + ")' onmouseout='closeRaceInd("+ race[cursor].id + ")'>"+
-   					 "<a href='single.html'>"+
+   					 "<a href='"+$("#appName").val()+"/race/detail/"+race[cursor].id+"'>"+
    					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
@@ -385,7 +385,7 @@
 		//console.log(res);   
 		menuRes = res;
 		var menuList = eval(res);  	
-		var menuText = "<li class='active grid'><a href='index.jsp'>主页</a></li>";
+		var menuText = "<li class='active grid'><a href='"+$("#appName").val()+"'>主页</a></li>";
 		var consor = 0;
 		
 		for(var i=0; i< menuList.length;i++){
