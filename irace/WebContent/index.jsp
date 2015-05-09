@@ -172,6 +172,7 @@
 	var eachPageNum; //每页显示个数
 	var isFirstESearch; //是否为第一次查询
 	var searchKeyWord;
+	var menuRes = "";
 	
 	//初始化值
 	function initValue(){
@@ -380,15 +381,17 @@
 	
 	function showMenu(res){		
 		//console.log(res);   
+		menuRes = res;
 		var menuList = eval(res);  	
-		var menuText = "<li class='active grid'><a href='index.html'>主页</a></li>";
+		var menuText = "<li class='active grid'><a href='index.jsp'>主页</a></li>";
 		var consor = 0;
 		
 		for(var i=0; i< menuList.length;i++){
 			consor = 0;
+			var divid = "megapanel" + menuList[i].id;			
 			menuText = menuText +
-				"<li><a class='color4' href='#'>"+ menuList[i].name +"</a>" +
-				"<div class='megapanel'>";				
+				"<li><a class='color4' href='#' onmouseover='openMenuList("+ menuList[i].id+ ")'>"+ menuList[i].name +"</a>" +
+				"<div class='megapanel' id='"+ divid +"' onmouseover='openMenuList("+ menuList[i].id +")' onmouseout='closeMenuList("+ menuList[i].id +")'>";				
 				//console.log(menuList[i].typeEntities);
 				var inLength = menuList[i].typeEntities.length;
 			
@@ -399,7 +402,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + "); closeMenuList("+ menuList[i].id +")'><h4>"+ menuList[i].typeEntities[consor].name  +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -410,7 +413,7 @@
 						"<div class='col1'>" +
 						"<div class='h_nav'>" +
 						"<ul>" +
-						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + ")'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
+						"<li><a href='#' onclick='getRaceByMenu(" + menuList[i].typeEntities[consor].id + "); closeMenuList("+ menuList[i].id +")'><h4>"+  menuList[i].typeEntities[consor].name +"</h4></a></li>" +
 						"</ul>" +
 						"</div>" +
 						"</div>";
@@ -428,41 +431,6 @@
 		else
 			$("#addMenu").html(menuText);
 	} 
-	
-	function testMenu(){		
-		//console.log(res);   
-		//var menuList = eval(res);  	
-		var menuText = "";
-		
-		menuText = menuText +
-			"<li class='active grid'><a href='index.html'>主页</a></li>" +
-			"<li><a class='color4' href='index.html'>理学类</a>" +
-			"<div class='megapanel'>" +
-			"<div class='row'>" +
-			"<div class='col1'>" +
-			"<div class='h_nav'>" +
-			"<ul>" +
-			"<li><a href='womens.html'><h4>金</h4></a></li>" +
-			"</ul>" +
-			"</div>" +
-			"</div>" +
-			"<div class='col1'>" +
-			"<div class='h_nav'>" +
-			"<ul>" +
-			"<li><a href='womens.html'><h4>金牌竞赛</h4></a></li>" +
-			"</ul>" +
-			"</div>"
-			"</div>" +
-			"</div>" +
-			"</div>" +
-			"</li>" ;
-		
-			
-		if(menuText =="")
-			$("#addMenu").html("没有内容哦");
-		else
-			$("#addMenu").html(menuText);
-	}
 	
 	
 	function getRaceByMenu(typeId){
@@ -483,6 +451,24 @@
 		});
 	}
 			
+	function openMenuList(divId){		
+		var menuList = eval(menuRes);  	
+		
+		for(var i=0; i<menuList.length;i++){
+			var dividStr = "megapanel" + menuList[i].id;
+			if(menuList[i].id == divId){
+				document.getElementById(dividStr).style.opacity=1;
+		    	document.getElementById(dividStr).style.display="block";
+			}else
+				document.getElementById(dividStr).style.display="none";
+		} 
+	}
+	
+	function closeMenuList(divId){
+		
+		var dividStr = "megapanel" + divId;
+		document.getElementById(dividStr).style.display="none";    	
+	}
 </script> 	     
 </body>
 </html>
