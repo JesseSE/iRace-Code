@@ -265,7 +265,7 @@
 				jump();
 	    });
 	    
-	 });  
+	 });
 
 	    	
 	function checkKeyWord(){
