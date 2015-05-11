@@ -21,9 +21,9 @@ public interface GroupRaceService {
 	
 	public GroupRaceEntity getGroupRaceDetail(int id); //获取包括外键实体
 	
-	public List getGroupRaceList(int pageNo); //获取不包括外键实体
+	public List getGroupRaceList(int raceId); //获取不包括外键实体
 	
-	public List getGroupRaceListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	public List getGroupRaceListDetail(int raceId); //获取包括外键实体
 	
 	public boolean updateGroupRace(GroupRaceEntity groupRace);
 }

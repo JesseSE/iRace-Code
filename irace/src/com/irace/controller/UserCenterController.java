@@ -91,18 +91,23 @@ public class UserCenterController extends SController {
 	@RequestMapping("userPasswordChange.act")
 	public @ResponseBody String passwordChange(		
 			@RequestParam(value="username",required=true)String username,
-			@RequestParam(value="password",required=true)String password
+			@RequestParam(value="password",required=true)String oldpassword,
+			@RequestParam(value="password",required=true)String newpassword
 			){
 		
 		UserEntity user = userService.getUser(username);
 		if(user == null){
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
 		}else{
-			
-			
-			boolean flag = userService.updateUser(user);
-			if(flag){
-				return JsonUtil.getJsonInfoOK();
+			boolean flagPassword = oldpassword.equals(user.getPwd());
+			if(flagPassword){
+				user.setPwd(newpassword);
+				boolean flag = userService.updateUser(user);
+				if(flag){
+					return JsonUtil.getJsonInfoOK();
+				}else{
+					return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+				}
 			}else{
 				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
 			}
@@ -155,6 +160,7 @@ public class UserCenterController extends SController {
 	/**
 	 *用户信息
 	 */
+
 	@RequestMapping("userInfo")
 	public View userInfo() {
 		return new View("home", "user", "user_info", "用户信息");

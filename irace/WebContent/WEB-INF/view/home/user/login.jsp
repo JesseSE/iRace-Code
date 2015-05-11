@@ -88,7 +88,7 @@
                		dataType: "JSON",
                		success: function(res) {
                			console.log(res);
-               			location.href = $("#appName").val() + "/user/index";
+               			location.href = $("#appName").val();
                		},
                		error: function(res) {
                			

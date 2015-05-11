@@ -63,4 +63,11 @@ public class MessageDaoImpl extends SDao implements MessageDao{
 		return true;
 	}
 
+	@Override
+	public List getMessageList(int userId, int pageNo, int pageItemNum,
+			boolean isRead) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -25,5 +25,9 @@ public interface MessageService {
 	
 	public List getMessageListDetail(int pageNo); //获取包括外键实体
 	
+	public List getMessageList(int userId,int pageNo,boolean isRead);
+	
+	public boolean readMessage(int msgId);
+	
 	public boolean updateMessage(MessageEntity message);
 }

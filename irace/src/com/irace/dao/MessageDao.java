@@ -18,5 +18,7 @@ public interface MessageDao {
 	
 	public List getMessageListDetail(int pageNo, int pageItemNum); //获取包括外键实体
 	
+	public List getMessageList(int userId,int pageNo,int pageItemNum, boolean isRead);
+	
 	public boolean updateMessage(MessageEntity message);
 }

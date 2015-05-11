@@ -83,6 +83,41 @@
         <property name="target" ref="teamServiceBase"></property>  
     </bean>
     
+    
+    <!-- ===================== Reward ===========================  -->
+    <bean id="rewardDao" class="com.irace.dao.impl.RewardDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="rewardServiceBase" class="com.irace.service.impl.RewardServiceImpl">  
+        <property name="rewardDao" ref="rewardDao"></property>
+    </bean>
+    <bean name="rewardService" parent="transactionProxy">
+        <property name="target" ref="rewardServiceBase"></property>  
+    </bean>
+    
+    
+    <!-- ===================== Stage ===========================  -->
+    <bean id="stageDao" class="com.irace.dao.impl.StageDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="stageServiceBase" class="com.irace.service.impl.StageServiceImpl">  
+        <property name="stageDao" ref="stageDao"></property>
+    </bean>
+    <bean name="stageService" parent="transactionProxy">
+        <property name="target" ref="stageServiceBase"></property>  
+    </bean>
+    
+    <!-- ===================== GroupRace ===========================  -->
+    <bean id="groupRaceDao" class="com.irace.dao.impl.GroupRaceDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="groupRaceServiceBase" class="com.irace.service.impl.GroupRaceServiceImpl">  
+        <property name="groupRaceDao" ref="groupRaceDao"></property>
+    </bean>
+    <bean name="groupRaceService" parent="transactionProxy">
+        <property name="target" ref="groupRaceServiceBase"></property>  
+    </bean>
+    
     <!-- ===================== User ===========================  -->
     <bean id="userDao" class="com.irace.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  
