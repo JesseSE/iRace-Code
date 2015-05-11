@@ -23,8 +23,8 @@
 		                <ul class="dropdown-menu" role="menu">
 							<div class="dropdown-header">dropdown header</div>
 							<li>
-								<a class="dropdown-btn" href="#">个人中心</a>
-								<a class="dropdown-btn" href="#">退出登录</a>
+								<a class="dropdown-btn" href="<%=request.getContextPath() %>/user/userCenter">个人中心</a>
+								<a class="dropdown-btn" href="<%=request.getContextPath() %>/user/logout.act">退出登录</a>
 							</li>
 		                </ul>
                     </li>

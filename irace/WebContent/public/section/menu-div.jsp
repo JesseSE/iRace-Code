@@ -6,7 +6,7 @@
 			<div class="header-bottom-left">
 <!--                网站标题logo-->
 				<div class="logo">
-					<a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
+					<a href="<%=request.getContextPath() %>"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
@@ -102,3 +102,6 @@
      <div class="clear"></div>
      </div>
 	</div>
+	
+	
+	
