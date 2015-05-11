@@ -57,7 +57,7 @@ public class RaceController extends SController {
 			@RequestParam(value="currentpagenum",required=true)int pageNum){
 		if( pageNum < 0 ){
 			return null;
-		}else{         
+		}else{
 			return raceService.getRaceListDetail(pageNum);
 		}
 	}
@@ -145,4 +145,5 @@ public class RaceController extends SController {
 		view.addObject("stageList", stageList);
 		return view;
 	}
+	
 }

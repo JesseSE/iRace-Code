@@ -9,6 +9,7 @@ import com.irace.dao.MessageDao;
 import com.irace.entity.MessageEntity;
 import com.irace.service.MessageService;
 import com.irace.util.Constants;
+import com.irace.util.InfoCode;
 
 /**
  * @author Tracy
@@ -82,7 +83,21 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public boolean updateMessage(MessageEntity message) {
 		// TODO Auto-generated method stub
-		return false;
+		return messageDao.updateMessage(message);
+	}
+
+	@Override
+	public List getMessageList(int userId, int pageNo, boolean isRead) {
+		// TODO Auto-generated method stub
+		return messageDao.getMessageList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM, isRead);
+	}
+
+	@Override
+	public boolean readMessage(int msgId) {
+		// TODO Auto-generated method stub
+		MessageEntity msg = messageDao.getMessage(msgId);
+		msg.setStatus(InfoCode.MSG_READED);
+		return messageDao.updateMessage(msg);
 	}
 
 }

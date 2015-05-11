@@ -16,7 +16,13 @@ public class InfoCode {
 	public static final Integer PERMISSION_DENIED = 201; //权限不足
 	public static final Integer LOGIN_TIMEOUT = 202; //登录超时
 	
-	/************************报名状态*************************/
+	
+	
+	
+	/***********消息状态：未读*********/
+	public static final Integer MSG_NOT_READED = 0;
+	/***********消息状态：已读*********/
+	public static final Integer MSG_READED = 1;
 	
 	/**************报名状态：已报名 **************/
 	public static final Integer APPLY_STATUS_REGISTERED = 0;
