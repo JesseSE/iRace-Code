@@ -48,37 +48,43 @@ public class UserTeamController extends SController{
 		team.setName("bbb");
 		apply.setRaceEntity(race);
 		
-		teamService.getCreatedTeamList(1, 1);
+		String aaaa = teamService.getCreatedTeamList(1, 1);
+		System.out.println(aaaa);
 		
 		return teamService.getCreatedTeamList(1, 1);	
+		//return null;
 	}
 	
 	//通过UserID检索我加入的比赛
 	@RequestMapping("getTeamJoin.act")
 	public @ResponseBody String getTeamJoin(
 			@RequestParam(value="userID",required=true)int userID){
-		return teamService.getJoinedTeamList(1, 1);	
+		//return teamService.getJoinedTeamList(1, 1);
+		return null;
 	}
 	
 	//通过UserID检索我申请的比赛
 	@RequestMapping("getTeamWait.act")
 	public @ResponseBody String getTeamWait(
 			@RequestParam(value="userID",required=true)int userID){
-		return teamService.getApplyingTeamList(1, 1);	
+		//return teamService.getApplyingTeamList(1, 1);	
+		return null;
 	}
 	
 	//通过teamID检索出team成员
 	@RequestMapping("getTeamMember.act")
 	public @ResponseBody String getTeamMember(
 			@RequestParam(value="teamID",required=true)int teamID){
-		return userService.getTeamMemberListByUser(teamID);	
+		//return userService.getTeamMemberListByUser(teamID);
+		return null;
 	}
 	
 	//通过teamID检索出team成员 且对team成员进行操作	
 	@RequestMapping("getTeamMemberLeader.act")
 	public @ResponseBody String getTeamMemberLeader(
 			@RequestParam(value="teamID",required=true)int teamID){
-		return userService.getTeamMemberListByUser(teamID);		
+		//return userService.getTeamMemberListByUser(teamID);
+		return null;
 	}
 	
 	//通过对队员的审核，准许入队 返回 teamID
@@ -89,7 +95,8 @@ public class UserTeamController extends SController{
 		apply.setId(applyID);
 		apply.setStatus(3);
 		applyService.updateApply(apply);
-		return applyService.getApplyDetail(applyID);	
+		//return applyService.getApplyDetail(applyID);	
+		return null;
 	}
 	
 	//拒绝该队员 返回teamID
@@ -100,7 +107,8 @@ public class UserTeamController extends SController{
 		apply.setId(applyID);
 		apply.setStatus(1);
 		applyService.updateApply(apply);
-		return applyService.getApplyDetail(applyID);		
+		//return applyService.getApplyDetail(applyID);
+		return null;
 	}
 	
 	//删除该队员 返回teamID
@@ -111,7 +119,8 @@ public class UserTeamController extends SController{
 		apply.setId(applyID);
 		apply.setStatus(1);
 		applyService.updateApply(apply);
-		return applyService.getApplyDetail(applyID);			
+		//return applyService.getApplyDetail(applyID);	
+		return null;
 	}
 	
 }
