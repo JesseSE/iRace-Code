@@ -332,7 +332,7 @@
 					var raceBarId = "raceBar" + race[cursor].id;
 				   htmlText = htmlText + 
        				 "<div class='col_1_of_3 span_1_of_3' onmouseover='openRaceInd("+ race[cursor].id + ")' onmouseout='closeRaceInd("+ race[cursor].id + ")'>"+
-       				"<a href='"+$("#appName").val()+"/user/single'>"+
+       				"<a href=' " +$("#appName").val()+ "/race/detail/"+ race[cursor].id +"'>"+
    					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
    					 "<div class='product_image'>"+
    					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+

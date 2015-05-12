@@ -113,8 +113,8 @@ function raceTab(pos)
 							style="color: #FFF; background-color: #4cb1ca;">我参加的比赛 <span
 								class="sr-only">(current)</span></a></li>
 						<li><a href="<%=request.getContextPath() %>/user/userTeam">参加的队伍</a></li>
-						<li><a href="<%=request.getContextPath() %>/user/userCenter">通知中心</a></li>
-						<li><a href="<%=request.getContextPath() %>/user/userCenter">个人信息</a></li>
+						<li><a href="<%=request.getContextPath() %>/user/usermsg">通知中心</a></li>
+						<li><a href="<%=request.getContextPath() %>/user/usermsg">个人信息</a></li>
 						<li><a href="<%=request.getContextPath() %>/user/userCenter">账号管理</a></li>
 					</ul>
 				</div>
@@ -383,7 +383,7 @@ function raceTab(pos)
 		for(var i=0; i<race.length;i++){
 			htmlText = htmlText + 
 				"<div class='list-group'>" +
-				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/user/single'>"+ 
+				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
 				"<h3 style='display:inline;'>" + race[i].name + "</h3>" +
 				"<h3 class='race-state-wait'>暂未组队，点击组队</h3>"+
 				"</a>" +
@@ -484,7 +484,7 @@ function raceTab(pos)
 				var raceBarId = "raceBar" + race[cursor].id;
 			   htmlText = htmlText + 
 			   "<div class='col_1_of_3 span_1_of_3' onmouseover='openRaceInd("+ race[cursor].id + ")' onmouseout='closeRaceInd("+ race[cursor].id + ")'>"+
-					 "<a href=' " +$("#appName").val()+ "/user/single'>"+ 
+					 "<a href='  " +$("#appName").val()+ "/race/detail/"+ race[cursor].id +"'>"+ 
 					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
 					 "<div class='product_image'>"+
 					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
