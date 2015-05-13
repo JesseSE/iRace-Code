@@ -1,11 +1,16 @@
 package com.irace.dao.impl;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
 import com.irace.dao.UserDao;
+import com.irace.entity.ApplyEntity;
 import com.irace.entity.UserEntity;
 
 public class UserDaoImpl extends SDao implements UserDao {
@@ -73,10 +78,27 @@ public class UserDaoImpl extends SDao implements UserDao {
 
 	@Override
 	public List getTeamMemberListByUser(int teamId) {
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.teamEntity.id = ?";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.teamEntity.id = ? and a.status in(1,2)";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teamId);
-		return query.list();
+		return myMemberList(query.list());
+	}
+	
+	private List myMemberList(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<ApplyEntity> it = list.iterator();
+		while(it.hasNext()){
+			ApplyEntity ap = it.next();
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("name", ap.getUserEntity().getNickname());
+			map.put("email", ap.getUserEntity().getEmail());
+			map.put("tel", ap.getUserEntity().getTel());
+			map.put("status", Integer.toString(ap.getStatus()));
+			map.put("teamID",Integer.toString(ap.getTeam()));
+			map.put("ID", Integer.toString(ap.getId()));
+			listMap.add(map);
+		}
+		return listMap;
 	}
 
 }

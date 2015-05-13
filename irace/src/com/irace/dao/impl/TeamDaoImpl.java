@@ -1,7 +1,10 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
@@ -79,7 +82,8 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setMaxResults(pageItemNum);
 		System.out.print(userId);
 		test(query.list());
-		return query.list();
+		return myTeamList(query.list());
+		//return query.list();
 
 	}
 
@@ -91,7 +95,9 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();	
+		System.out.println("joined");
+		test(query.list());
+		return myTeamList(query.list());
 
 	}
 
@@ -103,7 +109,9 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		return query.list();	
+		System.out.println("waitting");
+		test(query.list());
+		return myTeamList(query.list());
 	}
 	
 	private void test(List list){
@@ -125,5 +133,25 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		}
 			System.out.print("sss");
 	}
+	
+	private List myTeamList(List list){
+	List<Map> listMap = new ArrayList<Map>();
+	Iterator<ApplyEntity> it = list.iterator();
+	while(it.hasNext()){
+		Map<String,String> map =new HashMap<String,String>();
+		ApplyEntity ap = it.next();
+		map.put("teamStatus", Integer.toString(ap.getTeamEntity().getStatus()));
+		map.put("teamId", Integer.toString(ap.getTeamEntity().getId()));
+		map.put("teamName",ap.getTeamEntity().getName());
+		map.put("raceName", ap.getRaceEntity().getName());
+		map.put("leaderName",ap.getTeamEntity().getUserEntity().getNickname());
+		map.put("teamSlogan",ap.getTeamEntity().getSlogan());
+		//数据库为空
+		//map.put("reward",ap.getTeamEntity().getRewardEntity().getName());
+		listMap.add(map);
+	}
+	return listMap;
+	
+}
 
 }

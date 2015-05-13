@@ -59,7 +59,13 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 
 	@Override
 	public boolean updateApply(ApplyEntity apply) {
-		sessionFactory.getCurrentSession().update(apply);
+		//sessionFactory.getCurrentSession().update(apply);
+		this.hql = "UPDATE ApplyEntity AS a SET a.status = ? WHERE a.id = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		System.out.println(apply.getStatus()+""+apply.getId());
+		query.setInteger(0, apply.getStatus());
+		query.setInteger(1, apply.getId());
+		query.executeUpdate();
 		return true;
 	}
 	
