@@ -11,6 +11,7 @@
 	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
 	<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/formConfirm.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/md5-v2.2.js"></script>
 </head>
 <body>
 	

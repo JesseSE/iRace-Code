@@ -169,5 +169,16 @@ public class UserController extends SController {
 		}
 	}
 	
+	/**
+	 * 注销方法，清楚缓存
+	 */
+	
+	@RequestMapping("logout.act")
+	public @ResponseBody void logoutAction(HttpSession session){
+		session.removeAttribute("nickname");
+		session.removeAttribute("uid");
+		session.removeAttribute("username");
+	}
+	
 	
 }
