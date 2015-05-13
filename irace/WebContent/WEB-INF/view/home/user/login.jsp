@@ -83,7 +83,7 @@
                		<%-- url: "<%=request.getContextPath()%>/user/login.act", --%>
                		url: $("#appName").val()+"/user/login.act",
                		type: "POST",
-               		data: { username: $("#username").val(),
+               		data: { username: hex_md5($("#username").val()),
                				password: $("#password").val()
                				},
                		dataType: "JSON",

@@ -43,6 +43,8 @@ start menu
 	rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/public/js/formConfirm.js"></script>
+	<script type="text/javascript"
+	src="<%=request.getContextPath()%>/public/js/md5-v2.2.js"></script>
 
 
 </head>
@@ -188,8 +190,8 @@ start menu
 					type : "POST",
 					data : {
 						username : $("#username").val(),
-						password : $("#password").val(),
-						repassword : $("#repassword").val(),
+						password : hex_md5($("#password").val()),
+						repassword : hex_md5($("#repassword").val()),
 						nickname : $("#nickname").val(),
 						email : $("#email").val(),
 						phone : $("#phone").val(),
