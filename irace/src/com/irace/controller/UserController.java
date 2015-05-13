@@ -62,6 +62,7 @@ public class UserController extends SController {
 	public @ResponseBody String loginAction(
 			@RequestParam(value="username",required=true)String username,
 			@RequestParam(value="password",required=true)String password,
+			@RequestParam(value="type",required=true)String type,
 			HttpSession session){
 		
 		
@@ -167,6 +168,17 @@ public class UserController extends SController {
 			
 			return JsonUtil.objectToJSONString(userentity, null);
 		}
+	}
+	
+	/**
+	 * 注销方法，清楚缓存
+	 */
+	
+	@RequestMapping("logout.act")
+	public @ResponseBody void logoutAction(HttpSession session){
+		session.removeAttribute("nickname");
+		session.removeAttribute("uid");
+		session.removeAttribute("username");
 	}
 	
 	

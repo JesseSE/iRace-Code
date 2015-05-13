@@ -11,6 +11,7 @@
 	<link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
 	<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/formConfirm.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/md5-v2.2.js"></script>
 </head>
 <body>
 	
@@ -62,6 +63,16 @@
 								name="password" placeholder="Password">
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">身份</label>
+						<div class="col-sm-4" style="margin-top: 7px;">
+						  <label style="margin-left: 10px;margin-right: 30px;">
+						  <input name="Type" type="radio" value="0" id="qiye"/>企业 </label> 
+						  <label><input name="Type" type="radio" value="1" />个人 </label> 
+						</div>
+					  </div>
+					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="button" class="grey" id="submit-btn">登陆</button>
@@ -77,13 +88,18 @@
 	<script type="text/javascript">
         $(document).ready(function() {
             $("#submit-btn").click(function(){
-            	
+            	if(document.getElementById("qiye").checked){
+					var type = 0;
+				}else{
+					var type = 1;
+				}
                 $.ajax({
                		<%-- url: "<%=request.getContextPath()%>/user/login.act", --%>
                		url: $("#appName").val()+"/user/login.act",
                		type: "POST",
                		data: { username: $("#username").val(),
-               				password: $("#password").val()
+               				password: hex_md5($("#password").val()),
+               				type: type
                				},
                		dataType: "JSON",
                		success: function(res) {
