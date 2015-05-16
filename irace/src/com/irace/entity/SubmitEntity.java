@@ -28,6 +28,9 @@ public class SubmitEntity implements IEntity{
 	
 	private String name;
 	
+	@Column(name = "status", columnDefinition = "int default 0")
+	private int status;//淘汰的状态0,1
+	
 	private String content;
 	
 	@Column(name="file_url")
@@ -117,5 +120,13 @@ public class SubmitEntity implements IEntity{
 
 	public void setStageId(Integer stageId) {
 		this.stageId = stageId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

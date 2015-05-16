@@ -37,6 +37,10 @@ public class StageRaceEntity implements IEntity{
 	@Column(name="end_time")
 	private Date endTime;
 	
+	
+	@Column(name="status", columnDefinition="int default 0")
+	private int status;//审核状态
+	
 	public StageRaceEntity(){}
 	
 	/**
@@ -125,6 +129,14 @@ public class StageRaceEntity implements IEntity{
 
 	public void setGroupRaceEntity(GroupRaceEntity groupRaceEntity) {
 		this.groupRaceEntity = groupRaceEntity;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

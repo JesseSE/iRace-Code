@@ -433,7 +433,7 @@ function raceTab(pos)
 		for(var i=0; i<race.length;i++)	{
 			htmlText = htmlText + 
 			"<div class='list-group'>" +
-			"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/user/single'>"+ 
+			"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
 			"<h3 style='display:inline;'>" + race[i].name + "</h3>"+
 			"<h3 class='race-state-wait'>未获奖</h3>" +
 			"</a>" +			

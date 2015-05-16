@@ -1,5 +1,6 @@
 package com.irace.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,9 @@ public class GroupRaceEntity implements IEntity{
 	private String name;
 	
 	private String requires;
+	
+	@Column(name="status", columnDefinition = "int default 0")
+	private int status;//颁奖状态默认为0未颁奖
 
 	
 	public GroupRaceEntity(){}
@@ -85,6 +89,14 @@ public class GroupRaceEntity implements IEntity{
 
 	public void setRaceEntity(RaceEntity raceEntity) {
 		this.raceEntity = raceEntity;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	

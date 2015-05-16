@@ -21,6 +21,10 @@ public class OrganizerEntity implements IEntity{
 	
 	private String name;
 	
+	private String tel;
+	
+	private String email;
+	
 	private String city;
 	
 	private String comment;//�ٰ췽������
@@ -117,6 +121,22 @@ public class OrganizerEntity implements IEntity{
 
 	public void setPicUrl(String picUrl) {
 		this.picUrl = picUrl;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
