@@ -57,7 +57,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 	@Override
 	public List getRewardListByGroup(int groupId) {
 		// TODO Auto-generated method stub
-		this.hql = "FROM RewardEntity AS r where r.group=?";
+		this.hql = "FROM RewardEntity AS r where r.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
 		return query.list();
@@ -66,7 +66,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 	@Override
 	public List getRewardListDetailByGroup(int groupId) {
 		// TODO Auto-generated method stub
-		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g where r.group=?";
+		this.hql = "FROM RewardEntity AS r inner join fetch r.groupRaceEntity AS g where r.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
 		return query.list();

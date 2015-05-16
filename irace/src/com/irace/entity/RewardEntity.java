@@ -17,10 +17,10 @@ public class RewardEntity implements IEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id = null; 
 	
-	private Integer group; //奖项所争对的比赛组别
+	private Integer groupId; //奖项所争对的比赛组别
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="group",insertable=false,updatable=false)
+	@JoinColumn(name="groupId",insertable=false,updatable=false)
 	private GroupRaceEntity groupRaceEntity;//奖项所争对的比赛组别
 	
 	private String name;//奖项的名字
@@ -35,8 +35,8 @@ public class RewardEntity implements IEntity{
 	 * @param name ：奖项的名字
 	 * @param content ：奖项的描述
 	 */
-	public RewardEntity(Integer group, String name, String content){ 
-		this.group = group;
+	public RewardEntity(Integer groupId, String name, String content){ 
+		this.groupId = groupId;
 		this.name = name;
 		this.content = content;
 	}
@@ -51,12 +51,12 @@ public class RewardEntity implements IEntity{
 
 //	@ManyToOne(targetEntity=GroupRaceEntity.class)
 //	@JoinColumn(name="id")
-	public Integer getGroup() {
-		return group;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup(Integer group) {
-		this.group = group;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getName() {

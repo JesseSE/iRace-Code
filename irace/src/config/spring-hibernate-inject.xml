@@ -118,6 +118,18 @@
         <property name="target" ref="groupRaceServiceBase"></property>  
     </bean>
     
+    <!-- ===================== GroupRace ===========================  -->
+    <bean id="propertyDao" class="com.irace.dao.impl.PropertyDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="propertyServiceBase" class="com.irace.service.impl.PropertyServiceImpl">  
+        <property name="propertyDao" ref="propertyDao"></property>
+    </bean>
+    <bean name="propertyService" parent="transactionProxy">
+        <property name="target" ref="propertyServiceBase"></property>  
+    </bean>
+    
+    
     <!-- ===================== User ===========================  -->
     <bean id="userDao" class="com.irace.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  

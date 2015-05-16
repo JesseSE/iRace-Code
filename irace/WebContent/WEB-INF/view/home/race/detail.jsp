@@ -179,7 +179,7 @@
 					<c:forEach var="g" items="${groupList }">
 					<p class="m_text2">
 						<input name='r' type="radio" value='11'/>
-						<label  style="margin-right:20px;">${g.getName() }</label>${g.getRequire() }
+						<label  style="margin-right:20px;">${g.getName() }</label>${g.getRequires() }
 					</p>
 					</c:forEach>
 		         	 <div class="btn_form">

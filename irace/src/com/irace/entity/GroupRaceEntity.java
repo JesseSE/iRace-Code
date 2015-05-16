@@ -25,7 +25,7 @@ public class GroupRaceEntity implements IEntity{
 	
 	private String name;
 	
-	private String require;
+	private String requires;
 
 	
 	public GroupRaceEntity(){}
@@ -34,12 +34,12 @@ public class GroupRaceEntity implements IEntity{
 	 * 为比赛新建一个比赛分类
 	 * @param race ：比赛分类所属的比赛
 	 * @param name ：比赛分类的名字
-	 * @param require ：比赛分类的要求说明
+	 * @param requires ：比赛分类的要求说明
 	 */
-	public GroupRaceEntity(Integer race, String name, String require){
+	public GroupRaceEntity(Integer race, String name, String requires){
 		this.race = race;
 		this.name = name;
-		this.require = require;
+		this.requires = requires;
 	}
 	
 	public Integer getId() {
@@ -71,12 +71,12 @@ public class GroupRaceEntity implements IEntity{
 		this.name = name;
 	}
 
-	public String getRequire() {
-		return require;
+	public String getRequires() {
+		return requires;
 	}
 
-	public void setRequire(String require) {
-		this.require = require;
+	public void setRequires(String requires) {
+		this.requires = requires;
 	}
 
 	public RaceEntity getRaceEntity() {

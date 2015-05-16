@@ -116,7 +116,7 @@ public class RaceController extends SController {
 	}
 	
 	@RequestMapping("detail/{id}")
-	public View singlePage(@PathVariable(value = "id")Integer id) {
+	public View raceDetailPage(@PathVariable(value = "id")Integer id) {
 		
 		RaceEntity race = raceService.getRaceDetail(id);
 		List<GroupRaceEntity> groupList= groupRaceService.getGroupRaceList(id);

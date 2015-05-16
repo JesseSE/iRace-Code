@@ -25,7 +25,7 @@ public class PropertyEntity implements IEntity{
 	
 	private String name;
 	
-	private String require;
+	private String requires;
 	
 
 	public PropertyEntity() {}
@@ -34,12 +34,12 @@ public class PropertyEntity implements IEntity{
 	 * 新建一个属性
 	 * @param race ：对应的比赛
 	 * @param name ：属性的名称
-	 * @param require ：属性的要求
+	 * @param requires ：属性的要求
 	 */
-	public PropertyEntity(Integer race, String name, String require) {
+	public PropertyEntity(Integer race, String name, String requires) {
 		this.race = race;
 		this.name = name;
-		this.require = require;
+		this.requires = requires;
 	}
 	
 
@@ -69,12 +69,12 @@ public class PropertyEntity implements IEntity{
 		this.name = name;
 	}
 
-	public String getRequire() {
-		return require;
+	public String getRequires() {
+		return requires;
 	}
 
-	public void setRequire(String require) {
-		this.require = require;
+	public void setRequires(String requires) {
+		this.requires = requires;
 	}
 	
 	

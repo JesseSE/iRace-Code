@@ -40,20 +40,18 @@ public class PropertyDaoImpl extends SDao implements PropertyDao{
 	}
 
 	@Override
-	public List getPropertyList(int pageNo, int pageItemNum) {
-		this.hql = "FROM PropertyEntity";
+	public List getPropertyList(int raceId) {
+		this.hql = "FROM PropertyEntity as p where p.race=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
+		query.setInteger(0, raceId);
 		return query.list();
 	}
 
 	@Override
-	public List getPropertyListDetail(int pageNo, int pageItemNum) {
-		this.hql = "FROM PropertEntity AS p inner join fetch p.raceEntity AS r";
+	public List getPropertyListDetail(int raceId) {
+		this.hql = "FROM PropertEntity AS p inner join fetch p.raceEntity AS r where p.race=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setFirstResult((pageNo - 1) * pageItemNum);
-		query.setMaxResults(pageItemNum);
+		query.setInteger(0, raceId);
 		return query.list();
 	}
 
