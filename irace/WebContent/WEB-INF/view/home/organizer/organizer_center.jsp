@@ -162,7 +162,7 @@ function raceTab(pos)
 						<li><a href="#" aria-label="Previous" id="prePage"> <span
 								aria-hidden="true">&laquo;</span>
 						</a></li>
-						<li><a href="#" id="curPage">1</a></li>						
+						<li><a href="#" id=curPage>1</a></li>										
 						<li><a href="#" aria-label="Next" id="nextPage"> <span
 								aria-hidden="true">&raquo;</span>
 						</a></li>
@@ -201,24 +201,7 @@ function raceTab(pos)
 	</div>
     
     <!-- 页底开始  -->
-   <div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
-		         </div>
-				<div class="f-list2">
-				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
-				 </ul>
-			    </div>
-			    <div class="clear"></div>
-		      </div>
-	     </div>
-	</div>
+    <%@ include file="/public/section/footer.jsp" %>
 	<!-- 页底结束  -->
 	
 	<!-- Jquery函数开始 -->
@@ -250,7 +233,7 @@ function raceTab(pos)
 		
 		//下一页
 		function nextPage(){
-			if(currentPage < totalPage){
+			if(currentPage < totalPage){				
 				currentPage = currentPage + 1;
 				return true;
 			}else{
@@ -281,18 +264,21 @@ function raceTab(pos)
 		});
 		//点击翻页
 		$("#prePage").click(function(){
+			 prePage();			 
 			getRaceInfo();
 		});
 		$("#nextPage").click(function(){
+			nextPage();
 			getRaceInfo();
 		});
 		//点击新建比赛
 		$("#addNewRace").click(function(){
-			window.location.href=$("#appName").val();
+			window.location.href= $("#appName").val()+ "/organizer/racemanage_detail/"+ 1;
 		});
 		
 		//获取比赛
-		function getRaceInfo(){	
+		function getRaceInfo(){			
+			
 			$.ajax({
 	       		url: $("#appName").val()+"/organizer/manageRaceInOC.act",
 	       		type: "POST",
@@ -315,6 +301,7 @@ function raceTab(pos)
 		function showRaceInfo(res){
 			var raceList = eval(res);//将json转化为list
 			//计算最大页数
+			$("#curPage").text(currentPage);
 			if(raceList<6)
 				totalPage = currentPage;
 			else
@@ -322,23 +309,27 @@ function raceTab(pos)
 			
 			var html = "";
 			
-			for(var i=0; i<raceList.length; i++){
+			for(var i=0; i<raceList.length; i++){				
 				html = html +
-				"<div class='list-group'>" +
-				"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/race/detail/"+ raceList[i].id +"'>"+ 
-				"<h3 style='display:inline;'>" + raceList[i].name + "</h3>";
+				"<div class='list-group'>";
 				
 				//判断是正在进行的比赛、结束的比赛、未发布的比赛
 				if(pageStatus == 1){
-					html = html +
-					"<h3 class='race-state-submit'><a href='" +$("#appName").val()+ "/race/detail/"+ raceList[i].id +"'>点击进行阶段管理</a></h3>";
+					html = html +					
+					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
+					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
+					"<h3 class='race-state-submit'>点击进行阶段管理</h3>";
 				}else if(pageStatus == 2){
-					html = html +
-					"<h3 class='race-state-submit'><a href='##'>查看比赛结果</a></h3>";
+					html = html +					
+					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
+					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
+					"<h3 class='race-state-submit'>查看比赛结果</h3>";
 				}else if(pageStatus == 3){
-					html = html +
-					"<h3 class='race-state-submit' style='margin-left:10px;'><a href='##'>点击发布</a></h3>" +
-					"<h3 class='race-state-submit'><a href='##'>修改</a></h3>";
+					html = html +					
+					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
+					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
+					"<h3 class='race-state-submit' style='margin-left:10px;'>点击发布</h3>" +
+					"<h3 class='race-state-submit'>修改</h3>";
 				}else{
 					html = "没有任何比赛存在";
 					break;
@@ -350,7 +341,7 @@ function raceTab(pos)
 				"<span class='label label-primary'>" + raceList[i].grade + "</span>" +
 				"<span class='label label-success'>" + raceList[i].typeRaceEntity.name + "</span>" +
 				"<span class='label label-info'>"+ raceList[i].startTime.year +"/" + raceList[i].startTime.month +"至"+ raceList[i].endTime.year +"/" + raceList[i].endTime.month +"</span>" +
-				"</div>";
+				"</div><br>";
 			}
 			
 			//判断比赛状态将其注入到对应控件中
