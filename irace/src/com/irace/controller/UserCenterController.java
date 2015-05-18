@@ -91,8 +91,8 @@ public class UserCenterController extends SController {
 	@RequestMapping("userPasswordChange.act")
 	public @ResponseBody String passwordChange(		
 			@RequestParam(value="username",required=true)String username,
-			@RequestParam(value="password",required=true)String oldpassword,
-			@RequestParam(value="password",required=true)String newpassword
+			@RequestParam(value="oldpassword",required=true)String oldpassword,
+			@RequestParam(value="newpassword",required=true)String newpassword
 			){
 		
 		UserEntity user = userService.getUser(username);
@@ -164,6 +164,24 @@ public class UserCenterController extends SController {
 	@RequestMapping("userInfo")
 	public View userInfo() {
 		return new View("home", "user", "user_info", "用户信息");
+	}
+	
+	/**
+	 * 获取用户信息
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping("getUserInfo.act")
+	public @ResponseBody String getUserInfo(		
+			@RequestParam(value="userId",required=true)int userId){		
+		
+		UserEntity user = userService.getUser(userId);
+		if(user == null){
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+		}else{
+			System.out.println(user.toString());
+			return user.toString();
+		}
 	}
 	
 }
