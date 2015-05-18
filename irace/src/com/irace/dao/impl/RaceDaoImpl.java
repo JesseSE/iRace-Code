@@ -263,4 +263,11 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 			
 		}
 	}
+
+	@Override
+	public List getRaceListByUser(Integer pageNo, Integer pageItemNum,
+			int userID, int status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

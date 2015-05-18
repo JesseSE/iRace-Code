@@ -20,6 +20,8 @@ public interface RaceDao {
 	
 	public List getRaceListByUser(Integer pageNo, Integer pageItemNum, int userID);
 	
+	public List getRaceListByUser(Integer pageNo, Integer pageItemNum, int userID, int status);
+	
 	public List getRaceList(Integer pageNo, Integer pageItemNum);
 	
 	public List getRaceList(Integer pageNo, Integer pageItemNum, int type);

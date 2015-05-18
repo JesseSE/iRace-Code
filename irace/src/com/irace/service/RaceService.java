@@ -33,6 +33,15 @@ public interface RaceService {
 	 */
 	public String getRaceListByUser(Integer pageNo, int userID);
 	
+	/**
+	 * 查询用户参加的比赛 status=1,2,3分别表示正在进行的比赛，结束的比赛，未发布的比赛。
+	 * @param userID
+	 * @param pageNo
+	 * @param status
+	 * @return
+	 */
+	public String getRaceListByUser(int userID, int pageNo, int status);
+	
 	public String getRaceList(Integer pageNo, int type);
 	
 	/**
@@ -129,6 +138,7 @@ public interface RaceService {
 	 * @return
 	 */
 	public String getRaceListBySortedHotPoint(int pageNo, String keyword, boolean isAsc);
+	
 	
 	
 }
