@@ -47,14 +47,10 @@ public class OrganizerCenterController extends SController {
 		System.out.println("页数："+ currentPageNum +"\n查看比赛状态：" + pageStatus +"\n机构ID:"+ organizerId);
 		
 		String resultRcaeList = null;
-		if(pageStatus == 1){
-			resultRcaeList = raceService.getRaceListBySortedHotPoint(currentPageNum, "服务", true);
-		}else if(pageStatus == 2){
-			resultRcaeList = raceService.getRaceListBySortedHotPoint(currentPageNum, "服务", true);
-		}else if(pageStatus == 2){
-			resultRcaeList = raceService.getRaceListBySortedHotPoint(currentPageNum, "服务", true);
+		if(pageStatus == 1 || pageStatus == 2 || pageStatus == 3){
+			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, pageStatus);
 		}else
-			resultRcaeList = raceService.getRaceListBySortedHotPoint(currentPageNum, "服务", true);
+			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, 1);
 		
 		return resultRcaeList;		
 	}
