@@ -61,6 +61,7 @@ public class RaceEntity implements IEntity {
 	@Column(name="focus_num")
 	private int focusNum = 0;//比赛的关注人数
 
+	private int status;//比赛的状态
 	
 	public RaceEntity(){}
 	
@@ -249,6 +250,16 @@ public class RaceEntity implements IEntity {
 
 	public void setTypeRaceEntity(TypeRaceEntity typeRaceEntity) {
 		this.typeRaceEntity = typeRaceEntity;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 	
