@@ -85,11 +85,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li><a href="user_center.html">我参加的比赛 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="user_team.html">参加的队伍</a></li>   
-                    <li><a href="#">通知中心</a></li>  
-                    <li><a href="#">个人信息</a></li>  
-                    <li><a href="#">账号管理</a></li>                      
+                    <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam">参加的队伍</a></li>   
+                    <li><a href="<%=request.getContextPath() %>/user/userMsg">通知中心</a></li>  
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam">个人信息</a></li>  
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam">账号管理</a></li>                      
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->

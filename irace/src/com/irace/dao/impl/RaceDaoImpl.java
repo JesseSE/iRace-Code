@@ -267,7 +267,12 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListByUser(Integer pageNo, Integer pageItemNum,
 			int userID, int status) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity WHERE r.organizer = ? and r.status = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, userID);
+		query.setInteger(1, status);
+		query.setFirstResult((pageNo - 1) * pageItemNum);
+		query.setMaxResults(pageItemNum);
+		return query.list();
 	}
 }
