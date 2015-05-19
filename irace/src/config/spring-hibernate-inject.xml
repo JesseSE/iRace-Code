@@ -142,10 +142,17 @@
         <property name="target" ref="userServiceBase"></property>  
     </bean>
     
-    
-    
-    
-    
+    <!-- ===================== Organizer ===========================  -->
+    <bean id="organizerDao" class="com.irace.dao.impl.OrganizerDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="organizerServiceBase" class="com.irace.service.impl.OrganizerServiceImpl">  
+        <property name="organizerDao" ref="organizerDao"></property>
+    </bean>
+    <bean name="organizerService" parent="transactionProxy">
+        <property name="target" ref="organizerServiceBase"></property>  
+    </bean>
+
     
     
 </beans>
