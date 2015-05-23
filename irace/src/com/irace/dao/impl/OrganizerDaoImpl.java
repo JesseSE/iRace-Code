@@ -68,4 +68,14 @@ public class OrganizerDaoImpl extends SDao implements OrganizerDao {
 		return true;
 	}
 
+
+	@Override
+	public OrganizerEntity getOrganizer(String username) {
+		// TODO Auto-generated method stub
+		this.hql = "FROM OrganizerEntity AS u WHERE u.username=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString(0, username);
+		return (OrganizerEntity)query.uniqueResult();
+	}
+
 }

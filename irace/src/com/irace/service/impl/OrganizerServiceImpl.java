@@ -2,6 +2,8 @@ package com.irace.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.irace.dao.OrganizerDao;
 import com.irace.entity.OrganizerEntity;
 import com.irace.service.OrganizerService;
@@ -55,6 +57,25 @@ public class OrganizerServiceImpl implements OrganizerService {
 	public boolean updateOrganizer(OrganizerEntity organizer) {
 		// TODO Auto-generated method stub
 		return organizerDao.updateOrganizer(organizer);
+	}
+
+	@Override
+	public boolean login(String username, String pwd, HttpSession session) {
+		// TODO Auto-generated method stub
+		OrganizerEntity o = organizerDao.getOrganizer(username);
+		if(o != null) {
+			if(o.getPwd().equals(pwd)){
+				session.setAttribute("oid", o.getId());
+				session.setAttribute("ousername", o.getUsername());
+				session.setAttribute("oname", o.getName());
+				session.setAttribute("oname", o.getPicUrl());
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -12,6 +12,8 @@ public interface OrganizerDao {
 	
 	public OrganizerEntity getOrganizer(int id); //获取不包括外键实体
 	
+	public OrganizerEntity getOrganizer(String username); 
+	
 	public OrganizerEntity getOrganizerDetail(int id); //获取包括外键实体
 	
 	public List getOrganizerList(int pageNo, int pageItemNum); //获取不包括外键实体
