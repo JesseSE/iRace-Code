@@ -183,6 +183,7 @@ start menu
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#submit-btn").click(function() {
+				alert("!!!!!");
 				if (yanzheng() != 1) {
 					alert("提交失败，请重新操作！");
 					return;
@@ -206,13 +207,13 @@ start menu
 						qq : $("#qq").val(),
 						school : $("#school").val(),
 						major : $("#major").val(),
-						major : $("#image").val()
+						image : $("#image").val()
 					},
 					dataType : "JSON",
 					success : function(res) {
 						//var res = eval("("+obj+")");
 						console.log("登陆success!");
-						location.href = $("#appName").val() + "/user/index";
+						location.href = $("#appName").val() + "/user/userCenter";
 					},
 					error : function(res) {
 
