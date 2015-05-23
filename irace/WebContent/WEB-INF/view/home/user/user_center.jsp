@@ -260,8 +260,9 @@ function raceTab(pos)
 			</div>
 		</div>
 	</div>
-
-
+	
+	<!-- 取得用户id -->
+	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">
 
 	<%@ include file="/public/section/footer.jsp"%>
 	<script
@@ -279,7 +280,8 @@ function raceTab(pos)
 		currentPage = 1;
 		eachPageNum = 6;
 		isHeldNow = true;
-		userID = 1;
+		//userID = 1;
+		userID = $("#userIDHtml").val();
 	}
 	
 	//前一页
@@ -442,7 +444,7 @@ function raceTab(pos)
 		var htmlText = " <a name='race_done'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++)	{
-			if(race[i].status == 3){
+			if(race[i].status == 2){
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
 				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
