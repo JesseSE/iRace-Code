@@ -121,6 +121,7 @@ public class UserController extends SController {
 			@RequestParam(value="qq",required=true)String qq,
 			@RequestParam(value="school",required=true)String school,
 			@RequestParam(value="major",required=true)String major,
+			@RequestParam(value="image",required=true)String image,
 			HttpSession session){
 		
 		System.out.println("test!!!!!!!");
@@ -132,6 +133,7 @@ public class UserController extends SController {
 		userentity.setEmail(email);
 		userentity.setTel(phone);
 		userentity.setQq(qq);
+		userentity.setPicUrl(image);
 		userentity.setRole(1);
 		
 		//System.out.println(userentity.toString());

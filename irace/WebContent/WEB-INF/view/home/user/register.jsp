@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>注册页面</title>
+<title>${ title }</title>
 <!-- <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -161,6 +161,13 @@ start menu
 							placeholder="Major">
 					</div>
 				</div>
+				
+				<div class="form-group">
+				    <label for="major" class="col-sm-2 control-label">上传头像</label>
+				    <div class="col-sm-4">
+				      <input type="file" class="form-control" id="image" name="image" placeholder="image">
+				    </div>
+				  </div>
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
@@ -198,7 +205,8 @@ start menu
 						sexRadio : sex,
 						qq : $("#qq").val(),
 						school : $("#school").val(),
-						major : $("#major").val()
+						major : $("#major").val(),
+						major : $("#image").val()
 					},
 					dataType : "JSON",
 					success : function(res) {
