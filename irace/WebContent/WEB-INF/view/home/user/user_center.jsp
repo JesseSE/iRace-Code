@@ -549,7 +549,7 @@ function raceTab(pos)
        		url: $("#appName").val()+"/user/isJoinTeam.act",
        		type: "POST",
        		data: {
-       			userId: userId,
+       			userId: userID,
        			raceId: raceId
        			  },
        		dataType: "JSON",
@@ -567,7 +567,7 @@ function raceTab(pos)
        		url: $("#appName").val()+"/user/isGetRaward.act",
        		type: "POST",
        		data: {
-       			userId: userId,
+       			userId: userID,
        			raceId: raceId
        			  },
        		dataType: "JSON",
