@@ -205,7 +205,7 @@ function raceTab(pos)
 	<!-- 页底结束  -->
 	
 	<!-- 取得用户id -->
-	<input id="orIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">
+	<input id="orIDHtml" type="hidden" value="<%=session.getAttribute("oid") %>">
 	
 	<!-- Jquery函数开始 -->
 	<script type="text/javascript">		
