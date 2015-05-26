@@ -204,6 +204,9 @@ function raceTab(pos)
     <%@ include file="/public/section/footer.jsp" %>
 	<!-- 页底结束  -->
 	
+	<!-- 取得用户id -->
+	<input id="orIDHtml" type="hidden" value="<%=session.getAttribute("oid") %>">
+	
 	<!-- Jquery函数开始 -->
 	<script type="text/javascript">		
 		var currentPage; //当前页面
@@ -216,8 +219,8 @@ function raceTab(pos)
 			totalPage = 1;
 			pageStatus = 1;	//1正在进行，2已经结束，3还未发布
 			currentPage = 1;			
-			//organizerId = $("#uid").val();
-			organizerId = 1;
+			organizerId = $("#orIDHtml").val();
+			//organizerId = 1;
 		}
 		
 		//前一页

@@ -19,4 +19,7 @@ public interface SubmitDao {
 	public List getSubmitListDetail(int pageNo, int pageItemNum); //获取包括外键实体
 	
 	public boolean updateSubmit(SubmitEntity submit);
+	
+	
+	public List getSubmitByStage(int stageID);
 }

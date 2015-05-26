@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.dao.impl.UserDaoImpl;
+import com.irace.entity.OrganizerEntity;
 import com.irace.entity.UserEntity;
+import com.irace.service.OrganizerService;
 import com.irace.service.UserService;
 import com.irace.util.InfoCode;
 import com.irace.util.JsonUtil;
@@ -27,7 +29,8 @@ public class UserController extends SController {
 
 	@Resource(name="userService")
 	UserService userService;
-	
+	@Resource(name="organizerService")
+	OrganizerService organizerService;
 	/**
 	 * 鎺у埗鍣ㄦ祴璇�
 	 * @return
@@ -65,14 +68,27 @@ public class UserController extends SController {
 			@RequestParam(value="type",required=true)String type,
 			HttpSession session){
 		
-		
-		
+		boolean flag = true;
+		if(type.equals("2")){
+			
+			//flag = userService.login(username, password, session);
+			
+			/*UserEntity user = userService.getUser(username);
+			System.out.println(username+"     "+password);
+			flag = userService.login(username, password, session);*/
+			
+		}else{
+			UserEntity user = userService.getUser(username);
+			System.out.println(username+"     "+password);
+			flag = userService.login(username, password, session);
+		}
 		//userService = new UserService(username);
-		UserEntity user = userService.getUser(username);
-		boolean flag = userService.login(username, password, session);
+		
 		if(flag){
+			System.out.println("1111111111111111");
 			return JsonUtil.getJsonInfoOK();
 		}else{
+			System.out.println("2222222222222222222");
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户名或者密码错误，请重新登录！");
 		}
 		
@@ -121,6 +137,7 @@ public class UserController extends SController {
 			@RequestParam(value="qq",required=true)String qq,
 			@RequestParam(value="school",required=true)String school,
 			@RequestParam(value="major",required=true)String major,
+			@RequestParam(value="image",required=true)String image,
 			HttpSession session){
 		
 		System.out.println("test!!!!!!!");
@@ -132,6 +149,7 @@ public class UserController extends SController {
 		userentity.setEmail(email);
 		userentity.setTel(phone);
 		userentity.setQq(qq);
+		userentity.setPicUrl(image);
 		userentity.setRole(1);
 		
 		//System.out.println(userentity.toString());
@@ -160,12 +178,13 @@ public class UserController extends SController {
 		if(flag){
 			//out.print(result);
 			userService.login(username, password, session);
+			System.out.println("成功登陆！！");
 			return JsonUtil.getJsonInfoOK();
 		}else{
 			//out.print("{\"username\":"+username+", \"password\":\""+password+"\",\"repassword\":\""+password+"\", "
 			//		+ "\"nickname\":\""+nickname+"\",\"email\":\""+email+"\",\"phone\":\""+phone+"\",\"qq\":\""+qq+"\","
 			//				+ "\"school\":\""+school+"\",\"major\":\""+major+"\"}");
-			
+			System.out.println("登陆失败！！！");
 			return JsonUtil.objectToJSONString(userentity, null);
 		}
 	}
@@ -175,10 +194,12 @@ public class UserController extends SController {
 	 */
 	
 	@RequestMapping("logout.act")
-	public @ResponseBody void logoutAction(HttpSession session){
+	public @ResponseBody View logoutAction(HttpSession session){
 		session.removeAttribute("nickname");
 		session.removeAttribute("uid");
 		session.removeAttribute("username");
+		
+		return new View("home", "user", "login", "登陆");
 	}
 	
 	

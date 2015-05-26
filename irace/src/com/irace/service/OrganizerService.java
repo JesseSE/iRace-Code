@@ -5,6 +5,8 @@ package com.irace.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.irace.entity.OrganizerEntity;
 
 /**
@@ -18,6 +20,8 @@ public interface OrganizerService {
 	public boolean delOrganizer(int id);
 	
 	public OrganizerEntity getOrganizer(int id); //获取不包括外键实体
+	
+	public boolean login(String username, String pwd, HttpSession session);
 	
 	public OrganizerEntity getOrganizerDetail(int id); //获取包括外键实体
 	

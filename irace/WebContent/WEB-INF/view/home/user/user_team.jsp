@@ -134,7 +134,7 @@
 				</div>			
                 
                 </div>
-        			
+        <div class="clear" style = "height : 50px;"></div>
 		<h2 class="head">猜你喜欢</h2>
 		<div class="top-box" id="recommendation"> 
 		  
@@ -228,35 +228,7 @@
 	    getReconmmendation();
 	    loadCreate();
 	    
-	    $("#tab1").click(function(){
-	    	tab1.style.backgroundColor="#DFF0D8";
-			tab2.style.backgroundColor="";
-			tab3.style.backgroundColor="";
-			teamDiv1.style.display="block";
-			teamDiv2.style.display="none";
-			teamDiv3.style.display="none";
-			loadCreate();
-	    } );
 	    
-        $("#tab2").click(function(){
-        	tab2.style.backgroundColor="#DFF0D8";
-    		tab1.style.backgroundColor="";
-    		tab3.style.backgroundColor="";
-    		teamDiv1.style.display="none";
-    		teamDiv2.style.display="block";
-    		teamDiv3.style.display="none";
-    		loadJoin();
-	    } );
-        
-        $("#tab3").click(function(){
-        	tab3.style.backgroundColor="#DFF0D8";
-    		tab2.style.backgroundColor="";
-    		tab1.style.backgroundColor="";
-    		teamDiv1.style.display="none";
-    		teamDiv2.style.display="none";
-    		teamDiv3.style.display="block";
-    		loadWait();
-	    } );
 	});
 	
 	function getReconmmendation(){	
@@ -274,6 +246,36 @@
     		}   
 		});
 	}
+	
+	$("#tab1").click(function(){
+    	tab1.style.backgroundColor="#DFF0D8";
+		tab2.style.backgroundColor="";
+		tab3.style.backgroundColor="";
+		teamDiv1.style.display="block";
+		teamDiv2.style.display="none";
+		teamDiv3.style.display="none";
+		loadCreate();
+    } );
+    
+    $("#tab2").click(function(){
+    	tab2.style.backgroundColor="#DFF0D8";
+		tab1.style.backgroundColor="";
+		tab3.style.backgroundColor="";
+		teamDiv1.style.display="none";
+		teamDiv2.style.display="block";
+		teamDiv3.style.display="none";
+		loadJoin();
+    } );
+    
+    $("#tab3").click(function(){
+    	tab3.style.backgroundColor="#DFF0D8";
+		tab2.style.backgroundColor="";
+		tab1.style.backgroundColor="";
+		teamDiv1.style.display="none";
+		teamDiv2.style.display="none";
+		teamDiv3.style.display="block";
+		loadWait();
+    } );
 	
 	function showReconmmendation(res){		
 		var race = eval(res);   

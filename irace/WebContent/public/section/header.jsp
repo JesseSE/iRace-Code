@@ -30,11 +30,7 @@
 	type="text/javascript"></script>
 <script
 	src="<%=request.getContextPath()%>/public/js/jquery.easydropdown.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".megamenu").megamenu();
-	});
-</script>
+
 
 <link href="<%=request.getContextPath()%>/public/css/form.css"
 	rel="stylesheet" type="text/css" media="all" />
@@ -46,11 +42,6 @@
 
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/public/js/megamenu.js"></script>
-<script>
-	$(document).ready(function() {
-		$(".megamenu").megamenu();
-	});
-</script>
 
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/public/js/jquery1.min.js"></script>
@@ -73,9 +64,16 @@
 <!--testlink-->
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/public/css/normalize.css" />
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/public/css/demo.css" />
+
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/public/css/myButton.css" />
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/public/css/component.css" />
+
+<!--script type="text/javascript">
+	$(document).ready(function() {
+		$(".megamenu").megamenu();
+	});
+</script-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/public/css/demo.css" />

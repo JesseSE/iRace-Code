@@ -19,4 +19,6 @@ public interface ApplyInfoDao {
 	public List getApplyInfoListDetail(int pageNo, int pageItemNum); //获取包括外键实体
 	
 	public boolean updateApplyInfo(ApplyInfoEntity applyInfo);
+	
+	public List getApplyInfoListByAR(int applyID,int raceID);
 }

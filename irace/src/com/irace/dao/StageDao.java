@@ -19,5 +19,7 @@ public interface StageDao {
 	public List getStageListDetail(int groupId); //获取包括外键实体
 	
 	public boolean updateStage(StageRaceEntity stage);
+	
+	public List getStageByGroup(int groupID);
 }
 

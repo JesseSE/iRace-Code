@@ -46,4 +46,14 @@ public interface TeamDao {
 	public List getApplyingTeamList(int userId, int pageNo, int pageItemNum);
 	
 	public boolean updateTeam(TeamEntity team);
+	
+	public List getTeamListByGroup(int groupID);
+	
+	/**
+	 * 查询没有被淘汰的队伍
+	 * @param groupID
+	 * @param status
+	 * @return
+	 */
+	public List GetTeamListByGroup(int groupID, int status);
 }

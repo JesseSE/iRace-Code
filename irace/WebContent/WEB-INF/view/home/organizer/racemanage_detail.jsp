@@ -11,39 +11,34 @@
 <link href="<%=request.getContextPath() %>/public/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/form.css" rel="stylesheet" type="text/css" media="all" />
 <link href='<%=request.getContextPath() %>/public/css/family.css' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/jquery1.min.js"></script>
 <!-- start menu -->
 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/public/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/public/css/bootstrap-datetimepicker.min.css">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/locales/bootstrap-datetimepicker.fr.js"></script>
 
 <!-- 可选的Bootstrap主题文件（一般不用引入） -->
 <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
-    
-    
     
 <link href="<%=request.getContextPath() %>/public/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/megamenu.js"></script>
 <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
 
-
-<script type="text/javascript" src="js/jquery1.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
 <!--start slider -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/public/css/fwslider.css" media="all">
-    <script src="js/jquery-ui.min.js"></script>
-	<script src="js/jQuery-self.js"></script>
-    <script src="js/css3-mediaqueries.js"></script>
-    <script src="js/fwslider.js"></script>
+    <script src="<%=request.getContextPath() %>/public/js/jquery-ui.min.js"></script>
+	<script src="<%=request.getContextPath() %>/public/js/jQuery-self.js"></script>
+    <script src="<%=request.getContextPath() %>/public/js/css3-mediaqueries.js"></script>
+    <script src="<%=request.getContextPath() %>/public/js/fwslider.js"></script>
 <!--end slider -->
-<script src="js/jquery.easydropdown.js"></script>
+<script src="<%=request.getContextPath() %>/public/js/jquery.easydropdown.js"></script>
 <link href="<%=request.getContextPath() %>/public/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/form.css" rel="stylesheet" type="text/css" media="all" />
 <!--testlink-->
@@ -230,6 +225,16 @@ function delReward(id)
 	
 <!--组别js-->
 <script type="text/javascript">	
+function addStage()
+{
+	var stageGroupName= document.getElementById("stageGroupName");
+	location.href='#addStage';
+	stageGroupName.focus();
+}
+</script>
+
+<!--组别js-->
+<script type="text/javascript">	
 function addGroup()
 {
 	var groupNameAdd= document.getElementById("groupNameAdd");
@@ -303,11 +308,13 @@ function detailTab(pos)
 	var tab2= document.getElementById("tab2");
 	var tab3= document.getElementById("tab3");
 	var tab4= document.getElementById("tab4");
+	var tab5= document.getElementById("tab5");
 	
 	var raceDiv1 = document.getElementById("raceDescribe");
 	var raceDiv2 = document.getElementById("raceProperty");
 	var raceDiv3 = document.getElementById("raceGroup");
-	var raceDiv4 = document.getElementById("racePrice");
+	var raceDiv4 = document.getElementById("raceStage");
+	var raceDiv5 = document.getElementById("racePrice");
 	
 	if(pos==1)
 	{
@@ -315,11 +322,13 @@ function detailTab(pos)
 		tab2.style.backgroundColor="";
 		tab3.style.backgroundColor="";
 		tab4.style.backgroundColor="";
+		tab5.style.backgroundColor="";
 		
 		raceDiv1.style.display="block";
 		raceDiv2.style.display="none";
 		raceDiv3.style.display="none";
 		raceDiv4.style.display="none";
+		raceDiv5.style.display="none";
 	}
 	else if(pos==2)
 	{
@@ -327,11 +336,13 @@ function detailTab(pos)
 		tab1.style.backgroundColor="";
 		tab3.style.backgroundColor="";
 		tab4.style.backgroundColor="";
+		tab5.style.backgroundColor="";
 		
 		raceDiv1.style.display="none";
 		raceDiv2.style.display="block";
 		raceDiv3.style.display="none";
 		raceDiv4.style.display="none";
+		raceDiv5.style.display="none";
 	}
 	else if(pos==3)
 	{
@@ -339,11 +350,13 @@ function detailTab(pos)
 		tab1.style.backgroundColor="";
 		tab2.style.backgroundColor="";
 		tab4.style.backgroundColor="";
+		tab5.style.backgroundColor="";
 		
 		raceDiv1.style.display="none";
 		raceDiv2.style.display="none";
 		raceDiv3.style.display="block";
 		raceDiv4.style.display="none";
+		raceDiv5.style.display="none";
 	}
 	else if(pos==4)
 	{
@@ -351,13 +364,28 @@ function detailTab(pos)
 		tab1.style.backgroundColor="";
 		tab2.style.backgroundColor="";
 		tab3.style.backgroundColor="";
+		tab5.style.backgroundColor="";
 		
 		raceDiv1.style.display="none";
 		raceDiv2.style.display="none";
 		raceDiv3.style.display="none";
 		raceDiv4.style.display="block";
+		raceDiv5.style.display="none";
 	}
-	else{}
+	else if(pos==5)
+	{
+		tab4.style.backgroundColor="";
+		tab1.style.backgroundColor="";
+		tab2.style.backgroundColor="";
+		tab3.style.backgroundColor="";
+		tab5.style.backgroundColor="#DFF0D8";
+		
+		raceDiv1.style.display="none";
+		raceDiv2.style.display="none";
+		raceDiv3.style.display="none";
+		raceDiv4.style.display="none";
+		raceDiv5.style.display="block";
+	}
 }
 
 </script>
@@ -540,8 +568,7 @@ function submitPwd()
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
                     <li><a href="racemanage_detail.html" style="color:#FFF;background-color:#4cb1ca;">基本信息管理<span class="sr-only">(current)</span></a></li>
-                    <li><a href="racemanage_team.html">参赛队伍管理</a></li>   
-                    <li><a href="racemanage_stage.html">阶段审核</a></li>    
+                    <li><a href="racemanage_stage.html">比赛审核</a></li>    
                     <li><a href="racemanage_notice.html">发布公告</a></li>    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
@@ -558,14 +585,15 @@ function submitPwd()
 <div class="main" style="margin-top:-25px;">
 	<div class="wrap">
 		<div class="section group">            
-		  <div class="cont span_2_of_3">
+		  <div class="cont span_2_of_3" style="width:100%">
               
 			<div class="top-box" name="my_race">
                 <ul class="nav nav-tabs"  style="font-family:微软雅黑;">
                   <li role="presentation" class="active"><a href="##" id="tab1" onclick="detailTab(1);"  style="background-color:#DFF0D8;"><h4>比赛描述</h4></a></li>
                   <li role="presentation" class="active"><a href="##" id="tab2" onclick="detailTab(2);" ><h4>报名要求</h4></a></li> 
                   <li role="presentation" class="active"><a href="##" id="tab3" onclick="detailTab(3);" ><h4>组别设置</h4></a></li> 
-                  <li role="presentation" class="active"><a href="##" id="tab4" onclick="detailTab(4);" ><h4>奖项设置</h4></a></li> 
+                  <li role="presentation" class="active"><a href="##" id="tab4" onclick="detailTab(4);" ><h4>阶段设置</h4></a></li> 
+                  <li role="presentation" class="active"><a href="##" id="tab5" onclick="detailTab(5);" ><h4>奖项设置</h4></a></li> 
 					<li style="position:relative;float:right;margin-top:10px;margin-left:0px;"><button style="font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px"><a style="color:#FFF">点击发布比赛</a></button></li> 
 				</ul>
 <!--                比赛描述-->
@@ -587,7 +615,7 @@ function submitPwd()
                 <div id="preview">
 					<img id="imghead" class="innerImg" border=0 src="${race.getPicUrl() }"/>
 				</div>
-				<div class="picBtn" id="chooseBtn" style="display:none"><a onclick="changeHead();">选择图片</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
+				<div class="picBtn" id="chooseBtn" style="display:none;"><a onclick="changeHead();">选择图片</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
 				<div class="picBtn" id="picSubmit" style="display:none;margin-left:192px;"><a onclick="changePicDone();">完成更换</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
              </div>
 			 </div>
@@ -664,41 +692,39 @@ function submitPwd()
 				  <div class="form-group" >
 				    <label for="name" class="col-sm-2 control-label">比赛名称</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="name" name="name" placeholder="Name" onblur="">
+				      <input type="text" class="form-control" id="name" name="name" placeholder="Name" onblur="" value="${race.getName() }">
 				    </div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <label for="grade" class="col-sm-2 control-label">比赛级别</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="grade" name="grade" placeholder="Grade" onblur="">
+				      <input type="text" class="form-control" id="grade" name="grade" placeholder="Grade" onblur="" value="${race.getGrade() }">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="startTime" class="col-sm-2 control-label">开始时间</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="startTime" name="repassword" placeholder="Sart Time" onblur="">
+						<input type="text" class="form-control" value="${race.getStartTime() }" id="raceStartTime">
 				    </div>
-					<font id="tip">（格式为20150101）</font>
 				  </div>
 				  <div class="form-group">
 				    <label for="endTime" class="col-sm-2 control-label">结束时间</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="endTime" name="endTime" placeholder="End Time" onblur="">
+				     	<input type="text" class="form-control" value="${race.getEndTime() }" id="raceEndTime">
 				    </div>
-					<font id="tip">（格式如上）</font>
 				  </div>
 				  <div class="form-group">
 				    <label for="limitNum" class="col-sm-2 control-label">限制人数</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="limitNum" name="limitNum" placeholder="Limit Number" onblur="">
+				      <input type="text" class="form-control" id="limitNum" name="limitNum" placeholder="Limit Number" onblur="" value="${race.getNumRest() }">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="type" class="col-sm-2 control-label" style="margin-top:-5px;">类型</label>
 				    <div class="col-sm-4">
 				      <select class="" name="" id="bigType">
-								<option value="0">请选择大类</option>
+								<option value="0">${race.getTypeRaceEntity().getBigTypeEntity().getName() }</option>
 		                            <option value="1">工学类</option>
                                     <option value="2">理学类</option>
 		                            <option value="3">文学类</option>
@@ -706,7 +732,7 @@ function submitPwd()
 
 					  </select>
 					  <select class="" name="" id="smallType">
-								<option value="0">请选择小类</option>
+								<option value="0">${race.getTypeRaceEntity().getName() }</option>
 		                            <option value="1">数学</option>
                                     <option value="2">历史</option>
 		                            <option value="3">生物</option>
@@ -718,7 +744,7 @@ function submitPwd()
 				  <div class="form-group">
 				    <label for="describe" class="col-sm-2 control-label">描述</label>
 				    <div class="col-sm-4">
-				      <textarea  type="text" class="form-control" id="describe" style="width:100%;height:200px; name="describe" placeholder="Describe" onblur=""></textarea>
+				      <textarea  type="text" class="form-control" id="describe" style="width:100%;height:200px; name="describe" placeholder="Describe" onblur="">${race.getContent() }</textarea>
 				    </div>
 				  </div>
 				 <div class="form-group">
@@ -791,6 +817,86 @@ function submitPwd()
 										<td><a class="operate" href="javascript:addPriceIn();" style="margin-right:0%;">添加</a>
 									    </tr>
 									  </div>
+								  </table>
+								</div>
+							</a>
+							</div> 
+                              
+                        </div>  
+                          
+                      </div>
+                </div>  
+    </div> 
+<!--                阶段设置-->
+<div id="raceStage" style="display:none">
+                <div class="panel panel-default">
+                    <a name="race_done"></a>
+                      <div class="panel-body">
+					  <!--自定义奖项设置-->
+					  <div class="panel-body">
+						<div class="list-group">
+                              <a class="list-group-item list-group-item-success" href="##">
+                                  <h3 style="display:inline;">自定义阶段设置</h3>
+								  <h3 class="race-state-submit" onclick="addStage();">增设阶段</h3> 
+								  </a>
+                              <a class="list-group-item">
+					 <div class="panel panel-default">
+                         <table class="table" style="word-break:break-all; word-wrap:break-all;">
+									<thead style="font-weight:bold;">
+									  <tr>
+										<th>#</th>
+										<th>组别名称</th>
+										<th>阶段名称</th>
+										<th>开始时间</th>
+										<th>结束时间</th>
+										<th>描述</th>
+										<th>操作</th>
+									  </tr>
+									</thead>
+									<tbody>
+									  <tr>
+										<th scope="row">1</th>
+										<td>A组</td>
+										<td>Otto</td>
+										<td>20150101</td>
+										<td>20150606</td>
+										<td>Otto</td>
+										<td><a class="operate">删除</a>
+									  </tr>
+									  <tr>
+										<th scope="row">2</th>
+										<td>B组</td>
+										<td>Thornton</td>
+										<td>20150101</td>
+										<td>20150606</td>
+										<td>Thornton</td>
+										<td><a class="operate">删除</a>
+									  </tr>
+									  <tr>
+										<th scope="row">3</th>
+										<td>Larry</td>
+										<td>Larry</td>
+										<td>20150101</td>
+										<td>20150606</td>
+										<td>the aaaa</td>
+										<td><a class="operate">删除</a>
+									  </tr>
+									    <div name="addStage">
+										<tr id="addStage">
+										<th id="stageId" scope="row">4</th>
+										<td><select id="stageGroupName">
+											<option>A组</option>
+											<option>B组</option>
+											</select></td>
+										<td><input id="stageName"></input></td>
+										<td><input id="stageStartTime"></input></td>
+										<td><input id="stageEndTime"></input></td>
+										<td><input id="stageDescribe"></input></td>
+										<td><a class="operate" onclick="addStage();" style="margin-right:0%;">添加</a>
+									    </tr>
+										</div>
+									  <!--/table-->
+									</tbody>
 								  </table>
 								</div>
 							</a>
@@ -938,7 +1044,7 @@ function submitPwd()
             
             
             <!--侧边-->
-			<div class="rsidebar span_1_of_left">
+			<div class="rsidebar span_1_of_left" style="display:none">
 				
            <div class="top-border"> </div>
 			<div class="sidebar-bottom">
@@ -962,5 +1068,22 @@ function submitPwd()
    <script type="text/javascript">
    
    </script>
+<script type="text/javascript">	
+$(document).ready(function() {
+	
+	$('#raceStartTime').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+	$('#raceEndTime').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+	$('#stageStartTime').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+	$('#stageEndTime').datetimepicker({
+	    format: 'yyyy-mm-dd hh:ii'
+	});
+});
+</script>
 </body>
 </html>

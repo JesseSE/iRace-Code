@@ -23,19 +23,6 @@
 		return(0);
 	}
 
-	function check_usernum(){
-		var usernum = document.getElementById("usernum").value;
-		usernum = trim(usernum);
-		if(usernum == ""){
-			alert("学号为空，请输入学号！");
-			document.getElementById("usernum").value = "";
-			return(1);
-		}else{
-
-		}
-		return(0);
-	}
-
 	function check_password(){
 		var password = document.getElementById("password").value;
 		if (password == "") {
@@ -100,11 +87,6 @@
 	function yanzheng(){
 		if (check_username()) {
 			//alert("2用户名输入不合法，请输入用户名！");
-			return(0);
-		};
-		if (check_usernum()) {
-			//alert("2学号必须输入！请输入学号！");
-			document.getElementById("usernum").focus();
 			return(0);
 		};
 		if (check_password()) {

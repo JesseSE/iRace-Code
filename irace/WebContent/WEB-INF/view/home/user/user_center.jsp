@@ -260,8 +260,9 @@ function raceTab(pos)
 			</div>
 		</div>
 	</div>
-
-
+	
+	<!-- 取得用户id -->
+	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">
 
 	<%@ include file="/public/section/footer.jsp"%>
 	<script
@@ -279,7 +280,8 @@ function raceTab(pos)
 		currentPage = 1;
 		eachPageNum = 6;
 		isHeldNow = true;
-		userID = 1;
+		//userID = 1;
+		userID = $("#userIDHtml").val();
 	}
 	
 	//前一页
@@ -381,18 +383,29 @@ function raceTab(pos)
 		var htmlText = " <a name='race_default'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++){
-			htmlText = htmlText + 
+			if(race[i].status == 1){
+				htmlText = htmlText + 
 				"<div class='list-group'>" +
 				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
-				"<h3 style='display:inline;'>" + race[i].name + "</h3>" +
-				"<h3 class='race-state-wait'>暂未组队，点击组队</h3>"+
+				"<h3 style='display:inline;'>" + race[i].name + "</h3>" ;
+				
+				//判断组队状态
+				if(null == isJoinedAteam(race[i].id)){
+					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+				}else{
+					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+				}
+								
+				
+				htmlText = htmlText + 
 				"</a>" +
 				"<a class='list-group-item'>" + race[i].content + "</a>" +
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
 				"<span class='label label-primary'>" + race[i].grade + "</span>" +
 				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
 				"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
-				"</div>";			
+				"</div>";		
+			}
 		}	
 		
 			
@@ -431,18 +444,20 @@ function raceTab(pos)
 		var htmlText = " <a name='race_done'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++)	{
-			htmlText = htmlText + 
-			"<div class='list-group'>" +
-			"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
-			"<h3 style='display:inline;'>" + race[i].name + "</h3>"+
-			"<h3 class='race-state-wait'>未获奖</h3>" +
-			"</a>" +			
-			" <a class='list-group-item'>" + race[i].content + "</a>" +
-			"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
-			"<span class='label label-primary'>" + race[i].grade + "</span>" +
-			"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
-			"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
-			"</div>";
+			if(race[i].status == 2){
+				htmlText = htmlText + 
+				"<div class='list-group'>" +
+				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
+				"<h3 style='display:inline;'>" + race[i].name + "</h3>"+
+				"<h3 class='race-state-wait'>未获奖</h3>" +
+				"</a>" +			
+				" <a class='list-group-item'>" + race[i].content + "</a>" +
+				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
+				"<span class='label label-primary'>" + race[i].grade + "</span>" +
+				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
+				"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
+				"</div>";
+			}
 		}
 		
 			
@@ -527,6 +542,42 @@ function raceTab(pos)
 	function closeRaceInd(raceDiv){
 		var raceBarId = "raceBar" + raceDiv;
 		document.getElementById(raceBarId).style.display="none";   
+	}
+	//查看组队状态
+	function isJoinedAteam(raceId){
+		$.ajax({
+       		url: $("#appName").val()+"/user/isJoinTeam.act",
+       		type: "POST",
+       		data: {
+       			userId: userID,
+       			raceId: raceId
+       			  },
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			return eval(res).name;        			
+       		},
+       		error: function(res) {        			
+       			return null;
+       		}   
+		});		
+	}
+	//查看获奖状态
+	function isGetRaward(raceId){
+		$.ajax({
+       		url: $("#appName").val()+"/user/isGetRaward.act",
+       		type: "POST",
+       		data: {
+       			userId: userID,
+       			raceId: raceId
+       			  },
+       		dataType: "JSON",
+       		success: function(res) {           		
+       			return eval(res).name;        			
+       		},
+       		error: function(res) {        			
+       			return null;
+       		}   
+		});		
 	}
 	
 </script>
