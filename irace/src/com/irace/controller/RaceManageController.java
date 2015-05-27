@@ -3,7 +3,9 @@
  */
 package com.irace.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,7 @@ import com.irace.entity.GroupRaceEntity;
 import com.irace.entity.PropertyEntity;
 import com.irace.entity.RaceEntity;
 import com.irace.entity.RewardEntity;
+import com.irace.entity.StageRaceEntity;
 import com.irace.service.GroupRaceService;
 import com.irace.service.PropertyService;
 import com.irace.service.RaceService;
@@ -30,6 +33,7 @@ import com.irace.service.RewardService;
 import com.irace.service.StageService;
 import com.irace.util.InfoCode;
 import com.irace.util.JsonUtil;
+import com.irace.util.TimeUtil;
 import com.irace.view.View;
 
 /**
@@ -193,5 +197,57 @@ public class RaceManageController {
 		}
 	}
 	
+	@RequestMapping("addStage")
+	@ResponseBody
+	public String addStage(
+			@RequestParam(value="groupId")Integer groupId,
+			@RequestParam(value="name")String name,
+			@RequestParam(value="content")String content,
+			@RequestParam(value="startTime")String startTime,
+			@RequestParam(value="endTime")String endTime) {
+		try {
+			Date start = TimeUtil.formatDateStr(startTime, "yyyy-MM-dd HH:mm");
+			Date end = TimeUtil.formatDateStr(endTime, "yyyy-MM-dd HH:mm");
+			StageRaceEntity s = new StageRaceEntity(groupId, name, content, start, end);
+			
+			int res = stageService.addStage(s);
+			if(res > 0) {
+				return JsonUtil.getJsonInfo(InfoCode.OK, String.valueOf(res));
+			} else {
+				return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"增加失败！");
+			}
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"日期格式错误！");
+		}
+		
+	}
 	
+	@RequestMapping("delStage")
+	@ResponseBody
+	public String delStage(
+			@RequestParam(value="id")Integer id) {
+		
+		if(stageService.delStage(id)) {
+			return JsonUtil.getJsonInfoOK();
+		} else {
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"增加失败！");
+		}
+	}
+	
+	@RequestMapping("updateRaceAvatar")
+	@ResponseBody
+	public String updateRaceAvatar (@RequestParam(value="id")Integer id,
+			@RequestParam(value="imgName")String imgName) {
+		RaceEntity race = raceService.getRace(id);
+		race.setPicUrl(imgName);
+		if(raceService.updateRace(race)) {
+			return JsonUtil.getJsonInfoOK();
+		} else {
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"更新图片失败！");
+		}
+		
+	}
 }

@@ -21,15 +21,16 @@ public class StageRaceEntity implements IEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;
 	
-	private Integer group; 
+	@Column(name="group_id")
+	private Integer groupId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="group",insertable=false,updatable=false)
+	@JoinColumn(name="groupId",insertable=false,updatable=false)
 	private GroupRaceEntity groupRaceEntity;
 	
 	private String name;
 	
-	private String content; 
+	private String content;
 	
 	@Column(name="start_time")
 	private Date startTime;
@@ -51,8 +52,8 @@ public class StageRaceEntity implements IEntity{
 	 * @param startTime ：阶段的开始时间
 	 * @param endTime ：阶段的结束时间
 	 */
-	public StageRaceEntity(Integer group, String name, String content, Date startTime, Date endTime){
-		this.group = group;
+	public StageRaceEntity(Integer groupId, String name, String content, Date startTime, Date endTime){
+		this.groupId = groupId;
 		this.name = name;
 		this.content = content;
 		this.startTime = startTime;
@@ -65,8 +66,8 @@ public class StageRaceEntity implements IEntity{
 	 * @param name :阶段的名字
 	 * @param content ：阶段的简单介绍
 	 */
-	public StageRaceEntity(Integer group, String name, String content){
-		this.group = group;
+	public StageRaceEntity(Integer groupId, String name, String content){
+		this.groupId = groupId;
 		this.name = name;
 		this.content = content;
 		this.startTime = null;
@@ -83,12 +84,12 @@ public class StageRaceEntity implements IEntity{
 	
 //	@ManyToOne
 //	@JoinColumn(name="id")
-	public Integer getGroup() {
-		return group;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup(Integer group) {
-		this.group = group;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getName() {

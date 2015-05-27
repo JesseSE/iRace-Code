@@ -201,7 +201,7 @@ function addPriceIn()
 
 function delReward(id)
 {
-	if(confirm("你真的要删除奖项“"+$("#reward-data tr.item"+id+" td.name").html()+"”吗?")) {
+	if(confirm("你真的要删除“"+$("#reward-data tr.item"+id+" td:nth-child(2)").html()+"”的“"+$("#reward-data tr.item"+id+" td:nth-child(3)").html()+"”吗?")) {
 		$.ajax({
 			url: $("#appName").val()+"/organizer/delReward",
 			type: "POST",
@@ -223,7 +223,7 @@ function delReward(id)
 
 </script>	
 	
-<!--组别js-->
+<!--阶段js-->
 <script type="text/javascript">	
 function addStage()
 {
@@ -231,6 +231,78 @@ function addStage()
 	location.href='#addStage';
 	stageGroupName.focus();
 }
+
+function addStageIn()
+{
+	var groupId = $('#stageGroupName').val();
+	var name = $("#stageName").val();
+	var startTime = $("#stageStartTime").val();
+	var endTime = $('#stageEndTime').val();
+	var desc = $('#stageDescribe').val();
+	if(stageName==''||desc==''||startTime==''||endTime=='') {
+		alert('增加项均为必填！');
+	} else {
+		$.ajax({
+			url: $("#appName").val()+"/organizer/addStage",
+			type: "POST",
+			data: {
+				groupId: groupId,
+				name: name,
+				startTime: startTime,
+				endTime: endTime,
+				content: desc
+			},
+			dataType: "JSON",
+			success: function(res) {
+				if(res.code==200) {
+					var html = "<tr class='item"+res.msg+"'>";
+					html += "<th scope='row'>*</th>";
+					html += "<td>"+$("#stageGroupName option[value="+groupId+"]").html()+"</td>";
+					html += "<td class='name'>"+name+"</td>";
+					html += "<td>"+startTime+"</td>";
+					html += "<td>"+endTime+"</td>";
+					html += "<td>"+desc+"</td>";
+					html += "<td><a class='operate' href='javascript:delStage("+res.msg+")'>删除</a>";
+					html += "</tr>";
+					
+					$("#stage-data").append(html);
+					
+					$("#stageName").val("");
+					$("#stageStartTime").val("");
+					$("#stageEndTime").val("");
+					$("#stageDescribe").val("");
+				} else {
+					alert(res.msg);
+				}
+			},
+			complete: completehandle 
+		});
+	}
+}
+
+function delStage(id)
+{
+	if(confirm("你真的要删除“"+$("#stage-data tr.item"+id+" td:nth-child(2)").html()+"”的“"+$("#stage-data tr.item"+id+" td:nth-child(3)").html()+"”吗?")) {
+		$.ajax({
+			url: $("#appName").val()+"/organizer/delStage",
+			type: "POST",
+			data: {
+				id: id
+			},
+			dataType: "JSON",
+			success: function(res) {
+				if(res.code==200) {
+					$("#stage-data tr.item"+id).remove();
+				} else {
+					alert(res.msg);
+				}
+			},
+			complete: completehandle 
+		});
+	}
+}
+
+
 </script>
 
 <!--组别js-->
@@ -408,16 +480,40 @@ function changePic()
 	chooseBtn.style.display="block";
 	picSubmit.style.display="block";
 }
+
+
+//开始上传图片
 function changePicDone()
 {
 	var chooseBtn = document.getElementById("chooseBtn");
 	var picSubmit = document.getElementById("picSubmit");
 	var imgContent = document.getElementById("headImg");
+	
 	chooseBtn.style.display="none";
 	picSubmit.style.display="none";
-	alert("首页大图修改成功！");
 }
 
+
+function updateRaceAvatar(id,name) {
+	$.ajax({
+		url: $("#appName").val()+"/organizer/updateRaceAvatar",
+		type: "POST",
+		data: {
+			id: id,
+			imgName: name
+		},
+		dataType: "JSON",
+		success: function(res) {
+			if(res.code==200) {
+				alert("更新图片成功!");
+				changePicDone();
+			} else {
+				alert(res.msg);
+			}
+		},
+		complete: completehandle 
+	});
+}
 
 function submitPwd()
 {
@@ -615,8 +711,15 @@ function submitPwd()
                 <div id="preview">
 					<img id="imghead" class="innerImg" border=0 src="${race.getPicUrl() }"/>
 				</div>
-				<div class="picBtn" id="chooseBtn" style="display:none;"><a onclick="changeHead();">选择图片</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
-				<div class="picBtn" id="picSubmit" style="display:none;margin-left:192px;"><a onclick="changePicDone();">完成更换</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
+				<div class="picBtn" id="chooseBtn" style="display:none;">
+					<a onclick="changeHead();">选择图片</a>
+					<form id="avatar-form" action="<%=request.getContextPath() %>/upload/img" method="POST" enctype="multipart/form-data">
+						<input  name="uploadFile" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" style="display:none;" />
+					</form>
+				</div>
+				<div class="picBtn" id="picSubmit" style="display:none;margin-left:192px;">
+					<a onclick="javascript:$('#avatar-form').submit();">完成更换</a>
+				</div>
              </div>
 			 </div>
 			 
@@ -757,7 +860,7 @@ function submitPwd()
 				  </div>
 				</form>
                 </div>
-                </div>    
+                </div>
                 
    </div>             
 <!--                奖项设置-->
@@ -853,50 +956,40 @@ function submitPwd()
 										<th>操作</th>
 									  </tr>
 									</thead>
-									<tbody>
-									  <tr>
-										<th scope="row">1</th>
-										<td>A组</td>
-										<td>Otto</td>
-										<td>20150101</td>
-										<td>20150606</td>
-										<td>Otto</td>
-										<td><a class="operate">删除</a>
-									  </tr>
-									  <tr>
-										<th scope="row">2</th>
-										<td>B组</td>
-										<td>Thornton</td>
-										<td>20150101</td>
-										<td>20150606</td>
-										<td>Thornton</td>
-										<td><a class="operate">删除</a>
-									  </tr>
-									  <tr>
-										<th scope="row">3</th>
-										<td>Larry</td>
-										<td>Larry</td>
-										<td>20150101</td>
-										<td>20150606</td>
-										<td>the aaaa</td>
-										<td><a class="operate">删除</a>
-									  </tr>
-									    <div name="addStage">
+									<tbody id="stage-data">
+									<c:set var="stageIndex" value="0" scope="page"></c:set>
+									<c:forEach var="exStage" items="${stageList }">
+										<c:forEach var="s" items="${exStage.get('slist') }">
+											 <tr class="item${s.getId() }">
+												<th scope="row">${stageIndex = stageIndex + 1 }</th>
+												<td>${exStage.get('gname') }</td>
+												<td>${s.getName() }</td>
+												<td>${s.getStartTime() }</td>
+												<td>${s.getEndTime() }</td>
+												<td>${s.getContent() }</td>
+												<td><a class="operate" href="javascript:delStage(${s.getId() })">删除</a></td>
+											  </tr>
+										</c:forEach>
+									</c:forEach>
+									  <!--/table-->
+									</tbody>
+									<div name="addStage">
 										<tr id="addStage">
-										<th id="stageId" scope="row">4</th>
-										<td><select id="stageGroupName">
-											<option>A组</option>
-											<option>B组</option>
-											</select></td>
+										<th id="stageId" scope="row">*</th>
+										<td>
+											<select id="stageGroupName">
+												<c:forEach var="g" items="${groupList }">
+												<option value="${g.getId() }">${g.getName() }</option>
+												</c:forEach>
+											</select>
+										</td>
 										<td><input id="stageName"></input></td>
 										<td><input id="stageStartTime"></input></td>
 										<td><input id="stageEndTime"></input></td>
 										<td><input id="stageDescribe"></input></td>
-										<td><a class="operate" onclick="addStage();" style="margin-right:0%;">添加</a>
+										<td><a class="operate" onclick="javascript:addStageIn();" style="margin-right:0%;">添加</a>
 									    </tr>
-										</div>
-									  <!--/table-->
-									</tbody>
+									 </div>
 								  </table>
 								</div>
 							</a>
@@ -1064,8 +1157,44 @@ function submitPwd()
 	</div>
     
     <%@ include file="/public/section/footer.jsp" %>
-   
+   <script src="<%=request.getContextPath() %>/public/js/jquery.form.min.js" type="text/javascript"></script>
    <script type="text/javascript">
+   /**
+    * 上传文件设置
+    */
+   var uploadOptions = {
+  			beforeSubmit: function() {
+  	        	if($("#upimg").val() == "") {
+  	        		alert("没有选择文件！");
+  	        		return false;
+  	        	} else {
+  	        		//$("#loading").fadeIn();
+  	        		return true;
+  	        	}
+  	        },  //提交前处理 
+  	        success: function(res) {
+  	        	//$("#loading").fadeOut();
+  	        	if(res.code == 200) {
+  	        		updateRaceAvatar($("#raceId").val(),res.msg);
+  	        	} else {
+  	        		alert(res.msg);
+  	        	}
+  	        	
+  	        },
+  	        error: completeHandle,  //处理完成 
+  	        resetForm: true,
+  	        dataType:  'json'
+  	};
+   
+   /**
+    * 上传文件是触发事件
+    */
+   $("#avatar-form").submit(function(){
+   	$(this).ajaxSubmit(uploadOptions);
+   	return false;
+   });
+   
+   
    
    </script>
 <script type="text/javascript">	
