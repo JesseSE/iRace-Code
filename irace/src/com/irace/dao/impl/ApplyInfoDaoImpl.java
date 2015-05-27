@@ -62,6 +62,12 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 		sessionFactory.getCurrentSession().update(applyInfo);
 		return true;
 	}
+
+	@Override
+	public List getApplyInfoListByAR(int applyID, int raceID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 	

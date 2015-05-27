@@ -81,6 +81,18 @@ public class TeamServiceImpl implements TeamService {
 				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
 	}
 
+	@Override
+	public String getTeamListByGroup(int groupID) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID), new String[]{});
+	}
+
+	@Override
+	public String getTeamListByGroup(int groupID, int status) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID, status), new String[]{});
+	}
+
 
 
 }

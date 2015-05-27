@@ -55,5 +55,5 @@ public interface TeamDao {
 	 * @param status
 	 * @return
 	 */
-	public List GetTeamListByGroup(int groupID, int status);
+	public List getTeamListByGroup(int groupID, int status);
 }

@@ -52,4 +52,8 @@ public interface TeamService {
 	public String getApplyingTeamList(int userId, int pageNo);
 	
 	public boolean updateTeam(TeamEntity team);
+	
+	public String getTeamListByGroup(int groupID);
+	
+	public String getTeamListByGroup(int groupID, int status);
 }

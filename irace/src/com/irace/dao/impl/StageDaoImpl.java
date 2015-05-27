@@ -62,4 +62,10 @@ public class StageDaoImpl extends SDao implements StageDao{
 		sessionFactory.getCurrentSession().update(stage);
 		return true;
 	}
+
+	@Override
+	public List getStageByGroup(int groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

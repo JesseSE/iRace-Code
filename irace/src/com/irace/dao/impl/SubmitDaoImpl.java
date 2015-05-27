@@ -64,4 +64,10 @@ public class SubmitDaoImpl extends SDao implements SubmitDao{
 		return true;
 	}
 
+	@Override
+	public List getSubmitByStage(int stageID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

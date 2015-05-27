@@ -154,4 +154,16 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	
 }
 
+	@Override
+	public List getTeamListByGroup(int groupID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List getTeamListByGroup(int groupID, int status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

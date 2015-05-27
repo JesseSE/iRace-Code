@@ -5,6 +5,7 @@ import java.util.List;
 import com.irace.dao.StageDao;
 import com.irace.entity.StageRaceEntity;
 import com.irace.service.StageService;
+import com.irace.util.JsonUtil;
 
 public class StageServiceImpl implements StageService {
 
@@ -54,6 +55,12 @@ public class StageServiceImpl implements StageService {
 	public boolean updateStage(StageRaceEntity stage) {
 		// TODO Auto-generated method stub
 		return stageDao.updateStage(stage);
+	}
+
+	@Override
+	public String getStageByGroup(int groupID) {
+		// TODO Auto-generated method stub
+		return JsonUtil.listToJSONString(stageDao.getStageByGroup(groupID), new String[]{});
 	}
 
 }
