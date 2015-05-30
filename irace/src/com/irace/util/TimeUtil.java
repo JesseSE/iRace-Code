@@ -1,5 +1,6 @@
 package com.irace.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -98,5 +99,17 @@ public class TimeUtil {
 		Date curr = new Date();
 		long offset = curr.getTime() - pre.getTime();
 		return offset > 120*60000; //超时时限为2个小时
+	}
+	
+	/**
+	 * 通过特点的字符串得到时间
+	 * @param dateStr
+	 * @param mode
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date formatDateStr(String dateStr, String mode) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat(mode);
+		return format.parse(dateStr);
 	}
 }
