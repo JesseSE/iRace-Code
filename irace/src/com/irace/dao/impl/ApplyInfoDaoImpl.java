@@ -1,6 +1,9 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
@@ -65,8 +68,19 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 
 	@Override
 	public List getApplyInfoListByAR(int applyID, int raceID) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM ApplyInfoEntity AS a, PropertyEntity AS p WHERE a.apply = ? and p.race = ? and a.property =  p.id";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, applyID);
+		query.setInteger(1, raceID);
+		return query.list();
+	}
+	
+	private List MyList(List list){
+		List<Map> mapList = new ArrayList<Map>();
+		Iterator<Object> it = list.iterator();
+		while(it.hasNext()){			
+		}
+		return mapList;	
 	}
 	
 

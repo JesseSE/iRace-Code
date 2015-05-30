@@ -1,7 +1,12 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.hibernate.Query;
 
 import com.irace.dao.GroupRaceDao;
@@ -45,7 +50,7 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 		this.hql = "FROM GroupRaceEntity as g where g.race=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, raceId);
-		return query.list();
+		return myGroupList(query.list());
 	}
 
 	@Override
@@ -60,6 +65,20 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 	public boolean updateGroupRace(GroupRaceEntity groupRace) {
 		sessionFactory.getCurrentSession().update(groupRace);
 		return true;
+	}
+	
+	private List myGroupList(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<GroupRaceEntity> it = list.iterator();
+		while(it.hasNext()){
+			GroupRaceEntity group = it.next();
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("id", Integer.toString(group.getId()));
+			map.put("name",group.getName());
+			listMap.add(map);
+		}
+		return listMap;
+		
 	}
 
 }

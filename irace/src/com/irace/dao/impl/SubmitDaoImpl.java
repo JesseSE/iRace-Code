@@ -66,8 +66,10 @@ public class SubmitDaoImpl extends SDao implements SubmitDao{
 
 	@Override
 	public List getSubmitByStage(int stageID) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM SubmitEntity AS s inner join fetch s.teamEntity WHERE s.stageId = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, stageID);
+		return query.list();
 	}
 
 }

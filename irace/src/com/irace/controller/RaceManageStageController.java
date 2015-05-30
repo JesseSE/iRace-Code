@@ -1,17 +1,34 @@
 package com.irace.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.service.GroupRaceService;
+import com.irace.service.RaceService;
+import com.irace.service.TeamService;
 import com.irace.view.View;
 
 
 @Controller
 @RequestMapping("/race/*")
 public class RaceManageStageController extends SController{
+	 
+	@Resource(name = "raceService")
+	RaceService raceService;
+	@Resource(name = "groupRaceService")
+	GroupRaceService groupRaceService;
+	@Resource(name = "teamService")
+	TeamService teamservice;
 	
 	@RequestMapping("RaceManageStage")
 	public View raceManageStage(){
@@ -23,21 +40,26 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageStageLoadRaceName.act")
 	public @ResponseBody String loadRaceName(
 			@RequestParam(value="raceID",required=true) int raceID){
-		return null;		
+		System.out.println(raceService.getRace(raceID).getName());
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("name", raceService.getRace(raceID).getName());
+		JSONArray array = JSONArray.fromObject(map);
+		return array.toString();		
 	}
 	
 	//载入组别
 	@RequestMapping("manageStageLoadGroup.act")
 	public @ResponseBody String loadRace(
 			@RequestParam(value="raceID",required=true) int raceID){
-		return null;	
+		JSONArray array = JSONArray.fromObject(groupRaceService.getGroupRaceList(raceID));
+		return array.toString();	
 	}
 	
 	//载入报名审核里的小组 
 	@RequestMapping("manageStageLoadGroupTeam.act")
 	public @ResponseBody String loadGroupTeam(
-			@RequestParam(value="groupID",required=true) int groupID ){
-		return null;	
+			@RequestParam(value="groupID",required=true) int groupID ){	
+		return teamservice.getTeamListByGroup(groupID);	
 	}
 	
 	

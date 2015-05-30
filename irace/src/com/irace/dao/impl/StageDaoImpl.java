@@ -65,7 +65,9 @@ public class StageDaoImpl extends SDao implements StageDao{
 
 	@Override
 	public List getStageByGroup(int groupID) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM StageRaceEntity AS s WHERE s.groupID = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupID);
+		return query.list();
 	}
 }

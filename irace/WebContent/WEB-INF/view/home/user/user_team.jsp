@@ -360,15 +360,21 @@
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
 			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
 			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
-			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行，点击提交阶段产物
+			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行，点击提交阶段产物  4 审核未通过
 			if(apply[number].teamStatus == 1){
 				htmlCreate = htmlCreate+"<h3 class='team-state-submit onclick = 'applyTeam("+apply[number].teamID+");''>未提交审核，点击提交审核</h3>";
 			}
 			else if(apply[number].teamStatus == 2){
 				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
 			}
-			else{
+			else if(apply[number].teamStatus == 3){
 				htmlCreate = htmlCreate+"<h3 class='team-state-submit'><a href = ''>比赛正在进行，点击提交阶段产物</a></h3>";
+			}
+			else if(apply[number].teamStatus == 4){
+				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组未通过审核</h3>";
+			}
+			else{
+				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>比赛已结束</h3>";
 			}
 			htmlCreate = htmlCreate +"</a></div></div>";
 		}
@@ -400,7 +406,6 @@
 			htmlJoin = htmlJoin + "<a name = 'i_join'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>"+
-			//upDown need changed
 			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamID+");'>"+
 			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
@@ -409,15 +414,21 @@
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
 			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
 			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
-			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行
+			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行 4队伍未通过 5比赛已结束
 			if(apply[number].teamStatus == 1){
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>正在组队</h3>";
 			}
 			else if(apply[number].teamStatus == 2){
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在等待审核通过</h3>";
 			}
-			else{
+			else if(apply[number].teamStatus == 3){
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在进行比赛</h3>";
+			}
+			else if(apply[number].teamStatus == 4){
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组未通过审核</h3>";
+			}
+			else{
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已结束</h3>";
 			}
 			htmlJoin = htmlJoin +"</a></div></div>";
 		}

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<title>${ title }</title>
 <%@ include file="/public/section/header.jsp"%>
 <link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
@@ -48,8 +48,6 @@
 	color:#7A5555;
 }
 </style>
-
-<title>比赛管理</title>
 </head>
 <body>
 
@@ -149,7 +147,7 @@
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
-	<div id='groupTeam'>
+	<div id="groupTeam">
 
 	</div>
 		 
@@ -178,7 +176,7 @@
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
-	<div id='stageGroupTeam'>
+	<div id="stageGroupTeam">
 			<!--GDS软件工程实践课小组-->
                       <div class="panel-body" >
 						<div class="list-group">
@@ -234,7 +232,7 @@
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
-	<div id='groupTeam'>
+	<div id="groupTeam">
 			<!--GDS软件工程实践课小组-->
                       <div class="panel-body">
 						<div class="list-group">
@@ -377,6 +375,7 @@
 	     </div>
 	</div>
 
+<%@ include file="/public/section/footer.jsp" %>
 <script type="text/javascript">
     //date 传值
     var raceID = 1;
@@ -441,18 +440,20 @@
 	    } );
 
 	$(document).ready(function(){
-		
+		loadRaceName();
+		loadGroup();
+		loadGroupTeam();
 	});
 	
 	//载入比赛的名字
 	function loadRaceName(){
 		$.ajax({
-			url:$("#appName").val()+"/race/manageStageLoadRaceName.act",
+			url: $("#appName").val()+ "/race/manageStageLoadRaceName.act",
 			type:"POST",
 			data:{raceID:raceID},
 			dataType:"JSON",
 			success:function(res){
-				showRaceName();
+				showRaceName(res);
 			},
 			error:function(res){
 				console.log(res);
@@ -463,7 +464,7 @@
 	function showRaceName(res){
 		var htmlName = "";
 		var name = eval(res);
-		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name.name+"</h1>";
+		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name[0].name+"</h1>";
 		$("#raceTitle").html(htmlName);
 	}
 	
@@ -487,7 +488,7 @@
 		var select = eval(res);
 		var htmlSelect = "";
 		for(var number = 0;number < select.length; number++){
-			htmlSelect = htmlSelect + "<option value = " + select[number].ID +">" +
+			htmlSelect = htmlSelect + "<option value = " + select[number].id +">" +
 			select[number].name + "</option>";
 		}
 		$("#applyGroupSelect").html(htmlSelect);
@@ -503,19 +504,19 @@
 			url:$("#appName").val()+"/race/manageStageLoadGroupTeam.act",
 			type:"POST",
 			data:{
-				groupID:groupID
+				groupID:1
 			},
 			dataType:"JSON",
 			success:function(res){
 				showGroupTeam(res);
 			},
 			error:function(res){
-				console.log(res);
+				console.log("no");
 			}
 		});
 	}
 	
-	showGroupTeam(res){
+	function showGroupTeam(res){
 		var team = eval(res);
 		var htmlTeam = "";
 		for(var number = 0; number < team.length; number++){
@@ -524,7 +525,7 @@
 			"<h3 style = 'display:inline;'>"+team[number].name+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ="+team[number].id+" style = 'display:none'>"+"</div>"+
-			"<span class='label label-primary'>"team[number].leader+"</span>"+
+			"<span class='label label-primary'>"+ team[number].leader+"</span>"+
 			"<span class='label label-success'>"+team[number].slogan+"</span>"+
 			"<h3 class='team-state-submit' onclick = 'agreed("+team[number].id+");'>通过</h3>"+
 			"<h3 class='team-state-submit' onclick = 'refused("+team[number].id+");'>通过</h3>"+
@@ -600,7 +601,7 @@
 		"<thead style='font-weight:bold;'>"+
 		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>学历</th><th>年龄</th></tr></thead><tbody>";
 		for(var number = 0; number < teamMember.length; number++){
-			htmlTeamMember = htmlTeamMember + "<tr><th scope='row>"+ ( number + 1 ) + "</th>"+
+			htmlTeamMember = htmlTeamMember + "<tr><th scope='row'>"+ ( number + 1 ) + "</th>"+
 			"<td>"+teamMember[number].name+"</td>"+
 			"<td>"+teamMember[number].email+"</td>"+
 			"<td>"+teamMember[number].tel+"</td>"+

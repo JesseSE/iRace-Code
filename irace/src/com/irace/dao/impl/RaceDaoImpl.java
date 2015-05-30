@@ -102,6 +102,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 		this.hql = "FROM RaceEntity AS r WHERE r.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0,id);
+		TestRaceEntity((RaceEntity) query.uniqueResult());
 		return (RaceEntity) query.uniqueResult();
 		
 	}
@@ -110,7 +111,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public RaceEntity getRaceDetail(int id){
 		this.hql = "FROM RaceEntity AS r inner join fetch r.organizerEntity AS o inner join fetch r.typeRaceEntity AS t where r.id=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, id);				
+		query.setInteger(0, id);
 		return (RaceEntity)query.uniqueResult();	
 	}
 	
@@ -280,5 +281,9 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 		Test(query.list());
 
 		return query.list();
+	}
+	
+	public void TestRaceEntity(RaceEntity ra){
+		System.out.println(ra.getName());
 	}
 }

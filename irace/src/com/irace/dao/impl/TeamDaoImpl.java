@@ -90,7 +90,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	@Override
 	public List getJoinedTeamList(int userId, int pageNo, int pageItemNum) {
 
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 3 and a.teamEntity.leader = a.user";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 3 ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -104,7 +104,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	@Override
 	public List getApplyingTeamList(int userId, int pageNo, int pageItemNum) {
 
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 2";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 2 and a.teamEntity.status = 1";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -152,17 +152,22 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	}
 	return listMap;
 	
-}
+    }
 
 	@Override
 	public List getTeamListByGroup(int groupID) {
-		// TODO Auto-generated method stub
-		return null;
+		this.hql = "FROM TeamEntity AS t WHERE t.groupID = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupID);
+		test(query.list());
+		return myTeamList(query.list());
 	}
 
 	@Override
 	public List getTeamListByGroup(int groupID, int status) {
-		// TODO Auto-generated method stub
+		this.hql = "FROM TeamEntity AS t WHERE t.groupID = ?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupID);		
 		return null;
 	}
 

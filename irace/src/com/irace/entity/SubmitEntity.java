@@ -25,6 +25,13 @@ public class SubmitEntity implements IEntity{
 	@JoinColumn(name="stage_id",insertable=false,updatable=false)
 	private StageRaceEntity stageEntity;
 	
+	@Column(name = "team_id")
+	private Integer teamId;
+	
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity = TeamEntity.class)
+	@JoinColumn(name="team_id",insertable=false,updatable=false)
+	private TeamEntity teamEntity;
+	
 	
 	private String name;
 	
