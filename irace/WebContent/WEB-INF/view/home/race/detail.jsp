@@ -196,7 +196,7 @@
 			<c:forEach var="stage" items="${stageList }">
 				<ul class="m_text" data="${stage.gid }">${stage.gname }
 					<c:forEach var="s" items="${stage.slist }">
-					<li>${s.getStartTime() } ~ ${s.getEndTime() } ${s.getName() } ----- ${s.getContent() }</li>
+					<li>${s.getStrTime(s.getStartTime()) } ~ ${s.getStrTime(s.getEndTime()) } ${s.getName() } ----- ${s.getContent() }</li>
 					</c:forEach>
 				</ul>
 			</c:forEach>

@@ -26,11 +26,14 @@ import com.irace.entity.PropertyEntity;
 import com.irace.entity.RaceEntity;
 import com.irace.entity.RewardEntity;
 import com.irace.entity.StageRaceEntity;
+import com.irace.service.BigTypeService;
 import com.irace.service.GroupRaceService;
 import com.irace.service.PropertyService;
 import com.irace.service.RaceService;
 import com.irace.service.RewardService;
 import com.irace.service.StageService;
+import com.irace.service.TypeRaceService;
+import com.irace.util.Constants;
 import com.irace.util.InfoCode;
 import com.irace.util.JsonUtil;
 import com.irace.util.TimeUtil;
@@ -55,6 +58,10 @@ public class RaceManageController {
 	StageService stageService;
 	@Resource(name="propertyService")
 	PropertyService propertyService;
+	@Resource(name="bigTypeService")
+	BigTypeService bigTypeService;
+	@Resource(name="typeRaceService")
+	TypeRaceService typeRaceService;
 	
 	@RequestMapping("test")
 	public @ResponseBody String test() {
@@ -100,6 +107,7 @@ public class RaceManageController {
 		view.addObject("rewardList", rewardList);
 		view.addObject("propertyList", propertyList);
 		view.addObject("stageList", stageList);
+		view.addObject("bigTypeList",bigTypeService.getBigTypeList());
 		
 		return view;
 	}
@@ -165,8 +173,6 @@ public class RaceManageController {
 		}
 	}
 	
-	
-	
 	@RequestMapping("addReward")
 	@ResponseBody
 	public String addReward(
@@ -205,9 +211,10 @@ public class RaceManageController {
 			@RequestParam(value="content")String content,
 			@RequestParam(value="startTime")String startTime,
 			@RequestParam(value="endTime")String endTime) {
+		
 		try {
-			Date start = TimeUtil.formatDateStr(startTime, "yyyy-MM-dd HH:mm");
-			Date end = TimeUtil.formatDateStr(endTime, "yyyy-MM-dd HH:mm");
+			Date start = TimeUtil.formatStrToDate(startTime, Constants.DEDAULT_DATE_FORMAT);
+			Date end = TimeUtil.formatStrToDate(endTime, Constants.DEDAULT_DATE_FORMAT);
 			StageRaceEntity s = new StageRaceEntity(groupId, name, content, start, end);
 			
 			int res = stageService.addStage(s);
@@ -242,7 +249,7 @@ public class RaceManageController {
 	public String updateRaceAvatar (@RequestParam(value="id")Integer id,
 			@RequestParam(value="imgName")String imgName) {
 		RaceEntity race = raceService.getRace(id);
-		race.setPicUrl(imgName);
+		race.setPicUrl(Constants.DEFAULT_FILE_ROOT+"/"+imgName);
 		if(raceService.updateRace(race)) {
 			return JsonUtil.getJsonInfoOK();
 		} else {
@@ -250,4 +257,18 @@ public class RaceManageController {
 		}
 		
 	}
+	
+	@RequestMapping("getRaceType")
+	@ResponseBody
+	public String getRaceType (@RequestParam(value="bigTypeId")Integer bigTypeId) {
+		
+		if(bigTypeId > 0) {
+			List l = typeRaceService.getTypeRaceList(bigTypeId);
+			return JsonUtil.listToJSONString(l, new String[]{ "bigTypeEntity" });
+		} else {
+			return JsonUtil.getJsonInfo(InfoCode.OTHER_ERROR,"ID非法！");
+		}
+		
+	}
+	
 }

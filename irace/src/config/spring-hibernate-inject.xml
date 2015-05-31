@@ -153,6 +153,26 @@
         <property name="target" ref="organizerServiceBase"></property>  
     </bean>
 
+    <!-- ===================== TypeRace ===========================  -->
+    <bean id="typeRaceDao" class="com.irace.dao.impl.TypeRaceDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="typeRaceServiceBase" class="com.irace.service.impl.TypeRaceServiceImpl">  
+        <property name="typeRaceDao" ref="typeRaceDao"></property>
+    </bean>
+    <bean name="typeRaceService" parent="transactionProxy">
+        <property name="target" ref="typeRaceServiceBase"></property>  
+    </bean>
     
+    <!-- ===================== submit ===========================  -->
+    <bean id="submitDao" class="com.irace.dao.impl.SubmitDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="submitServiceBase" class="com.irace.service.impl.SubmitServiceImpl">  
+        <property name="submitDao" ref="submitDao"></property>
+    </bean>
+    <bean name="submitService" parent="transactionProxy">
+        <property name="target" ref="submitServiceBase"></property>  
+    </bean>
     
 </beans>

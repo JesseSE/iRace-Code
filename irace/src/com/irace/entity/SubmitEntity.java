@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="submit")
 public class SubmitEntity implements IEntity{
-		
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id = null;

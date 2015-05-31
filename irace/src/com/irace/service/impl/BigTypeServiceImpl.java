@@ -57,4 +57,11 @@ public class BigTypeServiceImpl implements BigTypeService {
 		return bigTypeDao.updateBigType(bigType);
 	}
 
+
+	@Override
+	public List getBigTypeList() {
+		// TODO Auto-generated method stub
+		return bigTypeDao.getBigTypeListDetail();
+	}
+
 }

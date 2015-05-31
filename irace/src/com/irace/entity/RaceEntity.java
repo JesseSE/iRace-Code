@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.irace.util.Constants;
+import com.irace.util.TimeUtil;
+
 /**
  * @author Song
  *
@@ -262,5 +265,7 @@ public class RaceEntity implements IEntity {
 		this.status = status;
 	}
 	
-	
+	public String getStrTime(Date date) {
+		return TimeUtil.formatDateToStr(date, Constants.DEDAULT_DATE_FORMAT);
+	}
 }
