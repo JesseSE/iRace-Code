@@ -425,6 +425,7 @@ h2.head{
 .inner_content {
 	padding:10px;
 	position: relative;
+	height: 325px;
 }
 
 .inner_content .product_image {
