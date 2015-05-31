@@ -1,6 +1,10 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
@@ -44,7 +48,7 @@ public class StageDaoImpl extends SDao implements StageDao{
 		this.hql = "FROM StageRaceEntity as s where s.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
-		return query.list();
+		return myStage(query.list());
 	}
 
 	@Override
@@ -52,9 +56,7 @@ public class StageDaoImpl extends SDao implements StageDao{
 		this.hql = "FROM StageRaceEntity AS s inner join fetch s.groupRaceEntity AS g where s.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
-//		query.setFirstResult((pageNo - 1) * pageItemNum);
-//		query.setMaxResults(pageItemNum);
-		return query.list();
+		return myStage(query.list());
 	}
 
 	@Override
@@ -69,5 +71,24 @@ public class StageDaoImpl extends SDao implements StageDao{
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		return query.list();
+	}
+	
+	private List myStage(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<StageRaceEntity> it = list.iterator();
+		while(it.hasNext()){
+			StageRaceEntity stage = it.next();
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", Integer.toString(stage.getId()));
+			map.put("name", stage.getName());
+			map.put("status", Integer.toString(stage.getStatus()));
+			//map.put("startTime", stage.getStartTime().toString());
+			//map.put("endTime",stage.getEndTime().toString());
+			//map.put("groupName", stage.getGroupRaceEntity().getName());
+			listMap.add(map);
+		}
+		return listMap;
+		
+		
 	}
 }

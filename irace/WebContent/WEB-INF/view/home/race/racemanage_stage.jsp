@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${ title }</title>
 <%@ include file="/public/section/header.jsp"%>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="<%=request.getContextPath() %>/public/css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="<%=request.getContextPath() %>/public/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
 <style type="text/css">
@@ -167,8 +168,7 @@
 
 			</select>
 			<select class="" name="" id="stageStageSelect">
-					  </select>
-					  （未完成审核）
+			</select>
 			  <div style="float:right;">
 				<img style="width:14px; height:14px;" src="images/finish.jpg"></img>
 				<a onclick="" style="font-size:0.7em;cursor:pointer;">完成所有阶段审核</a>
@@ -181,27 +181,13 @@
                       <div class="panel-body" >
 						<div class="list-group">
 							<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
-							<div id = "phaseDoingTitle">
+							<div id = "phaseTitle">
                    
 							</div>	  
                               <a class="list-group-item">
 							<!--开始展示小组成员-->
-							  <div id="phaseDoing" style="display:block">
+							  <div id="phaseSubmit" style="display:block">
 
-							  </div>
-                              </a>
-                              
-                        </div>
-					</div>
-			<!--GDS软件工程实践课小组-->
-                      <div class="panel-body" id = "phaseDone">
-						<div class="list-group">
-							<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
-							<div id = "phaseDoneTitle">
-							</div>
-                              <a class="list-group-item">
-							<!--开始展示小组成员-->
-							  <div id="phaseDone" style="display:block">
 							  </div>
                               </a>
                               
@@ -218,13 +204,11 @@
                 <div class="panel panel-default">
                     <a name="race_default"></a>
                       <div class="panel-body">
-					  <!--一个比赛-->
 					  
 			<h4 class="title" style="font-weight:bold;">
 			 <select class="" name="" id="priceGroupSelect">
 
-					  </select>
-					  （未完成颁奖）
+			  </select>
 			  <div style="float:right;">
 				<img style="width:14px; height:14px;" src="images/finish.jpg"></img>
 				<a onclick="" style="font-size:0.7em;cursor:pointer;">完成所有组别颁奖</a>
@@ -237,30 +221,17 @@
                       <div class="panel-body">
 						<div class="list-group">
 							<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
-							<div id = "praiseDoingTitle">
+							<div id = "praiseTitle">
 							</div>
                               <a class="list-group-item">
 							<!--开始展示小组成员-->
-							  <div id="praiseDoing" style="display:block">
+							  <div id="praiseShow" style="display:block">
 							  </div>
                               </a>
                               
                         </div>
 					</div>
-			<!--GDS软件工程实践课小组-->
-                      <div class="panel-body">
-						<div class="list-group">
-							<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
-							<div id ="praiseDoneTitle">
-							</div>
-                              <a class="list-group-item">
-							<!--开始展示小组成员-->
-							  <div id="" style="display:block">
 
-							  </div>
-                              </a>                          
-                        </div>
-					</div>
 	</div>
 	
 			 
@@ -401,6 +372,8 @@
 		 raceDiv2.style.display="none";
 		 raceDiv3.style.display="none";
 		 raceDiv4.style.display="none";
+		 
+		 selectGroupTeam();	
 	    } );
 	 
 	 $("#tab2").click(function(){	 
@@ -413,6 +386,8 @@
 		 raceDiv2.style.display="block";
 		 raceDiv3.style.display="none";
 		 raceDiv4.style.display="none";
+		 
+		 selectGroupPhase();
 	    } );
 	 
 	 $("#tab3").click(function(){
@@ -425,6 +400,8 @@
 		 raceDiv2.style.display="none";
 		 raceDiv3.style.display="block";
 		 raceDiv4.style.display="none";
+		 
+		 selectPhaseTeam();
 	    } );
 	 
 	 $("#tab4").click(function(){
@@ -442,7 +419,6 @@
 	$(document).ready(function(){
 		loadRaceName();
 		loadGroup();
-		loadGroupTeam();
 	});
 	
 	//载入比赛的名字
@@ -468,6 +444,7 @@
 		$("#raceTitle").html(htmlName);
 	}
 	
+	//审查小组部分
 	//载入比赛的组别选项框
 	function loadGroup(){
 		$.ajax({
@@ -495,16 +472,25 @@
 		$("#stageGroupSelect").html(htmlSelect);
 		$("#priceGroupSelect").html(htmlSelect);
 		$("#messageGroup").html(htmlSelect);
+		
+		selectGroupTeam();
 	}
 	
 	//载入报名审核里的小组
-	function loadGroupTeam(){
-		groupID = document.getElementById("applyGroupSelect").value;
+	 function selectGroupTeam() {
+	      var singleValues = $("#applyGroupSelect").val();
+	      loadGroupTeam(singleValues);
+	    }
+	 
+	 $("#applyGroupSelect").change(selectGroupTeam);   
+	
+	
+	function loadGroupTeam(id){
 		$.ajax({
 			url:$("#appName").val()+"/race/manageStageLoadGroupTeam.act",
 			type:"POST",
 			data:{
-				groupID:1
+				groupID:id
 			},
 			dataType:"JSON",
 			success:function(res){
@@ -528,7 +514,7 @@
 			"<span class='label label-primary'>"+ team[number].leader+"</span>"+
 			"<span class='label label-success'>"+team[number].slogan+"</span>"+
 			"<h3 class='team-state-submit' onclick = 'agreed("+team[number].id+");'>通过</h3>"+
-			"<h3 class='team-state-submit' onclick = 'refused("+team[number].id+");'>通过</h3>"+
+			"<h3 class='team-state-submit' onclick = 'refused("+team[number].id+");'>拒绝</h3>"+
 			"</a></div></div>";	
 		}
 		$("#groupTeam").html(htmlTeam);
@@ -571,7 +557,7 @@
 	
 	//载入报名审核小组里的成员
 	function loadGroupTeamMember(id){
-		var content = document.getElementById(id).value;
+		var content = document.getElementById(id);
 		if(content.style.display=="none")
 		{
 			content.style.display="block";
@@ -580,13 +566,14 @@
 		{content.style.display="none";}
 		
 		$.ajax({
-			url:$("#appName").val()+"/race/manageStageLoadGroupTeamMember.act",
+			url:$("#appName").val()+"/user/getTeamMember.act",
 			type:"post",
 			data: {
    				teamID:id
    			  },
    			success: function(res) {           		
-       			showTeamMember(res);        			
+       			showTeamMember(res); 
+       			console.log(res);
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -599,26 +586,33 @@
 		var htmlTeamMember = "<div class='panel panel-default'>"+
 		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
 		"<thead style='font-weight:bold;'>"+
-		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>学历</th><th>年龄</th></tr></thead><tbody>";
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>详细信息</th></tr></thead><tbody>";
 		for(var number = 0; number < teamMember.length; number++){
 			htmlTeamMember = htmlTeamMember + "<tr><th scope='row'>"+ ( number + 1 ) + "</th>"+
 			"<td>"+teamMember[number].name+"</td>"+
 			"<td>"+teamMember[number].email+"</td>"+
 			"<td>"+teamMember[number].tel+"</td>"+
-			"<td>"+teamMember[number].grade+"</td>"+
-			"<td>"+teamMember[number].age+"</td>"+
+			"<td><a>查看</a></td>"+	
 			"</tr>";
 		}
 		htmlTeamMember = htmlTeamMember + "</tbody></table></div>";
-		var name = "#"+teamMember[0].id;
+		var name = "#"+teamMember[0].teamID;
 		$(name).html(htmlTeamMember);
 	}
 	
+	
+	// 提交物部分
 	//载入阶段选项框
-	function loadPhase(){
-		groupID = document.getElementById("stageGroupSelect").value;
+	function selectGroupPhase() {
+	      var singleValues = $("#stageGroupSelect").val();
+	      loadPhase(singleValues);
+	    }
+	 
+	 $("#stageGroupSelect").change(selectGroupPhase); 
+	
+	function loadPhase(GroupID){
 		$.ajax({
-			url:$("appName").val()+"/race/manageStageLoadPhase.act",
+			url:$("#appName").val()+"/race/manageStageLoadPhase.act",
 			type:"POST",
 			data:{
 				groupID:groupID
@@ -637,28 +631,74 @@
 		var htmlPhase = "";
 		var phase = eval(res);
 		for(var number = 0; number < phase.length; number++){
-			htmlPhase = htmlPhase + "<option value = "+phase[number].id+">"+phase[nubmer].name+"</option>";
+			htmlPhase = htmlPhase + "<option value = "+phase[number].id+">"+phase[number].name+"</option>";
 		}
 		$("#stageStageSelect").html(htmlPhase);
+		selectPhaseTeam();
 	}
+	 
+	 function selectPhaseTeam() {
+	      var singleValues = $("#stageStageSelect").val();
+	      getPhaseTitle(singleValues);
+	    }
+	 
+	 $("#stageStageSelect").change(selectPhaseTeam);
+	 
+	 function getPhaseTitle(phaseId){
+		 $.ajax({
+			 url : $("#appName").val() + "/race/manageStageGetPhaseTitle.act",
+			 type: "POST",
+			 data:{
+				 phaseId : phaseId
+			 },
+			 dataType : "JSON",
+			 success : function(res){
+				 showPhaseTitle(res);
+			 },
+			 error : function(res){
+				 console.log(res);
+			 }
+		 });
+	 }
 	
-	//判断默认组别
-	function judgePhase(){
+	
+	//显示阶段审核下的标题 status 0  为阶段审查未结束 1 为未开始 2 为已结束
+	function showPhaseTitle(res){
+        var phase = eval(res);	
+		var htmlPhaseTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
+		"<h3 style='display:inline;'>" +
+		phase[0].groupName +" "+ phase[0].name+"</h3>"+
+		"<h3 class='team-state-wait'>阶段时间："+
+		phase[0].startTime + "-" + phase[0].endTime + "</h3></a>";
+		$("#phaseTitle").html(htmlPhaseTitle);
 		
+		if(phase[0].status == 0){
+			phase(phase[0].id,true);
+		}	
+		else if(phase[0].status == 2) {
+			phase(phase[0].id,false);
+		}
+		else{
+			alert("阶段未开始，请重新选择");
+		}
 	}
 	
-	//提交物再审
-	function phaseDoing(){
-		var phase = document.getElementById("stageStageSelect").value;
+	//阶段审查的队伍
+	function phase(phaseID,isFinished){
 		$.ajax({
-			url:$("appName").val() + "/race/manageStagePhaseDoing.act",
+			url:$("#appName").val() + "/race/manageGetStagePhase.act",
 			type:"POST",
 			data:{
 				phaseID:phase
 			},
 			dataType:"JSON",
 			success:function(res){
-				showPhaseDoing(res);
+				if(isFinished){
+					showPhaseDoing(res);
+				}
+				else{
+					showPhaseDone(res);
+				}			
 			},
 			error:function(){
 				console.log(res);
@@ -666,17 +706,11 @@
 		});
 	}
 	
+	//显示阶段审查的标题
+	
 	function showPhaseDoing(res){
 		var htmlPhase = "";
-		var phase = eval(res);
-		
-		var htmlPhaseDoingTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
-		"<h3 style='display:inline;'>" +
-		phase.gourpName + phase.phaseName+"阶段提交物</h3>"+
-		"<h3 class='team-state-wait'>阶段时间："+
-		phase.startTime + "-" + phase.endTime + "</h3></a>";
-		$("phaseDoingTitle").html(htmlPhaseDoingTitle);
-		
+			
 		htmlPhase = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
@@ -702,26 +736,7 @@
 		
 		htmlPhase = hamlPhase + "</tbody></table></div>" + 
 		"<h3 class = 'stage-pass'>完成此阶段审核</h3>";
-		$("#phaseDoing").html(htmlPhase);
-	}
-	
-	//提交物审查结束
-	function phaseDone(){
-		var phase = document.getElementById("stageStageSelect").value;
-		$.ajax({
-			url:$("appName").val() + "/race/manageStagePhaseDone.act",
-			type:"POST",
-			data:{
-				phaseID:phase
-			},
-			dataType:"JSON",
-			success:function(res){
-				showPhaseDone(res);
-			},
-			error:function(){
-				console.log(res);
-			}
-		});
+		$("#phaseSubmit").html(htmlPhase);
 	}
 	
 	function showPhaseDone(res){
@@ -760,36 +775,79 @@
 		
 		htmlPhase = hamlPhase + "</tbody></table></div>" + 
 		"<h3 class = 'stage-wait'>审核已结束</h3>";
-		$("#phaseDone").html(htmlPhase);
+		$("#phaseSubmit").html(htmlPhase);
 	}
 	
-	//未颁奖
-	function praiseDoing(){
-		var praise = document.getElementById("priceGroupSelect").value;
+	// 颁奖部分
+	 function selectPhaseTeam() {
+	      var singleValues = $("#priceGroupSelect").val();
+	      getPraiseTitle(singleValues);
+	    }
+	 
+	 $("#priceGroupSelect").change(selectPhaseTeam);
+	
+	
+	function getPraiseTitle(goupID){
 		$.ajax({
-			url:$("appName").val() + "/race/manageStagepraiseDone.act",
+			url:$("#appName").val()+"/race/manageStageGetPraiseTitle.act",
 			type:"POST",
 			data:{
-				phaseID:praise
-			},
+				groupID:goupID
+				},
 			dataType:"JSON",
 			success:function(res){
-				showPraiseDoing(res);
+				showPraiseTitle(res);
 			},
-			error:function(){
+			error:function(res){
 				console.log(res);
 			}
 		});
 	}
 	
+	function showPraiseTitle(res){
+		var group = eval(res);
+		var htmlPraiseTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
+		"<h3 style='display:inline;'>" +
+		group[0].name +"颁奖情况</h3>"+ "</a>";
+		$("#praiseTitle").html(htmlPraiseTitle);
+		//group status 0 报名审核 1 开始比赛 2 比赛结束 3 颁奖结束
+		if(group[0].status == 0){
+			getPraise(group[0].id,true);
+		}
+		else if(group[0].status == 2){
+			getPraise(group[0].id,false);
+		}
+		else{
+			
+		}
+	}
+	
+	function getPraise(groupID,isFinished){
+		$.ajax({
+			url : $("#appName").val() + "/race/manageStageGetPraise.act",
+			type : "POST",
+			data : {
+				groupID : groupID
+			},
+			dataTape : "JSON",
+			success : function(res){
+				if(isFinished){
+					showPraiseDoing(res);
+				}
+				else{
+					showPraiseDone(res);
+				}
+			},
+			error : function(res){
+				console.log(res);
+			}	
+		});
+	}
+	
+	//未颁奖
 	function showPraiseDoing(res){
 		var praise = eval(res);
 		var htmlPraise = "";
-		var htmlPraiseDoingTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
-		"<h3 style='display:inline;'>" +
-		praise.gourpName +"颁奖情况</h3>"+ "</a>";
-		$("praiseDoingTitle").html(htmlPhaseDoneTitle);
-		
 		htmlPraise = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
@@ -803,43 +861,22 @@
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
 		"<h3 class='stage-pass'>完成此组颁奖</h3></div>";
-		
+
+		$("#praiseShow").html(htmlPraise);
+	}
+	
+	function getPraiseSelect(groupID){
 		var htmlSelect = "";
 		for(var numberPraise = 0; number < praise[0].Name.length; number++){
 			htmlSelect = htmlSelect + "<option>" + praise[0].Name[numberPraise].name + "</option>";
-		}
-		
+		}		
 		$("#pricePriceSelect").html(htmlSelect);
-		$("#praiseDoing").html(htmlPraise);
 	}
 	
-	//已颁奖
-	function praiseDone(){
-		var praise = document.getElementById("priceGroupSelect");
-		$.ajax({
-			url:$("appName").val() + "/race/manageStagepraiseDone.act",
-			type:"POST",
-			data:{
-				phaseID:praise
-			},
-			dataType:"JSON",
-			success:function(res){
-				showPraiseDone(res);
-			},
-			error:function(){
-				console.log(res);
-			}
-		});
-		
-	}
-	
+	//已颁奖	
 	function showPraiseDone(res){
 		var praise = eval(res);
 		var htmlPraise = "";
-		var htmlPraiseDoneTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
-		"<h3 style='display:inline;'>" +
-		praise.gourpName +"颁奖情况</h3>"+ "</a>";
-		$("praiseDoneTitle").html(htmlPraiseDoneTitle);
 		
 		htmlPraise = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
@@ -853,7 +890,7 @@
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
 		"<h3 class='stage-pass'>此组颁奖已结束</h3></div>";
-		$("#praiseDone").html(htmlPraise);
+		$("#praiseShow").html(htmlPraise);
 	}
 		
 	//发送消息的队

@@ -75,6 +75,7 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 			Map<String,String> map = new HashMap<String,String>();
 			map.put("id", Integer.toString(group.getId()));
 			map.put("name",group.getName());
+			map.put("status", Integer.toString(group.getStatus()));
 			listMap.add(map);
 		}
 		return listMap;

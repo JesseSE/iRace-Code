@@ -25,7 +25,7 @@ public class StageRaceEntity implements IEntity{
 	private Integer groupId;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="groupId",insertable=false,updatable=false)
+	@JoinColumn(name="group_id",insertable=false,updatable=false)
 	private GroupRaceEntity groupRaceEntity;
 	
 	private String name;

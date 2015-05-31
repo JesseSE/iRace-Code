@@ -48,7 +48,7 @@ public class StageServiceImpl implements StageService {
 	@Override
 	public List getStageListDetail(int groupId) {
 		// TODO Auto-generated method stub
-		return stageDao.getStageList(groupId);
+		return stageDao.getStageListDetail(groupId);
 	}
 
 	@Override

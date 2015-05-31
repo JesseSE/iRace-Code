@@ -32,7 +32,6 @@ public class SubmitEntity implements IEntity{
 	@JoinColumn(name="team_id",insertable=false,updatable=false)
 	private TeamEntity teamEntity;
 	
-	
 	private String name;
 	
 	@Column(name = "status", columnDefinition = "int default 0")

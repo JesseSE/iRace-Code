@@ -159,7 +159,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		this.hql = "FROM TeamEntity AS t WHERE t.group = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
-		return query.list();
+		return myGroupTeam(query.list());
 	}
 
 	@Override
@@ -168,6 +168,21 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);		
 		return null;
+	}
+	
+	private List myGroupTeam(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<TeamEntity> it = list.iterator();
+		while(it.hasNext()){
+			TeamEntity team = it.next();
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id",Integer.toString(team.getId()));
+			map.put("name", team.getName());
+			map.put("slogan", team.getSlogan());
+			map.put("leader", team.getUserEntity().getNickname());
+			listMap.add(map);
+		}
+		return listMap;	
 	}
 
 }

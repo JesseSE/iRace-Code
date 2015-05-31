@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.entity.GroupRaceEntity;
+import com.irace.entity.StageRaceEntity;
 import com.irace.service.GroupRaceService;
 import com.irace.service.RaceService;
+import com.irace.service.StageService;
+import com.irace.service.SubmitService;
 import com.irace.service.TeamService;
 import com.irace.view.View;
 
@@ -29,6 +33,10 @@ public class RaceManageStageController extends SController{
 	GroupRaceService groupRaceService;
 	@Resource(name = "teamService")
 	TeamService teamservice;
+	@Resource(name = "stageService")
+	StageService stageService;
+//	@Resource(name = "submitService")
+//	SubmitService submitService;
 	
 	@RequestMapping("RaceManageStage")
 	public View raceManageStage(){
@@ -83,35 +91,55 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageStageLoadPhase.act")
 	public @ResponseBody String loadPhase(
 			@RequestParam(value="groupID",required=true) int groupID){
-		return null;	
+		JSONArray array = JSONArray.fromObject(stageService.getStageList(groupID));
+		return array.toString();	
+	}
+	
+	//载入阶段标题
+	@RequestMapping("manageStageGetPhaseTitle.act")
+	public @ResponseBody String getPhaseTitle(
+			@RequestParam(value="phaseId", required = true) int phaseID){
+		StageRaceEntity stage =  stageService.getStageDetail(phaseID);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", Integer.toString(stage.getId()));
+		map.put("name", stage.getName());
+		map.put("status", Integer.toString(stage.getStatus()));
+		map.put("startTime", stage.getStartTime().toString());
+		map.put("endTime",stage.getEndTime().toString());
+		map.put("groupName", stage.getGroupRaceEntity().getName());
+		JSONArray array = JSONArray.fromObject(map);
+		return array.toString();
 	}
 	
 	//提交物再审 status 
-	@RequestMapping("manageStagePhaseDoing.act")
+	@RequestMapping("manageGetStagePhase.act")
 	public @ResponseBody String phaseDoing(
 			@RequestParam(value="phaseID",required=true) int phaseID){	
+	//	submitService.getSubmitByStage(phaseID);
 		return null;		
 	}
 	
-	//提交物审查结束 status
-	@RequestMapping("manageStagePhaseDone.act")
-	public @ResponseBody String phaseDone(
-			@RequestParam(value="phaseID",required=true) int phaseID){	
-		return null;		
-   }
+	@RequestMapping("manageStageGetPraiseTitle.act")
+	public @ResponseBody String getPraiseTitle(
+			@RequestParam(value = "groupID", required = true)int groupID){
+		GroupRaceEntity group = groupRaceService.getGroupRace(groupID);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", Integer.toString(group.getId()));
+		map.put("name", group.getName());
+		map.put("status", Integer.toString(group.getStatus()));
+		JSONArray array = JSONArray.fromObject(map);
+		return array.toString();
+	}
 	
-	//颁奖未结束
-	@RequestMapping("manageStagepraiseDoing.act")
-	public @ResponseBody String praiseDoing(
-			@RequestParam(value="phaseID",required=true) int phaseID){	
-		return null;		
-   }
+	//颁奖
+	@RequestMapping("manageStageGetPraise.act")
+	public @ResponseBody String getPraise(
+			@RequestParam(value = "groupID",required = true)int groupID){
+		
+		return null;
+	}
 	
-	//颁奖结束
-	@RequestMapping("manageStagepraiseDone.act")
-	public @ResponseBody String praiseDone(
-			@RequestParam(value="phaseID",required=true) int phaseID){	
-		return null;		
-   }	
+	
+
 
 }
