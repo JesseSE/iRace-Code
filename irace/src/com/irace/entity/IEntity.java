@@ -3,6 +3,7 @@
  */
 package com.irace.entity;
 
+import java.util.Date;
 import java.util.Map;
 
 import net.sf.json.JSONObject;
@@ -14,4 +15,6 @@ import net.sf.json.JSONObject;
 public interface IEntity {
 	
 	//public JSONObject getJsonObject(); //封装了实体属性和值的map
+	
+	
 }

@@ -25,5 +25,7 @@ public interface BigTypeService {
 	 */
 	public String getBigTypeListDetail();
 	
+	public List getBigTypeList();
+	
 	public boolean updateBigType(BigTypeEntity bigType);
 }

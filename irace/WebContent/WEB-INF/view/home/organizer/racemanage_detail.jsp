@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
+<%@ page import="com.irace.util.TimeUtil" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
@@ -737,7 +738,7 @@ function submitPwd()
 						比赛名称
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getName() }</font>
+					  <font name="showInfo" id="preName">${race.getName() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -745,7 +746,7 @@ function submitPwd()
 					比赛级别
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getGrade() }</font>
+					  <font name="showInfo" id="preGrade">${race.getGrade() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -753,7 +754,7 @@ function submitPwd()
 						开始时间
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getStartTime() }</font>
+					  <font name="showInfo" id="preStartTime">${race.getStrTime(race.getStartTime()) }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -761,7 +762,7 @@ function submitPwd()
 						结束时间
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getEndTime() }</font>
+					  <font name="showInfo" id="preEndTime">${race.getStrTime(race.getEndTime()) }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -769,7 +770,7 @@ function submitPwd()
 						限制人数
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getNumRest() }</font>
+					  <font name="showInfo" id="preNumRest">${race.getNumRest() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -777,7 +778,7 @@ function submitPwd()
 						描述
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getContent() }</font>
+					  <font name="showInfo" id="preContent">${race.getContent() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -785,7 +786,8 @@ function submitPwd()
 						类型
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">${race.getTypeRaceEntity().getBigTypeEntity().getName() } -> ${race.getTypeRaceEntity().getName() }</font>
+					  <font name="showInfo" id="preBigType">${race.getTypeRaceEntity().getBigTypeEntity().getName() }</font> -> 
+					  <font name="showInfo" id="preSmallType">${race.getTypeRaceEntity().getName() }</font>
 					</td>
 				</tr>
 				</table>
@@ -808,39 +810,31 @@ function submitPwd()
 				  <div class="form-group">
 				    <label for="startTime" class="col-sm-2 control-label">开始时间</label>
 				    <div class="col-sm-4">
-						<input type="text" class="form-control" value="${race.getStartTime() }" id="raceStartTime">
+						<input type="text" class="form-control" value="${race.getStrTime(race.getStartTime()) }" id="raceStartTime">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="endTime" class="col-sm-2 control-label">结束时间</label>
 				    <div class="col-sm-4">
-				     	<input type="text" class="form-control" value="${race.getEndTime() }" id="raceEndTime">
+				     	<input type="text" class="form-control" value="${race.getStrTime(race.getEndTime()) }" id="raceEndTime">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="limitNum" class="col-sm-2 control-label">限制人数</label>
 				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="limitNum" name="limitNum" placeholder="Limit Number" onblur="" value="${race.getNumRest() }">
+				      <input type="number" class="form-control" id="limitNum" min="1" max="50" step="1" name="limitNum" placeholder="Limit Number" value="${race.getNumRest() }">
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <label for="type" class="col-sm-2 control-label" style="margin-top:-5px;">类型</label>
 				    <div class="col-sm-4">
 				      <select class="" name="" id="bigType">
-								<option value="0">${race.getTypeRaceEntity().getBigTypeEntity().getName() }</option>
-		                            <option value="1">工学类</option>
-                                    <option value="2">理学类</option>
-		                            <option value="3">文学类</option>
-									<option value="4">综合类</option>
-
-					  </select>
+				      <c:forEach var="bt" items="${bigTypeList }">
+				      	<option value="${bt.getId() }">${bt.getName() }</option>
+				      </c:forEach>
+					  </select> -> 
 					  <select class="" name="" id="smallType">
-								<option value="0">${race.getTypeRaceEntity().getName() }</option>
-		                            <option value="1">数学</option>
-                                    <option value="2">历史</option>
-		                            <option value="3">生物</option>
-									<option value="4">物理</option>
-
+						
 					  </select>
 				    </div>
 				  </div>
@@ -1134,8 +1128,6 @@ function submitPwd()
 			</div>	            		 						 			    
 		  </div>
             
-            
-            
             <!--侧边-->
 			<div class="rsidebar span_1_of_left" style="display:none">
 				
@@ -1181,10 +1173,10 @@ function submitPwd()
   	        	}
   	        	
   	        },
-  	        error: completeHandle,  //处理完成 
+  	        error: completehandle,  //处理完成 
   	        resetForm: true,
   	        dataType:  'json'
-  	};
+  };
    
    /**
     * 上传文件是触发事件
@@ -1193,8 +1185,6 @@ function submitPwd()
    	$(this).ajaxSubmit(uploadOptions);
    	return false;
    });
-   
-   
    
    </script>
 <script type="text/javascript">	

@@ -10,6 +10,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
 import com.irace.dao.RaceDao;
+import com.irace.dao.TypeRaceDao;
 import com.irace.entity.RaceEntity;
 import com.irace.service.RaceService;
 import com.irace.util.Constants;
@@ -181,5 +182,4 @@ public class RaceServiceImpl implements RaceService {
 		return JsonUtil.listToJSONString(raceDao.getRaceListByUser(pageNo,
 				Constants.DEFAULT_PAGE_ITEM_NUM, userID, status),  new String[] {"typeEntities"});
 	}
-
 }

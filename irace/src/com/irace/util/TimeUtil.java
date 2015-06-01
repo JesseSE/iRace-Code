@@ -43,13 +43,26 @@ public class TimeUtil {
 	
 	
 	/**
-	 * 把时间格式化成yyyy-MM-dd HH:mm:ss格式
+	 * 把时间格式化成指定的mode格式
 	 * @param date
+	 * @param mode
 	 * @return
 	 */
-	static public String timeFormat(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	static public String formatDateToStr(Date date, String mode) {
+		SimpleDateFormat sdf = new SimpleDateFormat(mode);
 		return sdf.format(date);
+	}
+	
+	/**
+	 * 通过特点的字符串得到时间
+	 * @param dateStr
+	 * @param mode
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date formatStrToDate(String dateStr, String mode) throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat(mode);
+		return format.parse(dateStr);
 	}
 	
 	/**
@@ -101,15 +114,5 @@ public class TimeUtil {
 		return offset > 120*60000; //超时时限为2个小时
 	}
 	
-	/**
-	 * 通过特点的字符串得到时间
-	 * @param dateStr
-	 * @param mode
-	 * @return
-	 * @throws ParseException
-	 */
-	public static Date formatDateStr(String dateStr, String mode) throws ParseException {
-		SimpleDateFormat format = new SimpleDateFormat(mode);
-		return format.parse(dateStr);
-	}
+	
 }

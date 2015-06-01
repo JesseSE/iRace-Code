@@ -12,4 +12,5 @@ public class Constants {
 	
 	public static String DEFAULT_FILE_ROOT = "/irace/public/images";
 	
+	public static String DEDAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm";
 }
