@@ -414,7 +414,7 @@
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
 			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
 			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
-			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行 4队伍未通过 5比赛已结束
+			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行 4队伍未通过 5比赛已结束 6已获奖
 			if(apply[number].teamStatus == 1){
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>正在组队</h3>";
 			}

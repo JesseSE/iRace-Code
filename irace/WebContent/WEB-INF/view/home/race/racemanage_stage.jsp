@@ -252,15 +252,8 @@
                                   </select>
                                   
                                   <select class="" name="" id="messageTeam">
-											<option value="1">发送给小组</option>
-											<option value="2">发送给个人</option>
 								</select>
-								  <select class="" name="" id="messagePerson">
-											<option value="0">选择发送对象</option>
-											<option value="1">GDS软件工程实践课小组</option>
-											<option value="2">QQQ软件工程实践课小组</option>
-										</select>
-								  <h3 class="team-state-submit" onclick="addGroup();">发送消息</h3> 
+								  <h3 class="team-state-submit" onclick="sendMessageToLeader();">发送消息</h3> 
 								  </a>
                               <a class="list-group-item">
 					 <div class="panel panel-default">
@@ -401,7 +394,7 @@
 		 raceDiv3.style.display="block";
 		 raceDiv4.style.display="none";
 		 
-		 selectPhaseTeam();
+		 selectPraiseTeam();
 	    } );
 	 
 	 $("#tab4").click(function(){
@@ -414,6 +407,8 @@
 		 raceDiv2.style.display="none";
 		 raceDiv3.style.display="none";
 		 raceDiv4.style.display="block";
+		 
+		 sendMessage();
 	    } );
 
 	$(document).ready(function(){
@@ -667,11 +662,11 @@
         var phase = eval(res);	
 		var htmlPhaseTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
 		"<h3 style='display:inline;'>" +
-		phase[0].groupName +" "+ phase[0].name+"</h3>"+
+		phase[0].name+"</h3>"+
 		"<h3 class='team-state-wait'>阶段时间："+
 		phase[0].startTime + "-" + phase[0].endTime + "</h3></a>";
 		$("#phaseTitle").html(htmlPhaseTitle);
-		
+		/*
 		if(phase[0].status == 0){
 			phase(phase[0].id,true);
 		}	
@@ -681,6 +676,7 @@
 		else{
 			alert("阶段未开始，请重新选择");
 		}
+		 */
 	}
 	
 	//阶段审查的队伍
@@ -693,7 +689,7 @@
 			},
 			dataType:"JSON",
 			success:function(res){
-				if(isFinished){
+				if(!isFinished){
 					showPhaseDoing(res);
 				}
 				else{
@@ -706,7 +702,6 @@
 		});
 	}
 	
-	//显示阶段审查的标题
 	
 	function showPhaseDoing(res){
 		var htmlPhase = "";
@@ -779,12 +774,12 @@
 	}
 	
 	// 颁奖部分
-	 function selectPhaseTeam() {
+	 function selectPraiseTeam() {
 	      var singleValues = $("#priceGroupSelect").val();
 	      getPraiseTitle(singleValues);
 	    }
 	 
-	 $("#priceGroupSelect").change(selectPhaseTeam);
+	 $("#priceGroupSelect").change(selectPraiseTeam);
 	
 	
 	function getPraiseTitle(goupID){
@@ -827,12 +822,14 @@
 			url : $("#appName").val() + "/race/manageStageGetPraise.act",
 			type : "POST",
 			data : {
-				groupID : groupID
+				groupID : groupID,
+				isFinished : isFinished
 			},
 			dataTape : "JSON",
 			success : function(res){
-				if(isFinished){
-					showPraiseDoing(res);
+				console.log(res);
+				if(!isFinished){
+					showPraiseDoing(res);		
 				}
 				else{
 					showPraiseDone(res);
@@ -848,29 +845,50 @@
 	function showPraiseDoing(res){
 		var praise = eval(res);
 		var htmlPraise = "";
-		htmlPraise = "<div class = 'pannel panel-default'>"+
+		htmlPraise = "<div class = 'pannel panel-default'>" + 
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
 		" <tr><th>#</th><th>队伍名</th><th>现状态</th><th>选择奖项</th><th>操作</th></tr></thead><tbody>";
 		for(var number = 0; number < praise.length; number ++){
-			htmlPraise = htmlPraise + htmlpraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
-			"<td>" + praise[number].teamName + "</td>" +
-			"<td>" + praise[number].praiseName  + "</td>" + 
-			"<td><select class='' name='' id='pricePriceSelect'>" + "</select></td>" + 
-			"<td><a class='team-operate'>颁奖</a></td></tr>" ;		
+			htmlPraise = htmlPraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
+			"<td>" + praise[number].name + "</td>" +
+			"<td>" + praise[number].reward  + "</td>" + 
+			"<td><select class='' name='' id='pricePriceSelect" + praise[number].id + "'>" + "</select></td>" +
+			"<td><a class='team-operate'>颁奖</a></td></tr>";	
+			getPraiseSelect(praise[0].groupID,praise[number].id);
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
 		"<h3 class='stage-pass'>完成此组颁奖</h3></div>";
 
 		$("#praiseShow").html(htmlPraise);
 	}
+	//颁奖奖项
+	function getPraiseSelect(groupID,teamid){
+		$.ajax({
+			url : $("#appName").val() + "/race/getPraiseSelect.act",
+			type : "POST",
+			data : {
+				groupID : groupID
+			},
+			dataType : "JSON",
+			success : function(res){
+				showPraiseSelect(res,teamid);
+				console.log(res);
+			},
+			error : function(res){
+				console.log(res);
+			}
+		});
+	}
 	
-	function getPraiseSelect(groupID){
+	function showPraiseSelect(res,teamid){
+		var praise = eval(res);
 		var htmlSelect = "";
-		for(var numberPraise = 0; number < praise[0].Name.length; number++){
-			htmlSelect = htmlSelect + "<option>" + praise[0].Name[numberPraise].name + "</option>";
-		}		
-		$("#pricePriceSelect").html(htmlSelect);
+		for(var number = 0; number < praise.length; number++){
+			htmlSelect = htmlSelect + "<option>" + praise[number].name + "</option>";
+		}	
+		var name = "#"  + "pricePriceSelect" + teamid;
+		$(name).html(htmlSelect);
 	}
 	
 	//已颁奖	
@@ -881,98 +899,76 @@
 		htmlPraise = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
-		" <tr><th>#</th><th>队伍名</th><th>现状态</th><th>选择奖项</th><th>操作</th></tr></thead><tbody>";
+		" <tr><th>#</th><th>队伍名</th><th>获奖情况</th></tr></thead><tbody>";
 		
 		for(var number = 0; number < praise.length; number ++){
-			htmlPraise = htmlPraise + htmlpraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
-			"<td>" + praise[number].teamName + "</td>" +
-			"<td>" + praise[number].praiseName  + "</td></tr>"; 		
+			htmlPraise = htmlPraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
+			"<td>" + praise[number].name + "</td>" +
+			"<td>" + praise[number].reward  + "</td></tr>"; 		
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
-		"<h3 class='stage-pass'>此组颁奖已结束</h3></div>";
+		"<h3 class='stage-wait'>此组颁奖已结束</h3></div>";
 		$("#praiseShow").html(htmlPraise);
 	}
-		
-	//发送消息的队
-	function sendMessageTeam(){
-		var group = document.getElementId("messageGroup").value;
-		$.ajax({
-			url:$("appName").val() + "/race/manageStageMessageTeam.act",
-			type:"POST",
-			data:{
-				groupID:group
-			},
-			dataType:"JSON",
-			success:function(res){
-				showTeamSelect(res);
-			},
-			error:function(){
-				console.log(res);
-			}
-		});
-	}
+	
+	//发送消息部分
+	 function sendMessage() {
+	      var singleValues = $("#messageGroup").val();
+	      selectMessageTeam(singleValues);
+	    }
+	 
+	 $("#messageGroup").change(sendMessage);  
+	 
+	 function selectMessageTeam(groupID){
+		 $.ajax({
+				url:$("#appName").val() + "/race/manageStageselectMessageTeam.act",
+				type:"POST",
+				data:{
+					groupID:groupID
+				},
+				dataType:"JSON",
+				success:function(res){
+					showTeamSelect(res);
+					console.log(res);
+				},
+				error:function(){
+					console.log(res);
+				}
+			});
+	 }
 	
 	function showTeamSelect(res){
 		var team = eval(res);
 		var htmlTeam = "";
 		for(var number = 0; number < team.length; number ++){
-			htmlTeam = htmlTeam + "<option value = "+team[nubmer].id+">" + teamp[number].name + "</option>";
+			htmlTeam = htmlTeam + "<option value = "+team[number].leadId+">" + team[number].name + "</option>";
 		}
 		$("#messageTeam").html(htmlTeam);
 	}
 	
-	
-	//发送消息的人
-	function sendMessagePerson(){
-		var team = document.getElementId("messageTeam").value;
+	 function sendMessageToLeader(){
+		var leader = $("#messageTeam").val();
+		console.log("leader" + leader);
+		var message = $("#message").val();
+		console.log("message" + message);
 		$.ajax({
-			url:$("appName").val() + "/race/manageStageMessagePerson.act",
+			url:$("#appName").val() + "/race/manageStageMessage.act",
 			type:"POST",
 			data:{
-				teamID:team
-			},
-			dataType:"JSON",
-			success:function(res){
-				showPersonSelect(res);
-			},
-			error:function(){
-				console.log(res);
-			}
-		});	
-	}
-	
-	function showPersonSelect(res){
-		var person = eval(res);
-		var htmlPerson = "";
-		for(var number = 0; number < person.length; number ++){
-			htmlPerson = htmlPerson + "<option value = "+person[nubmer].id+">" + person[number].name + "</option>";
-		}
-		$("#messagePerson").html(htmlPerson);
-	}
-	
-	
-	//发送消息
-	function sendMessage(){
-		var person = document.getElementId("messagePerson").value;
-		var message = document.getElementId("message").value;
-		$.ajax({
-			url:$("appName").val() + "/race/manageStageMessage.act",
-			type:"POST",
-			data:{
-				personID:person,
-				message:message
+				leader : leader,
+				message : message
 			},
 			dataType:"JSON",
 			success:function(res){
 				alert("成功");
+				$("#message").val("");
 			},
-			error:function(){
+			error:function(res){
 				console.log(res);
 			}
 		});	
-		
-
 	}
+	
 </script>
 </body>
 </html>

@@ -153,21 +153,25 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	return listMap;
 	
     }
-
+    //测试数据
 	@Override
 	public List getTeamListByGroup(int groupID) {
-		this.hql = "FROM TeamEntity AS t WHERE t.group = ?";
+		//this.hql = "FROM TeamEntity AS t WHERE t.group = ? and t.status = 2";
+		this.hql = "FROM TeamEntity AS t WHERE t.group = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		return myGroupTeam(query.list());
 	}
 
 	@Override
+	//测试
 	public List getTeamListByGroup(int groupID, int status) {
-		this.hql = "FROM TeamEntity AS t WHERE t.group = ?";
+		//this.hql = "FROM TeamEntity AS t WHERE t.group = ? and t.status = ?";
+		this.hql = "FROM TeamEntity AS t WHERE t.group = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
-		query.setInteger(0, groupID);		
-		return null;
+		query.setInteger(0, groupID);
+		//query.setInteger(1, status);
+		return myGroupTeam(query.list());
 	}
 	
 	private List myGroupTeam(List list){
@@ -176,10 +180,13 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		while(it.hasNext()){
 			TeamEntity team = it.next();
 			Map<String, String> map = new HashMap<String, String>();
+			map.put("groupID", Integer.toString(team.getGroup()));
 			map.put("id",Integer.toString(team.getId()));
 			map.put("name", team.getName());
 			map.put("slogan", team.getSlogan());
 			map.put("leader", team.getUserEntity().getNickname());
+			map.put("leadId", Integer.toString(team.getLeader()));
+			//map.put("reward",team.getRewardEntity().getName());
 			listMap.add(map);
 		}
 		return listMap;	

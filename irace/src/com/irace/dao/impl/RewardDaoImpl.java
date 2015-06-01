@@ -1,6 +1,10 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
@@ -60,7 +64,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 		this.hql = "FROM RewardEntity AS r where r.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
-		return query.list();
+		return myReward(query.list());
 	}
 
 	@Override
@@ -70,6 +74,20 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
 		return query.list();
+	}
+	
+	private List myReward(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<RewardEntity> it = list.iterator();
+		while(it.hasNext()){
+			Map<String, String> map = new HashMap<String, String>();
+			RewardEntity reward = it.next();
+			map.put("id", Integer.toString(reward.getId()));
+			map.put("name", reward.getName());
+			System.out.println("aaabbb");
+			listMap.add(map);
+		}
+		return listMap;
 	}
 
 }

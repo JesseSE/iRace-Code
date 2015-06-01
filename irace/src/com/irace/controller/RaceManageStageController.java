@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.irace.entity.GroupRaceEntity;
 import com.irace.entity.StageRaceEntity;
 import com.irace.service.GroupRaceService;
+import com.irace.service.MessageService;
 import com.irace.service.RaceService;
+import com.irace.service.RewardService;
 import com.irace.service.StageService;
 import com.irace.service.SubmitService;
 import com.irace.service.TeamService;
@@ -37,6 +39,10 @@ public class RaceManageStageController extends SController{
 	StageService stageService;
 //	@Resource(name = "submitService")
 //	SubmitService submitService;
+	@Resource(name = "rewardService")
+	RewardService rewardService;
+	@Resource(name = "messageService")
+	MessageService messageService;
 	
 	@RequestMapping("RaceManageStage")
 	public View raceManageStage(){
@@ -119,6 +125,7 @@ public class RaceManageStageController extends SController{
 		return null;		
 	}
 	
+	//得到阶段的标题
 	@RequestMapping("manageStageGetPraiseTitle.act")
 	public @ResponseBody String getPraiseTitle(
 			@RequestParam(value = "groupID", required = true)int groupID){
@@ -134,12 +141,42 @@ public class RaceManageStageController extends SController{
 	//颁奖
 	@RequestMapping("manageStageGetPraise.act")
 	public @ResponseBody String getPraise(
-			@RequestParam(value = "groupID",required = true)int groupID){
-		
-		return null;
+			@RequestParam(value = "groupID",required = true)int groupID,
+			@RequestParam(value = "isFinished", required = true) boolean isFinished){
+		String praise= null;
+		if(!isFinished){
+			praise = teamservice.getTeamListByGroup(groupID,0);
+		}
+		else{
+			praise = teamservice.getTeamListByGroup(groupID,0);
+		}
+		return praise;
 	}
 	
 	
+	@RequestMapping("getPraiseSelect.act")
+	public @ResponseBody String getPraiseSelect(
+			@RequestParam(value = "groupID", required = true)int groupID){
+		JSONArray array = JSONArray.fromObject(rewardService.getRewardListByGroup(groupID));
+		return array.toString();
+	}
+	
+	//获取发送消息的队伍
+	@RequestMapping("manageStageselectMessageTeam.act")
+	public @ResponseBody String selectMessageTeam(
+			@RequestParam(value = "groupID",required = true)int groupID){
+		//返回的状态更改
+		return teamservice.getTeamListByGroup(groupID,0);
+	}
+	
+	@RequestMapping("manageStageMessage.act")
+	public @ResponseBody String message(
+			@RequestParam(value = "leader",required = true)int leader,
+			@RequestParam(value = "message",required = true)String message){
+		messageService.getMessage(leader);
+		System.out.println(" " + leader + message);
+		return "1";
+	}
 
 
 }
