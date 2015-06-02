@@ -78,5 +78,4 @@ public class MessageDaoImpl extends SDao implements MessageDao{
 		query.setMaxResults(pageItemNum);
 		return query.list();
 	}
-
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.entity.GroupRaceEntity;
 import com.irace.entity.StageRaceEntity;
+import com.irace.entity.TeamEntity;
 import com.irace.service.GroupRaceService;
 import com.irace.service.MessageService;
 import com.irace.service.RaceService;
@@ -34,11 +35,11 @@ public class RaceManageStageController extends SController{
 	@Resource(name = "groupRaceService")
 	GroupRaceService groupRaceService;
 	@Resource(name = "teamService")
-	TeamService teamservice;
+	TeamService teamService;
 	@Resource(name = "stageService")
 	StageService stageService;
-//	@Resource(name = "submitService")
-//	SubmitService submitService;
+	@Resource(name = "submitService")
+	SubmitService submitService;
 	@Resource(name = "rewardService")
 	RewardService rewardService;
 	@Resource(name = "messageService")
@@ -73,7 +74,7 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageStageLoadGroupTeam.act")
 	public @ResponseBody String loadGroupTeam(
 			@RequestParam(value="groupID",required=true) int groupID ){	
-		return teamservice.getTeamListByGroup(groupID);	
+		return teamService.getTeamListByGroup(groupID);	
 	}
 	
 	
@@ -82,13 +83,21 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String sendTeamStatus(
 			@RequestParam(value="teamId",required = true) int teamID,
 			@RequestParam(value="status",required = true) boolean status){
-				return null;	
+		TeamEntity team = teamService.getTeam(teamID);
+		if(status){
+			team.setStatus(3);
+		}else{
+			team.setStatus(4);
+		}
+		teamService.updateTeam(team);		
+		System.out.print(team.getName());
+		return teamService.getTeamListByGroup(team.getGroup());	
 	}
 	
-	//载入报名审核小组里的成员
-	@RequestMapping("manageStageLoadGroupTeamMember.act")
+	//载入报名审核小组里成员的详细信息
+	@RequestMapping("managerStageShowSpecific.act")
 	public @ResponseBody String loadGroupTeamMember(
-			@RequestParam(value="teamID",required=true) int teamID){
+			@RequestParam(value="applyId",required=true) int applyId){
 				return null;	
 	}
 
@@ -117,15 +126,39 @@ public class RaceManageStageController extends SController{
 		return array.toString();
 	}
 	
-	//提交物再审 status 
+	//提交物
 	@RequestMapping("manageGetStagePhase.act")
 	public @ResponseBody String phaseDoing(
 			@RequestParam(value="phaseID",required=true) int phaseID){	
-	//	submitService.getSubmitByStage(phaseID);
-		return null;		
+		JSONArray array = JSONArray.fromObject(submitService.getSubmitByStage(phaseID));
+		return array.toString();		
 	}
 	
-	//得到阶段的标题
+	//确定队伍是否淘汰
+	@RequestMapping("manageStageTeamGoOrOut.act")
+	public @ResponseBody String setStageTeamGoOrOut(
+			@RequestParam(value="teamId",required=true) int teamId,
+			@RequestParam(value = "isPassed",required = true)boolean isPassed){
+		TeamEntity team = teamService.getTeam(teamId);
+		if(isPassed){
+			team.setStatus(5);
+		}else
+			team.setStatus(6);
+		teamService.updateTeam(team);	
+		return "1";		
+	}
+	
+	//完成阶段
+	@RequestMapping("manageStageFinishPhase.act")
+	public @ResponseBody String finishPhase(
+			@RequestParam(value = "phaseId",required = true)int phaseId){
+		StageRaceEntity stage = stageService.getStage(phaseId);
+		stage.setStatus(2);
+		stageService.updateStage(stage);
+		return "1";
+	}
+	
+	//得到奖项的标题
 	@RequestMapping("manageStageGetPraiseTitle.act")
 	public @ResponseBody String getPraiseTitle(
 			@RequestParam(value = "groupID", required = true)int groupID){
@@ -138,22 +171,22 @@ public class RaceManageStageController extends SController{
 		return array.toString();
 	}
 	
-	//颁奖
+	//颁奖的队伍
 	@RequestMapping("manageStageGetPraise.act")
 	public @ResponseBody String getPraise(
 			@RequestParam(value = "groupID",required = true)int groupID,
 			@RequestParam(value = "isFinished", required = true) boolean isFinished){
 		String praise= null;
 		if(!isFinished){
-			praise = teamservice.getTeamListByGroup(groupID,0);
+			praise = teamService.getTeamListByGroup(groupID,0);
 		}
 		else{
-			praise = teamservice.getTeamListByGroup(groupID,0);
+			praise = teamService.getTeamListByGroup(groupID,0);
 		}
 		return praise;
 	}
 	
-	
+	//得到组别的奖项
 	@RequestMapping("getPraiseSelect.act")
 	public @ResponseBody String getPraiseSelect(
 			@RequestParam(value = "groupID", required = true)int groupID){
@@ -161,12 +194,33 @@ public class RaceManageStageController extends SController{
 		return array.toString();
 	}
 	
+	//给队伍颁奖
+	@RequestMapping("mamageStageSendPraise.act")
+	public @ResponseBody String sendPraise(
+			@RequestParam(value = "teamId",required = true)int teamId,
+			@RequestParam(value = "praiseId",required = true)int praiseId){
+		TeamEntity team = teamService.getTeam(teamId);
+		team.setReward(praiseId);
+		teamService.updateTeam(team);
+		return "1";
+	}
+	
+	//完成颁奖
+	@RequestMapping("manageStageFinishPraise.act")
+	public @ResponseBody String finishPraise(
+			@RequestParam(value = "groupId",required = true)int groupId){
+		GroupRaceEntity group = groupRaceService.getGroupRace(groupId);
+		group.setStatus(3);
+		groupRaceService.updateGroupRace(group);
+		return "1";
+	}
+	
 	//获取发送消息的队伍
 	@RequestMapping("manageStageselectMessageTeam.act")
 	public @ResponseBody String selectMessageTeam(
 			@RequestParam(value = "groupID",required = true)int groupID){
 		//返回的状态更改
-		return teamservice.getTeamListByGroup(groupID,0);
+		return teamService.getTeamListByGroup(groupID,0);
 	}
 	
 	@RequestMapping("manageStageMessage.act")

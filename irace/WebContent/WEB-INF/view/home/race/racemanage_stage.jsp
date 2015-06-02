@@ -492,7 +492,7 @@
 				showGroupTeam(res);
 			},
 			error:function(res){
-				console.log("no");
+				console.log(res);
 			}
 		});
 	}
@@ -518,7 +518,7 @@
 	//同意队伍
 	function agreed(id){
 		var msg = "您确定同意吗？";
-		if(confirm(msg == true)){
+		if(confirm(msg) == true){
 			sendTeamStatus(id,true);
 		}
 	}
@@ -526,14 +526,14 @@
 	//不同意队伍
 	function refused(id){
 		var msg = "您确定取消队伍吗";
-		if(confirm(msg == true)){
+		if(confirm(msg)){
 			sendTeamStatus(id,false);
 		}
 	}
 	
 	function sendTeamStatus(id,status){
 		$.ajax({
-			url:$("appName").val()+"/race/sendTeamStatus.act",
+			url:$("#appName").val()+"/race/sendTeamStatus.act",
 			type:"POST",
 			data:{
 				teamId:id,
@@ -541,11 +541,10 @@
 			},
 			dataType:"JSON",
 			success:function(res){
-				var team = eval(res);
 				showGroupTeam(res);			
 			},
 			error:function(res){
-				
+			
 			}
 		});
 	}
@@ -587,7 +586,7 @@
 			"<td>"+teamMember[number].name+"</td>"+
 			"<td>"+teamMember[number].email+"</td>"+
 			"<td>"+teamMember[number].tel+"</td>"+
-			"<td><a>查看</a></td>"+	
+			"<td><a onclick = 'showSpecific(" + teamMember[mumber].id + ");'>查看</a></td>"+	
 			"</tr>";
 		}
 		htmlTeamMember = htmlTeamMember + "</tbody></table></div>";
@@ -595,6 +594,23 @@
 		$(name).html(htmlTeamMember);
 	}
 	
+	function showSpecific(applyId){
+		$.ajax({
+			url : $("#appName").val() + "/race/managerStageShowSpecific.act",
+			type : "POST",
+			data : {
+				applyId : applyId,
+			},
+			dataType : "JSON",
+			success : function(res){
+				alert("aaa");
+			},
+			error : function(res){
+				
+			}
+		});
+		
+	}
 	
 	// 提交物部分
 	//载入阶段选项框
@@ -657,7 +673,7 @@
 	 }
 	
 	
-	//显示阶段审核下的标题 status 0  为阶段审查未结束 1 为未开始 2 为已结束
+	//显示阶段审核下的标题 status 0 为阶段审查未结束 1 为未开始 2 为已结束
 	function showPhaseTitle(res){
         var phase = eval(res);	
 		var htmlPhaseTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
@@ -666,12 +682,13 @@
 		"<h3 class='team-state-wait'>阶段时间："+
 		phase[0].startTime + "-" + phase[0].endTime + "</h3></a>";
 		$("#phaseTitle").html(htmlPhaseTitle);
+		getPhase(phase[0].id,false);
 		/*
 		if(phase[0].status == 0){
-			phase(phase[0].id,true);
+			getPhase(phase[0].id,true);
 		}	
 		else if(phase[0].status == 2) {
-			phase(phase[0].id,false);
+			getPhase(phase[0].id,false);
 		}
 		else{
 			alert("阶段未开始，请重新选择");
@@ -680,23 +697,25 @@
 	}
 	
 	//阶段审查的队伍
-	function phase(phaseID,isFinished){
+	function getPhase(phaseID,isFinished){
 		$.ajax({
 			url:$("#appName").val() + "/race/manageGetStagePhase.act",
 			type:"POST",
 			data:{
-				phaseID:phase
+				phaseID:phaseID
 			},
 			dataType:"JSON",
 			success:function(res){
 				if(!isFinished){
 					showPhaseDoing(res);
+					console.log("Y1"+res);
 				}
 				else{
 					showPhaseDone(res);
+					console.log("Y2"+res);
 				}			
 			},
-			error:function(){
+			error:function(res){
 				console.log(res);
 			}
 		});
@@ -704,33 +723,34 @@
 	
 	
 	function showPhaseDoing(res){
-		var htmlPhase = "";
-			
+		var phase = eval(res);
+		
+		var htmlPhase = "";		
 		htmlPhase = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
-		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交时间</th><th>文件</th><th>队伍</th></tr></thead><tbody>";
+		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交物说明</th><th>文件</th><th>晋级</th></tr></thead><tbody>";
 		
 		for(var number = 0; number < phase.length; number++){
 			htmlPhase = htmlPhase + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
 			"<td>" + phase[number].teamName + "</td>" +
-			"<td>" + phase[number].phaseName +"作品" + "</td>" + 
-			"<td>" + phase[number].submitTime + "</td>" + 
-			"<td><a class = 'team-operate'>下载</a></td>" ;
+			"<td>" + phase[number].name  + "</td>" + 
+			"<td>" + phase[number].content + "</td>" + 
+			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +"'>下载</a></td>" ;
 			//队伍晋级
-			if(phase[number].teamStatus == 1){
+			if(phase[number].teamStatus == 5){
 				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate'>晋级</a></td></tr>" ;
+				"<td><a class = 'team-operate' onclick = 'teamStatusGoOrOut("+phase[number].teamId+" , true);'>晋级</a></td></tr>" ;
 			}
 			//队伍淘汰
 			else{
 				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate'>淘汰</a></td></tr>" ;
+				"<td><a class = 'team-operate' onclick = 'teamStatusGoOrOut("+phase[number].teamId+" , false);'>淘汰</a></td></tr>" ;
 			}	 
 		}
 		
-		htmlPhase = hamlPhase + "</tbody></table></div>" + 
-		"<h3 class = 'stage-pass'>完成此阶段审核</h3>";
+		htmlPhase = htmlPhase + "</tbody></table></div>" + 
+		"<h3 class = 'stage-pass' onclick  = 'finishPhase(" + phase[0].id + ")'>完成此阶段审核</h3>";
 		$("#phaseSubmit").html(htmlPhase);
 	}
 	
@@ -738,41 +758,71 @@
 		var htmlPhase = "";
 		var phase = eval(res);
 		
-		var htmlPhaseDoneTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
-		"<h3 style='display:inline;'>" +
-		phase.gourpName + phase.phaseName+"阶段提交物</h3>"+
-		"<h3 class='team-state-wait'>阶段时间："+
-		phase.startTime + "-" + phase.endTime + "</h3></a>";
-		$("phaseDoneTitle").html(htmlPhaseDoneTitle);
-		
 		htmlPhase = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
-		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交时间</th><th>文件</th><th>队伍</th></tr></thead><tbody>";
+		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交时间</th><th>文件</th><th>晋级</th></tr></thead><tbody>";
 		
 		for(var number = 0; number < phase.length; number++){
 			htmlPhase = htmlPhase + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
 			"<td>" + phase[number].teamName + "</td>" +
-			"<td>" + phase[number].phaseName +"作品" + "</td>" + 
-			"<td>" + phase[number].submitTime + "</td>" + 
-			"<td><a class = 'team-operate'>下载</a></td>" ;
+			"<td>" + phase[number].name +"作品" + "</td>" + 
+			"<td>" + phase[number].content + "</td>" + 
+			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +">下载</a></td>" ;
 			//队伍晋级
-			if(phase.teamStatus == 1){
+			if(phase.teamStatus == 5){
 				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate'>晋级</a></td></tr>" ;
+				"<td><a class = 'stage-wait'>晋级</a></td></tr>" ;
 			}
 			//队伍淘汰
 			else{
 				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate'>淘汰</a></td></tr>" ;
+				"<td><a class = 'stage-wait'>淘汰</a></td></tr>" ;
 			}	 
 		}
 		
-		htmlPhase = hamlPhase + "</tbody></table></div>" + 
+		htmlPhase = htmlPhase + "</tbody></table></div>" + 
 		"<h3 class = 'stage-wait'>审核已结束</h3>";
 		$("#phaseSubmit").html(htmlPhase);
 	}
 	
+	//判断队伍是晋级还是淘汰
+	function teamStatusGoOrOut(id, isPassed){
+		$.ajax({
+			url : $("#appName").val() + "/race/manageStageTeamGoOrOut.act",
+			type : "POST",
+			data : {
+				teamId : id,
+				isPassed : isPassed
+			},
+			dataType : "JSON",
+			success : function(res){
+				selectPhaseTeam();
+			},
+			error : function(res){
+				
+			}
+		});
+	}
+	
+	//完成阶段的审查
+	function finishPhase(phaseID){
+		$.ajax({
+			url : $("#appName").val() + "/race/manageStageFinishPhase.act",
+			type : "POST",
+			data : {
+				phaseId : phaseId
+			},
+			dataType : "JSON",
+			success : function(res){
+				selectPhaseTeam();
+			},
+			error : function(res){
+				
+			}
+			
+		});
+	}
 	// 颁奖部分
 	 function selectPraiseTeam() {
 	      var singleValues = $("#priceGroupSelect").val();
@@ -781,7 +831,7 @@
 	 
 	 $("#priceGroupSelect").change(selectPraiseTeam);
 	
-	
+	//得到获奖的标题
 	function getPraiseTitle(goupID){
 		$.ajax({
 			url:$("#appName").val()+"/race/manageStageGetPraiseTitle.act",
@@ -799,6 +849,7 @@
 		});
 	}
 	
+
 	function showPraiseTitle(res){
 		var group = eval(res);
 		var htmlPraiseTitle = "<a class='list-group-item list-group-item-success' href='##'>" +
@@ -807,7 +858,7 @@
 		$("#praiseTitle").html(htmlPraiseTitle);
 		//group status 0 报名审核 1 开始比赛 2 比赛结束 3 颁奖结束
 		if(group[0].status == 0){
-			getPraise(group[0].id,true);
+			getPraise(group[0].id,false);
 		}
 		else if(group[0].status == 2){
 			getPraise(group[0].id,false);
@@ -817,6 +868,7 @@
 		}
 	}
 	
+	//得到要颁奖的组别
 	function getPraise(groupID,isFinished){
 		$.ajax({
 			url : $("#appName").val() + "/race/manageStageGetPraise.act",
@@ -854,11 +906,11 @@
 			"<td>" + praise[number].name + "</td>" +
 			"<td>" + praise[number].reward  + "</td>" + 
 			"<td><select class='' name='' id='pricePriceSelect" + praise[number].id + "'>" + "</select></td>" +
-			"<td><a class='team-operate'>颁奖</a></td></tr>";	
+			"<td><a class='team-operate' onclick = 'sendPraise("+ praise[number].id +")'>颁奖</a></td></tr>";	
 			getPraiseSelect(praise[0].groupID,praise[number].id);
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
-		"<h3 class='stage-pass'>完成此组颁奖</h3></div>";
+		"<h3 class='stage-pass' onclick = 'finishPraise(" + praise[0].id + ")'>完成此组颁奖</h3></div>";
 
 		$("#praiseShow").html(htmlPraise);
 	}
@@ -881,13 +933,13 @@
 		});
 	}
 	
-	function showPraiseSelect(res,teamid){
+	function showPraiseSelect(res,teamId){
 		var praise = eval(res);
 		var htmlSelect = "";
 		for(var number = 0; number < praise.length; number++){
-			htmlSelect = htmlSelect + "<option>" + praise[number].name + "</option>";
+			htmlSelect = htmlSelect + "<option value = '" + praise[number].id + "'>" + praise[number].name + "</option>";
 		}	
-		var name = "#"  + "pricePriceSelect" + teamid;
+		var name = "#"  + "pricePriceSelect" + teamId;
 		$(name).html(htmlSelect);
 	}
 	
@@ -909,6 +961,41 @@
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
 		"<h3 class='stage-wait'>此组颁奖已结束</h3></div>";
 		$("#praiseShow").html(htmlPraise);
+	}
+	
+	function sendPraise(teamId){
+		var praise = $("#pricePriceSelect" + teamId).val();
+		$.ajax({
+			url : $("#appName").val() + "/race/mamageStageSendPraise.act",
+			type : "POST",
+			data : {
+				teamId : teamId,
+				praiseId : praiseId
+			},
+			dataType : "JSON",
+			success : function(res){
+				getPraiseTitle();
+			},
+			error : function(res){		
+			}
+		});
+	}
+	
+	function finishPraise(groupId){
+		$.ajax({
+			url : $("#appName").val() + "/race/manageStageFinishPraise.act",
+			type : "POST",
+			data : {
+				groupId : groupId
+			},
+			dataType : "JSON",
+			success : function (res){
+				selectPraiseTeam();
+			},
+			error : function (res){
+				
+			}
+		});
 	}
 	
 	//发送消息部分

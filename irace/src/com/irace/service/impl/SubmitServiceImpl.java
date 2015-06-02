@@ -67,7 +67,6 @@ public class SubmitServiceImpl implements SubmitService {
 
 	@Override
 	public List getSubmitByStage(int stageID) {
-		// TODO Auto-generated method stub
 		return submitDao.getSubmitByStage(stageID);
 	}
 

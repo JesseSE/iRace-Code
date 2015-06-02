@@ -368,13 +368,16 @@
 				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
 			}
 			else if(apply[number].teamStatus == 3){
-				htmlCreate = htmlCreate+"<h3 class='team-state-submit'><a href = ''>比赛正在进行，点击提交阶段产物</a></h3>";
+				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组审核通过</h3>";
 			}
 			else if(apply[number].teamStatus == 4){
 				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组未通过审核</h3>";
 			}
+			else if(apply[number].teamStatus == 5){
+				htmlCreate = htmlCreate+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+			}
 			else{
-				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>比赛已结束</h3>";
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已经结束</h3>";
 			}
 			htmlCreate = htmlCreate +"</a></div></div>";
 		}
@@ -422,13 +425,16 @@
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在等待审核通过</h3>";
 			}
 			else if(apply[number].teamStatus == 3){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在进行比赛</h3>";
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组审核通过</h3>";
 			}
 			else if(apply[number].teamStatus == 4){
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组未通过审核</h3>";
 			}
+			else if(apply[number].teamStatus == 5){
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛正在进行</h3>";
+			}
 			else{
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已结束</h3>";
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已经结束</h3>";
 			}
 			htmlJoin = htmlJoin +"</a></div></div>";
 		}

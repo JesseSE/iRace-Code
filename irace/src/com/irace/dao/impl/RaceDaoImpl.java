@@ -242,7 +242,7 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	}
 	
 	public List getTeamMemberListByUser(int userID){
-		this.hql = "SELECT r.name FROM RaceEntity AS r,UserEntity AS u ,ApplyEntity AS,";
+		this.hql = "SELECT r.name FROM RaceEntity AS r,UserEntity AS u ,ApplyEntity AS";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userID);
 		return query.list();		

@@ -39,6 +39,22 @@ public class SubmitEntity implements IEntity{
 	
 	private String content;
 	
+	public Integer getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(Integer teamId) {
+		this.teamId = teamId;
+	}
+
+	public TeamEntity getTeamEntity() {
+		return teamEntity;
+	}
+
+	public void setTeamEntity(TeamEntity teamEntity) {
+		this.teamEntity = teamEntity;
+	}
+
 	@Column(name="file_url")
 	private String fileUrl;
 
