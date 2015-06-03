@@ -49,5 +49,14 @@ public interface ApplyService {
 	 * @return
 	 */
 	public String applyJoinTeam(HttpSession session, int applyID, int teamID);
+	
+	/**
+	 * 获得组队情况
+	 * @param userId
+	 * @param raceId
+	 * @return
+	 */
+	public String getTeamDetail(int userId, int raceId);
+	
 }
 
