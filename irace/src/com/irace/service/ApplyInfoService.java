@@ -23,7 +23,7 @@ public interface ApplyInfoService {
 	
 	public List getApplyInfoList(int pageNo); //获取不包括外键实体
 	
-	public List getApplyInfoListDetail(int pageNo, int pageItemNum); //获取包括外键实体
+	public List getApplyInfoListDetail(int pageNo); //获取包括外键实体
 	
 	public boolean updateApplyInfo(ApplyInfoEntity applyInfo);
 	
