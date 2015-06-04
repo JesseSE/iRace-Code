@@ -122,4 +122,9 @@ public class ApplyServiceImpl implements ApplyService {
 		}
 	}
 
+	@Override
+	public String getTeamDetail(int userId, int raceId) {
+		String[] filterStr = {"groupRaceEntity","raceEntity","userEntity"};
+		return JsonUtil.listToJSONString(applyDao.getTeamDetail(userId, raceId), filterStr);
+	}
 }

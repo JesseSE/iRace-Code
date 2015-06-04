@@ -1,5 +1,6 @@
 package com.irace.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -7,6 +8,7 @@ import org.hibernate.Query;
 import com.irace.dao.ApplyDao;
 import com.irace.entity.ApplyEntity;
 import com.irace.entity.RaceEntity;
+import com.irace.entity.TeamEntity;
 
 public class ApplyDaoImpl extends SDao implements ApplyDao{
 
@@ -70,5 +72,13 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 	}
 	
 	
+	@Override
+	public List getTeamDetail(int userId, int raceId){
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.teamEntity AS t WHERE a.race = ? AND a.user=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);		
+		query.setInteger(0, raceId);
+		query.setInteger(1, userId);
+		return query.list();
+	}
 
 }

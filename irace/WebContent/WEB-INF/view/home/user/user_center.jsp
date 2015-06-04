@@ -62,39 +62,8 @@ function raceTab(pos)
 
 </head>
 <body>
-	<div class="header-top">
-		<div class="wrap">
-			<div class="header-top-left">
-				<div class="box">
-					<div class="logo" style="margin-top: 8px;">
-						<a href="index.html"><img src="images/logo1.png" alt="" /></a>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-			<!--用户头像-->
-			<div class="cssmenu" role="navigation">
-				<ul>
-					<li><image src="images/message.png"></image></li>
-					<li><a href="##">消息</a></li>|
-					<li><image src="images/userican.png"></image></li>
-
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" role="button"
-						aria-expanded="false"> 刘嵩 </a>
-						<ul class="dropdown-menu" role="menu">
-							<div class="dropdown-header">dropdown header</div>
-							<li><a class="dropdown-btn" href="##">个人中心</a> <a
-								class="dropdown-btn" href="##">退出登录</a></li>
-
-						</ul></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-
+	<!-- 在这里引入登录模块 -->
+     <%@ include file="/public/section/user-div.jsp" %>
 
 	<!--导航栏-->
 	<div class="header-bottom" style="margin-top: -10px;">
@@ -239,32 +208,12 @@ function raceTab(pos)
 	</div>
 
 
-	<div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-				<div class="copy">
-					<p>
-						GDS软件工程实践课小组版权所有<a target="_blank"
-							href="http://www.js-css.cn/a/css/template/">IRACE</a>
-					</p>
-				</div>
-				<div class="f-list2">
-					<ul>
-						<li class="active"><a href="about.html">团队介绍</a></li> |
-						<li><a href="delivery.html">网站加盟</a></li> |
-						<li><a href="delivery.html">工程介绍</a></li> |
-						<li><a href="contact.html">联系我们</a></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
+	<!-- 页底开始  -->
+    <%@ include file="/public/section/footer.jsp" %>
+	<!-- 页底结束  -->
 	
 	<!-- 取得用户id -->
-	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">
-
-	<%@ include file="/public/section/footer.jsp"%>
+	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">	
 	<script
 		src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript"> 
@@ -282,6 +231,10 @@ function raceTab(pos)
 		isHeldNow = true;
 		//userID = 1;
 		userID = $("#userIDHtml").val();
+		if(userID == "null"){
+			console.log(userID);
+			window.location.href=$("#appName").val()+"/user/login";
+		}
 	}
 	
 	//前一页
@@ -371,7 +324,7 @@ function raceTab(pos)
        		},
        		error: function(res) {        			
        			console.log(res);
-       			alert('输入错误！请返回重新输入！');
+       			alert('请登录！');
        		}   
 		});		
 	}
@@ -389,11 +342,18 @@ function raceTab(pos)
 				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
 				"<h3 style='display:inline;'>" + race[i].name + "</h3>" ;
 				
+				
 				//判断组队状态
-				if(null == isJoinedAteam(race[i].id)){
+				var apply = isJoinedAteam(race[i].id);				
+				if(null == apply){					
 					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
-				}else{
-					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+				}else{					
+					if(apply[0].status < 2)
+						htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+					else if(apply[0].status == 2)
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经申请加入："+ apply[0].teamEntity.name +"</h3>";
+					else if(apply[0].status == 3)
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经加入："+ apply[0].teamEntity.name +"</h3>";
 				}
 								
 				
@@ -432,7 +392,7 @@ function raceTab(pos)
        		},
        		error: function(res) {        			
        			console.log(res);
-       			alert('输入错误！请返回重新输入！');
+       			alert('请登录！');
        		}   
 		});		
 	}
@@ -444,12 +404,22 @@ function raceTab(pos)
 		var htmlText = " <a name='race_done'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++)	{
-			if(race[i].status == 2){
+			if(race[i].status == 1){
+				var reward = isJoinedAteam(race[i].id);
+				
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
 				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
-				"<h3 style='display:inline;'>" + race[i].name + "</h3>"+
-				"<h3 class='race-state-wait'>未获奖</h3>" +
+				"<h3 style='display:inline;'>" + race[i].name + "</h3>";
+				if(reward[0].teamEntity.rewardEntity == null){
+					htmlText = htmlText + 
+					"<h3 class='race-state-wait'>未获奖</h3>";					
+				}else{
+					htmlText = htmlText + 
+					"<h3 class='race-state-wait'>"+ reward[0].teamEntity.rewardEntity.name +"</h3>";
+				}		
+				
+				htmlText = htmlText + 
 				"</a>" +			
 				" <a class='list-group-item'>" + race[i].content + "</a>" +
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
@@ -481,7 +451,7 @@ function raceTab(pos)
     		},
     		error: function(res) {        			
     			console.log(res);
-    			alert('输入错误！请返回重新输入！');
+    			alert('请登录-推介');
     		}   
 		});
 	}
@@ -545,6 +515,9 @@ function raceTab(pos)
 	}
 	//查看组队状态
 	function isJoinedAteam(raceId){
+		
+		//var race = eval(res);  
+		var apply = null;
 		$.ajax({
        		url: $("#appName").val()+"/user/isJoinTeam.act",
        		type: "POST",
@@ -553,32 +526,17 @@ function raceTab(pos)
        			raceId: raceId
        			  },
        		dataType: "JSON",
-       		success: function(res) {           		
-       			return eval(res).name;        			
+       		async: false,//同步  
+       		success: function(res) {             			      
+       			console.log(eval(res));   
+       			apply = eval(res);
        		},
        		error: function(res) {        			
-       			return null;
+       			apply = null;
        		}   
 		});		
-	}
-	//查看获奖状态
-	function isGetRaward(raceId){
-		$.ajax({
-       		url: $("#appName").val()+"/user/isGetRaward.act",
-       		type: "POST",
-       		data: {
-       			userId: userID,
-       			raceId: raceId
-       			  },
-       		dataType: "JSON",
-       		success: function(res) {           		
-       			return eval(res).name;        			
-       		},
-       		error: function(res) {        			
-       			return null;
-       		}   
-		});		
-	}
+		return apply;
+	}	
 	
 </script>
 </body>

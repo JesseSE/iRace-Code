@@ -75,12 +75,12 @@ public class UserCenterController extends SController {
 	 * @param raceId
 	 * @return
 	 */
-	/*@RequestMapping("isJoinTeam.act")
+	@RequestMapping("isJoinTeam.act")
 	public @ResponseBody String isJoinTeam(
 			@RequestParam(value="userId", required=true)int userId,
 			@RequestParam(value="raceId", required=true)int raceId){
-		return raceService.isJoinedATeam(userId,raceId);
-	}*/
+		return applyService.getTeamDetail(userId, raceId);
+	}
 	
 	/**
 	 * 按照热度获取推介内容

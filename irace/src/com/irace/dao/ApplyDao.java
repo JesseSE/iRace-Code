@@ -19,4 +19,6 @@ public interface ApplyDao {
 	public List getApplyListDetail(int pageNo, int pageItemNum); //获取包括外键实体
 	
 	public boolean updateApply(ApplyEntity apply);
+	
+	public List getTeamDetail(int userId, int raceId);//通过userId和raceId 获得用户所参加的组
 }

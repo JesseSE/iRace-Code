@@ -220,7 +220,9 @@ function raceTab(pos)
 			pageStatus = 1;	//1正在进行，2已经结束，3还未发布
 			currentPage = 1;			
 			organizerId = $("#orIDHtml").val();
-			//organizerId = 1;
+			if(organizerId == "null"){				
+				window.location.href=$("#appName").val()+"/user/login";
+			}
 		}
 		
 		//前一页
