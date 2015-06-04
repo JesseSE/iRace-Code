@@ -1,5 +1,6 @@
 package com.irace.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -170,8 +171,15 @@ public class ApplyEntity implements IEntity{
 
 	@Override
 	public Map<String, Object> getMap() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("teamStatus",this.getStatus());
+		map.put("teamId", this.getTeam());
+		map.put("teamName",this.getTeamEntity().getName());
+		map.put("raceName", this.getRaceEntity().getName());
+		map.put("leaderName",this.getTeamEntity().getUserEntity().getNickname());
+		map.put("teamSlogan",this.getTeamEntity().getSlogan());
+		//map.put("reward",ap.getTeamEntity().getRewardEntity().getName());
+		return map;
 	}
 	
 

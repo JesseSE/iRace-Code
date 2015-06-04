@@ -64,7 +64,7 @@ public class RewardDaoImpl extends SDao implements RewardDao {
 		this.hql = "FROM RewardEntity AS r where r.groupId=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupId);
-		return myReward(query.list());
+		return query.list();
 	}
 
 	@Override

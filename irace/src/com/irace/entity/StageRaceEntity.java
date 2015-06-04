@@ -2,6 +2,7 @@ package com.irace.entity;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -150,7 +151,13 @@ public class StageRaceEntity implements IEntity{
 
 	@Override
 	public Map<String, Object> getMap() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", this.getId());
+		map.put("name", this.getName());
+		map.put("status", this.getStatus());
+		map.put("startTime", this.getStartTime());
+		map.put("endTime",this.getEndTime());
+		map.put("groupName", this.getGroupRaceEntity().getName());
+		return map;
 	}
 }

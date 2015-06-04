@@ -81,7 +81,7 @@ public class UserDaoImpl extends SDao implements UserDao {
 		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.teamEntity.id = ? and a.status in(1,2)";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teamId);
-		return myMemberList(query.list());
+		return query.list();
 	}
 	
 	private List myMemberList(List list){
@@ -96,6 +96,7 @@ public class UserDaoImpl extends SDao implements UserDao {
 			map.put("status", Integer.toString(ap.getStatus()));
 			map.put("teamID",Integer.toString(ap.getTeam()));
 			map.put("ID", Integer.toString(ap.getId()));
+			map.put("raceId", Integer.toString(ap.getRace()));
 			listMap.add(map);
 		}
 		return listMap;

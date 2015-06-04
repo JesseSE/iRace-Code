@@ -201,10 +201,13 @@ public class TeamEntity implements IEntity{
 
 	@Override
 	public Map<String,Object> getMap() {
-		// TODO Auto-generated method stub
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("", null);
-		
+		map.put("groupID", this.getGroup());
+		map.put("id",this.getId());
+		map.put("name", this.getName());
+		map.put("slogan",this.getSlogan());
+		map.put("leader",this.getUserEntity().getNickname());
+		map.put("leadId", this.getLeader());
 		return map;
 	}
 	
