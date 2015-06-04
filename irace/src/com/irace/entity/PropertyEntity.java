@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -76,6 +78,11 @@ public class PropertyEntity implements IEntity{
 	public void setRequires(String requires) {
 		this.requires = requires;
 	}
-	
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -4,6 +4,7 @@
 package com.irace.entity;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -267,5 +268,11 @@ public class RaceEntity implements IEntity {
 	
 	public String getStrTime(Date date) {
 		return TimeUtil.formatDateToStr(date, Constants.DEDAULT_DATE_FORMAT);
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

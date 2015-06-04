@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -138,7 +140,11 @@ public class OrganizerEntity implements IEntity{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -2,6 +2,7 @@ package com.irace.entity;
 
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -160,6 +161,12 @@ public class MessageEntity implements IEntity{
 
 	public void setrUserEntity(UserEntity rUserEntity) {
 		this.rUserEntity = rUserEntity;
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

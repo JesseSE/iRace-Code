@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -113,7 +115,13 @@ public class AdvertismentEntity implements IEntity{
 	public void setUserEntity(UserEntity userEntity) {
 		this.userEntity = userEntity;
 	}
-	
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

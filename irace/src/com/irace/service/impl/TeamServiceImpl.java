@@ -43,15 +43,17 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public String getTeamList(int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
-				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+//		return JsonUtil.listToJSONString(teamDao.getTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+//				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+		return JsonUtil.getJsonByMapList(teamDao.getTeamList(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
 	public String getTeamListDetail(int pageNo, int pageItemNum) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getTeamListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
-				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+//		return JsonUtil.listToJSONString(teamDao.getTeamListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+//				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+		return JsonUtil.getJsonByMapList(teamDao.getTeamListDetail(pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
@@ -63,34 +65,39 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public String getCreatedTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getCreatedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
-				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+//		return JsonUtil.listToJSONString(teamDao.getCreatedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+//				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+		return JsonUtil.getJsonByMapList(teamDao.getCreatedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
 	public String getJoinedTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getJoinedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
-				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+//		return JsonUtil.listToJSONString(teamDao.getJoinedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+//				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+		return JsonUtil.getJsonByMapList(teamDao.getJoinedTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
 	public String getApplyingTeamList(int userId, int pageNo) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getApplyingTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
-				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+//		return JsonUtil.listToJSONString(teamDao.getApplyingTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM), 
+//				new String[]{"RewardEntity","userEntity","groupRaceEntity","rewardEntity"});
+		return JsonUtil.getJsonByMapList(teamDao.getApplyingTeamList(userId, pageNo, Constants.DEFAULT_PAGE_ITEM_NUM));
 	}
 
 	@Override
 	public String getTeamListByGroup(int groupID) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID), new String[]{});
+		//return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID), new String[]{});
+		return JsonUtil.getJsonByMapList(teamDao.getTeamListByGroup(groupID));
 	}
 
 	@Override
 	public String getTeamListByGroup(int groupID, int status) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID, status), new String[]{});
+		//return JsonUtil.listToJSONString(teamDao.getTeamListByGroup(groupID, status), new String[]{});
+		return JsonUtil.getJsonByMapList(teamDao.getTeamListByGroup(groupID, status));
 	}
 
 

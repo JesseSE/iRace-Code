@@ -15,6 +15,5 @@ import net.sf.json.JSONObject;
 public interface IEntity {
 	
 	//public JSONObject getJsonObject(); //封装了实体属性和值的map
-	
-	
+	public Map<String, Object> getMap();
 }

@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -191,6 +193,12 @@ public class UserEntity implements IEntity {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -52,5 +54,11 @@ public class RoleEntity implements IEntity{
 
 	public void setPrivileges(String privileges) {
 		this.privileges = privileges;
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

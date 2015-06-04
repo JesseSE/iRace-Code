@@ -5,6 +5,7 @@ package com.irace.util;
 
 import java.util.List;
 
+import com.irace.entity.IEntity;
 import com.irace.entity.RaceEntity;
 
 import net.sf.json.JSONArray;
@@ -44,6 +45,19 @@ public class JsonUtil {
 	}
 	
 	/**
+	 * 把带有getMap方法的实体转化成JSON串
+	 * @param list
+	 * @return
+	 */
+	public static String getJsonByMapList(List<IEntity> list) {
+		JSONArray json = new JSONArray();
+		for(IEntity entity:list) {
+			json.add(entity.getMap());
+		}
+		return json.toString();
+	}
+	
+	/**
 	 * 返回一个操作的结果，用json串表示
 	 * @param code
 	 * @param info
@@ -64,5 +78,7 @@ public class JsonUtil {
 	public static String getJsonLoginTimeOut() {
 		return getJsonInfo(InfoCode.LOGIN_TIMEOUT,"登录超时");
 	}
+	
+	
 	
 }

@@ -33,21 +33,21 @@ public class Constants {
 	/**已获奖****/
 	public static Integer TEAM_RACE_AWARD = 8;
 	
-	//Group 状态
-	/***报名审核***/
-	public static Integer GROUP_WAIT_REVIEW = 0;
-	/***开始比赛***/
-	public static Integer GROUP_RACE_BEING = 1;
-	/***比赛结束***/
-	public static Integer GROUP_RACE_OVER = 2;
-	/***颁奖结束***/
-	public static Integer GROUP_AWARD_OVER = 3;
+//	//Group 状态
+//	/***报名审核***/
+//	public static Integer GROUP_WAIT_REVIEW = 0;
+//	/***开始比赛***/
+//	public static Integer GROUP_RACE_BEING = 1;
+//	/***比赛结束***/
+//	public static Integer GROUP_RACE_OVER = 2;
+//	/***颁奖结束***/
+//	public static Integer GROUP_AWARD_OVER = 3;
 	
-	//STATUS状态
+	//STAGE状态
 	/***正在审查***/
-	public static Integer STATUS_REVIEW_BEING = 0;
+	public static Integer STAGE_REVIEW_BEING = 0;
 	/***正在进行***/
-	public static Integer STATUS_BEING = 1;
+	public static Integer STAGE_BEING = 1;
 	/***已结结束***/
-	public static Integer STATUS_OVER = 2;
+	public static Integer STAGE_OVER = 2;
 }

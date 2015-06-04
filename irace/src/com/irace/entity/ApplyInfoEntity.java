@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="apply_info")
-public class ApplyInfoEntity implements IEntity{
+public class ApplyInfoEntity implements IEntity {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -115,6 +117,12 @@ public class ApplyInfoEntity implements IEntity{
 
 	public void setPropertyEntity(PropertyEntity propertyEntity) {
 		this.propertyEntity = propertyEntity;
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

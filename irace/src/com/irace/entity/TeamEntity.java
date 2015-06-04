@@ -1,5 +1,11 @@
 package com.irace.entity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -191,6 +197,15 @@ public class TeamEntity implements IEntity{
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	@Override
+	public Map<String,Object> getMap() {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("", null);
+		
+		return map;
 	}
 	
 	

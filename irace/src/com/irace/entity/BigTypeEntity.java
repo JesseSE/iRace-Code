@@ -2,6 +2,7 @@ package com.irace.entity;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="bigtype")
-public class BigTypeEntity {
+public class BigTypeEntity implements IEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id; //比赛大分类分类的主键	
@@ -62,4 +63,9 @@ public class BigTypeEntity {
 		this.typeEntities = typeEntities;
 	}
 
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

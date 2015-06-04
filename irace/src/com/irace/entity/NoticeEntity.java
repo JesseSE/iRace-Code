@@ -3,6 +3,7 @@ package com.irace.entity;
 
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -118,6 +119,11 @@ public class NoticeEntity implements IEntity{
 	public void setRaceEntity(RaceEntity raceEntity) {
 		this.raceEntity = raceEntity;
 	}
-	
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

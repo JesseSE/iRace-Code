@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="typerace")
-public class TypeRaceEntity {
+public class TypeRaceEntity implements IEntity{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -72,5 +74,11 @@ public class TypeRaceEntity {
 
 	public void setBigTypeEntity(BigTypeEntity bigTypeEntity) {
 		this.bigTypeEntity = bigTypeEntity;
+	}
+
+	@Override
+	public Map<String,Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,5 +1,7 @@
 package com.irace.entity;
 
+import java.util.Map;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -164,6 +166,12 @@ public class ApplyEntity implements IEntity{
 
 	public void setTeamEntity(TeamEntity teamEntity) {
 		this.teamEntity = teamEntity;
+	}
+
+	@Override
+	public Map<String, Object> getMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
