@@ -80,10 +80,9 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		System.out.print(userId);
-		
-		return myTeamList(query.list());
-		//return query.list();
+		System.out.print(userId);	
+		return query.list();
+
 
 	}
 
@@ -97,7 +96,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setMaxResults(pageItemNum);
 		System.out.println("joined");
 		
-		return myTeamList(query.list());
+		return query.list();
 
 	}
 
@@ -111,7 +110,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		query.setMaxResults(pageItemNum);
 		System.out.println("waitting");
 
-		return myTeamList(query.list());
+		return query.list();
 	}
 	
 	private void test(List list){
@@ -160,7 +159,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		this.hql = "FROM TeamEntity AS t WHERE t.group = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
-		return myGroupTeam(query.list());
+		return query.list();
 	}
 
 	@Override
@@ -171,7 +170,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		//query.setInteger(1, status);
-		return myGroupTeam(query.list());
+		return query.list();
 	}
 	
 	private List myGroupTeam(List list){

@@ -1,5 +1,6 @@
 package com.irace.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -156,7 +157,11 @@ public class SubmitEntity implements IEntity{
 
 	@Override
 	public Map<String, Object> getMap() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("teamName",this.getTeamEntity().getName());
+		map.put("name", this.getName());
+		map.put("content",this.getContent());
+		map.put("fileUrl", this.getFileUrl());
+		return map;
 	}
 }

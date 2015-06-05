@@ -128,7 +128,7 @@
                   <li role="presentation" class="active"><a href="##" id="tab2"  ><h4>阶段审核</h4></a></li> 
                   <li role="presentation" class="active"><a href="##" id="tab3"  ><h4>奖项颁发</h4></a></li> 
                   <li role="presentation" class="active"><a href="##" id="tab4"  ><h4>发送消息</h4></a></li> 
-				  <li style="position:relative;float:right;margin-top:10px;margin-left:0px;"><button style="font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px"><a style="color:#FFF">结束比赛</a></button></li> 
+				  <li style="position:relative;float:right;margin-top:10px;margin-left:0px;"><button style="font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px" onclick = "finishRace();"><a style="color:#FFF">结束比赛</a></button></li> 
 				</ul>  
                 <!--  报名审核-->
                 <div id="applyCheck" style="display:block">
@@ -343,8 +343,7 @@
 <script type="text/javascript">
     //date 传值
     var raceID = 1;
-    var groupID = 1;
-   
+    
 	var tab1= document.getElementById("tab1");
 	var tab2= document.getElementById("tab2");
 	var tab3= document.getElementById("tab3");
@@ -437,6 +436,23 @@
 		var name = eval(res);
 		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name[0].name+"</h1>";
 		$("#raceTitle").html(htmlName);
+	}
+	
+	//结束比赛
+	function finishRace(){
+		$.ajax({
+			url : $("#appName").val() + "/race/managerStageFinishRace.act",
+			type : "POST",
+			data : {
+				raceId : raceId
+			},
+			data : "JSON",
+			success : function(res){
+				alert("结束比赛");
+			},
+			error : function(res){
+			}
+		});
 	}
 	
 	//审查小组部分
@@ -586,7 +602,7 @@
 			"<td>"+teamMember[number].name+"</td>"+
 			"<td>"+teamMember[number].email+"</td>"+
 			"<td>"+teamMember[number].tel+"</td>"+
-			"<td><a onclick = 'showSpecific(" + teamMember[mumber].id + ");'>查看</a></td>"+	
+			"<td><a onclick = 'showSpecific(" + teamMember[number].id + teamMember[number].raceId + ");'>查看</a></td>"+	
 			"</tr>";
 		}
 		htmlTeamMember = htmlTeamMember + "</tbody></table></div>";
@@ -594,13 +610,14 @@
 		$(name).html(htmlTeamMember);
 	}
 	
-	function showSpecific(applyId){
+	function showSpecific(applyId,raceId){
 		$.ajax({
 			url : $("#appName").val() + "/race/managerStageShowSpecific.act",
 			type : "POST",
 			data : {
 				applyId : applyId,
-			},
+				raceId : raceId
+ 			},
 			dataType : "JSON",
 			success : function(res){
 				alert("aaa");

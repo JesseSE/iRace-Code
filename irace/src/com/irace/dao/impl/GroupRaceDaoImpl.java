@@ -50,7 +50,7 @@ public class GroupRaceDaoImpl extends SDao implements GroupRaceDao{
 		this.hql = "FROM GroupRaceEntity as g where g.race=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, raceId);
-		return myGroupList(query.list());
+		return query.list();
 	}
 
 	@Override

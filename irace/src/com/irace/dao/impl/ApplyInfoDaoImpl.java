@@ -74,16 +74,4 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 		query.setInteger(1, raceID);
 		return query.list();
 	}
-	
-	private List MyList(List list){
-		List<Map> mapList = new ArrayList<Map>();
-		Iterator<Object> it = list.iterator();
-		while(it.hasNext()){			
-		}
-		return mapList;	
-	}
-	
-
-	
-
 }

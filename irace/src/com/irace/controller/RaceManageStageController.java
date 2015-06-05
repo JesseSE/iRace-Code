@@ -1,5 +1,6 @@
 package com.irace.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.entity.GroupRaceEntity;
+import com.irace.entity.MessageEntity;
+import com.irace.entity.RaceEntity;
 import com.irace.entity.StageRaceEntity;
 import com.irace.entity.TeamEntity;
+import com.irace.service.ApplyInfoService;
 import com.irace.service.GroupRaceService;
 import com.irace.service.MessageService;
 import com.irace.service.RaceService;
@@ -23,6 +27,7 @@ import com.irace.service.RewardService;
 import com.irace.service.StageService;
 import com.irace.service.SubmitService;
 import com.irace.service.TeamService;
+import com.irace.service.UserService;
 import com.irace.view.View;
 
 
@@ -44,6 +49,10 @@ public class RaceManageStageController extends SController{
 	RewardService rewardService;
 	@Resource(name = "messageService")
 	MessageService messageService;
+	@Resource(name = "applyInfoService")
+	ApplyInfoService applyInfoService;
+	@Resource(name = "userService")
+	UserService userService;
 	
 	@RequestMapping("RaceManageStage")
 	public View raceManageStage(){
@@ -60,6 +69,16 @@ public class RaceManageStageController extends SController{
 		map.put("name", raceService.getRace(raceID).getName());
 		JSONArray array = JSONArray.fromObject(map);
 		return array.toString();		
+	}
+	
+	//结束比赛
+	@RequestMapping("finishRace.act")
+	public @ResponseBody String finishRace(
+			@RequestParam(value = "raceId" , required = true) int raceId){
+		RaceEntity race = raceService.getRace(raceId);
+		race.setStatus(1);
+		raceService.updateRace(race);
+		return "1";
 	}
 	
 	//载入组别
@@ -97,8 +116,9 @@ public class RaceManageStageController extends SController{
 	//载入报名审核小组里成员的详细信息
 	@RequestMapping("managerStageShowSpecific.act")
 	public @ResponseBody String loadGroupTeamMember(
-			@RequestParam(value="applyId",required=true) int applyId){
-				return null;	
+			@RequestParam(value="applyId",required=true) int applyId,
+			@RequestParam(value = "raceId",required = true)int raceID){			
+		return applyInfoService.getApplyInfoListByAR(applyId, raceID);	
 	}
 
 	
@@ -178,10 +198,10 @@ public class RaceManageStageController extends SController{
 			@RequestParam(value = "isFinished", required = true) boolean isFinished){
 		String praise= null;
 		if(!isFinished){
-			praise = teamService.getTeamListByGroup(groupID,0);
+			praise = teamService.getTeamListByGroup(groupID,2);
 		}
 		else{
-			praise = teamService.getTeamListByGroup(groupID,0);
+			praise = teamService.getTeamListByGroup(groupID,2);
 		}
 		return praise;
 	}
@@ -201,6 +221,7 @@ public class RaceManageStageController extends SController{
 			@RequestParam(value = "praiseId",required = true)int praiseId){
 		TeamEntity team = teamService.getTeam(teamId);
 		team.setReward(praiseId);
+		team.setStatus(7);
 		teamService.updateTeam(team);
 		return "1";
 	}
@@ -220,14 +241,19 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String selectMessageTeam(
 			@RequestParam(value = "groupID",required = true)int groupID){
 		//返回的状态更改
-		return teamService.getTeamListByGroup(groupID,0);
+		return teamService.getTeamListByGroup(groupID);
 	}
 	
+	//发送消息
 	@RequestMapping("manageStageMessage.act")
 	public @ResponseBody String message(
 			@RequestParam(value = "leader",required = true)int leader,
 			@RequestParam(value = "message",required = true)String message){
-		messageService.getMessage(leader);
+		MessageEntity messageEntity = new MessageEntity();
+		messageEntity.setrUserEntity(userService.getUser(leader));
+		messageEntity.setStatus(0);
+		messageEntity.setTime(new Date());
+		messageService.addMessage(messageEntity);
 		System.out.println(" " + leader + message);
 		return "1";
 	}
