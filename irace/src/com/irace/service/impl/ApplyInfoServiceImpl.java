@@ -12,8 +12,8 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 
 	ApplyInfoDao applyInfoDao;
 	
-	public void setPpplyInfoDao(ApplyInfoDao ppplyInfoDao) {
-		this.applyInfoDao = ppplyInfoDao;
+	public void setApplyInfoDao(ApplyInfoDao applyInfoDao) {
+		this.applyInfoDao = applyInfoDao;
 	}
 
 	@Override

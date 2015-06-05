@@ -164,6 +164,17 @@
         <property name="target" ref="typeRaceServiceBase"></property>  
     </bean>
     
+    <!-- ===================== applyInfo ===========================  -->
+    <bean id="applyInfoDao" class="com.irace.dao.impl.ApplyInfoDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    <bean id="applyInfoServiceBase" class="com.irace.service.impl.ApplyInfoServiceImpl">  
+        <property name="applyInfoDao" ref="applyInfoDao"></property>
+    </bean>
+    <bean name="applyInfoService" parent="transactionProxy">
+        <property name="target" ref="applyInfoServiceBase"></property>  
+    </bean>
+    
     <!-- ===================== submit ===========================  -->
     <bean id="submitDao" class="com.irace.dao.impl.SubmitDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>  
