@@ -207,7 +207,8 @@
 	     </div>
 	</div>
 	<%@ include file="/public/section/footer.jsp" %>
-	
+	<!-- 引入文件上传弹窗 -->
+	<%@ include file="/public/section/upload-file.jsp" %>
 	
 	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript"> 
@@ -374,7 +375,7 @@
 				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组未通过审核</h3>";
 			}
 			else if(apply[number].teamStatus == 5){
-				htmlCreate = htmlCreate+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+				htmlCreate = htmlCreate+"<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal'>比赛正在进行，点击提交阶段产物</h3>";
 			}
 			else{
 				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已经结束</h3>";
