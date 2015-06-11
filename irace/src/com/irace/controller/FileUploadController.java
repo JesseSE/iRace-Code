@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.irace.dao.ApplyDao;
+import com.irace.dao.StageDao;
+import com.irace.dao.impl.ApplyDaoImpl;
+import com.irace.dao.impl.StageDaoImpl;
+import com.irace.entity.ApplyEntity;
+import com.irace.entity.StageRaceEntity;
+import com.irace.entity.SubmitEntity;
+import com.irace.service.ApplyService;
+import com.irace.service.StageService;
+import com.irace.service.SubmitService;
 import com.irace.util.Constants;
 import com.irace.util.InfoCode;
 import com.irace.util.JsonUtil;
@@ -19,6 +30,15 @@ import com.irace.util.JsonUtil;
 @Controller
 @RequestMapping("/upload/*")
 public class FileUploadController {
+	@Resource(name="applyService")
+	ApplyService applyService;	
+	@Resource(name="stageService")
+	StageService stageService;	
+	@Resource(name="submitService")
+	SubmitService submitService;	
+	
+	private int teamId;
+	private int stageId;
 
 	@RequestMapping("img")
 	@ResponseBody
@@ -93,7 +113,7 @@ public class FileUploadController {
 		
 		
 		
-		if(file != null) {
+		if(file != null && submitName != "" && describle != "") {
 			String originalName = file.getOriginalFilename();
 			String suffix = originalName.substring(originalName.lastIndexOf('.'), originalName.length());
 	        
@@ -143,20 +163,47 @@ public class FileUploadController {
 	 * @param describle
 	 * @param fileUrl
 	 */
-	private void recordSubmit(int applyId, String submitName, String describle,
+	private boolean recordSubmit(int applyId, String submitName, String describle,
 			String fileUrl) {
-		
-		
+		SubmitEntity su = new SubmitEntity(stageId, teamId, submitName, describle, fileUrl, 0);
+		if(submitService.addSubmit(su) > 0){
+			return true;
+		}else if(submitService.updateSubmit(su)){			
+			return true;
+		}else
+			return false;			
 	}
 
-	//根据小组所在的比赛，选择文件的存储位置
-	private String submitFileName(String originalFileName) {		
-		return originalFileName.trim();
+	//根据小组所在的比赛，算文件名
+	private String submitFileName(String originalFileName) {
+		return teamId + "_" + originalFileName.trim();
 	}
 	
 	//根据小组所在的比赛，选择文件的存储位置
 	private String generatePath(int apply) {
-		return "D:/下载/irace/submit/";
+		System.out.println("开始计算存储路径");		
+		
+		ApplyEntity applyEntity = applyService.getApplyDetail(apply);
+		String race = applyEntity.getRaceEntity().getName();
+		int raceId = applyEntity.getRace();
+		String group = applyEntity.getGroupRaceEntity().getName();
+		int groupId = applyEntity.getGroup();		
+		teamId = applyEntity.getTeam();
+		
+		int state = 1;//当前状态为正在进行
+		StageRaceEntity stageEntity = stageService.getStageDetail(groupId, state);
+		stageId = stageEntity.getId();
+		String stage = stageEntity.getName();
+		
+		String path = Constants.DEFAULT_SUBMIT_FILE_ROOT;
+		
+		path = path + raceId + "_" + race + "/";
+		path = path + groupId + "_" + group + "/";
+		path = path + stageId + "_" + stage + "/";
+		
+		System.out.println(path);
+		
+		return path;		
 	}
 	/**
 	 * 判断上传文件是否是压缩包

@@ -21,5 +21,7 @@ public interface StageDao {
 	public boolean updateStage(StageRaceEntity stage);
 	
 	public List getStageByGroup(int groupID);
+
+	StageRaceEntity getStageDetail(int id, int state);
 }
 

@@ -28,5 +28,7 @@ public interface StageService {
 	public boolean updateStage(StageRaceEntity stage);
 	
 	public String getStageByGroup(int groupID);
+
+	public StageRaceEntity getStageDetail(int groupId, int state);
 }
 

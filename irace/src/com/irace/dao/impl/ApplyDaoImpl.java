@@ -35,7 +35,8 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 
 	@Override
 	public ApplyEntity getApplyDetail(int id) {
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity AS u inner join fetch a.raceEntity AS r inner join fetch a.groupRaceEntity AS g left join fetch a.teamEntity AS t where a.id=?";
+		//this.hql = "FROM ApplyEntity WHERE a.id = ?";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity AS u inner join fetch a.raceEntity AS r inner join fetch a.groupRaceEntity AS g inner join fetch a.teamEntity AS t where a.id = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);				
 		return (ApplyEntity)query.uniqueResult();	
