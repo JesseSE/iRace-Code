@@ -30,10 +30,10 @@ public class TeamEntity implements IEntity{
 	@JoinColumn(name="leader",insertable=false,updatable=false)
 	private UserEntity userEntity;//队伍的创建者，队长
 	
-	private Integer group;//队伍所属的比赛的组别raceGroup
+	private Integer groupId;//队伍所属的比赛的组别raceGroup
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="group",insertable=false,updatable=false)
+	@JoinColumn(name="groupId",insertable=false,updatable=false)
 	private GroupRaceEntity groupRaceEntity;//队伍所属的比赛的组别raceGroup
 	
 	private Integer reward;//队伍所获得奖项
@@ -65,7 +65,7 @@ public class TeamEntity implements IEntity{
 	public TeamEntity(Integer leader, Integer group, Integer reward,
 			String name, String picUrl, String slogan){
 		this.leader = leader;
-		this.group = group;
+		this.groupId = group;
 		this.reward = reward;
 		this.name = name;
 		this.picUrl = picUrl;
@@ -83,7 +83,7 @@ public class TeamEntity implements IEntity{
 	public TeamEntity(Integer leader, Integer group,
 			String name, String picUrl, String slogan){
 		this.leader = leader;
-		this.group = group;
+		this.groupId = group;
 		this.reward = null;
 		this.name = name;
 		this.picUrl = picUrl;
@@ -98,7 +98,7 @@ public class TeamEntity implements IEntity{
 	 */
 	public TeamEntity(Integer leader, Integer group,String name){
 		this.leader = leader;
-		this.group = group;
+		this.groupId = group;
 		this.reward = null;
 		this.name = name;
 		this.picUrl = null;
@@ -126,11 +126,11 @@ public class TeamEntity implements IEntity{
 //	@ManyToOne(targetEntity=GroupRaceEntity.class)
 //	@JoinColumn(name="id")
 	public Integer getGroup() {
-		return group;
+		return groupId;
 	}
 
 	public void setGroup(Integer group) {
-		this.group = group;
+		this.groupId = group;
 	}
 
 //	@ManyToOne(targetEntity=RewardEntity.class)
@@ -208,8 +208,8 @@ public class TeamEntity implements IEntity{
 		map.put("slogan",this.getSlogan());
 		map.put("leader",this.getUserEntity().getNickname());
 		map.put("leadId", this.getLeader());
+		map.put("reward", this.getRewardEntity().getName());
+		map.put("raceStatus", this.getGroupRaceEntity().getRaceEntity().getStatus());
 		return map;
-	}
-	
-	
+	}	
 }

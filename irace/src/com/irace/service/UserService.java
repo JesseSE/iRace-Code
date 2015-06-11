@@ -82,4 +82,6 @@ public interface UserService {
 	 * @return
 	 */
 	public String getTeamMemberListByUser(int uid);
+	
+	public String getTeamMemberListByTeamId(int teamId);
 }

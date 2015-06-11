@@ -1,5 +1,6 @@
 package com.irace.entity;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -121,8 +122,10 @@ public class ApplyInfoEntity implements IEntity {
 
 	@Override
 	public Map<String, Object> getMap() {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("name", this.getPropertyEntity().getName());
+		map.put("value",this.getValue());
+		return map;
 	}
 	
 	

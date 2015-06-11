@@ -162,6 +162,7 @@ public class SubmitEntity implements IEntity{
 		map.put("name", this.getName());
 		map.put("content",this.getContent());
 		map.put("fileUrl", this.getFileUrl());
+		map.put("teamId",this.getTeamId());
 		return map;
 	}
 }

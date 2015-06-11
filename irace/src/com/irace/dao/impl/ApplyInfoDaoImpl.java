@@ -68,10 +68,18 @@ public class ApplyInfoDaoImpl extends SDao implements ApplyInfoDao{
 
 	@Override
 	public List getApplyInfoListByAR(int applyID, int raceID) {
-		this.hql = "FROM ApplyInfoEntity AS a, PropertyEntity AS p WHERE a.apply = ? and p.race = ? and a.property =  p.id";
+		this.hql = "FROM ApplyInfoEntity AS a WHERE a.apply = ? and a.propertyEntity.race = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, applyID);
 		query.setInteger(1, raceID);
+//		test(query.list());
 		return query.list();
+	}
+	
+	private void test (List list){
+		Iterator<ApplyInfoEntity> it = list.iterator();
+		while(it.hasNext()){
+			
+		}
 	}
 }

@@ -67,7 +67,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 
 	@Override
 	public boolean updateTeam(TeamEntity team) {
-		sessionFactory.getCurrentSession().update(team);
+		this.sessionFactory.getCurrentSession().saveOrUpdate(team);
 		return true;
 	}
 
@@ -156,7 +156,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	@Override
 	public List getTeamListByGroup(int groupID) {
 		//this.hql = "FROM TeamEntity AS t WHERE t.group = ? and t.status = 2";
-		this.hql = "FROM TeamEntity AS t WHERE t.group = ? ";
+		this.hql = "FROM TeamEntity AS t WHERE t.groupId = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		return query.list();
@@ -166,7 +166,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	//测试
 	public List getTeamListByGroup(int groupID, int status) {
 		//this.hql = "FROM TeamEntity AS t WHERE t.group = ? and t.status = ?";
-		this.hql = "FROM TeamEntity AS t WHERE t.group = ? ";
+		this.hql = "FROM TeamEntity AS t WHERE t.groupId = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		//query.setInteger(1, status);

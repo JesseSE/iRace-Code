@@ -128,7 +128,7 @@
                   <li role="presentation" class="active"><a href="##" id="tab2"  ><h4>阶段审核</h4></a></li> 
                   <li role="presentation" class="active"><a href="##" id="tab3"  ><h4>奖项颁发</h4></a></li> 
                   <li role="presentation" class="active"><a href="##" id="tab4"  ><h4>发送消息</h4></a></li> 
-				  <li style="position:relative;float:right;margin-top:10px;margin-left:0px;"><button style="font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px" onclick = "finishRace();"><a style="color:#FFF">结束比赛</a></button></li> 
+				  <li style="position:relative;float:right;margin-top:10px;margin-left:0px;"><div id = "beginOrfinishRace"></div></li> 
 				</ul>  
                 <!--  报名审核-->
                 <div id="applyCheck" style="display:block">
@@ -434,8 +434,18 @@
 	function showRaceName(res){
 		var htmlName = "";
 		var name = eval(res);
+		var htmlStatus = "";
 		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name[0].name+"</h1>";
 		$("#raceTitle").html(htmlName);
+		if(name.status == 0){
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>开启比赛</a></button>";
+		}
+		else if(name.status == 1){
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>结束比赛</a></button>";
+		}else{
+			
+		}
+		$("#beginOrfinishRace").html(htmlStatus);	
 	}
 	
 	//结束比赛
@@ -448,7 +458,7 @@
 			},
 			data : "JSON",
 			success : function(res){
-				alert("结束比赛");
+				alert("成功");
 			},
 			error : function(res){
 			}
@@ -599,18 +609,19 @@
 		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>详细信息</th></tr></thead><tbody>";
 		for(var number = 0; number < teamMember.length; number++){
 			htmlTeamMember = htmlTeamMember + "<tr><th scope='row'>"+ ( number + 1 ) + "</th>"+
-			"<td>"+teamMember[number].name+"</td>"+
+			"<td>"+teamMember[number].userName+"</td>"+
 			"<td>"+teamMember[number].email+"</td>"+
 			"<td>"+teamMember[number].tel+"</td>"+
-			"<td><a onclick = 'showSpecific(" + teamMember[number].id + teamMember[number].raceId + ");'>查看</a></td>"+	
+			"<td><a onclick = 'showSpecific(" + teamMember[number].id +","+ teamMember[number].raceId + ");'>查看</a></td>"+	
 			"</tr>";
 		}
 		htmlTeamMember = htmlTeamMember + "</tbody></table></div>";
-		var name = "#"+teamMember[0].teamID;
+		var name = "#"+teamMember[0].teamId;
 		$(name).html(htmlTeamMember);
 	}
 	
 	function showSpecific(applyId,raceId){
+		console.log(applyId,raceId);
 		$.ajax({
 			url : $("#appName").val() + "/race/managerStageShowSpecific.act",
 			type : "POST",
@@ -619,11 +630,17 @@
 				raceId : raceId
  			},
 			dataType : "JSON",
-			success : function(res){
-				alert("aaa");
+			success : function(res){	
+				var context = eval(res);
+				var htmlContext = "";
+				for (var number = 0; number < context.length; number++){
+					htmlContext =  htmlContext + context[number].name + " : " + 
+					context[number].value + "\r\n";
+				}
+				alert(htmlContext);
 			},
 			error : function(res){
-				
+				console.log(res);
 			}
 		});
 		
@@ -638,7 +655,7 @@
 	 
 	 $("#stageGroupSelect").change(selectGroupPhase); 
 	
-	function loadPhase(GroupID){
+	function loadPhase(groupID){
 		$.ajax({
 			url:$("#appName").val()+"/race/manageStageLoadPhase.act",
 			type:"POST",
@@ -699,22 +716,11 @@
 		"<h3 class='team-state-wait'>阶段时间："+
 		phase[0].startTime + "-" + phase[0].endTime + "</h3></a>";
 		$("#phaseTitle").html(htmlPhaseTitle);
-		getPhase(phase[0].id,false);
-		/*
-		if(phase[0].status == 0){
-			getPhase(phase[0].id,true);
-		}	
-		else if(phase[0].status == 2) {
-			getPhase(phase[0].id,false);
-		}
-		else{
-			alert("阶段未开始，请重新选择");
-		}
-		 */
+		getPhase(phase[0].id,phase[0].status);
 	}
 	
 	//阶段审查的队伍
-	function getPhase(phaseID,isFinished){
+	function getPhase(phaseID,status){
 		$.ajax({
 			url:$("#appName").val() + "/race/manageGetStagePhase.act",
 			type:"POST",
@@ -723,14 +729,17 @@
 			},
 			dataType:"JSON",
 			success:function(res){
-				if(!isFinished){
+				if(status == 1){
 					showPhaseDoing(res);
 					console.log("Y1"+res);
 				}
-				else{
+				else if(status == 2){
 					showPhaseDone(res);
 					console.log("Y2"+res);
-				}			
+				}
+				else{
+					beginPhase();
+				}
 			},
 			error:function(res){
 				console.log(res);
@@ -738,6 +747,12 @@
 		});
 	}
 	
+	function beginPhase(){
+		var msg = "确定开启阶段吗？";
+		if(confirm(msg) == true){
+			finishPhase(1);
+		}
+	}
 	
 	function showPhaseDoing(res){
 		var phase = eval(res);
@@ -746,7 +761,7 @@
 		htmlPhase = "<div class = 'pannel panel-default'>"+
 		"<table class = 'table' style = 'word-break:break-all; word-wrap:break-all'>"+ 
 		"<thead style = 'font-weight:bold;'>" + 
-		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交物说明</th><th>文件</th><th>晋级</th></tr></thead><tbody>";
+		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交物说明</th><th>文件</th></tr></thead><tbody>";
 		
 		for(var number = 0; number < phase.length; number++){
 			htmlPhase = htmlPhase + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
@@ -754,20 +769,15 @@
 			"<td>" + phase[number].name  + "</td>" + 
 			"<td>" + phase[number].content + "</td>" + 
 			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +"'>下载</a></td>" ;
-			//队伍晋级
-			if(phase[number].teamStatus == 5){
-				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate' onclick = 'teamStatusGoOrOut("+phase[number].teamId+" , true);'>晋级</a></td></tr>" ;
-			}
 			//队伍淘汰
-			else{
+			if(phase[number].teamStatus == 2){
 				htmlPhase = htmlPhase + 
-				"<td><a class = 'team-operate' onclick = 'teamStatusGoOrOut("+phase[number].teamId+" , false);'>淘汰</a></td></tr>" ;
-			}	 
+				"<td><a class = 'team-operate' onclick = 'teamStatusGoOrOut("+phase[number].teamId+");'>淘汰</a></td></tr>" ;
+			}
 		}
 		
 		htmlPhase = htmlPhase + "</tbody></table></div>" + 
-		"<h3 class = 'stage-pass' onclick  = 'finishPhase(" + phase[0].id + ")'>完成此阶段审核</h3>";
+		"<h3 class = 'stage-pass' onclick  = 'finishPhase(2)'>完成此阶段审核</h3>";
 		$("#phaseSubmit").html(htmlPhase);
 	}
 	
@@ -786,16 +796,6 @@
 			"<td>" + phase[number].name +"作品" + "</td>" + 
 			"<td>" + phase[number].content + "</td>" + 
 			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +">下载</a></td>" ;
-			//队伍晋级
-			if(phase.teamStatus == 5){
-				htmlPhase = htmlPhase + 
-				"<td><a class = 'stage-wait'>晋级</a></td></tr>" ;
-			}
-			//队伍淘汰
-			else{
-				htmlPhase = htmlPhase + 
-				"<td><a class = 'stage-wait'>淘汰</a></td></tr>" ;
-			}	 
 		}
 		
 		htmlPhase = htmlPhase + "</tbody></table></div>" + 
@@ -803,14 +803,20 @@
 		$("#phaseSubmit").html(htmlPhase);
 	}
 	
-	//判断队伍是晋级还是淘汰
-	function teamStatusGoOrOut(id, isPassed){
+	//淘汰
+	function teamStatusGoOrOut(id){
+		var msg = "您确定淘汰该队伍吗？";
+		if(confirm(msg) == true){
+			sendteamStatusGoOrOut(id);
+		}
+	}
+	
+	function sendteamStatusGoOrOut(id){
 		$.ajax({
 			url : $("#appName").val() + "/race/manageStageTeamGoOrOut.act",
 			type : "POST",
 			data : {
-				teamId : id,
-				isPassed : isPassed
+				teamId : id
 			},
 			dataType : "JSON",
 			success : function(res){
@@ -823,12 +829,14 @@
 	}
 	
 	//完成阶段的审查
-	function finishPhase(phaseID){
+	function finishPhase(status){
+		var phaseId = $("#stageStageSelect").val();
 		$.ajax({
 			url : $("#appName").val() + "/race/manageStageFinishPhase.act",
 			type : "POST",
 			data : {
-				phaseId : phaseId
+				phaseId : phaseId,
+				Status : status
 			},
 			dataType : "JSON",
 			success : function(res){
@@ -987,11 +995,11 @@
 			type : "POST",
 			data : {
 				teamId : teamId,
-				praiseId : praiseId
+				praiseId : praise
 			},
 			dataType : "JSON",
 			success : function(res){
-				getPraiseTitle();
+				selectPraiseTeam();
 			},
 			error : function(res){		
 			}

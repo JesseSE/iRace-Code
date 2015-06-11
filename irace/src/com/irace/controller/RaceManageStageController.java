@@ -1,7 +1,10 @@
 package com.irace.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -28,6 +31,7 @@ import com.irace.service.StageService;
 import com.irace.service.SubmitService;
 import com.irace.service.TeamService;
 import com.irace.service.UserService;
+import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
 
@@ -72,11 +76,13 @@ public class RaceManageStageController extends SController{
 	}
 	
 	//结束比赛
-	@RequestMapping("finishRace.act")
+	@RequestMapping("managerStageFinishRace.act")
 	public @ResponseBody String finishRace(
-			@RequestParam(value = "raceId" , required = true) int raceId){
+			@RequestParam(value = "raceId" , required = true) int raceId){	
 		RaceEntity race = raceService.getRace(raceId);
-		race.setStatus(1);
+		int status = race.getStatus();
+		if(status < 3)
+			race.setStatus(status + 1);	
 		raceService.updateRace(race);
 		return "1";
 	}
@@ -85,7 +91,7 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageStageLoadGroup.act")
 	public @ResponseBody String loadRace(
 			@RequestParam(value="raceID",required=true) int raceID){
-		JSONArray array = JSONArray.fromObject(groupRaceService.getGroupRaceList(raceID));
+		JSONArray array = JSONArray.fromObject(myGroupList(groupRaceService.getGroupRaceList(raceID)));
 		return array.toString();	
 	}
 	
@@ -102,11 +108,11 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String sendTeamStatus(
 			@RequestParam(value="teamId",required = true) int teamID,
 			@RequestParam(value="status",required = true) boolean status){
-		TeamEntity team = teamService.getTeam(teamID);
+		TeamEntity team = teamService.getTeamDetail(teamID);
 		if(status){
-			team.setStatus(3);
+			team.setStatus(2);
 		}else{
-			team.setStatus(4);
+			team.setStatus(3);
 		}
 		teamService.updateTeam(team);		
 		System.out.print(team.getName());
@@ -117,7 +123,7 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("managerStageShowSpecific.act")
 	public @ResponseBody String loadGroupTeamMember(
 			@RequestParam(value="applyId",required=true) int applyId,
-			@RequestParam(value = "raceId",required = true)int raceID){			
+			@RequestParam(value = "raceId",required = true)int raceID){	
 		return applyInfoService.getApplyInfoListByAR(applyId, raceID);	
 	}
 
@@ -126,7 +132,7 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageStageLoadPhase.act")
 	public @ResponseBody String loadPhase(
 			@RequestParam(value="groupID",required=true) int groupID){
-		JSONArray array = JSONArray.fromObject(stageService.getStageList(groupID));
+		JSONArray array = JSONArray.fromObject(myStage(stageService.getStageList(groupID)));
 		return array.toString();	
 	}
 	
@@ -150,20 +156,17 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("manageGetStagePhase.act")
 	public @ResponseBody String phaseDoing(
 			@RequestParam(value="phaseID",required=true) int phaseID){	
-		JSONArray array = JSONArray.fromObject(submitService.getSubmitByStage(phaseID));
-		return array.toString();		
+//		JSONArray array = JSONArray.fromObject(submitService.getSubmitByStage(phaseID));
+//		return array.toString();	
+		return JsonUtil.getJsonByMapList(submitService.getSubmitByStage(phaseID));
 	}
 	
 	//确定队伍是否淘汰
 	@RequestMapping("manageStageTeamGoOrOut.act")
 	public @ResponseBody String setStageTeamGoOrOut(
-			@RequestParam(value="teamId",required=true) int teamId,
-			@RequestParam(value = "isPassed",required = true)boolean isPassed){
+			@RequestParam(value="teamId",required=true) int teamId){
 		TeamEntity team = teamService.getTeam(teamId);
-		if(isPassed){
-			team.setStatus(5);
-		}else
-			team.setStatus(6);
+		team.setStatus(3);
 		teamService.updateTeam(team);	
 		return "1";		
 	}
@@ -171,9 +174,10 @@ public class RaceManageStageController extends SController{
 	//完成阶段
 	@RequestMapping("manageStageFinishPhase.act")
 	public @ResponseBody String finishPhase(
-			@RequestParam(value = "phaseId",required = true)int phaseId){
+			@RequestParam(value = "phaseId",required = true)int phaseId,
+			@RequestParam(value = "status",required = true)int status){
 		StageRaceEntity stage = stageService.getStage(phaseId);
-		stage.setStatus(2);
+		stage.setStatus(status);
 		stageService.updateStage(stage);
 		return "1";
 	}
@@ -210,8 +214,9 @@ public class RaceManageStageController extends SController{
 	@RequestMapping("getPraiseSelect.act")
 	public @ResponseBody String getPraiseSelect(
 			@RequestParam(value = "groupID", required = true)int groupID){
-		JSONArray array = JSONArray.fromObject(rewardService.getRewardListByGroup(groupID));
-		return array.toString();
+		return JsonUtil.getJsonByMapList(rewardService.getRewardListByGroup(groupID));
+//		JSONArray array = JSONArray.fromObject(rewardService.getRewardListByGroup(groupID));
+//		return array.toString();
 	}
 	
 	//给队伍颁奖
@@ -250,13 +255,46 @@ public class RaceManageStageController extends SController{
 			@RequestParam(value = "leader",required = true)int leader,
 			@RequestParam(value = "message",required = true)String message){
 		MessageEntity messageEntity = new MessageEntity();
-		messageEntity.setrUserEntity(userService.getUser(leader));
+		//messageEntity.setrUserEntity(userService.getUser(leader));
+		messageEntity.setReceiver(leader);
 		messageEntity.setStatus(0);
 		messageEntity.setTime(new Date());
+		messageEntity.setContent(message);
+		messageEntity.setSender(2);
 		messageService.addMessage(messageEntity);
 		System.out.println(" " + leader + message);
 		return "1";
 	}
-
+	
+	private List myGroupList(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<GroupRaceEntity> it = list.iterator();
+		while(it.hasNext()){
+			GroupRaceEntity group = it.next();
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("id", Integer.toString(group.getId()));
+			map.put("name",group.getName());
+			map.put("status", Integer.toString(group.getStatus()));
+			listMap.add(map);
+		}
+		return listMap;
+	}
+	
+	private List myStage(List list){
+		List<Map> listMap = new ArrayList<Map>();
+		Iterator<StageRaceEntity> it = list.iterator();
+		while(it.hasNext()){
+			StageRaceEntity stage = it.next();
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("id", Integer.toString(stage.getId()));
+			map.put("name", stage.getName());
+			map.put("status", Integer.toString(stage.getStatus()));
+			//map.put("startTime", stage.getStartTime().toString());
+			//map.put("endTime",stage.getEndTime().toString());
+			//map.put("groupName", stage.getGroupRaceEntity().getName());
+			listMap.add(map);
+		}
+		return listMap;
+	}
 
 }

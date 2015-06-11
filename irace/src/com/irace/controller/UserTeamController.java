@@ -41,11 +41,8 @@ public class UserTeamController extends SController{
 	@RequestMapping("getTeamCreate.act")
 	public @ResponseBody String getTeamCreate(
 			@RequestParam(value="userID",required=true)int userID){			
-		String aaaa = teamService.getCreatedTeamList(1, 1);
-		System.out.println(aaaa);
-		
+		String aaaa = teamService.getCreatedTeamList(1, 1);	
 		return teamService.getCreatedTeamList(userID, 1);	
-		//return null;
 	}
 	
 	//通过UserID检索我加入的比赛
@@ -70,18 +67,10 @@ public class UserTeamController extends SController{
 	@RequestMapping("getTeamMember.act")
 	public @ResponseBody String getTeamMember(
 			@RequestParam(value="teamID",required=true)int teamID){
-		return userService.getTeamMemberListByUser(teamID);
+		return userService.getTeamMemberListByTeamId(teamID);
 		//return null;
 	}
-	
-	//通过teamID检索出team成员 且对team成员进行操作	
-	@RequestMapping("getTeamMemberLeader.act")
-	public @ResponseBody String getTeamMemberLeader(
-			@RequestParam(value="teamID",required=true)int teamID){
-		return userService.getTeamMemberListByUser(teamID);
-		//return null;
-	}
-	
+		
 	//通过对队员的审核，准许入队 返回 teamID
 	@RequestMapping("getTeamChooseAgree.act")
 	public @ResponseBody String getTeamChooseAgree(

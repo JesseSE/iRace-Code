@@ -323,7 +323,6 @@
 		$.ajax({
 			url:$("#appName").val()+"/user/getTeamCreate.act",
 			type:"post",
-			//测试 userID 为1 
 			data: {
    				userID:userID
    			  },
@@ -344,40 +343,46 @@
 		for(var number = 0;number < apply.length;number++){
 			htmlCreate = htmlCreate + "<a name = 'i_create'></a>"+
 			"<div class = 'panel-body'>"+
-			"<div class ='list-group'>";
-			//根据team状态判断，1正在组队，可以对队员的状态进行判断
-			if(apply[number].teamStatus == 1){
-				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' href='##' onclick='upDownTeamLeader("+apply[number].teamId+");'>";
-			}
-			else{
-				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+");'>";
-			}
-
-			htmlCreate = htmlCreate +"<h3>"+apply[number].teamName+"</h3></a>"+
+			"<div class ='list-group'>" +
+		    "<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId + "," + true +");'>" +
+			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
 			"<span class = 'label label-default'>"+apply[number].raceName+"</span>"+
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
-			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
-			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
-			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行，点击提交阶段产物  4 审核未通过
-			if(apply[number].teamStatus == 1){
-				htmlCreate = htmlCreate+"<h3 class='team-state-submit onclick = 'applyTeam("+apply[number].teamID+");''>未提交审核，点击提交审核</h3>";
-			}
-			else if(apply[number].teamStatus == 2){
-				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
-			}
-			else if(apply[number].teamStatus == 3){
-				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组审核通过</h3>";
-			}
-			else if(apply[number].teamStatus == 4){
-				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组未通过审核</h3>";
-			}
-			else if(apply[number].teamStatus == 5){
+			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>";
+			if(apply[number].raceStatus == 3)
+				htmlCreate = htmlCreate + "<span class = 'label label-info'>"+apply[number].reward+"</span>";
+			switch(apply[number].raceStatus){
+			//比赛报名阶段
+			case 1:
+				//队伍未发送申请
+				if(apply[number].teamStatus == 0){
+					htmlCreate = htmlCreate + "<h3 class='team-state-submit' onclick = 'applyTeam("+apply[number].teamID+");'>未提交审核，点击提交审核</h3>";
+				}
+				//队伍等待审核通过
+				else if(apply[number].teamStatus == 1){
+					htmlCreate = htmlCreate+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
+				}
+				//队伍通过审核
+				else if(apply[number].teamStatus == 2){
+					htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组审核通过</h3>";
+				}
+				//队伍未通过审核
+				else{
+					htmlCreate = htmlCreate+"<h3 class='team-state-wait'>小组被拒绝</h3>";
+				}			
+				break;
+			//比赛阶段
+			case 2:
 				htmlCreate = htmlCreate+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
-			}
-			else{
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已经结束</h3>";
+				break;
+			//比赛结束
+			case 3:
+				htmlCreate = htmlCreate+"<h3 class='team-state-wait'>比赛结束</h3>";
+				break;
+			default :
+				break;
 			}
 			htmlCreate = htmlCreate +"</a></div></div>";
 		}
@@ -409,32 +414,45 @@
 			htmlJoin = htmlJoin + "<a name = 'i_join'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>"+
-			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamID+");'>"+
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+ ","+ false +");'>"+
 			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
 			"<span class = 'label label-default'>"+apply[number].raceName+"</span>"+
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
-			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
-			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
-			//判断队伍的审核状态  1未提交 2 等待审核通过 3 比赛正在进行 4队伍未通过 5比赛已结束 6已获奖
-			if(apply[number].teamStatus == 1){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>正在组队</h3>";
-			}
-			else if(apply[number].teamStatus == 2){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组正在等待审核通过</h3>";
-			}
-			else if(apply[number].teamStatus == 3){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组审核通过</h3>";
-			}
-			else if(apply[number].teamStatus == 4){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组未通过审核</h3>";
-			}
-			else if(apply[number].teamStatus == 5){
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛正在进行</h3>";
-			}
-			else{
-				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛已经结束</h3>";
+			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>" ;
+			if(apply[number].raceStatus == 3)
+				htmlJoin = htmlJoin + "<span class = 'label label-info'>"+apply[number].reward+"</span>";
+			switch(apply[number].raceStatus){
+			//比赛报名阶段
+			case 1:
+				//队伍未发送申请
+				if(apply[number].teamStatus == 0){
+					htmlJoin = htmlJoin + "<h3 class='team-state-wait' >未提交审核</h3>";
+				}
+				//队伍等待审核通过
+				else if(apply[number].teamStatus == 1){
+					htmlJoin = htmlJoin+"<h3 class='team-state-wait'>正在等待审核通过</h3>";
+				}
+				//队伍通过审核
+				else if(apply[number].teamStatus == 2){
+					htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组审核通过</h3>";
+				}
+				//队伍未通过审核
+				else{
+					htmlJoin = htmlJoin+"<h3 class='team-state-wait'>小组被拒绝</h3>";
+				}			
+				break;
+			//比赛阶段
+			case 2:
+				htmlJoin = htmlJoin+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+				break;
+			//比赛结束
+			case 3:
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛结束</h3>";
+				break;
+			default :
+				break;
 			}
 			htmlJoin = htmlJoin +"</a></div></div>";
 		}
@@ -473,13 +491,12 @@
 			"<span class = 'label label-default'>"+apply[number].raceName+"</span>"+
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
 			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
-			"<span class = 'label label-info'>"+apply[number].reward+"</span>"+
 			"<h3 class='team-state-wait'>正在组队</h3>"+"</a></div></div>";
 		}
 		$("#wait").html(htmlWait);
 	}
 					
-	function upDown(id)
+	function upDown(id, judge)
 	{
 		var content = document.getElementById(id);
 		if(content.style.display=="none")
@@ -495,8 +512,11 @@
 			data: {
    				teamID:id
    			  },
-   			success: function(res) {           		
-       			showTeamMember(res);        			
+   			success: function(res) {
+   				if(judge)
+       			    showTeamMember(res); 
+   				else
+   					showTeamMemberJoin(res);
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -511,82 +531,56 @@
 		htmlMember = htmlMember +"<div class='panel panel-default'>"+
 		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
 		"<thead style='font-weight:bold;'>"+
-		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th></tr></thead>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th><th></th></tr></thead>"+
 		"<tbody>";
 		for(var number = 0;number < apply.length;number++){
 			htmlMember = htmlMember + "<tr>"+
 			"<th scope = 'row'>"+ (number+1)+"</th>"+
-			"<td>"+apply[number].name+"</td>"+
+			"<td>"+apply[number].userName+"</td>"+
 			"<td>"+apply[number].email+"</td>"+
 			"<td>"+apply[number].tel+"</td>";
-			//对队员的状态进行判断 2 提交等待审核 可以通过或者拒绝 其他，可以删除
-			if(apply[number].status == 1){
-				htmlMember = htmlMember + "<td>待审核</td></tr>";
+			//比赛报名
+			if(apply[number].raceStatus == 1){
+				if(apply[number].status == 1){
+					htmlMember = htmlMember + "<td>待审核</td>"+
+					"<td><a class='team-operate' onclick = 'chooseAgree("+apply[number].id+","+apply[number].teamId+");'>同意</a><a class='team-operate' onclick = 'chooseRefuse("+apply[number].ID+","+apply[number].teamID+")'>拒绝</a></td></tr>";
+				}
+				else{
+					htmlMember = htmlMember + "<td>已加入</td>"+
+					"<td><a class='team-operate' onclick = 'chooseDelete("+apply[number].id+","+apply[number].teamId+");'>删除</a></td></tr>";
+				}
 			}
+			//
 			else{
 				htmlMember = htmlMember + "<td>已加入</td></tr>";
 			}
 		}
 		htmlMember = htmlMember +"</tbody></table></div>";
-		var name = "#"+apply[0].teamID;
+		var name = "#"+apply[0].teamId;
 		$(name).html(htmlMember);
 	}
 	
-	function upDownTeamLeader(id)
-	{
-		var content = document.getElementById(id);
-		if(content.style.display=="none")
-		{
-			content.style.display="block";
-		}
-		else
-		{content.style.display="none";}
-		
-		$.ajax({
-			url:$("#appName").val()+"/user/getTeamMemberLeader.act",
-			type:"post",
-			data: {
-   				teamID:id
-   			  },
-   			success: function(res) {           		
-       			showTeamMemberLeader(res);        			
-       		},
-       		error: function(res) {        			
-       			console.log(res);
-       			alert('输入错误！请返回重新输入！');
-       		}   
-		});	
-	}
-	
-	function showTeamMemberLeader(res){
-		var apply = eval(res);
-		console.log(res);
+	function showTeamMemberJoin(res){
+		var apply = eval(res); 
 		var htmlMember = "";
 		htmlMember = htmlMember +"<div class='panel panel-default'>"+
 		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
 		"<thead style='font-weight:bold;'>"+
-		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th><th>操作</th></tr></thead>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th></tr></thead>"+
 		"<tbody>";
 		for(var number = 0;number < apply.length;number++){
 			htmlMember = htmlMember + "<tr>"+
 			"<th scope = 'row'>"+ (number+1)+"</th>"+
-			"<td>"+apply[number].name+"</td>"+
+			"<td>"+apply[number].userName+"</td>"+
 			"<td>"+apply[number].email+"</td>"+
-			"<td>"+apply[number].tel+"</td>";
-			//对队员的状态进行判断 2 提交等待审核 可以通过或者拒绝 其他，可以删除
-			if(apply[number].status == 1){
-				htmlMember = htmlMember + "<td>待审核</td>"+
-				"<td><a class='team-operate' onclick = 'chooseAgree("+apply[number].ID+","+apply[number].teamID+");'>同意</a><a class='team-operate' onclick = 'chooseRefuse("+apply[number].ID+","+apply[number].teamID+")'>拒绝</a></td></tr>";
-			}
-			else{
-				htmlMember = htmlMember + "<td>已加入</td>"+
-				"<td><a class='team-operate' onclick = 'chooseDelete("+apply[number].ID+","+apply[number].teamID+");'>删除</a></td></tr>";
-			}
+			"<td>"+apply[number].tel+"</td>" +
+			"<td>已加入</td></tr>";
 		}
 		htmlMember = htmlMember +"</tbody></table></div>";
-		var name = "#"+apply[0].teamID;
-		$(name).html(htmlMember);
+		var name = "#"+apply[0].teamId;
+		$(name).html(htmlMember);	
 	}
+	
 	
 	function chooseAgree(id,teamid){
 		$.ajax({

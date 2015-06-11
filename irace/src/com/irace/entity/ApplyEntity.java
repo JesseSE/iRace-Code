@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+
 @Entity
 @Table(name="apply")
 public class ApplyEntity implements IEntity{
@@ -178,6 +180,14 @@ public class ApplyEntity implements IEntity{
 		map.put("raceName", this.getRaceEntity().getName());
 		map.put("leaderName",this.getTeamEntity().getUserEntity().getNickname());
 		map.put("teamSlogan",this.getTeamEntity().getSlogan());
+		map.put("email",this.getUserEntity().getEmail());
+		map.put("tel",this.getUserEntity().getTel());
+		map.put("id", this.getId());
+		map.put("raceId", this.getRace());
+		map.put("userName", this.getUserEntity().getNickname());
+		map.put("raceStatus", this.getRaceEntity().getStatus());
+		map.put("leaderId", this.getTeamEntity().getLeader());
+		map.put("status", this.getStatus());
 		//map.put("reward",ap.getTeamEntity().getRewardEntity().getName());
 		return map;
 	}

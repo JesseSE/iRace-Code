@@ -21,4 +21,6 @@ public interface UserDao {
 	public boolean updateUser(UserEntity user);
 	
 	public List getTeamMemberListByUser(int uid);
+	
+	public List getTeamMemberListByTeamId(int teamId);
 }

@@ -67,7 +67,7 @@ public class StageDaoImpl extends SDao implements StageDao{
 
 	@Override
 	public List getStageByGroup(int groupID) {
-		this.hql = "FROM StageRaceEntity AS s WHERE s.groupID = ?";
+		this.hql = "FROM StageRaceEntity AS s WHERE s.groupId = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		return query.list();
@@ -87,8 +87,6 @@ public class StageDaoImpl extends SDao implements StageDao{
 			//map.put("groupName", stage.getGroupRaceEntity().getName());
 			listMap.add(map);
 		}
-		return listMap;
-		
-		
+		return listMap;	
 	}
 }

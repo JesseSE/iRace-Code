@@ -68,6 +68,7 @@ public class SubmitServiceImpl implements SubmitService {
 	@Override
 	public List getSubmitByStage(int stageID) {
 		return submitDao.getSubmitByStage(stageID);
+		//return JsonUtil.getJsonByMapList(submitDao.getSubmitByStage(stageID));
 	}
 
 }

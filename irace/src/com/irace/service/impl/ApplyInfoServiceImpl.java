@@ -61,7 +61,7 @@ public class ApplyInfoServiceImpl implements ApplyInfoService {
 	@Override
 	public String getApplyInfoListByAR(int applyID, int raceID) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(applyInfoDao.getApplyInfoListByAR(applyID, raceID), new String[]{});
+		return JsonUtil.getJsonByMapList(applyInfoDao.getApplyInfoListByAR(applyID, raceID));
 	}
 
 }
