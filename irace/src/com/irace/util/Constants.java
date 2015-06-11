@@ -10,6 +10,8 @@ public class Constants {
 	
 	public static String DEFAULT_FILE_ABSOLUTE_ROOT = "E:/project/Java/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/irace/public/images";
 	
+	public static String DEFAULT_SUBMIT_FILE_ROOT = "E:/irace/allSubmit/";
+	
 	public static String DEFAULT_FILE_ROOT = "/irace/public/images";
 	
 	public static String DEDAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm";

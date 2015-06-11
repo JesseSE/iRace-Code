@@ -63,4 +63,10 @@ public class StageServiceImpl implements StageService {
 		return JsonUtil.listToJSONString(stageDao.getStageByGroup(groupID), new String[]{});
 	}
 
+	@Override
+	public StageRaceEntity getStageDetail(int groupId, int state) {
+		// TODO Auto-generated method stub
+		return stageDao.getStageDetail(groupId, state);
+	}
+
 }

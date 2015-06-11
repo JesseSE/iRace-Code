@@ -78,6 +78,23 @@ public class SubmitEntity implements IEntity{
 	}
 	
 	/**
+	 * 阶段性提交物,包含附件
+	 * @param stagte ：所属阶段
+	 * @param name ：提交物名称
+	 * team id
+	 * @param content ：提交无描述
+	 * @param fileUrl ：提交物存放路径
+	 */
+	public SubmitEntity(Integer stageId, Integer teamId, String name, String content, String fileUrl, int state){
+		this.stageId = stageId;
+		this.teamId = teamId;
+		this.name = name;
+		this.content = content;
+		this.fileUrl = fileUrl;
+		this.status = state;
+	}
+	
+	/**
 	 * 阶段性提交物,不包含附件
 	 * @param stagte ：所属阶段
 	 * @param name ：提交物名称
