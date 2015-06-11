@@ -102,4 +102,13 @@ public class SubmitDaoImpl extends SDao implements SubmitDao{
 		return listMap;
 	}
 
+	@Override
+	public SubmitEntity getSubmitByStageAndTeam(int stageId, int teamId) {
+		this.hql = "FROM SubmitEntity AS s WHERE s.stageId=? and s.teamId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, stageId);
+		query.setInteger(1, teamId);
+		return (SubmitEntity) query.uniqueResult();
+	}
+
 }

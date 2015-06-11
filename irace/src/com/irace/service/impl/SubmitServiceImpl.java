@@ -71,4 +71,10 @@ public class SubmitServiceImpl implements SubmitService {
 		//return JsonUtil.getJsonByMapList(submitDao.getSubmitByStage(stageID));
 	}
 
+	@Override
+	public SubmitEntity getSubmitByStageAndTeam(int stageId, int teamId) {
+		// TODO Auto-generated method stub
+		return submitDao.getSubmitByStageAndTeam(stageId, teamId);
+	}
+
 }
