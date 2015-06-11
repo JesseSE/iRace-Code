@@ -62,7 +62,6 @@
             </nav>           
             
          </div>      
-        
 	</div>  
     
     
@@ -155,7 +154,8 @@
     
   
 	<%@ include file="/public/section/footer.jsp" %>
-	<!-- 引入文件上传弹窗 -->
+	
+	<!-- 引入文件上传弹窗 --> 
 	<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3>
 	<%@ include file="/public/section/upload-file.jsp" %>
 	
@@ -295,10 +295,10 @@
 			htmlCreate = htmlCreate + "<a name = 'i_create'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>" +
-		    "<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId + "," + true +");'>" +
-			"<h3>"+apply[number].teamName+"</h3></a>"+
+		    "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + "," + true +");'  href='##' >" +
+			"<h3 style='display:inline;'>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
-			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
+			"<div id ='"+apply[number].teamId +"' style='display:none'>"+"</div>"+
 			"<span class = 'label label-default'>"+apply[number].raceName+"</span>"+
 			"<span class = 'label label-primary'>"+apply[number].leaderName+"</span>"+
 			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>";
@@ -335,8 +335,6 @@
 			default :
 				break;
 			}
-			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
-			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
 			htmlCreate = htmlCreate +"</a></div></div>";
 		}
 		$("#create").html(htmlCreate);
