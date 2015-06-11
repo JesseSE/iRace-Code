@@ -33,42 +33,8 @@
 </script>	
 </head>
 <body>
-<div class="header-top">
-	   <div class="wrap"> 
-			  <div class="header-top-left">
-			  	  <div class="box">
-                     <div class="logo" style="margin-top:8px;">
-					   <a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
-				     </div>
-                  </div>
-                   <div class="clear"></div> 
-   			  </div>
-           
-            <!--用户头像-->
-			 <div class="cssmenu" role="navigation">
-				<ul>
-                    <li><image src="<%=request.getContextPath() %>/public/images/message.png"></image></li> 
-					<li><a href="##">消息</a></li>|                   
-					<li><image src="<%=request.getContextPath() %>/public/images/userican.png"></image></li>
-                    
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  刘嵩 
-                </a>
-                <ul class="dropdown-menu" role="menu">
-					<div class="dropdown-header">dropdown header
-					</div>
-					<li><a class="dropdown-btn" href="##">个人中心</a>
-					<a class="dropdown-btn" href="##">退出登录</a></li>
-					
-                </ul>
-                    
-                    </li>
-				</ul>
-			</div>
-			<div class="clear"></div>
- 		</div>
-	</div>
+<!-- 在这里引入登录模块 -->
+<%@ include file="/public/section/user-div.jsp" %>
     
     
     <!--导航栏-->
@@ -187,26 +153,11 @@
 	</div>
 	</div>
     
-    
-   <div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
-		         </div>
-				<div class="f-list2">
-				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
-				 </ul>
-			    </div>
-			    <div class="clear"></div>
-		      </div>
-	     </div>
-	</div>
+  
 	<%@ include file="/public/section/footer.jsp" %>
+	<!-- 引入文件上传弹窗 -->
+	<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3>
+	<%@ include file="/public/section/upload-file.jsp" %>
 	
 	
 	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
@@ -384,6 +335,8 @@
 			default :
 				break;
 			}
+			"<span class = 'label label-default'>"+apply[number].teamSlogan+"</span>"+
+			"<span class = 'label label-info'>"+apply[number].reward+"</span>";
 			htmlCreate = htmlCreate +"</a></div></div>";
 		}
 		$("#create").html(htmlCreate);

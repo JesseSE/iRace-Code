@@ -294,7 +294,12 @@
 		</div>
 	</div>
 
-	<%@ include file="/public/section/footer.jsp"%>
+	<!-- 页底开始  -->
+    <%@ include file="/public/section/footer.jsp" %>
+	<!-- 页底结束  -->
+	
+	<!-- 取得用户id -->
+	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">	
 	<script
 		src="<%=request.getContextPath()%>/public/js/jquery.nivo.slider.js">
 	</script>
@@ -311,7 +316,12 @@
 		currentPage = 1;
 		eachPageNum = 6;
 		isHeldNow = true;
-		userID = 1;
+		//userID = 1;
+		userID = $("#userIDHtml").val();
+		if(userID == "null"){
+			console.log(userID);
+			window.location.href=$("#appName").val()+"/user/login";
+		}
 	}
 	
 	//前一页
