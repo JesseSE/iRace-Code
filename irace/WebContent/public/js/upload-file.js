@@ -1,11 +1,4 @@
 //提交物上传
-//当对话框完全关闭时执行
-$(function () { $('#myModal').modal('hide')});
-$(function () { $('#myModal').on('hide.bs.modal', function () {
-	alert('嘿，我听说您喜欢模态框...');})
-});
-
-
  /**
   * 上传文件设置
   */
@@ -26,24 +19,26 @@ $(function () { $('#myModal').on('hide.bs.modal', function () {
     },  //提交前处理 
     success: function(res) {    	
     	if(res.code == 200) {
-    		console.log("提交成功！")
+    		alert('文件上传成功！');
     	} else {    		
-    		alert(res.msg);
+    		console.log(res.msg);
     	}
     	
     },
-    error: alert("上传文件失败"),  //处理完成 
-    resetForm: true,
+    error: function(res) {        			
+		console.log(res);	       			
+	},  //处理完成 
+    resetForm: false,
     dataType:  'json'
 };
  
  /**
   * 上传文件是触发事件
   */
- $("#submitform").submit(function(){		
- 	$(this).ajaxSubmit(submitUploadOptions);
- 	return false;
- });
+ $("#submitform").submit(function(){
+	 $(this).ajaxSubmit(submitUploadOptions);
+	 return false;
+});
 
 
  function setApplyIdForSubmit(apply){	 

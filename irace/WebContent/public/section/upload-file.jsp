@@ -52,9 +52,9 @@
 </div>
 <!-- 触发模态框 -->
 
- <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+ <!-- <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
- <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
- <script src="<%=request.getContextPath() %>/public/js/jquery.form.min.js" type="text/javascript"></script>
+ <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+ <script src="<%=request.getContextPath() %>/public/js/jquery.form.min.js"></script>
  
  
