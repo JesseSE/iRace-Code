@@ -45,10 +45,10 @@ public class StageDaoImpl extends SDao implements StageDao{
 	
 	@Override
 	public StageRaceEntity getStageDetail(int id, int state) {
-		this.hql = "FROM StageRaceEntity AS s inner join fetch s.groupRaceEntity AS g where s.id=? and s.status=?";
+		this.hql = "FROM StageRaceEntity AS s where s.id=? and s.status=?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, id);
-		query.setInteger(0, state);	
+		query.setInteger(1, state);	
 		return (StageRaceEntity)query.uniqueResult();	
 	}
 

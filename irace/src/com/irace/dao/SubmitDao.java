@@ -28,4 +28,6 @@ public interface SubmitDao {
 	public List getSubmitListByTeam(int teamId);
 	
 	public List getSubmitByStage(int stageID);
+
+	public SubmitEntity getSubmitByStageAndTeam(int stageId, int teamId);
 }

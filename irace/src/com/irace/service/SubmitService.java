@@ -47,6 +47,8 @@ public interface SubmitService {
 	 * @return
 	 */
 	public List getSubmitListByTeam(int teamId);
+
+	public SubmitEntity getSubmitByStageAndTeam(int stageId, int teamId);
 	
 }
 
