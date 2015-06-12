@@ -156,7 +156,7 @@
   
 	<%@ include file="/public/section/footer.jsp" %>
 	<!-- 引入文件上传弹窗 -->
-	<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3>
+	<!-- <h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3> -->
 	<%@ include file="/public/section/upload-file.jsp" %>
 	
 	
