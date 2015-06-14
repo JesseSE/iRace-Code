@@ -136,16 +136,6 @@
               <div class="btn"><a href="single.html">Check it Out</a></div>
              </div>
            <div class="top-border"> </div>
-			<div class="sidebar-bottom">
-			    <h2 class="m_1">新的比赛<br> 创建</h2>
-			    <p class="m_text">您可以通过我们网站定制并发布自己的比赛</p>
-			    <div class="subscribe">
-					 <form>
-					    <input name="userName" type="text" class="textbox">
-					    <input type="submit" value="定制">
-					 </form>
-	  			</div>
-			</div>
 	    </div>
 	   <div class="clear"></div>
 	</div>
@@ -153,10 +143,11 @@
 	</div>
     
   
-	<%@ include file="/public/section/footer.jsp" %>
-	
-	<!-- 引入文件上传弹窗 --> 
-	<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3>
+	<%@ include file="/public/section/footer.jsp" %>	
+
+	<!-- 引入文件上传弹窗 -->
+	<!-- <h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3> -->
+
 	<%@ include file="/public/section/upload-file.jsp" %>
 	
 	
@@ -326,7 +317,7 @@
 				break;
 			//比赛阶段
 			case 2:
-				htmlCreate = htmlCreate+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+				htmlCreate = htmlCreate+"<h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick='setApplyIdForSubmit( "+apply[number].id +")'>比赛正在进行，点击提交阶段产物</h3>";
 				break;
 			//比赛结束
 			case 3:
