@@ -208,7 +208,8 @@ public class TeamEntity implements IEntity{
 		map.put("slogan",this.getSlogan());
 		map.put("leader",this.getUserEntity().getNickname());
 		map.put("leadId", this.getLeader());
-		map.put("reward", this.getRewardEntity().getName());
+		if(this.getRewardEntity() != null)
+		    map.put("reward", this.getRewardEntity().getName());
 		map.put("raceStatus", this.getGroupRaceEntity().getRaceEntity().getStatus());
 		return map;
 	}	

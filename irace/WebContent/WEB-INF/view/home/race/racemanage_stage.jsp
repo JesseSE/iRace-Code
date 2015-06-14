@@ -244,17 +244,18 @@
                 <div class="panel panel-default">
                     <a name="race_done"></a>
                       <div class="panel-body">
+                       
 					  <!--自定义组别设置-->
 					  <div class="panel-body">
 						<div class="list-group">
-                              <a class="list-group-item list-group-item-success" href="##">
-                                  <select class="" name = "" id = "messageGroup">
-                                  </select>
+                             
+                                 <select class="" name = "" id = "messageGroup">
+                         </select>
                                   
-                                  <select class="" name="" id="messageTeam">
+                                 <select class="" name="" id="messageTeam">
 								</select>
-								  <h3 class="team-state-submit" onclick="sendMessageToLeader();">发送消息</h3> 
-								  </a>
+								<h3 class="team-state-submit" onclick="sendMessageToLeader();">发送消息</h3>
+							
                               <a class="list-group-item">
 					 <div class="panel panel-default">
                          <textarea style="width:100%;height:300px;" id = "message"></textarea>
@@ -424,6 +425,7 @@
 			dataType:"JSON",
 			success:function(res){
 				showRaceName(res);
+				console.log(res);
 			},
 			error:function(res){
 				console.log(res);
@@ -437,13 +439,13 @@
 		var htmlStatus = "";
 		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name[0].name+"</h1>";
 		$("#raceTitle").html(htmlName);
-		if(name.status == 0){
+		if(name[0].status == 0){
 			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>开启比赛</a></button>";
 		}
-		else if(name.status == 1){
+		else if(name[0].status == 1){
 			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>结束比赛</a></button>";
 		}else{
-			
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px'><a style='color:#FFF'>比赛已结束</a></button>";
 		}
 		$("#beginOrfinishRace").html(htmlStatus);	
 	}
@@ -454,13 +456,15 @@
 			url : $("#appName").val() + "/race/managerStageFinishRace.act",
 			type : "POST",
 			data : {
-				raceId : raceId
+				raceId : raceID
 			},
-			data : "JSON",
+			dataType : "JSON",
 			success : function(res){
 				alert("成功");
+				loadRaceName();
 			},
 			error : function(res){
+				console.log(res);
 			}
 		});
 	}
@@ -795,7 +799,7 @@
 			"<td>" + phase[number].teamName + "</td>" +
 			"<td>" + phase[number].name +"作品" + "</td>" + 
 			"<td>" + phase[number].content + "</td>" + 
-			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +">下载</a></td>" ;
+			"<td><a class = 'team-operate' href = "+ phase[number].fileUrl +">下载</a></td>" ;
 		}
 		
 		htmlPhase = htmlPhase + "</tbody></table></div>" + 
@@ -1053,7 +1057,7 @@
 		var team = eval(res);
 		var htmlTeam = "";
 		for(var number = 0; number < team.length; number ++){
-			htmlTeam = htmlTeam + "<option value = "+team[number].leadId+">" + team[number].name + "</option>";
+			htmlTeam = htmlTeam + "<option value =" + team[number].leadId + ">" + team[number].name + "</option>";
 		}
 		$("#messageTeam").html(htmlTeam);
 	}

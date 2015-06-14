@@ -74,22 +74,21 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	@Override
 
 	public List getCreatedTeamList(int userId, int pageNo, int pageItemNum) {	
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.status = 3 and a.teamEntity.leader = a.user";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader = a.user";
 		//this.hql = "FROM ApplyEntity";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
 		System.out.print(userId);	
+		test(query.list());
 		return query.list();
-
-
 	}
 
 	@Override
 	public List getJoinedTeamList(int userId, int pageNo, int pageItemNum) {
 
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 3 ";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 2 ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -103,7 +102,7 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	@Override
 	public List getApplyingTeamList(int userId, int pageNo, int pageItemNum) {
 
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 2 and a.teamEntity.status = 1";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.user = ? and a.teamEntity.leader <> a.user and a.status = 1";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
@@ -152,11 +151,11 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 	return listMap;
 	
     }
-    //测试数据
+	
 	@Override
 	public List getTeamListByGroup(int groupID) {
-		//this.hql = "FROM TeamEntity AS t WHERE t.group = ? and t.status = 2";
-		this.hql = "FROM TeamEntity AS t WHERE t.groupId = ? ";
+		this.hql = "FROM TeamEntity AS t WHERE t.groupId = ? and t.status = 1";
+		//this.hql = "FROM TeamEntity AS t WHERE t.groupId = ? ";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, groupID);
 		return query.list();

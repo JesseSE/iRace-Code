@@ -78,7 +78,7 @@ public class UserDaoImpl extends SDao implements UserDao {
 
 	@Override
 	public List getTeamMemberListByUser(int teamId) {
-		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.teamEntity.id = ? and a.status in(1,2)";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.userEntity inner join fetch a.raceEntity inner join fetch a.teamEntity WHERE a.team = ? and a.status in(1,2)";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, teamId);
 		return query.list();

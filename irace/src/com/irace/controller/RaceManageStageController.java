@@ -69,8 +69,11 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String loadRaceName(
 			@RequestParam(value="raceID",required=true) int raceID){
 		System.out.println(raceService.getRace(raceID).getName());
-		Map<String,String> map = new HashMap<String, String>();
-		map.put("name", raceService.getRace(raceID).getName());
+		Map<String,Object> map = new HashMap<String, Object>();
+		RaceEntity race = raceService.getRace(raceID);
+		map.put("name", race.getName());
+		map.put("status", race.getStatus());
+		System.out.println(race.getStatus());
 		JSONArray array = JSONArray.fromObject(map);
 		return array.toString();		
 	}
@@ -115,7 +118,6 @@ public class RaceManageStageController extends SController{
 			team.setStatus(3);
 		}
 		teamService.updateTeam(team);		
-		System.out.print(team.getName());
 		return teamService.getTeamListByGroup(team.getGroup());	
 	}
 	

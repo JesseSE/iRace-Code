@@ -174,7 +174,7 @@ public class ApplyEntity implements IEntity{
 	@Override
 	public Map<String, Object> getMap() {
 		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("teamStatus",this.getStatus());
+		map.put("teamStatus",this.getTeamEntity().getStatus());
 		map.put("teamId", this.getTeam());
 		map.put("teamName",this.getTeamEntity().getName());
 		map.put("raceName", this.getRaceEntity().getName());

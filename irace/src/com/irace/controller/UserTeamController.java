@@ -41,7 +41,6 @@ public class UserTeamController extends SController{
 	@RequestMapping("getTeamCreate.act")
 	public @ResponseBody String getTeamCreate(
 			@RequestParam(value="userID",required=true)int userID){			
-		String aaaa = teamService.getCreatedTeamList(1, 1);	
 		return teamService.getCreatedTeamList(userID, 1);	
 	}
 	
@@ -110,4 +109,12 @@ public class UserTeamController extends SController{
 		return userService.getTeamMemberListByUser(teamID);
 	}
 	
+	@RequestMapping("userTeamSendTeamApply.act")
+	public @ResponseBody String sendTeamApply(
+			@RequestParam(value = "teamId",required = true)int teamId){
+	    TeamEntity team = teamService.getTeam(teamId);
+	    team.setStatus(1);
+	    teamService.updateTeam(team);
+		return "1";
+	}
 }

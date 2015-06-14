@@ -482,7 +482,7 @@
 		htmlMember = htmlMember +"<div class='panel panel-default'>"+
 		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
 		"<thead style='font-weight:bold;'>"+
-		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th><th></th></tr></thead>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th><th></th><th></th></tr></thead>"+
 		"<tbody>";
 		for(var number = 0;number < apply.length;number++){
 			htmlMember = htmlMember + "<tr>"+
@@ -494,7 +494,7 @@
 			if(apply[number].raceStatus == 1){
 				if(apply[number].status == 1){
 					htmlMember = htmlMember + "<td>待审核</td>"+
-					"<td><a class='team-operate' onclick = 'chooseAgree("+apply[number].id+","+apply[number].teamId+");'>同意</a><a class='team-operate' onclick = 'chooseRefuse("+apply[number].ID+","+apply[number].teamID+")'>拒绝</a></td></tr>";
+					"<td><a class='team-operate' onclick = 'chooseAgree("+apply[number].id+","+apply[number].teamId+");'>同意</a></td><td><a class='team-operate' onclick = 'chooseRefuse("+apply[number].ID+","+apply[number].teamID+")'>拒绝</a></td></tr>";
 				}
 				else{
 					htmlMember = htmlMember + "<td>已加入</td>"+
@@ -543,7 +543,7 @@
    			  },
    			success: function(res) {  
    				var apply = eval(res);
-   				showTeamMemberLeader(res);  			       			
+   				showTeamMember(res);  			       			
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -562,7 +562,7 @@
    			  },
    			success: function(res) {           		
    				var apply = eval(res);
-   				showTeamMemberLeader(res);    			
+   				showTeamMember(res);    			
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -581,7 +581,7 @@
    			  },
    			success: function(res) {           		
    				var apply = eval(res);
-   				showTeamMemberLeader(res);  		
+   				showTeamMember(res);  		
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -592,7 +592,22 @@
 	
 	function applyTeam(id){
 		//发送申请
-		alert("申请已发送");
+		$.ajax({
+			url : $("#appName").val() + "/user/userTeamSendTeamApply.act",
+			type : "POST",
+			data : {
+				teamId : id
+			},
+			dataType : "JSON",
+			success : function(res){
+				alert("申请已发送");
+			},
+			error : function(res){
+				alert("请重新发送");
+			}
+			
+		})
+		
 	}
 	
 </script> 

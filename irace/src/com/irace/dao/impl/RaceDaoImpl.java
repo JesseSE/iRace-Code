@@ -43,6 +43,8 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public boolean updateRace(RaceEntity race) {
 		sessionFactory.getCurrentSession().update(race);
+		System.out.print(race.getName());
+		System.out.print(race.getStatus());
 		return true;
 	}
 	
