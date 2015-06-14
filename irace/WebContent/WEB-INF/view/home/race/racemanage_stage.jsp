@@ -320,25 +320,6 @@
 	</div>
 	</div>
     
-    
-   <div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
-		         </div>
-				<div class="f-list2">
-				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
-				 </ul>
-			    </div>
-			    <div class="clear"></div>
-		      </div>
-	     </div>
-	</div>
 
 <%@ include file="/public/section/footer.jsp" %>
 <script type="text/javascript">
@@ -768,11 +749,12 @@
 		" <tr><th>#</th><th>队伍名</th><th>提交物</th><th>提交物说明</th><th>文件</th></tr></thead><tbody>";
 		
 		for(var number = 0; number < phase.length; number++){
+			console.log(phase[number].fileUrl);
 			htmlPhase = htmlPhase + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
 			"<td>" + phase[number].teamName + "</td>" +
 			"<td>" + phase[number].name  + "</td>" + 
 			"<td>" + phase[number].content + "</td>" + 
-			"<td><a class = 'team-operate' href = '"+ phase[number].fileUrl +"'>下载</a></td>" ;
+			"<td><a class = 'team-operate' href = '<%=request.getContextPath() %>/public/images/1.rar' >下载</a></td>" ;
 			//队伍淘汰
 			if(phase[number].teamStatus == 2){
 				htmlPhase = htmlPhase + 
@@ -783,6 +765,12 @@
 		htmlPhase = htmlPhase + "</tbody></table></div>" + 
 		"<h3 class = 'stage-pass' onclick  = 'finishPhase(2)'>完成此阶段审核</h3>";
 		$("#phaseSubmit").html(htmlPhase);
+	}
+	
+	function fileDownLoad(fileUrl){
+		var file="<%=request.getContextPath() %>/public/images/1.rar";
+		console.log(file);
+		window.location.href = file;
 	}
 	
 	function showPhaseDone(res){
