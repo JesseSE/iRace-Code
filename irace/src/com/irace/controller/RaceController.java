@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +20,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.entity.GroupRaceEntity;
 import com.irace.entity.RaceEntity;
+import com.irace.entity.TeamEntity;
+import com.irace.entity.UserEntity;
 import com.irace.service.BigTypeService;
 import com.irace.service.GroupRaceService;
 import com.irace.service.RaceService;
 import com.irace.service.RewardService;
 import com.irace.service.StageService;
+import com.irace.service.TeamService;
+import com.irace.service.UserService;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
 
@@ -44,6 +49,10 @@ public class RaceController extends SController {
 	RewardService rewardService;
 	@Resource(name="stageService")
 	StageService stageService;
+	@Resource(name="teamService")
+	TeamService teamService;
+	@Resource(name="userService")
+	UserService userService;
 	
 	
 	@RequestMapping("index")
@@ -144,6 +153,57 @@ public class RaceController extends SController {
 		view.addObject("rewardList", rewardList);
 		view.addObject("stageList", stageList);
 		return view;
+	}
+	
+	@RequestMapping("apply_race")
+	public View applyRace() {
+		View view = new View("home","race", "apply_race", "报名比赛");		
+		return view;
+	}
+	/**
+	 * 
+	 * @param username
+	 * @param emailad
+	 * @param education
+	 * @param school
+	 * @return 报名是否成功
+	 */
+	@RequestMapping("applyRace.act")
+	public @ResponseBody String applyRace(
+			@RequestParam(value="username",required=true)String username,
+			@RequestParam(value="emailad",required=true)String emailad,
+			@RequestParam(value="education",required=true)String education,
+			@RequestParam(value="school",required=true)String school){
+		
+		
+		
+		return null;
+	}
+	
+	@RequestMapping("applyRace.act")
+	public @ResponseBody String createTeam(
+			@RequestParam(value="teamname",required=true)String teamname,
+			@RequestParam(value="slogan",required=true)String slogan,
+			HttpSession session){
+		
+		TeamEntity teamEntity = new TeamEntity();
+		teamEntity.setName(teamname);
+		teamEntity.setSlogan(slogan);
+		
+		UserEntity userEntity = userService.getUser((String)session.getAttribute("username"));
+		
+		//teamEntity.setLeader(userEntity.getUsername());
+		
+		return null;
+	}
+	
+	@RequestMapping("getRaceList.act")
+	public @ResponseBody String getTeamList(){
+		
+		String teamList = teamService.getTeamList(1);
+		//teamEntity.setLeader(userEntity.getUsername());
+		
+		return teamList;
 	}
 	
 }
