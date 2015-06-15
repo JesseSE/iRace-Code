@@ -131,7 +131,7 @@ public class FileUploadController {
 				if (file.getSize() < 52428800) {
 					try {
 						String fileName = this.submitFileName(originalName);
-						String filePath = this.generatePath(applyId);
+						String filePath = this.generatePath(applyId, request);
 						String fileUrl = filePath + fileName;
 						System.out.println(fileUrl);
 						// 判断目录是否存在
@@ -200,7 +200,7 @@ public class FileUploadController {
 	}
 
 	// 根据小组所在的比赛，选择文件的存储位置
-	private String generatePath(int apply) {
+	private String generatePath(int apply, HttpServletRequest request) {
 		System.out.println("开始计算存储路径");
 
 		ApplyEntity applyEntity = applyService.getApplyDetail(apply);
@@ -217,16 +217,16 @@ public class FileUploadController {
 				state);
 		stageId = stageEntity.getId();
 		String stage = stageEntity.getName();
-
-		String path = Constants.DEFAULT_SUBMIT_FILE_ROOT;
-
+		
+		String path = "AllSubmitFiles/";
 		path = path + raceId + "_" + race + "/";
 		path = path + groupId + "_" + group + "/";
 		path = path + stageId + "_" + stage + "/";
-
-		System.out.println(path);
-
-		return path;
+		
+		//工程在web服务器中的目录
+		String path1 = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(path1 + path);
+		return path1 + path;
 	}
 
 	/**
