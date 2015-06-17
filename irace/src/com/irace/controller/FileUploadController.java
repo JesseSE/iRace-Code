@@ -207,7 +207,7 @@ public class FileUploadController {
 		String race = applyEntity.getRaceEntity().getName();
 		int raceId = applyEntity.getRace();
 		String group = applyEntity.getGroupRaceEntity().getName();
-		int groupId = applyEntity.getGroup();
+		int groupId = applyEntity.getGroupId();
 		teamId = applyEntity.getTeam();
 
 		System.out.println("小组的ID：" + teamId + "   Group：" + groupId);

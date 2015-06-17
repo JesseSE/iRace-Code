@@ -21,6 +21,8 @@ public interface ApplyService {
 	
 	public ApplyEntity getApply(int id); //获取不包括外键实体
 	
+	public ApplyEntity getApply(int uid, int groupId);
+	
 	public ApplyEntity getApplyDetail(int id); //获取包括外键实体
 	
 	public String getApplyList(int pageNo); //获取不包括外键实体
@@ -58,5 +60,12 @@ public interface ApplyService {
 	 */
 	public String getTeamDetail(int userId, int raceId);
 	
+	/**
+	 * 返回用户是否参加过某个比赛
+	 * @param userId
+	 * @param raceId
+	 * @return
+	 */
+	public boolean hasApplyed(int userId, int raceId);
 }
 

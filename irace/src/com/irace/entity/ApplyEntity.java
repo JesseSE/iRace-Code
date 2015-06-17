@@ -34,10 +34,10 @@ public class ApplyEntity implements IEntity{
 	@JoinColumn(name="race",insertable=false,updatable=false)
 	private RaceEntity raceEntity;//报名的比赛，实体是RaceEntity
 	
-	private Integer group;//报名的比赛的组别groupRace
+	private Integer groupId;//报名的比赛的组别groupRace
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="group",insertable=false,updatable=false)
+	@JoinColumn(name="groupId",insertable=false,updatable=false)
 	private GroupRaceEntity groupRaceEntity;//报名的比赛的组别groupRace
 	
 	private Integer team;//所参加的队伍，可以为空，TeamEntity
@@ -46,7 +46,7 @@ public class ApplyEntity implements IEntity{
 	@JoinColumn(name="team",insertable=false,updatable=false)
 	private TeamEntity teamEntity;//所参加的队伍，可以为空，TeamEntity
 	
-	private int status = 0;//报名的状态 , 0:报名但是为参加小组,1报名且已经发出进组申请, 2报名且已经加入一个小组	
+	private int status = 0;//报名的状态 , 0:报名但是为参加小组,1报名且已经发出进组申请, 2报名且已经加入一个小组
 	
 
 	public ApplyEntity() {}
@@ -55,14 +55,14 @@ public class ApplyEntity implements IEntity{
 	 * 创建报名，使用全参数
 	 * @param user ：报名比赛的人
 	 * @param race ：报名参加的比赛
-	 * @param group ：报名参加的组别
+	 * @param groupId ：报名参加的组别
 	 * @param team ：报名参加的小组
 	 * @param status ：报名后的状态
 	 */
-	public ApplyEntity(Integer user, Integer race, Integer group, Integer team, int status){
+	public ApplyEntity(Integer user, Integer race, Integer groupId, Integer team, int status){
 		this.user = user;
 		this.race = race;
-		this.group = group;
+		this.groupId = groupId;
 		this.team = team;
 		this.status = status;
 	}
@@ -71,13 +71,13 @@ public class ApplyEntity implements IEntity{
 	 * 报名比赛了，但是还未选择参加哪一个小组
 	 * @param user ：报名比赛的人
 	 * @param race ：报名参加的比赛
-	 * @param group ：报名参加的组别
+	 * @param groupId ：报名参加的组别
 	 * @param status ：报名的状态 , 0:报名但是为参加小组,1报名且已经发出进组申请, 2报名且已经加入一个小组	
 	 */
-	public ApplyEntity(Integer user, Integer race, Integer group, int status){
+	public ApplyEntity(Integer user, Integer race, Integer groupId, int status){
 		this.user = user;
 		this.race = race;
-		this.group = group;
+		this.groupId = groupId;
 		this.team = null;
 		this.status = status;
 	}
@@ -113,12 +113,12 @@ public class ApplyEntity implements IEntity{
 
 //	@ManyToOne(targetEntity=GroupRaceEntity.class)
 //	@JoinColumn(name="id")
-	public Integer getGroup() {
-		return group;
+	public Integer getGroupId() {
+		return groupId;
 	}
 
-	public void setGroup(Integer group) {
-		this.group = group;
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
 	}
 
 //	@ManyToOne(targetEntity=TeamEntity.class)

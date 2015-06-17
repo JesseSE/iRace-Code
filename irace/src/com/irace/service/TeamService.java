@@ -55,5 +55,9 @@ public interface TeamService {
 	
 	public String getTeamListByGroup(int groupID);
 	
+	public List getTeamEntityListByGroup(int groupID, int status);
+	
 	public String getTeamListByGroup(int groupID, int status);
+	
+	//public boolean joinTeam(int userId, int teamId);
 }

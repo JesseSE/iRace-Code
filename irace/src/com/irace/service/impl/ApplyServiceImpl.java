@@ -127,4 +127,16 @@ public class ApplyServiceImpl implements ApplyService {
 		String[] filterStr = {"groupRaceEntity","raceEntity","userEntity"};
 		return JsonUtil.listToJSONString(applyDao.getTeamDetail(userId, raceId), filterStr);
 	}
+
+	@Override
+	public boolean hasApplyed(int userId, int raceId) {
+		// TODO Auto-generated method stub
+		return applyDao.getTeamDetail(userId, raceId) != null;
+	}
+
+	@Override
+	public ApplyEntity getApply(int uid, int groupId) {
+		// TODO Auto-generated method stub
+		return applyDao.getApply(uid, groupId);
+	}
 }

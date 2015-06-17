@@ -82,4 +82,14 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 		return query.list();
 	}
 
+	@Override
+	public ApplyEntity getApply(int uid, int groupId) {
+		// TODO Auto-generated method stub
+		this.hql = "FROM ApplyEntity AS a WHERE a.user=? and a.groupId=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, uid);
+		query.setInteger(1, groupId);
+		return (ApplyEntity)query.uniqueResult();
+	}
+
 }
