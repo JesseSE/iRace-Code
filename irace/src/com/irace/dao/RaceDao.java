@@ -97,4 +97,6 @@ public interface RaceDao {
 	 */
 	public List getRaceListBySortedHotPoint(int pageNo,Integer pageItemNum, String keyword, boolean isAsc);
 	
+	
+	public List getRaceListByOrganizer(int oid, int status);
 }

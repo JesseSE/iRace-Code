@@ -4,6 +4,7 @@
 package com.irace.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.irace.entity.RaceEntity;
 
@@ -139,5 +140,7 @@ public interface RaceService {
 	 */
 	public String getRaceListBySortedHotPoint(int pageNo, String keyword, boolean isAsc);
 	
+	
+	public List getRaceListByOrganizer(int oid, int status);
 	
 }

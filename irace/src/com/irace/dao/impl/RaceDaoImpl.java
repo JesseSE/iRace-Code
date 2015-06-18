@@ -288,4 +288,10 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	public void TestRaceEntity(RaceEntity ra){
 		System.out.println(ra.getName());
 	}
+
+	@Override
+	public List getRaceListByOrganizer(int oid, int status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

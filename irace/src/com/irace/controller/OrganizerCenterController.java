@@ -1,5 +1,7 @@
 package com.irace.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -44,15 +46,19 @@ public class OrganizerCenterController extends SController {
 			@RequestParam(value="pageStatus")int pageStatus,
 			@RequestParam(value="organizerId")int organizerId){
 		
-		System.out.println("页数："+ currentPageNum +"\n查看比赛状态：" + pageStatus +"\n机构ID:"+ organizerId);
+		//System.out.println("页数："+ currentPageNum +"\n查看比赛状态：" + pageStatus +"\n机构ID:"+ organizerId);
 		
-		String resultRcaeList = null;
-		if(pageStatus == 1 || pageStatus == 2 || pageStatus == 3){
-			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, pageStatus);
-		}else
-			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, 1);
-		
-		return resultRcaeList;		
+//		String resultRcaeList = null;
+//		if(pageStatus == 1 || pageStatus == 2 || pageStatus == 3){
+//			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, pageStatus);
+//		}else
+//			resultRcaeList = raceService.getRaceListByUser(organizerId, currentPageNum, 1);
+		if(pageStatus < 0 || pageStatus > 3) {
+			pageStatus = 0;
+		}
+		List raceList = raceService.getRaceListByOrganizer(organizerId, pageStatus);
+		//-------------------------------------
+		return JsonUtil.listToJSONString(raceList, new String[]{});
 	}
 	
 	/**
