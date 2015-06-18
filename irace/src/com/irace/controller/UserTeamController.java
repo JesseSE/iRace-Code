@@ -75,8 +75,7 @@ public class UserTeamController extends SController{
 	public @ResponseBody String getTeamChooseAgree(
 			@RequestParam(value="applyID",required=true)int applyID,
 			@RequestParam(value="teamID",required=true)int teamID){
-		ApplyEntity apply = new ApplyEntity();
-		apply.setId(applyID);
+		ApplyEntity apply = applyService.getApply(applyID);
 		apply.setStatus(InfoCode.APPLY_STATUS_REVIEW_PASS);
 		applyService.updateApply(apply);
 		//return applyService.getApplyDetail(applyID);	
