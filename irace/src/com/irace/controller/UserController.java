@@ -70,8 +70,10 @@ public class UserController extends SController {
 		
 		boolean flag = true;
 		if(type.equals("2")){
-			
-			//flag = userService.login(username, password, session);
+			/*int id = Integer.parseInt(username);
+			OrganizerEntity organizerEntity = organizerService.getOrganizer(id);*/
+			System.out.println("121212"+username+"     "+password);
+			flag = organizerService.login(username, password, session);
 			
 			/*UserEntity user = userService.getUser(username);
 			System.out.println(username+"     "+password);

@@ -190,4 +190,14 @@ public class TeamDaoImpl extends SDao implements TeamDao{
 		return listMap;	
 	}
 
+	@Override
+	public List getTeamDetailListByGroup(int groupID, int status) {
+		// TODO Auto-generated method stub
+		this.hql = "FROM TeamEntity AS t inner join fetch t.userEntity WHERE t.groupId = ? and t.status=?";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
+		query.setInteger(0, groupID);
+		query.setInteger(1, status);
+		return query.list();
+	}
+
 }

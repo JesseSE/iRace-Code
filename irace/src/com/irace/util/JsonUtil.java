@@ -79,6 +79,8 @@ public class JsonUtil {
 		return getJsonInfo(InfoCode.LOGIN_TIMEOUT,"登录超时");
 	}
 	
-	
+	public static String getJsonOtherError(String info) {
+		return getJsonInfo(InfoCode.OTHER_ERROR,info);
+	}
 	
 }

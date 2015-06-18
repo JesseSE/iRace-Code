@@ -32,123 +32,8 @@
 
     <%@ include file="/public/section/user-div.jsp" %>
 <!--    网站标题、选择菜单、搜索框模块-->
-	<div class="header-bottom">
-	    <div class="wrap">
-			<div class="header-bottom-left">
-<!--                网站标题logo-->
-				<div class="logo">
-					<a href="index.html"><img src="images/logo1.png" alt=""/></a>
-				</div>
-<!--                菜单栏， 内容分类-->
-				<div class="menu">
-	            <ul class="megamenu skyblue">
-			<li class="active grid"><a href="index.html">主页</a></li>
-			<li><a class="color4" href="#">理学类</a>
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>数学</h4>
-								<ul>
-									<li><a href="womens.html">金牌杯数学竞赛</a></li>
-									<li><a href="womens.html">中国奥林匹克大赛</a></li>
-									<li><a href="womens.html">全国高中数学联赛</a></li>
-									<li><a href="womens.html">全国研究生数学竞赛</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>物理</h4>
-								<ul>
-									<li><a href="womens.html">全国中学生物理大赛</a></li>
-									<li><a href="womens.html">全国物理实验大赛</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>生物</h4>
-								<ul>
-									<li><a href="womens.html">全国生物竞赛</a></li>
-									<li><a href="womens.html">生物研究大赛</a></li>
-									<li><a href="womens.html">亚洲生物医学未来领袖大赛</a></li>
-								</ul>
-							</div>												
-						</div>
-					  </div>
-					</div>
-				</li>				
-				<li><a class="color5" href="#">工学类</a>
-				<div class="megapanel">
-					<div class="col1">
-							<div class="h_nav">
-								<h4>电子信息</h4>
-								<ul>
-									<li><a href="mens.html">电子信息科技大赛</a></li>
-									<li><a href="mens.html">光电科学大赛</a></li>
-									<li><a href="mens.html">电子知识大赛</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>土木建筑</h4>
-								<ul>
-									<li><a href="mens.html">土木创新大赛</a></li>
-									<li><a href="mens.html">建筑创新设计大赛</a></li>
-									<li><a href="mens.html">Round-Shaped</a></li>
-									<li><a href="mens.html">Oval-Shaped</a></li>
-								</ul>	
-							</div>							
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>计算机</h4>
-								<ul>
-									<li><a href="mens.html">软件杯创新大赛</a></li>
-									<li><a href="mens.html">服务外包大赛</a></li>
-									<li><a href="mens.html">新软攀峰大赛</a></li>
-									<li><a href="mens.html">Hi-index</a></li>
-									<li><a href="mens.html">Progressive</a></li>
-								</ul>	
-							</div>												
-						</div>
-					</div>
-				</li>
-				<li><a class="color6" href="other.html">综合类</a>
-				<div class="megapanel">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>国家级</h4>
-								<ul>
-									<li><a href="mens.html">大学生创业大赛</a></li>
-									<li><a href="mens.html">国家知识竞赛</a></li>
-									<li><a href="mens.html">电子商务大赛</a></li>
-									<li><a href="mens.html">Hi-index</a></li>
-									<li><a href="mens.html">Progressive</a></li>
-								</ul>	
-							</div>												
-						</div>
-				</div>
-				</li>
-				<li><a class="color7" href="other.html">关注</a></li>
-			</ul>
-			</div>
-		</div>
-<!--            搜索框，标签等-->
-	   <div class="header-bottom-right">
-         <div class="search">	  
-				<input type="text" name="s" class="textbox" value="搜索" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索';}">
-				<input type="submit" value="Subscribe" id="submit" name="submit">
-				<div id="response"> </div>
-		 </div>
-<!--           标签，暂时无用-->
-
-    </div>
-     <div class="clear"></div>
-     </div>
-	</div>
+	<!-- 盗汗菜单div -->
+	<%@ include file="/public/section/menu-div.jsp"%>
 	
 <div class="mens">    
   <div class="main">
@@ -170,20 +55,22 @@
 							</div>
 						</div>
 	            </div>
+	            <input id="raceId" type="hidden" value="${race.getId() }">
 		         <div class="desc1 span_3_of_2">
-		         	<h3 class="m_3">${race.getName() }</h3>
+		         	<h3 id="raceName" class="m_3">${race.getName() }</h3>
 		            
 				    <p class="m_text2" style="text-indent: 25px;">${race.getContent() }</p>
 				    
 					
 					<c:forEach var="g" items="${groupList }">
 					<p class="m_text2">
-						<input name='r' type="radio" value='11'/>
-						<label  style="margin-right:20px;">${g.getName() }</label>${g.getRequires() }
+						<input id="group${g.getId() }" name='group' type="radio" value='${g.getId() }'/>
+						<label for="group${g.getId() }" style="margin-right:20px;">${g.getName() }</label>${g.getRequires() }
 					</p>
 					</c:forEach>
+					
 		         	 <div class="btn_form">
-						<form><input type="submit" value="报名"></form>
+						<form><button id="apply_submit" type="button" style="background:#4CB1CA;  color: #fff;line-height: 2em;width: 100px; border: none;">报名</button></form>
 					 </div>
 				 </div>
 			   <div class="clear"></div>
@@ -235,75 +122,74 @@
 	     </div>
 		    
 	  </div>
-		      <div class="clear"></div>
-			</div>
-			 <div class="clear"></div>
-		   </div>
-		</div>
-	<div class="footer-middle">
-			<div class="wrap">
-	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
-		         </div>
-				<div class="f-list2">
-				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
-				 </ul>
-			    </div>
-			    <div class="clear"></div>
-		      </div>
-	     </div>
-	     
-	     
-	  <script type="text/javascript">
-		$(window).load(function() {
-			$("#flexiselDemo1").flexisel();
-			$("#flexiselDemo2").flexisel({
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 1
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 2
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 3
-		    		}
-		    	}
-		    });
-		
-			$("#flexiselDemo3").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: true,
-				enableResponsiveBreakpoints: true,
-		    	responsiveBreakpoints: { 
-		    		portrait: { 
-		    			changePoint:480,
-		    			visibleItems: 1
-		    		}, 
-		    		landscape: { 
-		    			changePoint:640,
-		    			visibleItems: 2
-		    		},
-		    		tablet: { 
-		    			changePoint:768,
-		    			visibleItems: 3
-		    		}
-		    	}
-		    });
-		    
+	</div>
+	<div class="clear"></div>
+   </div>
+</div>
+<%@ include file="/public/section/footer.jsp" %>
+
+<script type="text/javascript">
+	$(window).load(function() {
+		$("#flexiselDemo1").flexisel();
+		$("#flexiselDemo2").flexisel({
+			enableResponsiveBreakpoints: true,
+	    	responsiveBreakpoints: { 
+	    		portrait: { 
+	    			changePoint:480,
+	    			visibleItems: 1
+	    		}, 
+	    		landscape: { 
+	    			changePoint:640,
+	    			visibleItems: 2
+	    		},
+	    		tablet: { 
+	    			changePoint:768,
+	    			visibleItems: 3
+	    		}
+	    	}
+	    });
+	
+		$("#flexiselDemo3").flexisel({
+			visibleItems: 5,
+			animationSpeed: 1000,
+			autoPlay: true,
+			autoPlaySpeed: 3000,    		
+			pauseOnHover: true,
+			enableResponsiveBreakpoints: true,
+	    	responsiveBreakpoints: { 
+	    		portrait: { 
+	    			changePoint:480,
+	    			visibleItems: 1
+	    		}, 
+	    		landscape: { 
+	    			changePoint:640,
+	    			visibleItems: 2
+	    		},
+	    		tablet: { 
+	    			changePoint:768,
+	    			visibleItems: 3
+	    		}
+	    	}
+	    });
+	    
+		$("#apply_submit").click(function(){
+			var groupId=0;
+			var groupName='';
+			$("[name='group']").each(function(index, ele) {
+				if(ele.checked) {
+					groupId = ele.value;
+					groupName = $("label[for='"+ele.id+"']").html();
+				}
+			});
+			if(groupId!=0) {
+				location.href = $("#appName").val() + "/race/apply_race/"+$("#raceId").val()+"?raceName="+$("#raceName").html()+"&groupId="+groupId+"&groupName="+groupName;
+			} else {
+				alert("请选择组别!");
+			}
 		});
-	</script>
-	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+		
+	});
+</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/public/js/jquery.flexisel.js"></script>
 </body>
 </html>

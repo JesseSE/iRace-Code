@@ -21,4 +21,6 @@ public interface ApplyDao {
 	public boolean updateApply(ApplyEntity apply);
 	
 	public List getTeamDetail(int userId, int raceId);//通过userId和raceId 获得用户所参加的组
+	
+	public ApplyEntity getApply(int uid, int groupId);
 }

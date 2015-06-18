@@ -3,6 +3,7 @@ package com.irace.entity;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -84,7 +85,7 @@ public class MessageEntity implements IEntity{
 		this.sender = sender;
 		this.receiver = receiver;		
 		this.content = content;
-		this.time = null;//任然需要设置
+		this.time = new Date();//任然需要设置
 		this.status = 0; //任然需要更改
 	}
 	

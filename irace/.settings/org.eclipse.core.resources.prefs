@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/view/home/organizer/racemanage_detail.jsp=UTF-8
+encoding//WebContent/WEB-INF/view/home/race/apply_race.jsp=UTF-8
 encoding//WebContent/WEB-INF/view/home/race/detail.jsp=UTF-8
 encoding//src/com/irace/controller/UserController.java=UTF-8

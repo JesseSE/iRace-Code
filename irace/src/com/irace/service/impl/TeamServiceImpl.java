@@ -100,6 +100,12 @@ public class TeamServiceImpl implements TeamService {
 		return JsonUtil.getJsonByMapList(teamDao.getTeamListByGroup(groupID, status));
 	}
 
+	@Override
+	public List getTeamEntityListByGroup(int groupID, int status) {
+		// TODO Auto-generated method stub
+		return teamDao.getTeamDetailListByGroup(groupID, status);
+	}
+
 
 
 }
