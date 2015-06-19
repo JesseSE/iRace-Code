@@ -83,10 +83,10 @@
 								<span class="sr-only">(current)</span>
 						</a></li>
 						<li><a href="<%=request.getContextPath()%>/user/userTeam">参加的队伍</a></li>
-						<li><a href="<%=request.getContextPath()%>/user/userCenter"
+						<li><a href="<%=request.getContextPath()%>/user/userMsg"
 							style="color: #FFF; background-color: #4cb1ca;">通知中心</a></li>
-						<li><a href="<%=request.getContextPath()%>/user/userCenter">个人信息</a></li>
-						<li><a href="<%=request.getContextPath()%>/user/userCenter">账号管理</a></li>
+						<li><a href="<%=request.getContextPath()%>/user/userInfo">个人信息</a></li>
+						<li><a href="<%=request.getContextPath()%>/user/userAccount">账号管理</a></li>
 					</ul>
 				</div>
 			</div>
