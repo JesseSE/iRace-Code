@@ -331,12 +331,12 @@ function raceTab(pos)
 	
 	function showHedingRace(res){		
 		var race = eval(res);   
-		console.log(res);        	
+		console.log(race);        	
 		
 		var htmlText = " <a name='race_default'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++){
-			if(race[i].status == 1){
+			if(race[i].status == 2){
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
 				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
@@ -344,16 +344,17 @@ function raceTab(pos)
 				
 				
 				//判断组队状态
-				var apply = isJoinedAteam(race[i].id);				
-				if(null == apply){					
+				var apply = isJoinedAteam(race[i].id);	
+				//console.log(apply);
+				if(null == apply || " " == apply || "" == apply || "[]" == apply){					
 					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
 				}else{					
-					if(apply[0].status < 2)
+					if(apply[0].status == 0)
 						htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+					else if(apply[0].status == 1)
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经申请加入："+ apply[0].teamName +"</h3>";
 					else if(apply[0].status == 2)
-						htmlText = htmlText + "<h3 class='race-state-wait'>已经申请加入："+ apply[0].teamEntity.name +"</h3>";
-					else if(apply[0].status == 3)
-						htmlText = htmlText + "<h3 class='race-state-wait'>已经加入："+ apply[0].teamEntity.name +"</h3>";
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经加入："+ apply[0].teamName +"</h3>";
 				}
 								
 				
@@ -363,7 +364,7 @@ function raceTab(pos)
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
 				"<span class='label label-primary'>" + race[i].grade + "</span>" +
 				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
-				"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
+				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
 				"</div>";		
 			}
 		}	
@@ -404,19 +405,19 @@ function raceTab(pos)
 		var htmlText = " <a name='race_done'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++)	{
-			if(race[i].status == 1){
-				var reward = isJoinedAteam(race[i].id);
+			if(race[i].status == 3){
+				var reward = isJoinedAteam(race[i].id);				
 				
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
 				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
 				"<h3 style='display:inline;'>" + race[i].name + "</h3>";
-				if(reward[0].teamEntity.rewardEntity == null){
+				if(null == reward || " " == reward || "" == reward || "[]" == reward){
 					htmlText = htmlText + 
 					"<h3 class='race-state-wait'>未获奖</h3>";					
 				}else{
 					htmlText = htmlText + 
-					"<h3 class='race-state-wait'>"+ reward[0].teamEntity.rewardEntity.name +"</h3>";
+					"<h3 class='race-state-wait'>"+ reward[0].reward +"</h3>";
 				}		
 				
 				htmlText = htmlText + 
@@ -425,7 +426,7 @@ function raceTab(pos)
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
 				"<span class='label label-primary'>" + race[i].grade + "</span>" +
 				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
-				"<span class='label label-info'>"+ race[i].startTime.year +"/" + race[i].startTime.month +"至"+ race[i].endTime.year +"/" + race[i].endTime.month +"</span>" +
+				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
 				"</div>";
 			}
 		}
@@ -486,7 +487,7 @@ function raceTab(pos)
 					 "</div> </div>"+
 					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
 					 "<div class='price1'>"+
-					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year+1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year+1900) +"/" + race[cursor].endTime.month +"</span>"+
 					 "</div>"+
 					 "<div class='clear'></div>"+
 					 "</div></div></a></div>";  					 
@@ -527,7 +528,8 @@ function raceTab(pos)
        			  },
        		dataType: "JSON",
        		async: false,//同步  
-       		success: function(res) {             			      
+       		success: function(res) {  
+       			console.log("+++++++");
        			console.log(eval(res));   
        			apply = eval(res);
        		},

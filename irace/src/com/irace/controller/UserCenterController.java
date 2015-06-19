@@ -79,6 +79,7 @@ public class UserCenterController extends SController {
 	public @ResponseBody String isJoinTeam(
 			@RequestParam(value="userId", required=true)int userId,
 			@RequestParam(value="raceId", required=true)int raceId){
+		System.out.println("======"+applyService.getTeamDetail(userId, raceId));
 		return applyService.getTeamDetail(userId, raceId);
 	}
 	
@@ -91,7 +92,7 @@ public class UserCenterController extends SController {
 	public @ResponseBody String getReconmmendation(		
 			@RequestParam(value="currentpagenum",required=true)int pageNum){		
 		
-		System.out.println("按照热度获取推介内容----" + pageNum);		
+		//System.out.println("按照热度获取推介内容----" + pageNum);		
 		return raceService.getRaceListBySortedHotPoint(pageNum, true);	
 	}
 	

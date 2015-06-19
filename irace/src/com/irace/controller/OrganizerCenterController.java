@@ -56,9 +56,9 @@ public class OrganizerCenterController extends SController {
 		if(pageStatus < 0 || pageStatus > 3) {
 			pageStatus = 0;
 		}
-		List raceList = raceService.getRaceListByOrganizer(organizerId, pageStatus);
+		List raceList = raceService.getRaceListByOrganizer(organizerId, currentPageNum, pageStatus);
 		//-------------------------------------
-		return JsonUtil.listToJSONString(raceList, new String[]{});
+		return JsonUtil.listToJSONString(raceList, new String[] {"typeEntities"});
 	}
 	
 	/**

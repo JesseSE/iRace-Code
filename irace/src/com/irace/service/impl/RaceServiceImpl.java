@@ -184,8 +184,9 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public List getRaceListByOrganizer(int oid, int status) {
-		// TODO Auto-generated method stub
-		return raceDao.getRaceListByOrganizer(oid, status);
+	public List getRaceListByOrganizer(int oid, int currentPageNum, int status) {
+		
+		return raceDao.getRaceListByOrganizer(currentPageNum,
+				Constants.DEFAULT_PAGE_ITEM_NUM, oid, status);
 	}
 }

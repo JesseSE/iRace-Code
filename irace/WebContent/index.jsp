@@ -35,15 +35,15 @@
                 <!-- /Slide image -->
                 <!-- Texts container -->
                 <div class="slide_content">
-                    <div class="slide_content_wrap">
-                        <!-- Text title -->
+                    <!-- <div class="slide_content_wrap">
+                        Text title
                         <h4 class="title">Aluminium Club</h4>
-                        <!-- /Text title -->
+                        /Text title
                         
-                        <!-- Text description -->
+                        Text description
                         <p class="description">Experiance ray ban</p>
-                        <!-- /Text description -->
-                    </div>
+                        /Text description
+                    </div> -->
                 </div>
                  <!-- /Texts container -->
             </div>
@@ -51,10 +51,10 @@
             <div class="slide">
                 <img src="<%=request.getContextPath() %>/public/images/fwwb.jpg" alt=""/>
                 <div class="slide_content">
-                    <div class="slide_content_wrap">
+                    <!-- <div class="slide_content_wrap">
                         <h4 class="title">consectetuer adipiscing </h4>
                         <p class="description">diam nonummy nibh euismod</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!--/slide -->
@@ -326,7 +326,7 @@
    					 "</div> </div>"+
    					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"</span>"+
+   					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year+1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year+1900) +"/" + race[cursor].endTime.month +"</span>"+
    					 "</div>"+
    					 "<div class='clear'></div>"+
    					 "</div></div></a></div>";
