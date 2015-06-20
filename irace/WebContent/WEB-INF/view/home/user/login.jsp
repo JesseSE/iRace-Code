@@ -122,7 +122,7 @@
                				
                			}else{
                				alert('输入错误！请返回重新输入！');
-               				location.href = "";
+               				location.href = "login";
                			}
                			
                			
@@ -131,6 +131,7 @@
                			
                			console.log(res);
                			alert('输入错误！请返回重新输入！');
+               			location.href = "login";
                		}
                	});	                
             });

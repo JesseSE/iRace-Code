@@ -70,9 +70,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
-                    <li><a href="<%=request.getContextPath() %>/organizer/detail/demo">基本信息管理<span class="sr-only">(current)</span></a></li> 
+                    <li><a href="<%=request.getContextPath() %>/organizer/racemanage_detail/${raceIDHTML}">基本信息管理<span class="sr-only">(current)</span></a></li> 
                     <li><a href="##" style="color:#FFF;background-color:#4cb1ca;">比赛审核</a></li>    
-                    <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">发布公告</a></li>    
+                    <li><a href="##">发布公告</a></li>    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
