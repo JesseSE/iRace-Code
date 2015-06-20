@@ -73,42 +73,8 @@ function submitPwd()
 
 </head>
 <body>
-     <div class="header-top">
-	   <div class="wrap"> 
-			  <div class="header-top-left">
-			  	  <div class="box">
-                     <div class="logo" style="margin-top:8px;">
-					   <a href="index.html"><img src="images/logo1.png" alt=""/></a>
-				     </div>
-                  </div>
-                   <div class="clear"></div> 
-   			  </div>
-           
-            <!--用户头像-->
-			 <div class="cssmenu" role="navigation">
-				<ul>
-                    <li><image src="images/message.png"></image></li> 
-					<li><a href="##">消息</a></li>|                   
-					<li><image src="images/userican.png"></image></li>
-                    
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  刘嵩 
-                </a>
-                <ul class="dropdown-menu" role="menu">
-					<div class="dropdown-header">dropdown header
-					</div>
-					<li><a class="dropdown-btn" href="##">个人中心</a>
-					<a class="dropdown-btn" href="##">退出登录</a></li>
-					
-                </ul>
-                    
-                    </li>
-				</ul>
-			</div>
-			<div class="clear"></div>
- 		</div>
-	</div>
+ <!-- 在这里引入登录模块 -->
+	<%@ include file="/public/section/user-div.jsp"%>
     
     
     <!--导航栏-->
@@ -125,9 +91,9 @@ function submitPwd()
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
-                    <li><a href="">比赛管理<span class="sr-only">(current)</span></a></li>
-                    <li><a href="">机构信息管理</a></li>   
-                    <li><a href="" style="color:#FFF;background-color:#4cb1ca;">机构账号管理</a></li>                    
+                    <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">比赛管理</a></li>
+                    <li><a href="<%=request.getContextPath() %>/organizer/orginfo">机构信息管理</a></li> 
+                    <li><a href="<%=request.getContextPath() %>/organizer/orgaccount" style="color:#FFF;background-color:#4cb1ca;">机构账号管理<span class="sr-only">(current)</span></a></li>                   
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -155,25 +121,8 @@ function submitPwd()
 			  </h4>
 			  
 			 
-			 <!--div class="top-border"> </div>
-				 <div class="border">
-				<img src="images/t-img1.jpg" style="float:left; width:30%; height:254px;"></img>
-			 <div class="btn"><a href="single.html">Check it Out</a></div>
-			 </div-->
-			 
-			 
-			 <!--上传头像>
-			<div style="float:left; width:30%; height:254px;margin-left:20px;margin-top:45px;">
-			<div class="top-border"> </div>
-			<div class="headImg">
-                <div id="preview">
-					<img id="imghead" class="innerImg" border=0 src="images/headExmp.jpg"/>
-				</div>
-				<div class="headBtn" id="headBtn"><a onclick="changeHead();">更换LOGO</a><input style="display:none" id="upimg" type="file" onchange="previewImage(this);" value="更换头像" name="uploadFile" /></div>
-             </div>
-			 </div>
-			 <-->
-		    	<form class="form-horizontal" action="" method="post" id="joinus" name="joinus" style="float:lefgt; width:64%; margin-left:0px;margin-top:45px;">
+			
+		    <form class="form-horizontal" id="joinus" name="joinus" style="float:lefgt; width:64%; margin-left:0px;margin-top:45px;">
 				
 				<!--显示账号信息部分-->
 				<div id="userInfo" style="margin-top:60px;margin-left:100px;margin-bottom:19px;">
@@ -183,7 +132,7 @@ function submitPwd()
 						账号名
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">BJTURJXY</font>
+					  <font name="showInfo">${ organizer.getUsername() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -191,7 +140,7 @@ function submitPwd()
 						联系邮箱
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">rjxy@bjtu.edu.cn</font>
+					  <font name="showInfo">${ organizer.getEmail() }</font>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;color:#000;font-family:微软雅黑;border:solid 2px #4cb1ca">
@@ -199,7 +148,7 @@ function submitPwd()
 						联系电话
 					</td>
 					<td style="padding:10px 10px;">
-					  <font name="showInfo">18811442504</font>
+					  <font name="showInfo">${ organizer.getTel() }</font>
 					</td>
 				</tr>
 				</table>
@@ -208,30 +157,30 @@ function submitPwd()
 				  <!--显示密码修改部分-->
 				  <div id="changePwd" style="display:none;margin-top:50px;margin-left:100px;margin-bottom:-38px;">
 				  <div class="form-group" >
-				    <label for="password" class="col-sm-2 control-label">旧密码</label>
-				    <div class="col-sm-4">
-				      <input type="password" class="form-control" id="password" name="password" placeholder="Password" onblur="confirm_password()">
+				    <label for="oldpassword" class="col-sm-3 control-label">旧密码</label>
+				    <div class="col-sm-5">
+				      <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Password" onblur="confirm_password()">
 				    </div>
 				    <font id="warnPassword" color="red"></font>
 				  </div>
 				  
 				  <div class="form-group">
-				    <label for="password" class="col-sm-2 control-label">新密码</label>
-				    <div class="col-sm-4">
-				      <input type="password" class="form-control" id="password" name="password" placeholder="Password" onblur="check_password()">
+				    <label for="newpassword" class="col-sm-3 control-label">新密码</label>
+				    <div class="col-sm-5">
+				      <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Password" onblur="check_password()">
 				    </div>
 				    <font id="warnPassword" color="red"></font>
 				  </div>
 				  <div class="form-group">
-				    <label for="repassword" class="col-sm-2 control-label">请确认</label>
-				    <div class="col-sm-4">
+				    <label for="repassword" class="col-sm-3 control-label">请确认</label>
+				    <div class="col-sm-5">
 				      <input type="password" class="form-control" id="repassword" name="repassword" placeholder="rePassword" onblur="check_repassword()">
 				    </div>
 				    <font id="warnrePassword" color="red"></font>
 				  </div>
 				 <div class="form-group">
 				    <div class="col-sm-offset-2 col-sm-10" style="margin-left:200px;">
-				      <button type="button" class="grey" onclick="submitPwd()">提交修改</button>
+				      <button type="button" class="grey" id="submit-btn">提交修改</button>
 				      <!--button style="display:none" type="reset" class="grey" style="margin-left: 20px;">重置</button-->
 				      <!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 				    </div>
@@ -255,41 +204,85 @@ function submitPwd()
             
             <!--侧边-->
 			<div class="rsidebar span_1_of_left">
-           <div class="top-border"> </div>
-			<div class="sidebar-bottom">
-			    <h2 class="m_1">新的比赛<br> 创建</h2>
-			    <p class="m_text">您可以通过我们网站定制并发布自己的比赛</p>
-			    <div class="subscribe">
-					 <form>
-					    <input name="userName" type="text" class="textbox">
-					    <input type="submit" value="定制">
-					 </form>
-	  			</div>
+				<div class="top-border"></div>
+				<div class="border">
+					<link href="<%=request.getContextPath()%>/public/css/default.css"
+						rel="stylesheet" type="text/css" media="all" />
+					<link
+						href="<%=request.getContextPath()%>/public/css/nivo-slider.css"
+						rel="stylesheet" type="text/css" media="all" />
+					<script
+						src="<%=request.getContextPath()%>/public/js/jquery.nivo.slider.js"></script>
+					<script type="text/javascript">
+						$(window).load(function() {
+							$('#slider').nivoSlider();
+						});
+					</script>
+					<div class="slider-wrapper theme-default">
+						<div id="slider" class="nivoSlider">
+							<img src="<%=request.getContextPath()%>/public/images/t-img1.jpg"
+								alt="" /> <img
+								src="<%=request.getContextPath()%>/public/images/t-img2.jpg"
+								alt="" /> <img
+								src="<%=request.getContextPath()%>/public/images/t-img3.jpg"
+								alt="" />
+						</div>
+					</div>
+					<div class="btn">
+						<a href="single.html">Check it Out</a>
+					</div>
+				</div>
+				<div class="top-border"></div>
+				<div class="sidebar-bottom">
+					<h2 class="m_1">
+						新的比赛<br> 创建
+					</h2>
+					<p class="m_text">您可以通过我们网站定制并发布自己的比赛</p>
+					<div class="subscribe">
+						<form>
+							<input name="userName" type="text" class="textbox"> <input
+								type="submit" value="定制">
+						</form>
+					</div>
+				</div>
 			</div>
-	    </div>
-	   <div class="clear"></div>
-	</div>
+			<div class="clear"></div>
+		</div>
 	</div>
 	</div>
     
     
-   <div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-	             <div class="copy">
-			        <p>GDS软件工程实践课小组版权所有<a target="_blank" href="http://www.js-css.cn/a/css/template/">IRACE</a></p>
-		         </div>
-				<div class="f-list2">
-				 <ul>
-					<li class="active"><a href="about.html">团队介绍</a></li> |
-					<li><a href="delivery.html">网站加盟</a></li> |
-					<li><a href="delivery.html">工程介绍</a></li> |
-					<li><a href="contact.html">联系我们</a></li> 
-				 </ul>
-			    </div>
-			    <div class="clear"></div>
-		      </div>
-	     </div>
-	</div>
+   <%@ include file="/public/section/footer.jsp"%>
+
+	<!-- 引入文件上传弹窗 -->
+	<!-- <h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3> -->
+
+	<%@ include file="/public/section/upload-file.jsp"%>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/public/js/md5-v2.2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			$("#submit-btn").click(function() {
+				$.ajax({
+					url : $("#appName").val() + "/organizer/organizerPasswordChange.act",
+					type : "POST",
+					data : {
+						oldpassword : hex_md5($("#oldpassword").val()),
+						newpassword : hex_md5($("#newpassword").val())
+					},
+					dataType : "JSON",
+					success : function(res) {
+						alert("修改成功！!");
+						console.log(res);
+						location.href = $("#appName").val() + "/organizer/orgaccount";
+					},
+					error : function(res) {
+						console.log(res);
+						alert('提交失败，请重新操作！');
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
