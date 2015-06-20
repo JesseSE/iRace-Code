@@ -192,12 +192,10 @@ public class OrganizerCenterController extends SController {
 		int oid = (int) session.getAttribute("oid");
 		System.out.println("oid:"+oid);
 		OrganizerEntity organizer = organizerService.getOrganizer(oid);
-		System.out.println(organizer.toString()+"--------"+oid);
-		
+		System.out.println(organizer+"--------"+oid);
 		if(organizer == null){
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
 		}else{
-			organizer.setName(organizername);
 			organizer.setEmail(email);
 			organizer.setTel(phone);
 			organizer.setCity(city);
