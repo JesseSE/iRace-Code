@@ -519,7 +519,7 @@
 			"<td>"+apply[number].tel+"</td>" ;
 			if(apply[number].status == 1)
 				htmlMember = htmlMember + "<td>待审核</td></tr>";
-			else(apply[number].status == 2)
+			else
 			htmlMember = htmlMember + "<td>已加入</td></tr>";
 		}
 		htmlMember = htmlMember +"</tbody></table></div>";
