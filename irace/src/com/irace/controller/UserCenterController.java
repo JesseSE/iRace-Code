@@ -107,13 +107,14 @@ public class UserCenterController extends SController {
 			@RequestParam(value="newpassword",required=true)String newpassword,
 			HttpSession session){
 		
-		
+		System.out.println(oldpassword+"-----------"+newpassword);
 		int uid = (int) session.getAttribute("uid");
 		UserEntity user = userService.getUser(uid);
 		if(user == null){
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
 		}else{
 			boolean flagPassword = oldpassword.equals(user.getPwd());
+			System.out.println(flagPassword);
 			if(flagPassword){
 				user.setPwd(newpassword);
 				boolean flag = userService.updateUser(user);
@@ -157,14 +158,17 @@ public class UserCenterController extends SController {
 			@RequestParam(value="sexRadio",required=true)String sexRadio,
 			@RequestParam(value="qq",required=true)String qq,
 			@RequestParam(value="school",required=true)String school,
-			@RequestParam(value="major",required=true)String major){
+			@RequestParam(value="major",required=true)String major,
+			HttpSession session){
 		
-		UserEntity user = userService.getUser(username);
+		int uid = (int) session.getAttribute("uid");
+		UserEntity user = userService.getUser(uid);
+		System.out.println(user.toString());
+		
 		if(user == null){
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
 		}else{
 			user.setEmail(email);
-			user.setNickname(nickname);
 			user.setQq(qq);
 			user.setTel(phone);
 			user.setGender(sexRadio);
