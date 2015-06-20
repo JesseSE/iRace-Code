@@ -106,10 +106,6 @@
 			 <select class="" name="" id="applyGroupSelect">
 
 			 </select>
-			    <div style="float:right;">
-				<img style="width:14px; height:14px;" src="images/finish.jpg"></img>
-				<a onclick="" style="font-size:0.7em;cursor:pointer;">完成所有报名审核</a>
-			  </div>
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
@@ -134,10 +130,6 @@
 			</select>
 			<select class="" name="" id="stageStageSelect">
 			</select>
-			  <div style="float:right;">
-				<img style="width:14px; height:14px;" src="images/finish.jpg"></img>
-				<a onclick="" style="font-size:0.7em;cursor:pointer;">完成所有阶段审核</a>
-			  </div>
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
@@ -174,10 +166,6 @@
 			 <select class="" name="" id="priceGroupSelect">
 
 			  </select>
-			  <div style="float:right;">
-				<img style="width:14px; height:14px;" src="images/finish.jpg"></img>
-				<a onclick="" style="font-size:0.7em;cursor:pointer;">完成所有组别颁奖</a>
-			  </div>
 			  </h4>
 			 
 	<!--每个组的队伍列表-->
@@ -909,7 +897,7 @@
 			getPraiseSelect(praise[0].groupID,praise[number].id);
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
-		"<h3 class='stage-pass' onclick = 'finishPraise(" + praise[0].id + ")'>完成此组颁奖</h3></div>";
+		"<h3 class='stage-wait' >颁奖未结束</h3></div>";
 
 		$("#praiseShow").html(htmlPraise);
 	}
