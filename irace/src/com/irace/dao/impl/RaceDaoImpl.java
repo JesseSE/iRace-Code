@@ -234,12 +234,12 @@ public class RaceDaoImpl extends SDao implements RaceDao {
 	@Override
 	public List getRaceListByUser(Integer pageNo, Integer pageItemNum,
 			int userID) {
-		this.hql = "SELECT r FROM RaceEntity AS r, UserEntity AS u ,ApplyEntity AS a inner join fetch r.organizerEntity  inner join fetch r.typeRaceEntity WHERE a.user=u.id and a.race=r.id and u.id = ?";
+		this.hql = "FROM ApplyEntity AS a inner join fetch a.teamEntity inner join fetch a.raceEntity inner join fetch a.groupRaceEntity inner join fetch a.userEntity WHERE a.user = ?";
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userID);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
-		Test(query.list());
+		//Test(query.list());
 		return query.list();
 	}
 	

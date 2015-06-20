@@ -1,6 +1,7 @@
 package com.irace.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,9 +33,12 @@ public class UserTeamController extends SController{
 	ApplyService applyService;
 	
 	@RequestMapping("userTeam")
-	public View UserTeamPage() {
-		View view = new View("home","user", "user_team", "个人中心");		
-		return view;
+	public View UserTeamPage(HttpSession session) {
+		View view = new View("home","user", "user_team", "个人中心");	
+		if(session.getAttribute("uid") != null)
+			return view;
+		else
+			return new View("home", "user", "login", "登陆");
 	}
 	
 	//通过UserID检索我创建的比赛

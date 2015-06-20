@@ -292,7 +292,6 @@
     //date 传值
     var raceID = $("#raceIDHtml").val();
     var raceStatus = null;
-    console.log(raceID + "raceID");
     
 	var tab1= document.getElementById("tab1");
 	var tab2= document.getElementById("tab2");

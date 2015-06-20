@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +33,6 @@ import com.irace.service.TeamService;
 import com.irace.service.UserService;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
-
 
 @Controller
 @RequestMapping("/race/*")
@@ -60,10 +59,14 @@ public class RaceManageStageController extends SController{
 	
 	@RequestMapping("RaceManageStage")
 	public View raceManageStage(
-			@RequestParam(value = "raceID",required = true)int raceID){
+			@RequestParam(value = "raceID",required = true)int raceID,
+			HttpSession session){
 		View view = new View("home","race","racemanage_stage","比赛管理");
 		view.addObject("raceIDHTML",raceID);
-		return view;	
+		if(session.getAttribute("oid") != null)
+			return view;
+		else
+			return new View("home", "user", "login", "登陆");	
 	}
 	
 	//载入比赛名字
