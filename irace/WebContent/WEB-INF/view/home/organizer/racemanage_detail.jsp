@@ -665,7 +665,7 @@ function submitPwd()
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
                     <li><a href="racemanage_detail.html" style="color:#FFF;background-color:#4cb1ca;">基本信息管理<span class="sr-only">(current)</span></a></li>
-                    <li><a href="racemanage_stage.html">比赛审核</a></li>    
+                    <li><a href="<%=request.getContextPath() %>/race/RaceManageStage?raceID=${raceID}">比赛审核</a></li>    
                     <li><a href="racemanage_notice.html">发布公告</a></li>    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
