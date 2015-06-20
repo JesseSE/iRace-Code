@@ -52,42 +52,7 @@
 </head>
 <body>
 
-     <div class="header-top">
-	   <div class="wrap"> 
-			  <div class="header-top-left">
-			  	  <div class="box">
-                     <div class="logo" style="margin-top:8px;">
-					   <a href="index.html"><img src="<%=request.getContextPath() %>/public/images/logo1.png" alt=""/></a>
-				     </div>
-                  </div>
-                   <div class="clear"></div> 
-   			  </div>
-           
-            <!--用户头像-->
-			 <div class="cssmenu" role="navigation">
-				<ul>
-                    <li><image src="<%=request.getContextPath() %>/public/images/message.png"></image></li> 
-					<li><a href="##">消息</a></li>|                   
-					<li><image src="<%=request.getContextPath() %>/public/images/userican.png"></image></li>
-                    
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                  刘嵩 
-                </a>
-                <ul class="dropdown-menu" role="menu">
-					<div class="dropdown-header">dropdown header
-					</div>
-					<li><a class="dropdown-btn" href="##">个人中心</a>
-					<a class="dropdown-btn" href="##">退出登录</a></li>
-					
-                </ul>
-                    
-                    </li>
-				</ul>
-			</div>
-			<div class="clear"></div>
- 		</div>
-	</div>
+<%@ include file="/public/section/user-div.jsp" %>
     
     
     <!--导航栏-->
@@ -105,9 +70,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
-                    <li><a href="racemanage_detail.html">基本信息管理<span class="sr-only">(current)</span></a></li> 
-                    <li><a href="racemanage_stage.html" style="color:#FFF;background-color:#4cb1ca;">比赛审核</a></li>    
-                    <li><a href="racemanage_notice.html">发布公告</a></li>    
+                    <li><a href="<%=request.getContextPath() %>/organizer/detail/demo">基本信息管理<span class="sr-only">(current)</span></a></li> 
+                    <li><a href="##" style="color:#FFF;background-color:#4cb1ca;">比赛审核</a></li>    
+                    <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">发布公告</a></li>    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -320,11 +285,14 @@
 	</div>
 	</div>
     
-
+<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("oid") %>">
+<input id="raceIDHtml" type="hidden" value="${raceIDHTML}">
 <%@ include file="/public/section/footer.jsp" %>
 <script type="text/javascript">
     //date 传值
-    var raceID = 1;
+    var raceID = $("#raceIDHtml").val();
+    var raceStatus = null;
+    console.log(raceID + "raceID");
     
 	var tab1= document.getElementById("tab1");
 	var tab2= document.getElementById("tab2");
@@ -346,8 +314,11 @@
 		 raceDiv2.style.display="none";
 		 raceDiv3.style.display="none";
 		 raceDiv4.style.display="none";
-		 
-		 selectGroupTeam();	
+		 if(RaceStatus == 1)
+			 selectGroupTeam();	
+		 else{
+			 alert("现在不能进行小组审核");
+		 }
 	    } );
 	 
 	 $("#tab2").click(function(){	 
@@ -360,8 +331,9 @@
 		 raceDiv2.style.display="block";
 		 raceDiv3.style.display="none";
 		 raceDiv4.style.display="none";
-		 
+		
 		 selectGroupPhase();
+
 	    } );
 	 
 	 $("#tab3").click(function(){
@@ -374,9 +346,10 @@
 		 raceDiv2.style.display="none";
 		 raceDiv3.style.display="block";
 		 raceDiv4.style.display="none";
-		 
+		
 		 selectPraiseTeam();
-	    } );
+	    
+	 } );
 	 
 	 $("#tab4").click(function(){
 		 tab4.style.backgroundColor="#DFF0D8";
@@ -420,14 +393,16 @@
 		var htmlStatus = "";
 		htmlName = "<h1 style = 'margin-top:-0px;float:adjusty;font-family:微软雅黑;'>"+name[0].name+"</h1>";
 		$("#raceTitle").html(htmlName);
+		raceStatus = name[0].status;
 		if(name[0].status == 0){
-			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>开启比赛</a></button>";
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>开启比赛，进行报名</a></button>";
 		}
 		else if(name[0].status == 1){
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>结束报名，开始比赛</a></button>";
+		}else if(name[0].status == 2){
 			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px' onclick = 'finishRace();'><a style='color:#FFF'>结束比赛</a></button>";
-		}else{
-			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px'><a style='color:#FFF'>比赛已结束</a></button>";
-		}
+		}else
+			htmlStatus = "<button style='font-family:微软雅黑;border:0px;padding:10px;color:#FFF;background-color:#4cb1ca;margin-right:17px;margin-top:-10px'><a style='color:#FFF'>比赛结束</a></button>";
 		$("#beginOrfinishRace").html(htmlStatus);	
 	}
 	
@@ -706,6 +681,7 @@
 	
 	//阶段审查的队伍
 	function getPhase(phaseID,status){
+		console.log(phaseID + " " + status);
 		$.ajax({
 			url:$("#appName").val() + "/race/manageGetStagePhase.act",
 			type:"POST",
@@ -736,6 +712,7 @@
 		var msg = "确定开启阶段吗？";
 		if(confirm(msg) == true){
 			finishPhase(1);
+			selectPhaseTeam();
 		}
 	}
 	
@@ -823,12 +800,13 @@
 	//完成阶段的审查
 	function finishPhase(status){
 		var phaseId = $("#stageStageSelect").val();
+		console.log(phaseId + "" +status);
 		$.ajax({
 			url : $("#appName").val() + "/race/manageStageFinishPhase.act",
 			type : "POST",
 			data : {
 				phaseId : phaseId,
-				Status : status
+				status : status
 			},
 			dataType : "JSON",
 			success : function(res){
@@ -874,10 +852,11 @@
 		group[0].name +"颁奖情况</h3>"+ "</a>";
 		$("#praiseTitle").html(htmlPraiseTitle);
 		//group status 0 报名审核 1 开始比赛 2 比赛结束 3 颁奖结束
-		if(group[0].status == 0){
-			getPraise(group[0].id,false);
+		console.log(raceStatus);
+		if(raceStatus == 2){
+			getPraise(group[0].id,true);
 		}
-		else if(group[0].status == 2){
+		else if(raceStatus == 3){
 			getPraise(group[0].id,false);
 		}
 		else{
@@ -892,12 +871,11 @@
 			type : "POST",
 			data : {
 				groupID : groupID,
-				isFinished : isFinished
 			},
 			dataTape : "JSON",
 			success : function(res){
 				console.log(res);
-				if(!isFinished){
+				if(isFinished){
 					showPraiseDoing(res);		
 				}
 				else{
@@ -920,8 +898,13 @@
 		" <tr><th>#</th><th>队伍名</th><th>现状态</th><th>选择奖项</th><th>操作</th></tr></thead><tbody>";
 		for(var number = 0; number < praise.length; number ++){
 			htmlPraise = htmlPraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
-			"<td>" + praise[number].name + "</td>" +
-			"<td>" + praise[number].reward  + "</td>" + 
+			"<td>" + praise[number].name + "</td>" ;
+			if(praise[number].reward == null)
+				htmlPraise = htmlPraise + "<td>未获奖</td>";
+			else
+				htmlPraise = htmlPraise + "<td>" + praise[number].reward  + "</td>";
+					
+			htmlPraise = htmlPraise  + 
 			"<td><select class='' name='' id='pricePriceSelect" + praise[number].id + "'>" + "</select></td>" +
 			"<td><a class='team-operate' onclick = 'sendPraise("+ praise[number].id +")'>颁奖</a></td></tr>";	
 			getPraiseSelect(praise[0].groupID,praise[number].id);
@@ -972,8 +955,12 @@
 		
 		for(var number = 0; number < praise.length; number ++){
 			htmlPraise = htmlPraise + "<tr><th scope = 'row'>" + (number + 1) + "</th>" + 
-			"<td>" + praise[number].name + "</td>" +
-			"<td>" + praise[number].reward  + "</td></tr>"; 		
+			"<td>" + praise[number].name + "</td>" ;
+			if(praise[number].reward == null)
+				htmlPraise = htmlPraise + "<td>未获奖</td>";
+			else
+				htmlPraise = htmlPraise + "<td>" + praise[number].reward  + "</td>";
+					
 		}
 		htmlPraise = htmlPraise + "</tbody></table></div>" + 
 		"<h3 class='stage-wait'>此组颁奖已结束</h3></div>";

@@ -59,8 +59,10 @@ public class RaceManageStageController extends SController{
 	UserService userService;
 	
 	@RequestMapping("RaceManageStage")
-	public View raceManageStage(){
+	public View raceManageStage(
+			@RequestParam(value = "raceID",required = true)int raceID){
 		View view = new View("home","race","racemanage_stage","比赛管理");
+		view.addObject("raceIDHTML",raceID);
 		return view;	
 	}
 	
@@ -178,7 +180,9 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String finishPhase(
 			@RequestParam(value = "phaseId",required = true)int phaseId,
 			@RequestParam(value = "status",required = true)int status){
+		System.out.println(phaseId + " " + status);
 		StageRaceEntity stage = stageService.getStage(phaseId);
+		System.out.print(stage.getName() + stage.getStatus());
 		stage.setStatus(status);
 		stageService.updateStage(stage);
 		return "1";
@@ -200,16 +204,8 @@ public class RaceManageStageController extends SController{
 	//颁奖的队伍
 	@RequestMapping("manageStageGetPraise.act")
 	public @ResponseBody String getPraise(
-			@RequestParam(value = "groupID",required = true)int groupID,
-			@RequestParam(value = "isFinished", required = true) boolean isFinished){
-		String praise= null;
-		if(!isFinished){
-			praise = teamService.getTeamListByGroup(groupID,2);
-		}
-		else{
-			praise = teamService.getTeamListByGroup(groupID,2);
-		}
-		return praise;
+			@RequestParam(value = "groupID",required = true)int groupID){
+		return teamService.getTeamListByGroup(groupID,0);
 	}
 	
 	//得到组别的奖项

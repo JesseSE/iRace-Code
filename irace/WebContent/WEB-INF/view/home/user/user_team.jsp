@@ -388,7 +388,7 @@
 				break;
 			//比赛阶段
 			case 2:
-				htmlJoin = htmlJoin+"<h3 class='team-state-submit'>比赛正在进行，点击提交阶段产物</h3>";
+				htmlJoin = htmlJoin+"<h3 class='team-state-wait'>比赛正在进行</h3>";
 				break;
 			//比赛结束
 			case 3:
