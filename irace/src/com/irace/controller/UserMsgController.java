@@ -46,8 +46,8 @@ public class UserMsgController {
 			@RequestParam(value="userId",required=true)int userId){
 				
 		System.out.println("新消息管理" + pageNum);	
-		//return messageService.getMessageList(pageNum, 1,true);
-		return mkMsg();
+		return messageService.getMessageList(userId,pageNum, false);
+		//return mkMsg();
 	}
 	
 	/**
@@ -62,15 +62,18 @@ public class UserMsgController {
 			@RequestParam(value="userId",required=true)int userId){
 				
 		System.out.println("旧消息管理" + pageNum);		
-		//return messageService.getMessageList(pageNum, userId,false);
-		return mkMsg();
+		return messageService.getMessageList(userId,pageNum,true);
+		//return mkMsg();
 	}
 
 	@RequestMapping("setMsgStatus.act")
-	public @ResponseBody Boolean setMsgStatus(
+	public @ResponseBody String setMsgStatus(
 			@RequestParam(value="msgId",required=true)int msgId){
-		System.out.println(msgId);
-		return messageService.readMessage(msgId);		
+		//System.out.println(msgId);
+		if(messageService.readMessage(msgId))
+			return "YES";
+		else
+			return "NO";
 	}
 	
 	

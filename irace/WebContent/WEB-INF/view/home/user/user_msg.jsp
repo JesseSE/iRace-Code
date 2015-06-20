@@ -119,30 +119,7 @@
 								<a name="race_default"></a>
 								<div class="panel-body" id="newMessage">
 
-									<!-- 一条通知开始 -->
-									<div class="list-group">
-										<a class="list-group-item list-group-item-success" href="##"
-											onclick="upDown('msg1');">
-											<h3 style="display: inline;">《关于提交第一次材料的通知》</h3>
-										</a> <a class="list-group-item">
-
-											<div id="msg1" style="display: none">
-												<table class="table"
-													style="word-break: break-all; word-wrap: break-all;">
-													<th>ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于
-														HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1]
-														它由Twitter的设计师Mark Otto和Jacob
-														Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking
-														News都使用了该项目。</th>
-												</table>
-											</div> <span class="label label-default">发送者：中国软件协会</span> <span
-											class="label label-primary">接收方：GDS小组</span> <span
-											class="label label-success">所属比赛：大学生创新创业大赛</span> <span
-											class="label label-info">发送时间：2016/04/28 21:38</span>
-											<h3 class="msg-state-tag">点击标记为已读</h3>
-										</a>
-									</div>
-									<!-- 一条通知结束 -->
+									
 
 								</div>
 							</div>
@@ -155,30 +132,7 @@
 								<a name="race_default"></a>
 								<div class="panel-body" id="oldMessage">
 
-									<!-- 一条通知开始 -->
-									<div class="list-group">
-										<a class="list-group-item list-group-item-success" href="##"
-											onclick="upDown('msg3');">
-											<h3 style="display: inline;">《关于提交第一次材料的通知》</h3>
-										</a> <a class="list-group-item">
-
-											<div id="msg3" style="display: none">
-												<table class="table"
-													style="word-break: break-all; word-wrap: break-all;">
-													<th>ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于
-														HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1]
-														它由Twitter的设计师Mark Otto和Jacob
-														Thornton合作开发，是一个CSS/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking
-														News都使用了该项目。</th>
-												</table>
-											</div> <span class="label label-default">发送者：中国软件协会</span> <span
-											class="label label-primary">接收方：GDS小组</span> <span
-											class="label label-success">所属比赛：大学生创新创业大赛</span> <span
-											class="label label-info">发送时间：2016/04/28 21:38</span>
-											<h3 class="msg-state-haveRead">已读</h3>
-										</a>
-									</div>
-									<!-- 一条通知结束 -->
+									
 
 								</div>
 							</div>
@@ -271,28 +225,6 @@
 		</div>
 	</div>
 	<!-- 主体结束 -->
-
-
-	<div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-				<div class="copy">
-					<p>
-						GDS软件工程实践课小组版权所有<a target="_blank" href="##">IRACE</a>
-					</p>
-				</div>
-				<div class="f-list2">
-					<ul>
-						<li class="active"><a href="##">团队介绍</a></li> |
-						<li><a href="##">网站加盟</a></li> |
-						<li><a href="##">工程介绍</a></li> |
-						<li><a href="##">联系我们</a></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
 
 	<!-- 页底开始  -->
     <%@ include file="/public/section/footer.jsp" %>
@@ -406,11 +338,12 @@
        				userId: userID
        			  },
        		dataType: "JSON",
-       		success: function(res) {           		
+       		success: function(res) {   
+       			//console.log(res);
        			showNewMessage(res);        			
        		},
        		error: function(res) {        			
-       			console.log(res);
+       			//console.log(res);
        			alert('获取新消息失败');
        		}   
 		});		
@@ -423,25 +356,25 @@
 		var htmlText = "";
 		
 		for(var i=0;i<message.length;i++){
-			var msgFlag = "msg" + message[i].id;
+			var msgFlag = "msg" + message[i].messageId;
 			htmlText = htmlText +
 			"<div class='list-group'>" +
-			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+ message[i].id +");'>" +
-			"<h3 style='display:inline;'>"+ message[i].sUserEntity.nickname +"发来的消息</h3>" +
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+ message[i].messageId +");'>" +
+			"<h3 style='display:inline;'>"+ message[i].senderName +"发来的消息</h3>" +
 			"</a>" +
 			"<a class='list-group-item'>" +
 			"<div id='"+ msgFlag +"' style='display:none'>" +
 			"<table class='table' style='word-break:break-all; word-wrap:break-all;'>" +
 			"<th>" +
-			message[i].content +
+			message[i].messageContent +
 			"</th>" +
 			"</table>" +
 			"</div>" +
-			"<span class='label label-default'>发送者："+ message[i].sUserEntity.nickname +"</span>" +
+			"<span class='label label-default'>发送者："+ message[i].senderName +"</span>" +
 			//"<span class='label label-primary'>接收方："+ message[i].reciver +"</span>" +
 			//"<span class='label label-success'>所属比赛："+ message[i].race.name +"</span>" +
-			"<span class='label label-info'>发送时间："+ message[i].time.year +"/" + message[i].time.month +"/" + message[i].time.day+"</span>" +
-			"<h3 class='msg-state-tag' onclick='readMsg("+ message[i].id +")'>点击标记为已读</h3>" +
+			"<span class='label label-info'>发送时间："+ (message[i].messageTime.year+1900) +"/" + message[i].messageTime.month +"/" + message[i].messageTime.day+"</span>" +
+			"<h3 class='msg-state-tag' onclick='readMsg("+ message[i].messageId +")'>点击标记为已读</h3>" +
 			"</a>" +
 			"</div>";
 		}		
@@ -478,24 +411,24 @@
 		//console.log(res); 
 		var htmlText = "";
 		for(var i=0;i<message.length;i++){
-			var msgFlag = "msg" + message[i].id;
+			var msgFlag = "msg" + message[i].messageId;
 			htmlText = htmlText +
 				"<div class='list-group'>" +
-				"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+ message[i].id +");'>" +
-				"<h3 style='display:inline;'>"+ message[i].sUserEntity.nickname +"发来的消息</h3>" +
+				"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+ message[i].messageId +");'>" +
+				"<h3 style='display:inline;'>"+ message[i].senderName +"发来的消息</h3>" +
 				"</a>" +
 				"<a class='list-group-item'>" +
 				"<div id='"+ msgFlag +"' style='display:none'>" +
 				"<table class='table' style='word-break:break-all; word-wrap:break-all;'>" +
 				" <th>" +
-				message[i].content +
+				message[i].messageContent +
 				"</th>" +
 				"</table>" +
 				"</div>" +
-				"<span class='label label-default'>发送者："+ message[i].sUserEntity.nickname +"</span>" +
+				"<span class='label label-default'>发送者："+ message[i].senderName +"</span>" +
 				//"<span class='label label-primary'>接收方：GDS小组</span>" +
 				//"<span class='label label-success'>所属比赛：大学生创新创业大赛</span>" +
-				"<span class='label label-info'>发送时间："+ message[i].time.year +"/" + message[i].time.month +"/" + message[i].time.day+"</span>" +
+				"<span class='label label-info'>发送时间："+ (message[i].messageTime.year+1900) +"/" + message[i].messageTime.month +"/" + message[i].messageTime.day+"</span>" +
 				"<h3 class='msg-state-haveRead'>已读</h3>" +
 				"</a>" +
 				"</div>";
@@ -513,12 +446,14 @@
     		type: "POST",
     		data: { "msgId": msgId},
     		dataType: "JSON",
-    		success: function(res) {           		
+    		success: function(res) {   
+    			console.log(res);
     			getNewMessage();        			
     		},
     		error: function(res) {        			
-    			console.log(res);
-    			alert('服务器错误，未能标识为已阅读');
+    			//console.log(res);
+    			getNewMessage();       
+    			//alert('服务器错误，未能标识为已阅读');
     		}   
 		});
 	}
@@ -570,7 +505,7 @@
 					 "</div> </div>"+
 					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
 					 "<div class='price1'>"+
-					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year+1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year+1900) +"/" + race[cursor].endTime.month +"</span>"+
 					 "</div>"+
 					 "<div class='clear'></div>"+
 					 "</div></div></a></div>";  					 

@@ -54,15 +54,12 @@
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><a href="<%=request.getContextPath()%>/user/userCenter">我参加的比赛
-							</a></li>
-							<li><a href="<%=request.getContextPath()%>/user/userTeam">参加的队伍</a></li>
-							<li><a href="<%=request.getContextPath()%>/user/userMsg">通知中心</a></li>
-							<li><a href="<%=request.getContextPath()%>/user/userInfo">个人信息<span
-									class="sr-only">(current)</span></a></li>
-							<li><a
-								href="<%=request.getContextPath()%>/user/userAccount">账号管理</a></li>
-						</ul>
+		                    <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 </a></li>
+		                    <li><a href="<%=request.getContextPath() %>/user/userTeam">参加的队伍</a></li>   
+		                    <li><a href="<%=request.getContextPath() %>/user/usermsg">通知中心</a></li>  
+		                    <li><a href="<%=request.getContextPath() %>/user/userInfo" style="color: #FFF; background-color: #4cb1ca;">个人信息<span class="sr-only">(current)</span></a></li>  
+		                    <li><a href="<%=request.getContextPath() %>/user/userAccount">账号管理</a></li>                      
+		                  </ul> 
 					</div>
 					<!-- /.navbar-collapse -->
 				</div>
@@ -401,9 +398,9 @@
 							+ race[cursor].typeRaceEntity.name + "</span>"
 							+ "<div class='price1'>"
 							+ "<span class='actual' font='0.5em'>"
-							+ race[cursor].startTime.year + "/"
+							+ (race[cursor].startTime.year+1900) + "/"
 							+ race[cursor].startTime.month + "-"
-							+ race[cursor].endTime.year + "/"
+							+ (race[cursor].endTime.year+1900) + "/"
 							+ race[cursor].endTime.month + "</span>" + "</div>"
 							+ "<div class='clear'></div>"
 							+ "</div></div></a></div>";

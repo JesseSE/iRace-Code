@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +33,6 @@ import com.irace.service.TeamService;
 import com.irace.service.UserService;
 import com.irace.util.JsonUtil;
 import com.irace.view.View;
-
 
 @Controller
 @RequestMapping("/race/*")
@@ -59,9 +58,15 @@ public class RaceManageStageController extends SController{
 	UserService userService;
 	
 	@RequestMapping("RaceManageStage")
-	public View raceManageStage(){
+	public View raceManageStage(
+			@RequestParam(value = "raceID",required = true)int raceID,
+			HttpSession session){
 		View view = new View("home","race","racemanage_stage","比赛管理");
-		return view;	
+		view.addObject("raceIDHTML",raceID);
+		if(session.getAttribute("oid") != null)
+			return view;
+		else
+			return new View("home", "user", "login", "登陆");	
 	}
 	
 	//载入比赛名字
@@ -178,7 +183,9 @@ public class RaceManageStageController extends SController{
 	public @ResponseBody String finishPhase(
 			@RequestParam(value = "phaseId",required = true)int phaseId,
 			@RequestParam(value = "status",required = true)int status){
+		System.out.println(phaseId + " " + status);
 		StageRaceEntity stage = stageService.getStage(phaseId);
+		System.out.print(stage.getName() + stage.getStatus());
 		stage.setStatus(status);
 		stageService.updateStage(stage);
 		return "1";
@@ -200,16 +207,8 @@ public class RaceManageStageController extends SController{
 	//颁奖的队伍
 	@RequestMapping("manageStageGetPraise.act")
 	public @ResponseBody String getPraise(
-			@RequestParam(value = "groupID",required = true)int groupID,
-			@RequestParam(value = "isFinished", required = true) boolean isFinished){
-		String praise= null;
-		if(!isFinished){
-			praise = teamService.getTeamListByGroup(groupID,2);
-		}
-		else{
-			praise = teamService.getTeamListByGroup(groupID,2);
-		}
-		return praise;
+			@RequestParam(value = "groupID",required = true)int groupID){
+		return teamService.getTeamListByGroup(groupID,0);
 	}
 	
 	//得到组别的奖项
