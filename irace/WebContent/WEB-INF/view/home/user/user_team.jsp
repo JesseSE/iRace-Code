@@ -287,7 +287,7 @@
 			htmlCreate = htmlCreate + "<a name = 'i_create'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>" +
-		    "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + "," + true +");'  href='##' >" +
+		    "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + ", 1 );'  href='##' >" +
 			"<h3 style='display:inline;'>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId +"' style='display:none'>"+"</div>"+
@@ -357,7 +357,7 @@
 			htmlJoin = htmlJoin + "<a name = 'i_join'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>"+
-			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+ ","+ false +");'>"+
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+ ",2);'>"+
 			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
@@ -427,7 +427,7 @@
 			htmlWait = htmlWait + "<a name = 'wait_pass'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>"+
-	    	"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+",false);'>"+
+	    	"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+",3);'>"+
 			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
@@ -456,10 +456,12 @@
    				teamID:id
    			  },
    			success: function(res) {
-   				if(judge)
+   				if(judge == 1)
        			    showTeamMember(res); 
-   				else
+   				else if(judge == 2)
    					showTeamMemberJoin(res);
+   				else
+   					showTeamMemberWait(res);
        		},
        		error: function(res) {        			
        			console.log(res);
@@ -504,6 +506,30 @@
 	}
 	
 	function showTeamMemberJoin(res){
+		var apply = eval(res); 
+		var htmlMember = "";
+		htmlMember = htmlMember +"<div class='panel panel-default'>"+
+		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
+		"<thead style='font-weight:bold;'>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th></tr></thead>"+
+		"<tbody>";
+		for(var number = 0;number < apply.length;number++){
+			htmlMember = htmlMember + "<tr>"+
+			"<th scope = 'row'>"+ (number+1)+"</th>"+
+			"<td>"+apply[number].userName+"</td>"+
+			"<td>"+apply[number].email+"</td>"+
+			"<td>"+apply[number].tel+"</td>" ;
+			if(apply[number].status == 1)
+				htmlMember = htmlMember + "<td>待审核</td></tr>";
+			else
+			htmlMember = htmlMember + "<td>已加入</td></tr>";
+		}
+		htmlMember = htmlMember +"</tbody></table></div>";
+		var name = "#"+apply[0].teamId;
+		$(name).html(htmlMember);	
+	}
+	
+	function showTeamMemberWait(res){
 		var apply = eval(res); 
 		var htmlMember = "";
 		htmlMember = htmlMember +"<div class='panel panel-default'>"+
