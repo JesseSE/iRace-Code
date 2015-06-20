@@ -3,6 +3,7 @@ package com.irace.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.irace.entity.OrganizerEntity;
+import com.irace.entity.UserEntity;
 import com.irace.service.OrganizerService;
 import com.irace.service.RaceService;
 import com.irace.util.InfoCode;
@@ -66,8 +68,48 @@ public class OrganizerCenterController extends SController {
 	 * @return
 	 */
 	@RequestMapping("orgaccount")
-	public View accountPage() {
-		return new View("home", "organizer", "organizer_account", "机构账号管理");
+	public @ResponseBody View accountPage(HttpSession session) {
+		View view = new View("home", "organizer", "organizer_account", "机构账号管理");
+		
+		int oid = (int) session.getAttribute("oid");
+		OrganizerEntity organizer = organizerService.getOrganizer(oid);
+		System.out.println(organizer.toString());
+		view.addObject("organizer", organizer);
+		
+		return view;
+	}
+	
+	/**
+	 * 账号管理提交修改
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("organizerPasswordChange.act")
+	public @ResponseBody String passwordChange(		
+			@RequestParam(value="oldpassword",required=true)String oldpassword,
+			@RequestParam(value="newpassword",required=true)String newpassword,
+			HttpSession session){
+		
+		System.out.println(oldpassword+"-----------"+newpassword);
+		int oid = (int) session.getAttribute("oid");
+		OrganizerEntity user = organizerService.getOrganizer(oid);
+		if(user == null){
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+		}else{
+			boolean flagPassword = oldpassword.equals(user.getPwd());
+			System.out.println(flagPassword);
+			if(flagPassword){
+				user.setPwd(newpassword);
+				boolean flag = organizerService.updateOrganizer(user);
+				if(flag){
+					return JsonUtil.getJsonInfoOK();
+				}else{
+					return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+				}
+			}else{
+				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+			}
+		}
 	}
 	
 	/**
@@ -113,6 +155,60 @@ public class OrganizerCenterController extends SController {
 			}
 		}else{
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+		}
+	}
+	
+	
+	/**
+	 *企业信息
+	 */
+
+	@RequestMapping("orginfo")
+	public @ResponseBody View orgInfo(HttpSession session) {
+		View view = new View("home", "organizer", "organizer_info", "机构信息管理");
+		
+		int oid = (int) session.getAttribute("oid");
+		OrganizerEntity organizer = organizerService.getOrganizer(oid);
+		System.out.println(organizer.toString());
+		view.addObject("organizer", organizer);
+		
+		return view;
+	}
+	
+	/**
+	 * 企业信息管理提交修改
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("organizerInfoChange.act")
+	public @ResponseBody String infoChange(		
+			@RequestParam(value="organizername",required=true)String organizername,
+			@RequestParam(value="email",required=true)String email,
+			@RequestParam(value="phone",required=true)String phone,
+			@RequestParam(value="city",required=true)String city,
+			@RequestParam(value="comment",required=true)String comment,
+			HttpSession session){
+		
+		int oid = (int) session.getAttribute("oid");
+		System.out.println("oid:"+oid);
+		OrganizerEntity organizer = organizerService.getOrganizer(oid);
+		System.out.println(organizer.toString()+"--------"+oid);
+		
+		if(organizer == null){
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
+		}else{
+			organizer.setName(organizername);
+			organizer.setEmail(email);
+			organizer.setTel(phone);
+			organizer.setCity(city);
+			organizer.setComment(comment);
+			
+			boolean flag = organizerService.updateOrganizer(organizer);
+			if(flag){
+				return JsonUtil.getJsonInfoOK();
+			}else{
+				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
+			}
 		}
 	}
 
