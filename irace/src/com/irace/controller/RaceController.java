@@ -154,6 +154,7 @@ public class RaceController extends SController {
 			Map<String,Object> m = new HashMap<String,Object>();
 			m.put("gid", g.getId());
 			m.put("gname", g.getName());
+			m.put("grequire", g.getRequires());
 			m.put("rlist", rewardService.getRewardListByGroup(g.getId()));
 			rewardList.add(m);
 		}
@@ -163,6 +164,7 @@ public class RaceController extends SController {
 			Map<String,Object> m = new HashMap<String,Object>();
 			m.put("gid", g.getId());
 			m.put("gname", g.getName());
+			m.put("grequire", g.getRequires());
 			m.put("slist", stageService.getStageList(g.getId()));
 			stageList.add(m);
 		}
@@ -283,13 +285,9 @@ public class RaceController extends SController {
 		
 	}
 	
-	@RequestMapping("getRaceList.act")
-	public @ResponseBody String getTeamList(){
-		
-		String teamList = teamService.getTeamList(1);
-		//teamEntity.setLeader(userEntity.getUsername());
-		
-		return teamList;
+	@RequestMapping("test/page/detail")
+	public View getTeamList() {
+		return new View("home", "race", "detail01", "test");
 	}
 	
 }
