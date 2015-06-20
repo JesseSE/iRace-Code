@@ -46,8 +46,8 @@ public class UserMsgController {
 			@RequestParam(value="userId",required=true)int userId){
 				
 		System.out.println("新消息管理" + pageNum);	
-		return messageService.getMessageList(pageNum, 1,false);
-		//return mkMsg();
+		//return messageService.getMessageList(pageNum, 1,true);
+		return mkMsg();
 	}
 	
 	/**
