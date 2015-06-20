@@ -67,15 +67,17 @@ public class MessageDaoImpl extends SDao implements MessageDao{
 	public List getMessageList(int userId, int pageNo, int pageItemNum,
 			boolean isRead) {
 		if(isRead){
-			this.hql = "FROM MessageEntity AS m inner join fetch sUserEntity AS s inner join fetch rUserEntity AS r WHERE m.receiver = ? and m.status = 1";
+			this.hql = "FROM MessageEntity AS m WHERE m.receiver = ? and m.status = 1";
 		}
 		else{
-			this.hql = "FROM MessageEntity AS m inner join fetch sUserEntity AS s inner join fetch rUserEntity AS r WHERE m.receiver = ? and m.status = 0";
+			//this.hql = "FROM MessageEntity AS m inner join fetch sUserEntity AS s inner join fetch rUserEntity AS r WHERE m.receiver = ? and m.status = 0";
+			this.hql = "FROM MessageEntity AS m WHERE m.receiver = ? and m.status = 0";
 		}
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);
 		query.setInteger(0, userId);
 		query.setFirstResult((pageNo - 1) * pageItemNum);
 		query.setMaxResults(pageItemNum);
+		List l = query.list();
 		return query.list();
 	}
 }

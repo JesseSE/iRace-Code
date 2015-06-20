@@ -180,7 +180,7 @@
 							<li><a href="<%=request.getContextPath()%>/user/usermsg">通知中心</a></li>
 							<li><a href="<%=request.getContextPath()%>/user/userInfo">个人信息</a></li>
 							<li><a
-								href="<%=request.getContextPath()%>/user/userAccount">账号管理<span
+								href="<%=request.getContextPath()%>/user/userAccount" style="color: #FFF; background-color: #4cb1ca;">账号管理<span
 									class="sr-only">(current)</span></a></li>
 						</ul>
 					</div>
