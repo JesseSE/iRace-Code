@@ -2,6 +2,7 @@ package com.irace.entity;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -166,8 +167,19 @@ public class MessageEntity implements IEntity{
 
 	@Override
 	public Map<String, Object> getMap() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		map.put("messageId", this.getId());
+		map.put("messageContent", this.getContent());
+		map.put("messageState", this.getStatus());
+		map.put("messageTime", this.getTime());
+		map.put("receiverId", this.getReceiver());
+		map.put("receiverName", this.getrUserEntity().getNickname());
+		map.put("senderId", this.getReceiver());
+		map.put("senderName",this.getsUserEntity().getNickname());
+
+		return map;
 	}
 	
 }

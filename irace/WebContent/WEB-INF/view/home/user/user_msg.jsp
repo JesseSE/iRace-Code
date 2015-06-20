@@ -418,7 +418,7 @@
 	
 	function showNewMessage(res){		
 		var message = eval(res);   
-		//console.log(res); 
+		console.log(res); 
 		//console.log(message.length); 
 		var htmlText = "";
 		
@@ -534,7 +534,7 @@
     			showReconmmendation(res);        			
     		},
     		error: function(res) {        			
-    			console.log(res);
+    			//console.log(res);
     			alert('输入错误！请返回重新输入！');
     		}   
 		});
@@ -542,7 +542,7 @@
 	
 	function showReconmmendation(res){		
 		var race = eval(res);   
-		console.log(res);        	
+		//console.log(res);        	
 		
 		var htmlText = "";
 		var cursor = 0;	
@@ -570,7 +570,7 @@
 					 "</div> </div>"+
 					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
 					 "<div class='price1'>"+
-					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year+1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year+1900) +"/" + race[cursor].endTime.month +"</span>"+
 					 "</div>"+
 					 "<div class='clear'></div>"+
 					 "</div></div></a></div>";  					 

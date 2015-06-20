@@ -110,10 +110,10 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public String getMessageList(int userId, int pageNo, boolean isRead) {
 		// TODO Auto-generated method stub
-		List res = messageDao.getMessageList(userId, pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, isRead);
-		return JsonUtil.listToJSONString(res, new String[] { "userEntity",
-				"groupRaceEntity", "raceEntity", "teamEntity" });
+		//List res = messageDao.getMessageList(userId, pageNo,Constants.DEFAULT_PAGE_ITEM_NUM, isRead);
+		//return JsonUtil.listToJSONString(res, new String[] { "userEntity","groupRaceEntity", "raceEntity", "teamEntity" });
+		return JsonUtil.getJsonByMapList(messageDao.getMessageList(userId, pageNo,
+				Constants.DEFAULT_PAGE_ITEM_NUM, isRead));
 	}
 
 	@Override
