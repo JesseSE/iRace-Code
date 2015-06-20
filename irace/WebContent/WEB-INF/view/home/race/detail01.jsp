@@ -49,7 +49,7 @@
 	float:right;
 }
 </style>
-		
+
 <script type="text/javascript">	
 function toWatch()
 {
@@ -293,16 +293,16 @@ function detailTab(pos)
 				 </div>
 			   <div class="clear"></div>
 			   
-			   <div class="top-border"></div>
-<!--DetailTab-->
-<div style="margin-top:30px;"></div>
+			<div class="top-border"></div>
+			<!--DetailTab-->
+			<div style="margin-top:30px;"></div>
 			<div class="top-box" name="my_race">
                 <ul class="nav nav-tabs">
                   <li role="presentation" class="active"><a href="##" id="tab1" onclick="detailTab(1);"  style="background-color:#DFF0D8;padding:0px 10px"><h3>比赛详情</h3></a></li>
                   <li role="presentation" class="active"><a href="##" id="tab2" onclick="detailTab(2);" style="padding:0px 10px"><h3>大赛资讯</h3></a></li> 
-                </ul>  
-<!--                比赛详情-->
-<div id="detail" style="display:block">
+                </ul>
+	<!--                比赛详情-->
+	<div id="detail" style="display:block">
 			    <div class="panel panel-default">
                     <a name="race_default"></a>
                       <div class="panel-body">
@@ -384,9 +384,9 @@ function detailTab(pos)
                       </a>
                     </li>
                   </ul>
-                </nav>                
+                </nav>
                 <-->
-			</div>	
+			</div>
 
 
 <!-- DetailTab-->

@@ -54,8 +54,8 @@
                     <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 <span class="sr-only">(current)</span></a></li>
                     <li><a href="<%=request.getContextPath() %>/user/userTeam" style="color: #FFF; background-color: #4cb1ca;">参加的队伍</a></li>   
                     <li><a href="<%=request.getContextPath() %>/user/usermsg">通知中心</a></li>  
-                    <li><a href="<%=request.getContextPath() %>/user/userTeam">个人信息</a></li>  
-                    <li><a href="<%=request.getContextPath() %>/user/userTeam">账号管理</a></li>                      
+                    <li><a href="<%=request.getContextPath() %>/user/userInfo">个人信息</a></li>  
+                    <li><a href="<%=request.getContextPath() %>/user/userAccount">账号管理</a></li>                      
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->

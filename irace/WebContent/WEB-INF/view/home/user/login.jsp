@@ -74,7 +74,7 @@
 							<div class="col-sm-4" style="margin-top: 7px;">
 								<label style="margin-left: 10px; margin-right: 30px;"> <input
 									name="Type" type="radio" value="0" id="organizer" />企业
-								</label> <label><input name="Type" type="radio" value="1" />个人
+								</label> <label><input name="Type" type="radio" value="1" checked/>个人
 								</label>
 							</div>
 						</div>

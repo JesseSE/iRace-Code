@@ -11,37 +11,6 @@
 <link href="<%=request.getContextPath()%>/public/css/nivo-slider.css"
 	rel="stylesheet" type="text/css" media="all" />
 
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
-<link href='css/family.css' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/jquery1.min.js"></script>
-start menu
-
-    新 Bootstrap 核心 CSS 文件
-<link rel="stylesheet" href="css/bootstrap.min.css">
-
-可选的Bootstrap主题文件（一般不用引入）
-<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-jQuery文件。务必在bootstrap.min.js 之前引入
-<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-
-最新的 Bootstrap 核心 JavaScript 文件
-<script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="js/formConfirm.js"></script>
-    
-    
-    
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script>
-<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-
-
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script> -->
 
 <script>
 	$(document).ready(function() {
@@ -49,33 +18,6 @@ jQuery文件。务必在bootstrap.min.js 之前引入
 	});
 </script>
 
-<!-- <script type="text/javascript" src="js/jquery1.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
-start menu
-<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/megamenu.js"></script> -->
-
-<script>
-	$(document).ready(function() {
-		$(".megamenu").megamenu();
-	});
-</script>
-
-<!--start slider -->
-<!--  <link rel="stylesheet" href="css/fwslider.css" media="all">
-    <script src="js/jquery-ui.min.js"></script>
-	<script src="js/jQuery-self.js"></script>
-    <script src="js/css3-mediaqueries.js"></script>
-    <script src="js/fwslider.js"></script> -->
-<!--end slider -->
-<!-- <script src="js/jquery.easydropdown.js"></script>
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/form.css" rel="stylesheet" type="text/css" media="all" /> -->
-<!--testlink-->
-<!-- <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/myButton.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" /> -->
 
 <script text="text/javascript">
 	function info_edit() {
@@ -96,39 +38,8 @@ start menu
 
 </head>
 <body>
-	<div class="header-top">
-		<div class="wrap">
-			<div class="header-top-left">
-				<div class="box">
-					<div class="logo" style="margin-top: 8px;">
-						<a href="index.html"><img src="images/logo1.png" alt="" /></a>
-					</div>
-				</div>
-				<div class="clear"></div>
-			</div>
-
-			<!--用户头像-->
-			<div class="cssmenu" role="navigation">
-				<ul>
-					<li><image src="images/message.png"></image></li>
-					<li><a href="##">消息</a></li>|
-					<li><image src="images/userican.png"></image></li>
-
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#" role="button"
-						aria-expanded="false"> 刘嵩 </a>
-						<ul class="dropdown-menu" role="menu">
-							<div class="dropdown-header">dropdown header</div>
-							<li><a class="dropdown-btn" href="##">个人中心</a> <a
-								class="dropdown-btn" href="##">退出登录</a></li>
-
-						</ul></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
-
+<!-- 在这里引入登录模块 -->
+<%@ include file="/public/section/user-div.jsp" %>
 
 	<!--导航栏-->
 	<div class="header-bottom" style="margin-top: -10px;">
@@ -142,14 +53,13 @@ start menu
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav" style="font-family: 微软雅黑">
-							<li><a href="user_center.html">我参加的比赛 <span
-									class="sr-only">(current)</span></a></li>
-							<li><a href="user_team.html">参加的队伍</a></li>
-							<li><a href="user_msg.html">通知中心</a></li>
-							<li><a href="user_info.html">个人信息</a></li>
-							<li><a href="user_account.html">账号管理</a></li>
-						</ul>
+						<ul class="nav navbar-nav">
+		                    <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 </a></li>
+		                    <li><a href="<%=request.getContextPath() %>/user/userTeam">参加的队伍</a></li>   
+		                    <li><a href="<%=request.getContextPath() %>/user/userMsg">通知中心</a></li>  
+		                    <li><a href="<%=request.getContextPath() %>/user/userInfo">个人信息<span class="sr-only">(current)</span></a></li>  
+		                    <li><a href="<%=request.getContextPath() %>/user/userAccount">账号管理</a></li>                      
+		                  </ul> 
 					</div>
 					<!-- /.navbar-collapse -->
 				</div>
@@ -184,36 +94,34 @@ start menu
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">昵称</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-												<%
-													session.getAttribute("nickname");
-												%>
+												${ user.getNickname() }
 										</font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">用户名</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-												<%
-													session.getAttribute("username");
-												%>
+												${ user.getUsername() }
 										</font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">电话</td>
-										<td style="padding: 10px 10px;"><font name="showInfo">18811442504</font>
+										<td style="padding: 10px 10px;"><font name="showInfo">
+										${ user.getTel() }</font>
 										</td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">性别</td>
-										<td style="padding: 10px 10px;"><font name="showInfo">男</font>
+										<td style="padding: 10px 10px;"><font name="showInfo">
+										${ user.getGender() }</font>
 										</td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">QQ</td>
-										<td style="padding: 10px 10px;"><font name="showInfo">741753181</font>
+										<td style="padding: 10px 10px;"><font name="showInfo">${ user.getQq() }</font>
 										</td>
 									</tr>
 									<tr
@@ -371,30 +279,8 @@ start menu
 	</div>
 	</div>
 
-
-	<div class="footer">
-		<div class="footer-middle">
-			<div class="wrap">
-				<div class="copy">
-					<p>
-						GDS软件工程实践课小组版权所有<a target="_blank"
-							href="http://www.js-css.cn/a/css/template/">IRACE</a>
-					</p>
-				</div>
-				<div class="f-list2">
-					<ul>
-						<li class="active"><a href="about.html">团队介绍</a></li> |
-						<li><a href="delivery.html">网站加盟</a></li> |
-						<li><a href="delivery.html">工程介绍</a></li> |
-						<li><a href="contact.html">联系我们</a></li>
-					</ul>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-	</div>
-
 	<%@ include file="/public/section/footer.jsp"%>
+	<%@ include file="/public/section/upload-file.jsp"%>
 	<script
 		src="<%=request.getContextPath()%>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript">

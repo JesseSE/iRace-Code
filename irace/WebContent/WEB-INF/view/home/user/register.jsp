@@ -5,36 +5,7 @@
 <html>
 <head>
 <title>${ title }</title>
-<!-- <meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="/irace/public/css/style.css" rel="stylesheet" type="text/css"
-	media="all" />
-<link href='/irace/public/css/family.css' rel='stylesheet'
-	type='text/css'>
-
-<link href='/irace/public/bootstrap-3.3.4-dist/css/bootstrap.min.css'
-	rel='stylesheet' type='text/css'>
-<link
-	href='/irace/public/bootstrap-3.3.4-dist/css/bootstrap-theme.min.css'
-	rel='stylesheet' type='text/css'>
-
-start menu
-<link href="/irace/public/css/megamenu.css" rel="stylesheet"
-	type="text/css" media="all" />
-<script type="text/javascript" src="/irace/public/js/megamenu.js"></script>
-
-
-<script type="text/javascript"
-	src="/irace/public/js/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="/irace/public/js/formConfirm.js"></script>
-<script src="/irace/public/js/jquery.easydropdown.js"></script>
-<script src="/irace/public/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function(){$(".megamenu").megamenu();});
-</script> -->
-
+ 
 <%@ include file="/public/section/header.jsp"%>
 
 <link href="<%=request.getContextPath()%>/public/css/default.css"

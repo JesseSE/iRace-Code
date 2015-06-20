@@ -25,17 +25,114 @@
 	hr {
 		border: 1px solid #D0D0D0;
 	}
-	</style>
 	
+	.avatar {
+		width: 100%;
+	}
+	.race-state-submit {
+		color:#4F7F90;
+		float:right;
+		cursor:pointer;
+	}
+	.race-state-submit:hover
+	{
+		text-decoration:underline;
+		color:#7A5555;
+	}
+	.race-state-wait {
+		color:#7A5555;
+		float:right;
+	}
+	
+	.tag-head {
+		padding: 0px 10px;
+		line-height: 2em;
+		font-size: 1.3em;
+	}
+	
+	.content-box {
+		padding: 20px;
+	}
+	
+	.bottom-line {
+		margin-bottom: 10px;
+		border-bottom: solid 1px;
+	}
+	
+	.span-tag {
+		padding: 5px;
+		background: rgb(128, 228, 216);
+		border-radius: 5px;
+	}
+	
+	.stage-name {
+		font-size: 1.2em;
+		font-weight: bold;
+		margin-right: 10px;
+	}
+	
+	.reward-name {
+		color: rgb(255, 91, 91);
+		font-size: 1.2em;
+		font-weight: bold;
+		margin-right: 10px;
+	}
+	
+	.break-line {
+		word-break: break-all;
+	}
+</style>
+<script type="text/javascript">
+function toWatch()
+{
+	var watchButton= document.getElementById("watch");
+	if(watchButton.value=="添加关注"){
+		alert("关注成功");
+		watchButton.value="取消关注";
+		watchButton.style.backgroundColor="#DFF0D8";
+		watchButton.style.color="#777";
+	}
+	else if(watchButton.value=="取消关注"){
+		alert("成功取消关注");
+		watchButton.value="添加关注";
+		watchButton.style.backgroundColor="#4CB1CA";
+		watchButton.style.color="#FFF";
+	}
+	else{}
+}
+
+function detailTab(pos)
+{
+	var tab1= document.getElementById("tab1");
+	var tab2= document.getElementById("tab2");
+	var raceDiv1 = document.getElementById("detail");
+	var raceDiv2 = document.getElementById("notice");
+	
+	if(pos==1)
+	{
+		tab1.style.backgroundColor="#DFF0D8";
+		tab2.style.backgroundColor="";
+		raceDiv1.style.display="block";
+		raceDiv2.style.display="none";
+	}
+	else if(pos==2)
+	{
+		tab2.style.backgroundColor="#DFF0D8";
+		tab1.style.backgroundColor="";
+		raceDiv1.style.display="none";
+		raceDiv2.style.display="block";
+	}
+	else{}
+}
+</script>
 </head>
 <body>
 
     <%@ include file="/public/section/user-div.jsp" %>
-<!--    网站标题、选择菜单、搜索框模块-->
-	<!-- 盗汗菜单div -->
-	<%@ include file="/public/section/menu-div.jsp"%>
-	
-<div class="mens">    
+	<div class="avatar">
+		<img src="<%=request.getContextPath() %>/public/images/${race.getOrganizerEntity().getPicUrl() }">
+	</div>
+<div class="mens">
   <div class="main">
      <div class="wrap">
      	<ul class="breadcrumb breadcrumb__t">
@@ -55,72 +152,152 @@
 							</div>
 						</div>
 	            </div>
-	            <input id="raceId" type="hidden" value="${race.getId() }">
-		         <div class="desc1 span_3_of_2">
-		         	<h3 id="raceName" class="m_3">${race.getName() }</h3>
-		            
-				    <p class="m_text2" style="text-indent: 25px;">${race.getContent() }</p>
-				    
-					
-					<c:forEach var="g" items="${groupList }">
-					<p class="m_text2">
-						<input id="group${g.getId() }" name='group' type="radio" value='${g.getId() }'/>
-						<label for="group${g.getId() }" style="margin-right:20px;">${g.getName() }</label>${g.getRequires() }
-					</p>
-					</c:forEach>
-					
-		         	 <div class="btn_form">
-						<form><button id="apply_submit" type="button" style="background:#4CB1CA;  color: #fff;line-height: 2em;width: 100px; border: none;">报名</button></form>
-					 </div>
-				 </div>
-			   <div class="clear"></div>
-	     <div class="toogle">
-	     	<h3 class="m_3">详情介绍</h3><hr>
-			<div class="clear"></div>
-			<p class="m_text2">>>比赛说明</p>
-	     	<p class="m_text" style="text-indent: 25px;">${race.getContent() }</p>
-			<p class="m_text2">>>阶段安排</p>
-			<c:forEach var="stage" items="${stageList }">
-				<ul class="m_text" data="${stage.gid }">${stage.gname }
-					<c:forEach var="s" items="${stage.slist }">
-					<li>${s.getStrTime(s.getStartTime()) } ~ ${s.getStrTime(s.getEndTime()) } ${s.getName() } ----- ${s.getContent() }</li>
-					</c:forEach>
-				</ul>
+           <input id="raceId" type="hidden" value="${race.getId() }">
+         <div class="desc1 span_3_of_2">
+         	<h3 id="raceName" class="m_3">${race.getName() }</h3>
+            
+		    <p class="m_text2" style="text-indent: 25px;">${race.getContent() }</p>
+		    
+			<c:forEach var="g" items="${groupList }">
+			<p class="m_text2">
+				<input id="group${g.getId() }" name='group' type="radio" value='${g.getId() }'/>
+				<label for="group${g.getId() }" style="margin-right:20px;">${g.getName() }</label>${g.getRequires() }
+			</p>
 			</c:forEach>
 			
-			<p class="m_text2">>>奖项设置</p>
-			<c:forEach var="reward" items="${rewardList }">
-				<ul class="m_text" data="${reward.gid }">${reward.gname }
-					<c:forEach var="r" items="${reward.rlist }">
-					<li>${r.getName() } ===== ${r.getContent() }</li>
-					</c:forEach>
-				</ul>
-			</c:forEach>
+         	<div class="btn_form">
+				<form><button id="apply_submit" type="button" style="background:#4CB1CA;  color: #fff;line-height: 2em;width: 100px; border: none;">报名</button></form>
+			</div>
 		 </div>
+		<div class="clear"></div>
+	     
+		<!--DetailTab-->
+		<div style="margin-top:30px;"></div>
+		<div class="top-box" name="my_race">
+            <ul class="nav nav-tabs">
+              <li role="presentation" class="active">
+              	<a href="##" id="tab1" class="tag-head" onclick="detailTab(1);"  style="background-color:#DFF0D8;"><h3>比赛详情</h3></a>
+              </li>
+              <li role="presentation" class="active">
+              	<a href="##" id="tab2" class="tag-head" onclick="detailTab(2);"><h3>大赛资讯</h3></a>
+              </li> 
+            </ul>
+			<!-- 比赛详情 -->
+			<div id="detail" style="display:block;">
+			    <div class="panel panel-default">
+                    <a name="race_default"></a>
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <a class="list-group-item list-group-item-success" href="##">
+                            <h4 style="display:inline;">比赛简介</h4>
+						</a>
+						<p class="m_text" style="text-indent: 25px;margin-right: 30px; margin-top: 10px;">${race.getContent() }</p>
+                      </div>
+                      
+                      <div class="list-group">
+                          <a class="list-group-item list-group-item-success" href="##">
+                              <h4 style="display:inline;">阶段安排</h4>
+						  </a>
+						  <div class="content-box">
+						  	<c:forEach var="stage" items="${stageList }">
+								<ul class="m_text" data="${stage.gid }" style="margin-bottom: 20px;">
+									<p class="bottom-line"><label style="font-size: 1.5em;margin-right: 10px;">${stage.gname }</label><span style="color: #A3A3A3;font-style: italic;">${stage.grequire }</span></p>
+									<c:forEach var="s" items="${stage.slist }">
+									<li style="margin-top: 10px; line-height: 1.7em;">
+										<span class="span-tag">${s.getStrTime(s.getStartTime()) }</span> ~ <span class="span-tag">${s.getStrTime(s.getEndTime()) }</span>
+										<p><label class="stage-name">${s.getName() }</label><span>${s.getContent() }</span></p>
+									</li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+						  </div>
+                      </div>
+                      
+					  <div class="list-group">
+                          <a class="list-group-item list-group-item-success" href="##">
+                              <h4 style="display:inline;">奖项设置</h4>
+						  </a>
+						  <div class="content-box">
+						  	<c:forEach var="reward" items="${rewardList }">
+								<ul class="m_text" data="${reward.gid }" style="margin-bottom: 20px;">
+									<p class="bottom-line"><label style="font-size: 1.5em;margin-right: 10px;">${reward.gname }</label><span style="color: #A3A3A3;font-style: italic;">${reward.grequire }</span></p>
+									<c:forEach var="r" items="${reward.rlist }">
+									<li><label class="reward-name">${r.getName() }</label> <span>${r.getContent() }</span></li>
+									</c:forEach>
+								</ul>
+							</c:forEach>
+						  </div>
+						  
+                       </div>
+                      </div>
+                </div>
+			</div>             
+			<!--                大赛公告-->
+			<div id="notice" style="display:none">
+                <div class="panel panel-default">
+                    <a name="race_done"></a>
+                      <div class="panel-body">
+                          <div class="list-group">
+                              <a class="list-group-item disabled" href="##">
+                                  <h4 style="display:inline;">关于比赛开始的通告</h4>
+                                <span class="label label-info" style="float:right;padding:5px;5px;">发布时间：2015-03-30 09:13:23</span>
+								  </a>
+                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个<%=request.getContextPath() %>/public/css/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。</a>
+                    
+                        </div>                      
+                        
+                          
+                          
+                         <div class="list-group">
+                              <a class="list-group-item disabled" href="##">
+                                  <h4 style="display:inline;">比赛修改通知</h4>
+								  
+                                <span class="label label-info" style="float:right;padding:5px;5px;">发布时间：2015-03-30 09:13:23</span>
+								  </a>
+                              <a class="list-group-item">ootstrap，来自 Twitter，是目前最受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。[1] 它由Twitter的设计师Mark Otto和Jacob Thornton合作开发，是一个<%=request.getContextPath() %>/public/css/HTML框架。Bootstrap提供了优雅的HTML和CSS规范，它即是由动态CSS语言Less写成。Bootstrap一经推出后颇受欢迎，一直是GitHub上的热门开源项目，包括NASA的MSNBC（微软全国广播公司）的Breaking News都使用了该项目。</a>
+                              
+                        </div>   
+                          
+                      </div>
+                </div>  
+    			</div>            
+                
+		</div>
+		 
 	 
 	 
 	    <div class="clients">
 		    <h3 class="m_3">历年赛事风采展示</h3>
 			 <ul id="flexiselDemo3">
-				<li><img src="images/s5.jpg" /><a href="#">Category</a><p>Rs 600</p></li>
-				<li><img src="images/s6.jpg" /><a href="#">Category</a><p>Rs 850</p></li>
-				<li><img src="images/s7.jpg" /><a href="#">Category</a><p>Rs 900</p></li>
-				<li><img src="images/s8.jpg" /><a href="#">Category</a><p>Rs 550</p></li>
-				<li><img src="images/s9.jpg" /><a href="#">Category</a><p>Rs 750</p></li>
+				<li><img src="<%=request.getContextPath() %>/public/images/s5.jpg" /><a href="#">Category</a><p>Rs 600</p></li>
+				<li><img src="<%=request.getContextPath() %>/public/images/s6.jpg" /><a href="#">Category</a><p>Rs 850</p></li>
+				<li><img src="<%=request.getContextPath() %>/public/images/s7.jpg" /><a href="#">Category</a><p>Rs 900</p></li>
+				<li><img src="<%=request.getContextPath() %>/public/images/s8.jpg" /><a href="#">Category</a><p>Rs 550</p></li>
+				<li><img src="<%=request.getContextPath() %>/public/images/s9.jpg" /><a href="#">Category</a><p>Rs 750</p></li>
 			 </ul>
 	     </div>
       </div>
 	  <div class="rsingle span_1_of_single">
 		<div class="toogle">
-	     	<h3 class="m_3" style="font-size: 1.3em;margin-bottom: -10px;">大赛资讯</h3><hr>
-	     	<p class="m_text" style="margin-left:5px;"><a href="#">大学生创业大</a><span style="float: right;">【2015-03-30】</span></p>
-			<p class="m_text" style="margin-left:5px;"><a href="#">《报名者须知》</a><span style="float: right;">【2015-03-30】</span></p>
-			<p class="m_text" style="margin-left:5px;"><a href="#">报名截止公告</a><span style="float: right;">【2015-03-30】</span></p>
-			<p class="m_text" style="margin-left:5px;"><a href="#">大学生创业大</a><span style="float: right;">【2015-03-30】</span></p>
-			<p class="m_text" style="margin-left:5px;"><a href="#">《报名者须知》</a><span style="float: right;">【2015-03-30】</span></p>
-			<p class="m_text" style="margin-left:5px;"><a href="#">报名截止公告</a><span style="float: right;">【2015-03-30】</span></p>
+	     	<h3 class="m_3" style="font-size: 1.3em;margin-bottom: -10px;">${race.getOrganizerEntity().getName() }</h3><hr>
+	     	<div class="o-item">
+	     		<label style="color:#B5B5B5; margin-right: 10px;">城市：</label>
+	     		<span>${race.getOrganizerEntity().getCity() }</span>
+	     	</div>
+	     	<div class="o-item">
+	     		<label style="color:#B5B5B5; margin-right: 10px;">电话：</label>
+	     		<span>${race.getOrganizerEntity().getTel() }</span>
+	     	</div>
+	     	<div class="o-item">
+	     		<label style="color:#B5B5B5; margin-right: 10px;">邮箱：</label>
+	     		<span class="break-line">${race.getOrganizerEntity().getEmail() }</span>
+	     	</div>
+	     	<div class="o-item">
+	     		<label style="color:#B5B5B5; margin-right: 10px;">简介：</label>
+	     		<span class="break-line">${race.getOrganizerEntity().getComment() }</span>
+	     	</div>
 	     </div>
-		    
+		 
 	  </div>
 	</div>
 	<div class="clear"></div>

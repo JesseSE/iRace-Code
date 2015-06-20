@@ -103,12 +103,13 @@ public class UserCenterController extends SController {
 	 */
 	@RequestMapping("userPasswordChange.act")
 	public @ResponseBody String passwordChange(		
-			@RequestParam(value="username",required=true)String username,
 			@RequestParam(value="oldpassword",required=true)String oldpassword,
-			@RequestParam(value="newpassword",required=true)String newpassword
-			){
+			@RequestParam(value="newpassword",required=true)String newpassword,
+			HttpSession session){
 		
-		UserEntity user = userService.getUser(username);
+		
+		int uid = (int) session.getAttribute("uid");
+		UserEntity user = userService.getUser(uid);
 		if(user == null){
 			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"用户不存在！");
 		}else{
@@ -131,8 +132,15 @@ public class UserCenterController extends SController {
 	 *账号管理
 	 */
 	@RequestMapping("userAccount")
-	public View userAccount() {
-		return new View("home", "user", "user_account", "账号管理");
+	public @ResponseBody View userAccount(HttpSession session) {
+		View view = new View("home", "user", "user_account", "账号管理");
+		
+		int uid = (int) session.getAttribute("uid");
+		UserEntity user = userService.getUser(uid);
+		System.out.println(user);
+		view.addObject("user", user);
+		
+		return view;
 	}
 	
 	/**
@@ -175,8 +183,15 @@ public class UserCenterController extends SController {
 	 */
 
 	@RequestMapping("userInfo")
-	public View userInfo() {
-		return new View("home", "user", "user_info", "用户信息");
+	public @ResponseBody View userInfo(HttpSession session) {
+		View view = new View("home", "user", "user_info", "用户信息");
+		
+		int uid = (int) session.getAttribute("uid");
+		UserEntity user = userService.getUser(uid);
+		System.out.println(user);
+		view.addObject("user", user);
+		
+		return view;
 	}
 	
 	/**
