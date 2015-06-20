@@ -35,7 +35,7 @@
 	function showimg() {
 		var img = document.getElementById("upimg").value;
 		alert(img);
-		document.getElementById("innerImg").src = "images/" + img;
+		document.getElementById("innerImg").src = "<%=request.getContextPath()%>/public/images/" + img;
 	}
 </script>
 
@@ -173,7 +173,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse"
 						id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav" style="font-family:微软雅黑">
 							<li><a href="<%=request.getContextPath()%>/user/userCenter">我参加的比赛
 							</a></li>
 							<li><a href="<%=request.getContextPath()%>/user/userTeam">参加的队伍</a></li>
@@ -207,7 +207,7 @@
 								账号管理
 								<div style="float: right;">
 									<img style="width: 14px; height: 14px;"
-										src="images/edit-icon.jpg"></img> <a onclick="changePwd();"
+										src="<%=request.getContextPath()%>/public/images/edit-icon.jpg"></img> <a onclick="changePwd();"
 										style="font-size: 0.7em;">修改密码</a>
 								</div>
 							</h4>
@@ -215,7 +215,7 @@
 
 							<!--div class="top-border"> </div>
 				 <div class="border">
-				<img src="images/t-img1.jpg" style="float:left; width:30%; height:254px;"></img>
+				<img src="<%=request.getContextPath()%>/public/images/t-img1.jpg" style="float:left; width:30%; height:254px;"></img>
 			 <div class="btn"><a href="single.html">Check it Out</a></div>
 			 </div-->
 
@@ -225,7 +225,7 @@
 								<div class="headImg">
 									<div id="preview">
 										<img id="imghead" class="innerImg" border=0
-											src="images/headExmp.jpg" />
+											src="<%=request.getContextPath()%>/public/images/headExmp.jpg" />
 									</div>
 									<div class="headBtn" id="headBtn">
 										<a onclick="changeHead();">更换头像</a><input
@@ -323,11 +323,11 @@
 			<div class="rsidebar span_1_of_left">
 				<div class="top-border"></div>
 				<div class="border">
-					<link href="css/default.css" rel="stylesheet" type="text/css"
+					<link href="<%=request.getContextPath()%>/public/css/default.css" rel="stylesheet" type="text/css"
 						media="all" />
-					<link href="css/nivo-slider.css" rel="stylesheet" type="text/css"
+					<link href="<%=request.getContextPath()%>/public/css/nivo-slider.css" rel="stylesheet" type="text/css"
 						media="all" />
-					<script src="js/jquery.nivo.slider.js"></script>
+					<script src="<%=request.getContextPath()%>/public/js/jquery.nivo.slider.js"></script>
 					<script type="text/javascript">
 						$(window).load(function() {
 							$('#slider').nivoSlider();
@@ -335,13 +335,13 @@
 					</script>
 					<div class="slider-wrapper theme-default">
 						<div id="slider" class="nivoSlider">
-							<img src="images/t-img1.jpg" alt="" /> <img
-								src="images/t-img2.jpg" alt="" /> <img src="images/t-img3.jpg"
+							<img src="<%=request.getContextPath()%>/public/images/t-img1.jpg" alt="" /> <img
+								src="<%=request.getContextPath()%>/public/images/t-img2.jpg" alt="" /> <img src="<%=request.getContextPath()%>/public/images/t-img3.jpg"
 								alt="" />
 						</div>
 					</div>
 					<div class="btn">
-						<a href="single.html">Check it Out</a>
+						<a href="single.html">查看详情</a>
 					</div>
 				</div>
 				<div class="top-border"></div>

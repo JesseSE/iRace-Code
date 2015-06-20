@@ -68,7 +68,7 @@ public class OrganizerServiceImpl implements OrganizerService {
 				session.setAttribute("oid", o.getId());
 				session.setAttribute("ousername", o.getUsername());
 				session.setAttribute("oname", o.getName());
-				session.setAttribute("oname", o.getPicUrl());
+				session.setAttribute("opic", o.getPicUrl());
 				return true;
 			} else {
 				return false;

@@ -50,7 +50,7 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav">
+                  <ul class="nav navbar-nav" style="font-family:微软雅黑">
                     <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 <span class="sr-only">(current)</span></a></li>
                     <li><a href="<%=request.getContextPath() %>/user/userTeam" style="color: #FFF; background-color: #4cb1ca;">参加的队伍</a></li>   
                     <li><a href="<%=request.getContextPath() %>/user/usermsg">通知中心</a></li>  

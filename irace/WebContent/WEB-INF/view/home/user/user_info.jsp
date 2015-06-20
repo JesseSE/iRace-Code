@@ -82,7 +82,7 @@
 								个人信息管理
 								<div style="float: right;">
 									<img style="width: 14px; height: 14px;"
-										src="images/edit-icon.jpg"></img> <a onclick="info_edit();"
+										src="<%=request.getContextPath()%>/public/images/edit-icon.jpg"></img> <a onclick="info_edit();"
 										style="font-size: 0.7em">编辑资料</a>
 								</div>
 							</h4>

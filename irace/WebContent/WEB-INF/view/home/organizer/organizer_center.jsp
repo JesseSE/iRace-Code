@@ -385,7 +385,7 @@ function raceTab(pos)
 				"<a class='list-group-item'>"+ raceList[i].content +"<br><br>" +
 				"<span class='label label-primary'>" + raceList[i].grade + "</span>" +
 				"<span class='label label-success'>" + raceList[i].typeRaceEntity.name + "</span>" +
-				"<span class='label label-info'>"+ raceList[i].startTime.year +"/" + raceList[i].startTime.month +"至"+ raceList[i].endTime.year +"/" + raceList[i].endTime.month +"</span>" +
+				"<span class='label label-info'>"+ (raceList[i].startTime.year+1900) +"/" + raceList[i].startTime.month +"至"+ (raceList[i].endTime.year+1900) +"/" + raceList[i].endTime.month +"</span>" +
 				"</a></div><br>";
 			}
 			

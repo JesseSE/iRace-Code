@@ -197,9 +197,19 @@ public class UserController extends SController {
 	
 	@RequestMapping("logout.act")
 	public @ResponseBody View logoutAction(HttpSession session){
-		session.removeAttribute("nickname");
-		session.removeAttribute("uid");
-		session.removeAttribute("username");
+		if(session.getAttribute("uid")!=null)
+		{
+			session.removeAttribute("nickname");
+			session.removeAttribute("uid");
+			session.removeAttribute("username");
+		}
+		else if(session.getAttribute("oid")!=null)
+		{
+			session.removeAttribute("oid");
+			session.removeAttribute("oname");
+			session.removeAttribute("ousername");
+			session.removeAttribute("opic");
+		}
 		
 		return new View("home", "user", "login", "登陆");
 	}
