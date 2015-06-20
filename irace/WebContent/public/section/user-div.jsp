@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+<style type="text/css">
+    .dropdown-btn
+    {
+    	width:100%;
+    	height:100%;
+    	background-color:rgba(0,0,0,0);
+    	font-family:微软雅黑;
+    }
+    .dropdown-menu
+    {
+    	background-color:#99BBFF;
+    }
+</style>
     <div class="header-top">
 	   <div class="wrap"> 
 <!--           登录注册菜单模块-->
