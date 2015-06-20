@@ -427,7 +427,7 @@
 			htmlWait = htmlWait + "<a name = 'wait_pass'></a>"+
 			"<div class = 'panel-body'>"+
 			"<div class ='list-group'>"+
-			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+");'>"+
+			"<a class='list-group-item list-group-item-success' href='##' onclick='upDown("+apply[number].teamId+",false);'>"+
 			"<h3>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId+"' style='display:none'>"+"</div>"+
@@ -509,15 +509,14 @@
 		htmlMember = htmlMember +"<div class='panel panel-default'>"+
 		"<table class='table' style='word-break:break-all; word-wrap:break-all;'>"+
 		"<thead style='font-weight:bold;'>"+
-		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th><th>状态</th></tr></thead>"+
+		"<tr><th>#</th><th>姓名</th><th>邮箱</th><th>电话</th></tr></thead>"+
 		"<tbody>";
 		for(var number = 0;number < apply.length;number++){
 			htmlMember = htmlMember + "<tr>"+
 			"<th scope = 'row'>"+ (number+1)+"</th>"+
 			"<td>"+apply[number].userName+"</td>"+
 			"<td>"+apply[number].email+"</td>"+
-			"<td>"+apply[number].tel+"</td>" +
-			"<td>已加入</td></tr>";
+			"<td>"+apply[number].tel+"</td>" ;
 		}
 		htmlMember = htmlMember +"</tbody></table></div>";
 		var name = "#"+apply[0].teamId;
