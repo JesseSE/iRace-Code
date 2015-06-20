@@ -79,6 +79,7 @@ public class ApplyDaoImpl extends SDao implements ApplyDao{
 		Query query = this.sessionFactory.getCurrentSession().createQuery(this.hql);		
 		query.setInteger(0, raceId);
 		query.setInteger(1, userId);
+		//List a = query.list();
 		return query.list();
 	}
 

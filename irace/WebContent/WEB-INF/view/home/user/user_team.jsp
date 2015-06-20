@@ -52,10 +52,10 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
                     <li><a href="<%=request.getContextPath() %>/user/userCenter">我参加的比赛 <span class="sr-only">(current)</span></a></li>
-                    <li><a href="<%=request.getContextPath() %>/user/userTeam">参加的队伍</a></li>   
-                    <li><a href="<%=request.getContextPath() %>/user/userMsg">通知中心</a></li>  
-                    <li><a href="<%=request.getContextPath() %>/user/userInfo">个人信息</a></li>  
-                    <li><a href="<%=request.getContextPath() %>/user/userAccount">账号管理</a></li>                      
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam" style="color: #FFF; background-color: #4cb1ca;">参加的队伍</a></li>   
+                    <li><a href="<%=request.getContextPath() %>/user/usermsg">通知中心</a></li>  
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam">个人信息</a></li>  
+                    <li><a href="<%=request.getContextPath() %>/user/userTeam">账号管理</a></li>                      
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -149,11 +149,12 @@
 	<!-- <h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3> -->
 
 	<%@ include file="/public/section/upload-file.jsp" %>
-	
+	<!-- 取得用户id -->
+	<input id="userIDHtml" type="hidden" value="<%=session.getAttribute("uid") %>">	
 	
 	<script src="<%=request.getContextPath() %>/public/js/jquery.nivo.slider.js"></script>
 	<script type="text/javascript"> 
-	var userID = 1;
+	var userID = $("#userIDHtml").val();
 	var tab1= document.getElementById("tab1");
 	var tab2= document.getElementById("tab2");
 	var tab3= document.getElementById("tab3");
@@ -230,7 +231,7 @@
 			if(cursor<race.length){
 			   htmlText = htmlText + 
     				 "<div class='col_1_of_3 span_1_of_3'>"+
-					 "<a href='single.html'>"+
+    				 "<a href='  " +$("#appName").val()+ "/race/detail/"+ race[cursor].id +"'>"+ 
 					 "<div id='race"+race[cursor].id+"' class='inner_content clearfix'>"+
 					 "<div class='product_image'>"+
 					 "<img src='"+race[cursor].picUrl+"' alt=''/>"+
@@ -247,7 +248,7 @@
 					 "</div> </div>"+
 					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
 					 "<div class='price1'>"+
-					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year+1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year+1900) +"/" + race[cursor].endTime.month +"</span>"+
 					 "</div>"+
 					 "<div class='clear'></div>"+
 					 "</div></div></a></div>";  					 

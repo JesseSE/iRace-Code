@@ -31,29 +31,35 @@
 <script type="text/javascript">	
 function raceTab(pos)
 {
+	var tab0= document.getElementById("tab0");
 	var tab1= document.getElementById("tab1");
 	var tab2= document.getElementById("tab2");
 	var tab3= document.getElementById("tab3");
-	var raceDiv1 = document.getElementById("ongoing");
-	var raceDiv2 = document.getElementById("finish");
-	var raceDiv3 = document.getElementById("publish");
+	var raceDiv0 = document.getElementById("publish");
+	var raceDiv1 = document.getElementById("baoming");
+	var raceDiv2 = document.getElementById("ongoing");
+	var raceDiv3 = document.getElementById("finish");
 	
 	if(pos==1)
 	{
 		tab1.style.backgroundColor="#DFF0D8";
 		tab2.style.backgroundColor="";
 		tab3.style.backgroundColor="";
+		tab0.style.backgroundColor="";
 		
 		raceDiv1.style.display="block";
 		raceDiv2.style.display="none";
 		raceDiv3.style.display="none";
+		raceDiv0.style.display="none";
 	}
 	else if(pos==2)
 	{
 		tab2.style.backgroundColor="#DFF0D8";
+		tab0.style.backgroundColor="";
 		tab1.style.backgroundColor="";
 		tab3.style.backgroundColor="";
 		
+		raceDiv0.style.display="none";
 		raceDiv1.style.display="none";
 		raceDiv2.style.display="block";
 		raceDiv3.style.display="none";
@@ -61,14 +67,25 @@ function raceTab(pos)
 	else if(pos==3)
 	{
 		tab3.style.backgroundColor="#DFF0D8";
+		tab0.style.backgroundColor="";
 		tab1.style.backgroundColor="";
 		tab2.style.backgroundColor="";
 		
+		raceDiv0.style.display="none";
 		raceDiv1.style.display="none";
 		raceDiv2.style.display="none";
 		raceDiv3.style.display="block";
-	}
-	else{}
+	}else if(pos == 0){
+		tab0.style.backgroundColor="#DFF0D8";
+		tab3.style.backgroundColor="";
+		tab1.style.backgroundColor="";
+		tab2.style.backgroundColor="";
+		
+		raceDiv3.style.display="none";
+		raceDiv1.style.display="none";
+		raceDiv2.style.display="none";
+		raceDiv0.style.display="block";
+	}else{}
 }
 
 </script>
@@ -94,7 +111,7 @@ function raceTab(pos)
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
                     <li><a href="<%=request.getContextPath() %>/organizer/orgcenter" style="color:#FFF;background-color:#4cb1ca;">比赛管理<span class="sr-only">(current)</span></a></li>
                     <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">机构信息管理</a></li>   
-                    <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">机构账号管理</a></li>                    
+                    <li><a href="<%=request.getContextPath() %>/organizer/orgaccount">机构账号管理</a></li>                    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
               </div><!-- /.container-fluid -->
@@ -115,17 +132,29 @@ function raceTab(pos)
 			<div class="top-box" name="my_race">
 				<!-- 我的比赛导航栏 -->
                 <ul class="nav nav-tabs">
-                  <li role="presentation" class="active"><a href="##" id="tab1" onclick="raceTab(1);"  style="background-color:#DFF0D8;"><h4>正在进行</h4></a></li>
-                  <li role="presentation" class="active"><a href="##" id="tab2" onclick="raceTab(2);" ><h4>已经结束</h4></a></li> 
-                  <li role="presentation" class="active"><a href="##" id="tab3" onclick="raceTab(3);" ><h4>未发布</h4></a></li> 
+                  <li role="presentation" class="active"><a href="##" id="tab0" onclick="raceTab(0);"  style="background-color:#DFF0D8;"><h4>未发布</h4></a></li>
+                  <li role="presentation" class="active"><a href="##" id="tab1" onclick="raceTab(1);" ><h4>正在报名</h4></a></li> 
+                  <li role="presentation" class="active"><a href="##" id="tab2" onclick="raceTab(2);" ><h4>正在比赛</h4></a></li> 
+                  <li role="presentation" class="active"><a href="##" id="tab3" onclick="raceTab(3);" ><h4>已经结束</h4></a></li> 
                 </ul>  
                 <!-- 我的比赛导航栏结束 -->
                 
-				<!--正在进行的比赛开始 -->
-				<div id="ongoing" style="display:block">
+                <!--正在报名的比赛开始 -->
+				<div id="baoming" style="display:none">
 			    <div class="panel panel-default">
                     <a name="race_default"></a>
                       <div class="panel-body" id="race1">
+					  		<!-- 在这里注入正在进行的比赛 -->
+                      </div>
+                </div>
+			   </div> 
+			   <!--正在报名的比赛结束 -->  
+                
+				<!--正在进行的比赛开始 -->
+				<div id="ongoing" style="display:none">
+			    <div class="panel panel-default">
+                    <a name="race_default"></a>
+                      <div class="panel-body" id="race2">
 					  		<!-- 在这里注入正在进行的比赛 -->
                       </div>
                 </div>
@@ -136,7 +165,7 @@ function raceTab(pos)
 				<div id="finish" style="display:none">
                 <div class="panel panel-default">
                     <a name="race_done"></a>
-                      <div class="panel-body" id="race2">
+                      <div class="panel-body" id="race3">
 					  		<!-- 在这里诸如已经结束的比赛 -->
                       </div>
                 	</div>  
@@ -144,10 +173,10 @@ function raceTab(pos)
 			    <!--已经结束的比赛结束-->  
 			             
 				<!--未发布的比赛-->
-				<div id="publish" style="display:none">
+				<div id="publish" style="display:block">
                 <div class="panel panel-default">
                     <a name="race_done"></a>
-                      <div class="panel-body" id="race3">
+                      <div class="panel-body" id="race0">
                       		<!-- 在这里诸如还未发布的比赛 -->
                       </div>
                 	</div>  
@@ -217,8 +246,8 @@ function raceTab(pos)
 		//初始化值
 		function initValue(){
 			totalPage = 1;
-			pageStatus = 1;	//1正在进行，2已经结束，3还未发布
-			currentPage = 1;			
+			pageStatus = 0;	//2正在进行，3已经结束，0还未发布,1正在报名
+			currentPage = 1;				
 			organizerId = $("#orIDHtml").val();
 			if(organizerId == "null"){				
 				window.location.href=$("#appName").val()+"/user/login";
@@ -253,8 +282,14 @@ function raceTab(pos)
 			getRaceInfo();
 		});
 		//点击选择比赛的状态
+		$("#tab0").click(function(){
+			initValue();	
+			pageStatus = 0;	
+			getRaceInfo();
+		});
 		$("#tab1").click(function(){
-			initValue();			
+			initValue();	
+			pageStatus = 1;	
 			getRaceInfo();
 		});
 		$("#tab2").click(function(){
@@ -319,22 +354,27 @@ function raceTab(pos)
 				"<div class='list-group'>";
 				
 				//判断是正在进行的比赛、结束的比赛、未发布的比赛
-				if(pageStatus == 1){
+				if(pageStatus == 2){
 					html = html +					
 					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
 					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
 					"<h3 class='race-state-submit'>点击进行阶段管理</h3>";
-				}else if(pageStatus == 2){
+				}else if(pageStatus == 3){
 					html = html +					
 					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
 					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
 					"<h3 class='race-state-submit'>查看比赛结果</h3>";
-				}else if(pageStatus == 3){
+				}else if(pageStatus == 0){
 					html = html +					
 					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
 					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
 					"<h3 class='race-state-submit' style='margin-left:10px;'>点击发布</h3>" +
 					"<h3 class='race-state-submit'>修改</h3>";
+				}else if(pageStatus == 1){
+					html = html +					
+					"<a class='list-group-item list-group-item-success' href='" +$("#appName").val()+ "/organizer/racemanage_detail/"+ raceList[i].id +"'>"+ 
+					"<h3 style='display:inline;'>" + raceList[i].name + "</h3>" +
+					"<h3 class='race-state-submit'>查看比赛报名</h3>";
 				}else{
 					html = "没有任何比赛存在";
 					break;
@@ -357,8 +397,8 @@ function raceTab(pos)
 				$("#race2").html(html);
 			}else if(pageStatus == 3){
 				$("#race3").html(html);
-			}else{
-				$("#race1").html(html);
+			}else if(pageStatus == 0){
+				$("#race0").html(html);
 			}
 		}
 			

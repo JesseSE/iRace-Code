@@ -188,7 +188,10 @@ public class ApplyEntity implements IEntity{
 		map.put("raceStatus", this.getRaceEntity().getStatus());
 		map.put("leaderId", this.getTeamEntity().getLeader());
 		map.put("status", this.getStatus());
-		//map.put("reward",ap.getTeamEntity().getRewardEntity().getName());
+		if(this.getTeamEntity().getRewardEntity() != null)
+			map.put("reward",this.getTeamEntity().getRewardEntity().getName());	
+		else 
+			map.put("reward","未获奖");	
 		return map;
 	}
 	

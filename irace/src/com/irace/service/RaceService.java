@@ -141,6 +141,6 @@ public interface RaceService {
 	public String getRaceListBySortedHotPoint(int pageNo, String keyword, boolean isAsc);
 	
 	
-	public List getRaceListByOrganizer(int oid, int status);
+	public List getRaceListByOrganizer(int oid, int currentPageNum, int status);
 	
 }

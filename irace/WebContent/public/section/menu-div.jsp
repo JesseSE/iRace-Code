@@ -10,82 +10,8 @@
 				</div>
 <!--                菜单栏， 内容分类-->
 				<div class="menu">
-	          <ul class="megamenu skyblue" id="addMenu">
-    
-	            <li class="active grid"><a href="index.html">主页</a></li>
-				<li><a class="color4" href="#">理学类</a>
-					<div class="megapanel">
-						<div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						  <div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						</div>
-					</li>		
-					
-					<li><a class="color4" href="#">工学类</a>
-					<div class="megapanel">
-						<div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						  <div class="row">
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>
-							<div class="col1">
-								<div class="h_nav">							
-									<ul>
-										<li><a href="womens.html"><h4>金牌竞赛</h4></a></li>									
-									</ul>	
-								</div>							
-							</div>					
-						  </div>
-						</div>
-					</li>					
+	          <ul class="megamenu skyblue" id="addMenu">    
+	           				
 				</ul>
 			</div>
 		</div>

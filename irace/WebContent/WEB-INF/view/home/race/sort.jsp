@@ -14,23 +14,8 @@
 	
 </head>
 <body>
-     <div class="header-top">
-	   <div class="wrap"> 
-<!--           登录注册菜单模块-->
-			 <div class="cssmenu">
-				<ul>
-<!--
-					<li class="active"><a href="login.html">Account</a></li> |
-					<li><a href="checkout.html">Wishlist</a></li> |
-					<li><a href="checkout.html">Checkout</a></li> |
--->
-					<li><a href="<%=request.getContextPath() %>/user/login">登录</a></li> |
-					<li><a href="<%=request.getContextPath() %>/user/register">注册</a></li>
-				</ul>
-			</div>
-			<div class="clear"></div>
- 		</div>
-	</div>
+     <!-- 用户登录信息div -->
+	<%@ include file="/public/section/user-div.jsp"%>
     
 <!--    网站标题、选择菜单、搜索框模块-->
 	<div class="header-bottom">
@@ -349,7 +334,7 @@
    					 "</div> </div>"+
    					 "<span class='actual'>分类："+race[cursor].typeRaceEntity.name+"</span>"+
    					 "<div class='price1'>"+
-   					 "<span class='actual' font='0.5em'>"+ race[cursor].startTime.year +"/" + race[cursor].startTime.month +"-"+ race[cursor].endTime.year +"/" + race[cursor].endTime.month +"</span>"+
+   					 "<span class='actual' font='0.5em'>"+ (race[cursor].startTime.year + 1900) +"/" + race[cursor].startTime.month +"-"+ (race[cursor].endTime.year +1900) +"/" + race[cursor].endTime.month +"</span>"+
    					 "</div>"+
    					 "<div class='clear'></div>"+
    					 "</div></div></a></div>";
