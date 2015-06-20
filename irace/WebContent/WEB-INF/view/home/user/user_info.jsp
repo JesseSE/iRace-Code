@@ -38,8 +38,8 @@
 
 </head>
 <body>
-<!-- 在这里引入登录模块 -->
-<%@ include file="/public/section/user-div.jsp" %>
+	<!-- 在这里引入登录模块 -->
+	<%@ include file="/public/section/user-div.jsp"%>
 
 	<!--导航栏-->
 	<div class="header-bottom" style="margin-top: -10px;">
@@ -91,32 +91,34 @@
 								<table class="formTable"
 									style="width: 300px; text-align: justify;">
 									<tr
-										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
-										<td style="padding: 10px 10px;">昵称</td>
+										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca;">
+										<td style="padding: 10px 10px;width:33%">昵称</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-												${ user.getNickname() }
-										</font></td>
+												${ user.getNickname() } </font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">用户名</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-												${ user.getUsername() }
-										</font></td>
+												${ user.getUsername() } </font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">电话</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-										${ user.getTel() }</font>
-										</td>
+												${user.getTel()}</font></td>
+									</tr>
+									<tr
+										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
+										<td style="padding: 10px 10px;">邮箱</td>
+										<td style="padding: 10px 10px;"><font name="showInfo">
+												${ user.getEmail() }</font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
 										<td style="padding: 10px 10px;">性别</td>
 										<td style="padding: 10px 10px;"><font name="showInfo">
-										${ user.getGender() }</font>
-										</td>
+												${ user.getGender() }</font></td>
 									</tr>
 									<tr
 										style="margin-bottom: 10px; color: #000; font-family: 微软雅黑; border: solid 2px #4cb1ca">
@@ -143,18 +145,18 @@
 							<div id="modifyInfo" style="display: none; margin-top: 40px;">
 								<form class="form-horizontal" id="joinus" name="joinus">
 									<div class="form-group">
-										<label for="username" class="col-sm-2 control-label">昵称</label>
+										<label for="nickname" class="col-sm-2 control-label">昵称</label>
 										<div class="col-sm-4">
-											<input type="input" class="form-control" id="username"
-												name="username" placeholder="<%session.getAttribute("username");%>" readOnly="true"></input>
+											<input type="input" class="form-control" id="nickname"
+												name="nickname" placeholder="${user.getNickname()}" readOnly="true"></input>
 										</div>
 										<div id="warnNickname" color="red"></div>
 									</div>
 									<div class="form-group">
-										<label for="nickname" class="col-sm-2 control-label">昵称</label>
+										<label for="username" class="col-sm-2 control-label">用户名</label>
 										<div class="col-sm-4">
-											<input type="input" class="form-control" id="nickname"
-												name="nickname" placeholder="Nickname"></input>
+											<input type="input" class="form-control" id="username"
+												name="username" placeholder="${user.getUsername()}" readOnly="true"></input>
 										</div>
 										<div id="warnNickname" color="red"></div>
 									</div>
@@ -162,7 +164,7 @@
 										<label for="email" class="col-sm-2 control-label">电子邮件</label>
 										<div class="col-sm-4">
 											<input type="input" class="form-control" id="email"
-												name="email" placeholder="Email" onblur="check_email()"></input>
+												name="email" placeholder="${user.getEmail()}" onblur="check_email()"></input>
 										</div>
 										<div id="warnEmail" color="red"></div>
 									</div>
@@ -170,24 +172,24 @@
 										<label for="phone" class="col-sm-2 control-label">电话</label>
 										<div class="col-sm-4">
 											<input type="tel" class="form-control" id="phone"
-												name="phone" placeholder="Phone number"></input>
+												name="phone" placeholder="${user.getTel()}"></input>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">性别</label>
 										<div class="col-sm-4" id="sexRadio">
 											<label class="radio-inline"> <input type="radio"
-												name="sexRadioOptions" id="sexManRadio" value="0"> 男</input>
+												name="sexRadioOptions" id="sexManRadio" value="0" checked> 男</input>
 											</label> <label class="radio-inline"> <input type="radio"
-												name="sexRadioOptions" id="sexWomanRadio" value="1"> 女</input>
+												name="sexRadioOptions" id="sexWomanRadio" value="1">
+												女</input>
 											</label>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="qq" class="col-sm-2 control-label">QQ</label>
 										<div class="col-sm-4">
-											<input type="input" class="form-control" id="qq" name="qq"
-												placeholder="QQ"></input>
+											<input type="input" class="form-control" id="qq" name="qq" placeholder="${user.getQq()}"></input>
 										</div>
 									</div>
 									<div class="form-group">
@@ -208,7 +210,7 @@
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10"
 											style="margin-left: 200px;">
-											<button type="button" class="grey" onclick="submitChange()">提交修改</button>
+											<button type="button" class="grey" id="submit-btn">提交修改</button>
 											<!--button style="display:none" type="reset" class="grey" style="margin-left: 20px;">重置</button-->
 											<!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 										</div>
@@ -247,8 +249,7 @@
 					</script>
 					<div class="slider-wrapper theme-default">
 						<div id="slider" class="nivoSlider">
-							<img
-								src="<%=request.getContextPath()%>/public/images/t-img1.jpg"
+							<img src="<%=request.getContextPath()%>/public/images/t-img1.jpg"
 								alt="" /> <img
 								src="<%=request.getContextPath()%>/public/images/t-img2.jpg"
 								alt="" /> <img
@@ -300,21 +301,51 @@
 		}
 
 		//Ajax函数
-		$(document).ready(
-				function() {
-					$(".inner_content").hover(
-							function() {
-								$(
-										".inner_content#" + this.id
-												+ " .product_image .float-Bar")
-										.slideToggle();
-							});
-					$('#slider').nivoSlider();
+		$(document).ready(function() {
+			$(".inner_content").hover(
+					function() {
+						$(".inner_content#" + this.id+ " .product_image .float-Bar")
+						.slideToggle();
+					});
+			$('#slider').nivoSlider();
+			//初始化
+			initValue();
+			getReconmmendation();
 
-					//初始化
-					initValue();
-					getReconmmendation();
+			$("#submit-btn").click(function() {
+				if(document.getElementById("sexManRadio").checked){
+					var sex = 'Man';
+				}else{
+					var sex = 'Woman';
+				}
+				$.ajax({
+					url : $("#appName").val() + "/user/userInfoChange.act",
+					type : "POST",
+					data : {
+						username : $("#username").val(),
+						nickname : $("#nickname").val(),
+						email : $("#email").val(),
+						phone : $("#phone").val(),
+						sexRadio : sex,
+						qq : $("#qq").val(),
+						school : $("#school").val(),
+						major : $("#major").val()
+					},
+					dataType : "JSON",
+					success : function(res) {
+						//var res = eval("("+obj+")");
+						console.log("登陆success!");
+						location.href = $("#appName").val() + "/user/userInfo";
+					},
+					error : function(res) {
+						console.log(res);
+						console.log("unsuccess!");
+						//alert('输入错误！请返回重新输入！');
+					}
 				});
+			});
+
+		});
 
 		function getReconmmendation() {
 			$.ajax({
@@ -383,12 +414,12 @@
 			else
 				$("#recommendation").html(htmlText);
 		}
-		
-		function submitChange(){
-			if(document.getElementById("sexManRadio").checked){
-				var sex = 'Man';
-			}else{
-				var sex = 'Woman';
+
+		function submitChange() {
+			if (document.getElementById("sexManRadio").checked) {
+				var sex = '男';
+			} else {
+				var sex = '女';
 			}
 			$.ajax({
 				url : $("#appName").val() + "/user/userInfoChange.act",
@@ -405,7 +436,7 @@
 				},
 				dataType : "JSON",
 				success : function(res) {
-					
+
 				},
 				error : function(res) {
 					console.log(res);

@@ -86,74 +86,6 @@
 
 
 
-<script type="text/javascript">
-	function changeHead() {
-		document.getElementById('upimg').click();
-	}
-	//图片上传预览    IE是用了滤镜。
-	function previewImage(file) {
-		var MAXWIDTH = 260;
-		var MAXHEIGHT = 180;
-		var div = document.getElementById('preview');
-		if (file.files && file.files[0]) {
-			div.innerHTML = '<img id=imghead>';
-			var img = document.getElementById('imghead');
-			img.onload = function() {
-				var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT,
-						img.offsetWidth, img.offsetHeight);
-				img.width = rect.width;
-				img.height = rect.height;
-				//                 img.style.marginLeft = rect.left+'px';
-				img.style.marginTop = rect.top + 'px';
-			}
-			var reader = new FileReader();
-			reader.onload = function(evt) {
-				img.src = evt.target.result;
-			}
-			reader.readAsDataURL(file.files[0]);
-		} else //兼容IE
-		{
-			var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
-			file.select();
-			var src = document.selection.createRange().text;
-			div.innerHTML = '<img id=imghead>';
-			var img = document.getElementById('imghead');
-			img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
-			var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth,
-					img.offsetHeight);
-			status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width
-					+ ',' + rect.height);
-			div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
-		}
-
-		alert("头像修改成功！")
-	}
-	function clacImgZoomParam(maxWidth, maxHeight, width, height) {
-		var param = {
-			top : 0,
-			left : 0,
-			width : width,
-			height : height
-		};
-		if (width > maxWidth || height > maxHeight) {
-			rateWidth = width / maxWidth;
-			rateHeight = height / maxHeight;
-
-			if (rateWidth > rateHeight) {
-				param.width = maxWidth;
-				param.height = Math.round(height / rateWidth);
-			} else {
-				param.width = Math.round(width / rateHeight);
-				param.height = maxHeight;
-			}
-		}
-
-		param.left = Math.round((maxWidth - param.width) / 2);
-		param.top = Math.round((maxHeight - param.height) / 2);
-		return param;
-	}
-</script>
-
 
 </head>
 <body>
@@ -270,7 +202,7 @@
 												name="oldpassword" placeholder="Password"
 												onblur="confirm_password()">
 										</div>
-										<font id="warnPassword" color="red"></font>
+										<font id="warnOldPassword" color="red"></font>
 									</div>
 
 									<div class="form-group">
@@ -294,7 +226,7 @@
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10"
 											style="margin-left: 200px;">
-											<button type="button" class="grey" onclick="submitChange()">提交修改</button>
+											<button type="button" class="grey" id="submit-btn">提交修改</button>
 											<!--button style="display:none" type="reset" class="grey" style="margin-left: 20px;">重置</button-->
 											<!-- <button type="submit" class="btn btn-default">Sign in</button> -->
 										</div>
@@ -310,8 +242,9 @@
 					<div class="clear" style="height: 100px;"></div>
 
 					<h2 class="head">猜你喜欢</h2>
-					<div class="top-box" id="recommendation"></div>
+					<div class="top-box" id="recommendation">
 
+					</div>
 
 					<div class="clear"></div>
 				</div>
@@ -323,11 +256,13 @@
 			<div class="rsidebar span_1_of_left">
 				<div class="top-border"></div>
 				<div class="border">
-					<link href="css/default.css" rel="stylesheet" type="text/css"
-						media="all" />
-					<link href="css/nivo-slider.css" rel="stylesheet" type="text/css"
-						media="all" />
-					<script src="js/jquery.nivo.slider.js"></script>
+					<link href="<%=request.getContextPath()%>/public/css/default.css"
+						rel="stylesheet" type="text/css" media="all" />
+					<link
+						href="<%=request.getContextPath()%>/public/css/nivo-slider.css"
+						rel="stylesheet" type="text/css" media="all" />
+					<script
+						src="<%=request.getContextPath()%>/public/js/jquery.nivo.slider.js"></script>
 					<script type="text/javascript">
 						$(window).load(function() {
 							$('#slider').nivoSlider();
@@ -335,8 +270,11 @@
 					</script>
 					<div class="slider-wrapper theme-default">
 						<div id="slider" class="nivoSlider">
-							<img src="images/t-img1.jpg" alt="" /> <img
-								src="images/t-img2.jpg" alt="" /> <img src="images/t-img3.jpg"
+							<img src="<%=request.getContextPath()%>/public/images/t-img1.jpg"
+								alt="" /> <img
+								src="<%=request.getContextPath()%>/public/images/t-img2.jpg"
+								alt="" /> <img
+								src="<%=request.getContextPath()%>/public/images/t-img3.jpg"
 								alt="" />
 						</div>
 					</div>
@@ -370,7 +308,76 @@
 	<!-- <h3 class='team-state-submit' data-toggle='modal' data-target='#myModal' onclick="setApplyIdForSubmit(1)">比赛正在进行，点击提交阶段产物</h3> -->
 
 	<%@ include file="/public/section/upload-file.jsp"%>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/public/js/md5-v2.2.js"></script>
 
+	<script type="text/javascript">
+		function changeHead() {
+			document.getElementById('upimg').click();
+		}
+		//图片上传预览    IE是用了滤镜。
+		function previewImage(file) {
+			var MAXWIDTH = 260;
+			var MAXHEIGHT = 180;
+			var div = document.getElementById('preview');
+			if (file.files && file.files[0]) {
+				div.innerHTML = '<img id=imghead>';
+				var img = document.getElementById('imghead');
+				img.onload = function() {
+					var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT,
+							img.offsetWidth, img.offsetHeight);
+					img.width = rect.width;
+					img.height = rect.height;
+					//                 img.style.marginLeft = rect.left+'px';
+					img.style.marginTop = rect.top + 'px';
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					img.src = evt.target.result;
+				}
+				reader.readAsDataURL(file.files[0]);
+			} else //兼容IE
+			{
+				var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+				file.select();
+				var src = document.selection.createRange().text;
+				div.innerHTML = '<img id=imghead>';
+				var img = document.getElementById('imghead');
+				img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+				var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth,
+						img.offsetHeight);
+				status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width
+						+ ',' + rect.height);
+				div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+			}
+
+			alert("头像修改成功！")
+		}
+		function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+			var param = {
+				top : 0,
+				left : 0,
+				width : width,
+				height : height
+			};
+			if (width > maxWidth || height > maxHeight) {
+				rateWidth = width / maxWidth;
+				rateHeight = height / maxHeight;
+
+				if (rateWidth > rateHeight) {
+					param.width = maxWidth;
+					param.height = Math.round(height / rateWidth);
+				} else {
+					param.width = Math.round(width / rateHeight);
+					param.height = maxHeight;
+				}
+			}
+
+			param.left = Math.round((maxWidth - param.width) / 2);
+			param.top = Math.round((maxHeight - param.height) / 2);
+			return param;
+		}
+	</script>
 
 	<script type="text/javascript">
 		$(document).ready(function(){	
@@ -379,7 +386,27 @@
 		    });		
 			$('#slider').nivoSlider();
 		    getReconmmendation();
-		
+
+			$("#submit-btn").click(function() {
+				$.ajax({
+					url : $("#appName").val() + "/user/userPasswordChange.act",
+					type : "POST",
+					data : {
+						oldpassword : hex_md5($("#oldpassword").val()),
+						newpassword : hex_md5($("#newpassword").val())
+					},
+					dataType : "JSON",
+					success : function(res) {
+						alert("success!");
+						console.log(res);
+						location.href = $("#appName").val() + "/user/userAccount";
+					},
+					error : function(res) {
+						console.log(res);
+						alert('提交失败，请重新操作！');
+					}
+				});
+			});
 		});
 		
 		function getReconmmendation(){	
@@ -440,24 +467,16 @@
 				$("#recommendation").html(htmlText);
 		}
 
-		function submitChange(){
-			$.ajax({
-				url : $("#appName").val() + "/user/userPasswordChange.act",
-				type : "POST",
-				data : {
-					oldpassword : $("#oldpassword").val(),
-					newpassword : $("#newpassword").val()
-				dataType : "JSON",
-				success : function(res) {
-					console.log(res);
-					
-				},
-				error : function(res) {
-					console.log(res);
-					alert('提交失败，请重新操作！');
-				}
-			});
+		function confirm_password(){
+			//warnOldPassword
+			var password = document.getElementById("oldpassword").value;
+			if (password == "") {
+				document.getElementById("warnOldPassword").innerHTML = 
+				'用户名输入不合法，请输入用户名！';
+				document.getElementById("oldpassword").value = "";
+			};
 		}
+
 	</script>
 </body>
 </html>
