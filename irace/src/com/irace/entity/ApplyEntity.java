@@ -192,6 +192,12 @@ public class ApplyEntity implements IEntity{
 			map.put("reward",this.getTeamEntity().getRewardEntity().getName());	
 		else 
 			map.put("reward","未获奖");	
+		map.put("raceContent",this.getRaceEntity().getContent());	
+		map.put("raceOrgName",this.getRaceEntity().getOrganizerEntity().getName());
+		map.put("raceGrade",this.getRaceEntity().getGrade());
+		map.put("raceType",this.getRaceEntity().getTypeRaceEntity().getName());
+		map.put("raceStartTime",this.getRaceEntity().getStartTime());
+		map.put("raceEndTime",this.getRaceEntity().getEndTime());
 		return map;
 	}
 	

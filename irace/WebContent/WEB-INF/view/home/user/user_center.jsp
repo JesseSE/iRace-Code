@@ -336,35 +336,35 @@ function raceTab(pos)
 		var htmlText = " <a name='race_default'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++){
-			if(race[i].status == 2){
+			if(race[i].raceStatus == 2 || race[i].raceStatus == 1){
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
-				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
-				"<h3 style='display:inline;'>" + race[i].name + "</h3>" ;
+				"<a class='list-group-item list-group-item-success' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].raceId +"'>"+ 
+				"<h3 style='display:inline;'>" + race[i].raceName + "</h3>" ;
 				
 				
 				//判断组队状态
-				var apply = isJoinedAteam(race[i].id);	
+				//var apply = isJoinedAteam(race[i].raceId);	
 				//console.log(apply);
-				if(null == apply || " " == apply || "" == apply || "[]" == apply){					
-					htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
-				}else{					
-					if(apply[0].status == 0)
+				//if(null == apply || " " == apply || "" == apply || "[]" == apply){					
+					//htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
+				//}else{					
+					if(race[i].status == 0)
 						htmlText = htmlText + "<h3 class='race-state-wait'>暂未组队，点击组队</h3>";
-					else if(apply[0].status == 1)
-						htmlText = htmlText + "<h3 class='race-state-wait'>已经申请加入："+ apply[0].teamName +"</h3>";
-					else if(apply[0].status == 2)
-						htmlText = htmlText + "<h3 class='race-state-wait'>已经加入："+ apply[0].teamName +"</h3>";
-				}
+					else if(race[i].status == 1)
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经申请加入："+ race[i].teamName +"</h3>";
+					else if(race[i].status == 2)
+						htmlText = htmlText + "<h3 class='race-state-wait'>已经加入："+ race[i].teamName +"</h3>";
+				//}
 								
 				
 				htmlText = htmlText + 
 				"</a>" +
-				"<a class='list-group-item'>" + race[i].content + "<br><br>"+
-				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
-				"<span class='label label-primary'>" + race[i].grade + "</span>" +
-				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
-				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
+				"<a class='list-group-item'>" + race[i].raceContent + "<br><br>"+
+				"<span class='label label-default'>" + race[i].raceOrgName + "</span>" +
+				"<span class='label label-primary'>" + race[i].raceGrade + "</span>" +
+				"<span class='label label-success'>" + race[i].raceType + "</span>" +
+				"<span class='label label-info'>"+ (race[i].raceStartTime.year+1900) +"/" + race[i].raceStartTime.month +"至"+ (race[i].raceEndTime.year+1900) +"/" + race[i].raceEndTime.month +"</span>" +
 				"</a>" +"</div>";		
 			}
 		}	
@@ -405,28 +405,28 @@ function raceTab(pos)
 		var htmlText = " <a name='race_done'></a>" +
 			"<div class='panel-body'>";
 		for(var i=0; i<race.length;i++)	{
-			if(race[i].status == 3){
-				var reward = isJoinedAteam(race[i].id);				
+			if(race[i].raceStatus == 3){
+				//var reward = isJoinedAteam(race[i].id);				
 				
 				htmlText = htmlText + 
 				"<div class='list-group'>" +
-				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].id +"'>"+ 
-				"<h3 style='display:inline;'>" + race[i].name + "</h3>";
-				if(null == reward || " " == reward || "" == reward || "[]" == reward){
+				"<a class='list-group-item disabled' href=' " +$("#appName").val()+ "/race/detail/"+ race[i].raceId +"'>"+ 
+				"<h3 style='display:inline;'>" + race[i].raceName + "</h3>";
+				//if(null == reward || " " == reward || "" == reward || "[]" == reward){
+					/* htmlText = htmlText + 
+					"<h3 class='race-state-wait'>未获奖</h3>"; */					
+				//}else{
 					htmlText = htmlText + 
-					"<h3 class='race-state-wait'>未获奖</h3>";					
-				}else{
-					htmlText = htmlText + 
-					"<h3 class='race-state-wait'>"+ reward[0].reward +"</h3>";
-				}		
+					"<h3 class='race-state-wait'>"+ race[i].reward +"</h3>";
+				//}		
 				
 				htmlText = htmlText + 
 				"</a>" +			
-				" <a class='list-group-item'>" + race[i].content + "<br><br>"+
-				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
-				"<span class='label label-primary'>" + race[i].grade + "</span>" +
-				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
-				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
+				" <a class='list-group-item'>" + race[i].raceContent + "<br><br>"+
+				"<span class='label label-default'>" + race[i].raceOrgName + "</span>" +
+				"<span class='label label-primary'>" + race[i].raceGrade + "</span>" +
+				"<span class='label label-success'>" + race[i].raceType + "</span>" +
+				"<span class='label label-info'>"+ (race[i].raceStartTime.year+1900) +"/" + race[i].raceStartTime.month +"至"+ (race[i].raceEndTime.year+1900) +"/" + race[i].raceEndTime.month +"</span>" +
 				"</a>" +"</div>";
 			}
 		}
