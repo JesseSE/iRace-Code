@@ -172,8 +172,9 @@ public class RaceServiceImpl implements RaceService {
 	@Override
 	public String getRaceListByUser(Integer pageNo, int userID) {
 		// TODO Auto-generated method stub
-		return JsonUtil.listToJSONString(raceDao.getRaceListByUser(pageNo,
-				Constants.DEFAULT_PAGE_ITEM_NUM, userID),  new String[] {"typeEntities"});
+//		return JsonUtil.listToJSONString(raceDao.getRaceListByUser(pageNo,
+//				Constants.DEFAULT_PAGE_ITEM_NUM, userID),  new String[] {"typeEntities"});
+		return JsonUtil.getJsonByMapList(raceDao.getRaceListByUser(pageNo,Constants.DEFAULT_PAGE_ITEM_NUM, userID));
 	}
 
 	@Override

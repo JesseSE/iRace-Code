@@ -423,7 +423,8 @@
        		data: {raceType: typeId,
        			currentpagenum: currentPage},
        		dataType: "JSON",
-       		success: function(res) {           		
+       		success: function(res) { 
+       			$("#fwslider").hide();
        			showResult(res);        			
        		},
        		error: function(res) {        			
