@@ -382,11 +382,11 @@ function raceTab(pos)
 				//加在比赛的内容	
 				html = html +
 				"</a>" +
-				"<a class='list-group-item'>"+ raceList[i].content +"</a>" +
+				"<a class='list-group-item'>"+ raceList[i].content +"<br><br>" +
 				"<span class='label label-primary'>" + raceList[i].grade + "</span>" +
 				"<span class='label label-success'>" + raceList[i].typeRaceEntity.name + "</span>" +
 				"<span class='label label-info'>"+ raceList[i].startTime.year +"/" + raceList[i].startTime.month +"至"+ raceList[i].endTime.year +"/" + raceList[i].endTime.month +"</span>" +
-				"</div><br>";
+				"</a></div><br>";
 			}
 			
 			//判断比赛状态将其注入到对应控件中
