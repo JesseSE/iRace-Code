@@ -108,7 +108,7 @@ public class RaceManageController {
 		view.addObject("propertyList", propertyList);
 		view.addObject("stageList", stageList);
 		view.addObject("bigTypeList",bigTypeService.getBigTypeList());
-		
+		view.addObject("raceID",id);
 		return view;
 	}
 	

@@ -110,7 +110,7 @@ function raceTab(pos)
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav" style="font-family:微软雅黑;">
                     <li><a href="<%=request.getContextPath() %>/organizer/orgcenter" style="color:#FFF;background-color:#4cb1ca;">比赛管理<span class="sr-only">(current)</span></a></li>
-                    <li><a href="<%=request.getContextPath() %>/organizer/orgcenter">机构信息管理</a></li>   
+                    <li><a href="<%=request.getContextPath() %>/organizer/orginfo">机构信息管理</a></li>   
                     <li><a href="<%=request.getContextPath() %>/organizer/orgaccount">机构账号管理</a></li>                    
                   </ul>           
                 </div><!-- /.navbar-collapse -->
