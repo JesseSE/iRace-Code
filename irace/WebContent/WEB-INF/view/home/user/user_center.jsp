@@ -360,12 +360,12 @@ function raceTab(pos)
 				
 				htmlText = htmlText + 
 				"</a>" +
-				"<a class='list-group-item'>" + race[i].content + "</a>" +
+				"<a class='list-group-item'>" + race[i].content + "<br><br>"+
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
 				"<span class='label label-primary'>" + race[i].grade + "</span>" +
 				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
 				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
-				"</div>";		
+				"</a>" +"</div>";		
 			}
 		}	
 		
@@ -422,12 +422,12 @@ function raceTab(pos)
 				
 				htmlText = htmlText + 
 				"</a>" +			
-				" <a class='list-group-item'>" + race[i].content + "</a>" +
+				" <a class='list-group-item'>" + race[i].content + "<br><br>"+
 				"<span class='label label-default'>" + race[i].organizerEntity.name + "</span>" +
 				"<span class='label label-primary'>" + race[i].grade + "</span>" +
 				"<span class='label label-success'>" + race[i].typeRaceEntity.name + "</span>" +
 				"<span class='label label-info'>"+ (race[i].startTime.year+1900) +"/" + race[i].startTime.month +"至"+ (race[i].endTime.year+1900) +"/" + race[i].endTime.month +"</span>" +
-				"</div>";
+				"</a>" +"</div>";
 			}
 		}
 		
