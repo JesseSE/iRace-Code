@@ -19,13 +19,13 @@ public class Constants {
 	
 	//team 状态
 	/***未提交***/
-	public static Integer TEAM_NOT_SUBMIT = 1;
+	public static Integer TEAM_NOT_SUBMIT = 0;
 	/***等待审核***/
-	public static Integer TEAM_WAIT_REVIEW = 2;
+	public static Integer TEAM_WAIT_REVIEW = 1;
 	/***审核通过***/
-	public static Integer TEAM_PASS_REVIEW = 3;
+	public static Integer TEAM_PASS_REVIEW = 2;
 	/***审核拒绝***/
-	public static Integer TEAM_NOT_PASS_REVIEW = 4;
+	public static Integer TEAM_NOT_PASS_REVIEW = 3;
 	/***比赛正在进行 ***/
 	public static Integer TEAM_RACE_BEING = 5;
 	/***队伍被淘汰***/
