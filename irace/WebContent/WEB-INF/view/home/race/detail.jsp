@@ -130,7 +130,7 @@ function detailTab(pos)
 
     <%@ include file="/public/section/user-div.jsp" %>
 	<div class="avatar">
-		<img src="<%=request.getContextPath() %>/public/images/${race.getOrganizerEntity().getPicUrl() }">
+		<img src="${race.getOrganizerEntity().getPicUrl() }">
 	</div>
 <div class="mens">
   <div class="main">
@@ -166,7 +166,17 @@ function detailTab(pos)
 			</c:forEach>
 			
          	<div class="btn_form">
-				<form><button id="apply_submit" type="button" style="background:#4CB1CA;  color: #fff;line-height: 2em;width: 100px; border: none;">报名</button></form>
+         	<form><button id="apply_submit" data-status="${race.getStatus() }" type="button" style="background:#4CB1CA;  color: #fff;line-height: 2em;width: 100px; border: none;">
+         	<c:choose>
+         	<c:when test="${race.getStatus() == 1 }">报名</c:when>
+         	<c:when test="${race.getStatus() == 0 }">未开始</c:when>
+         	<c:when test="${race.getStatus() == 2 }">比赛中</c:when>
+         	<c:when test="${race.getStatus() == 3 }">已结束</c:when>
+         	<c:otherwise>
+         	
+         	</c:otherwise>
+         	</c:choose>
+         	</button></form>
 			</div>
 		 </div>
 		<div class="clear"></div>
@@ -259,14 +269,10 @@ function detailTab(pos)
                         </div>   
                           
                       </div>
-                </div>  
-    			</div>            
-                
+                </div>
+    			</div>
 		</div>
-		 
-	 
-	 
-	    <div class="clients">
+	    <div class="clients" style="display:none;">
 		    <h3 class="m_3">历年赛事风采展示</h3>
 			 <ul id="flexiselDemo3">
 				<li><img src="<%=request.getContextPath() %>/public/images/s5.jpg" /><a href="#">Category</a><p>Rs 600</p></li>
@@ -307,6 +313,18 @@ function detailTab(pos)
 
 <script type="text/javascript">
 	$(window).load(function() {
+		//默认选中报名时第一个小组
+		
+		if($("input[id*='group'").lenght > 0) {
+			$("input[id*='group'").get(0).checked = true;
+		}
+		
+		
+		if($("#apply_submit").attr("data-status") != "1") {
+			$("#apply_submit").attr("disabled", "disabled");
+			$("#apply_submit").css("background-color","#bbb");
+		}
+		
 		$("#flexiselDemo1").flexisel();
 		$("#flexiselDemo2").flexisel({
 			enableResponsiveBreakpoints: true,

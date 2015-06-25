@@ -51,17 +51,20 @@
 	<%@ include file="/public/section/user-div.jsp"%>
 	
 	
-	<input name="groupId" id="groupId" type="hidden" value="${groupId }">
-	<input name="raceId" type="hidden" value="${rid }">
+	<c:if test="${ hasApplyed == true }">
+		<input name="groupId" id="groupId" type="hidden" value="${groupId }">
+		<input name="raceId" type="hidden" value="${rid }">
+	</c:if>
 	
-	<c:if test="${hasApplyed == false }">
+	<c:if test="${ hasApplyed == false }">
 	
 	<!--报名资料-->
 	<div class="register_account" id="applyInfo" style="min-height: 430px; border:0;">
 		<div class="wrap">
 			<h4 class="title" style="font-family: 微软雅黑">填写报名资料</h4>
 			<form action="<%=request.getContextPath() %>/race/applyRace.act" class="form-horizontal" id="apply" name="apply">
-				
+				<input name="groupId" id="groupId" type="hidden" value="${groupId }">
+				<input name="raceId" type="hidden" value="${rid }">
 				<div class="form-group">
 					<label for="racename" class="col-sm-2 control-label">比赛名称</label>
 					<div class="col-sm-4">
@@ -94,10 +97,13 @@
 			</form>
 		</div>
 	</div>
+	
 	</c:if>
 	
+	<input id="hasJoinTeam" type="hidden" value="${hasJoinTeam }">
+	
 	<!--选择参赛队伍-->
-	<div id="chooseTeam" style="<c:if test='${hasApplyed == false }'>display: none;</c:if> min-height: 430px; margin-top: 60px;">
+	<div id="chooseTeam" style="<c:if test='${hasApplyed == false || hasJoinTeam == true }'>display: none;</c:if> min-height: 430px; margin-top: 60px;">
 		<div class="wrap">
 			<h4 class="title" style="font-family: 微软雅黑">
 				选择参赛队伍
@@ -108,63 +114,6 @@
 
 			<!--GDS软件工程实践课小组-->
 			<div class="panel-body">
-				
-				<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
-				<!-- 
-				<div class="list-group">
-					
-					<a class="list-group-item list-group-item-success" href="##"
-						onclick="upDown('zyxzContent');">
-						<h5 style="display: inline;">GDS软件工程实践课小组</h5>
-					</a>
-					<a class="list-group-item">
-						<div id="zyxzContent" style="display: none">
-							<div class="panel panel-default">
-								
-								<table class="table"
-									style="word-break: break-all; word-wrap: break-all;">
-									<thead style="font-weight: bold;">
-										<tr>
-											<th>#</th>
-											<th>姓名</th>
-											<th>邮箱</th>
-											<th>电话</th>
-											<th>状态</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-											<td>已加入</td>
-										</tr>
-										<tr style="background-color: #D9EDF7;">
-											<th scope="row">2</th>
-											<td>Jacob</td>
-											<td>Thornton</td>
-											<td>@fat</td>
-											<td>待审核</td>
-										</tr>
-										<tr>
-											<th scope="row">3</th>
-											<td>Larry</td>
-											<td>the aaaa</td>
-											<td>18811442504</td>
-											<td>已加入</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div> <span class="label label-default">比赛名字</span> <span
-						class="label label-primary">组长</span> <span
-						class="label label-success">口号</span>
-						<h5 class="team-join" onclick="alert();">申请加入队伍</h5>
-					</a>
-				</div>
-				 -->
-				
 				<c:forEach var="t" items="${teamList }">
 				<div class="list-group" id="team${t.getId() }">
 					<!--upDown()函数里的参数是小组的id，动态加载时需要将小组id写入布局-->
@@ -172,7 +121,7 @@
 						onclick="upDown('zyxzContent');">
 						<h5 style="display: inline;">${t.getName() }</h5>
 					</a>
-					<a class="list-group-item"> <!--开始展示小组成员-->
+					<a class="list-group-item">
 						<span class="label label-default">${raceName }</span>
 						<span class="label label-primary">${t.getUserEntity().getNickname() }</span>
 						<span class="label label-success">${t.getSlogan() }</span>
@@ -184,6 +133,13 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:if test="${hasJoinTeam }">
+		<p style="text-align:center; margin-top:20%; margin-bottom: 20%; font-size: 1.2em; color: #bbb;">
+			您已经报名参加了比赛<a href="<%=request.getContextPath() %>/race/detail/${rid }">${raceName }</a>，请前往<a href="<%=request.getContextPath() %>/user/userCenter">个人中心</a>
+		</p>
+	</c:if>
+	
 	<!--创建我的队伍-->
 	<div class="register_account" id="buildTeam"
 		style="display: none; min-height: 430px;">

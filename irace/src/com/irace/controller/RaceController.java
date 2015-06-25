@@ -94,8 +94,7 @@ public class RaceController extends SController {
 	@RequestMapping("homepageChoose.act")
 	public @ResponseBody String chooseAction(
 			@RequestParam(value="currentpagenum",required=true)int pageNum,
-			@RequestParam(value="chooseItem",required=true)int chooseItem)
-	{
+			@RequestParam(value="chooseItem",required=true)int chooseItem) {
 		if( pageNum < 0 ){
 			return null;
 		}else{			
@@ -189,8 +188,10 @@ public class RaceController extends SController {
 		
 		List teamList = teamService.getTeamEntityListByGroup(groupId,Constants.TEAM_NOT_SUBMIT);
 		View view = new View("home","race", "apply_race", "报名比赛");
+		ApplyEntity a = applyService.getApply(userId, groupId);
 		view.addObject("propertyList", propertyService.getPropertyList(rid));
-		view.addObject("hasApplyed", applyService.hasApplyed(userId, rid));
+		view.addObject("hasApplyed", null != a);
+		view.addObject("hasJoinTeam", null != a && null != a.getTeam());
 		view.addObject("rid", rid);
 		view.addObject("groupId", groupId);
 		view.addObject("groupName", groupName);
@@ -250,19 +251,39 @@ public class RaceController extends SController {
 			@RequestParam(value="name",required=true)String name,
 			@RequestParam(value="slogan",required=true)String slogan,
 			@RequestParam(value="groupId",required=true)Integer groupId,
-			HttpSession session){
+			HttpSession session) {
 		
-		TeamEntity teamEntity = new TeamEntity();
-		teamEntity.setName(name);
-		teamEntity.setSlogan(slogan);
-		teamEntity.setLeader((Integer)session.getAttribute("uid"));
-		teamEntity.setGroup(groupId);
-		teamEntity.setStatus(Constants.TEAM_NOT_SUBMIT);
-		if(teamService.addTeam(teamEntity) > 0) {
-			return JsonUtil.getJsonInfoOK();
+		Integer uid = (Integer)session.getAttribute("uid");
+		ApplyEntity hasApply = applyService.getApply(uid, groupId);
+		if(null == hasApply || null == hasApply.getTeam()) {
+			TeamEntity teamEntity = new TeamEntity();
+			teamEntity.setName(name);
+			teamEntity.setSlogan(slogan);
+			teamEntity.setLeader(uid);
+			teamEntity.setGroup(groupId);
+			teamEntity.setStatus(Constants.TEAM_NOT_SUBMIT);
+			Integer teamId = teamService.addTeam(teamEntity);
+			
+			if(teamId > 0) {
+				Integer raceId = groupRaceService.getGroupRace(groupId).getRace();
+				//ApplyEntity apply = new ApplyEntity(uid, raceId, groupId, teamId, 2); //2 表示参加了队伍
+				ApplyEntity apply = applyService.getApply(uid, groupId);
+				apply.setTeam(teamId);
+				apply.setStatus(2);
+				if(applyService.updateApply(apply)) {
+					return JsonUtil.getJsonInfoOK();
+				} else {
+					return JsonUtil.getJsonOtherError("更新报名记录失败!");
+				}
+				
+			} else {
+				return JsonUtil.getJsonOtherError("增加队伍失败!");
+			}
 		} else {
-			return JsonUtil.getJsonOtherError("增加队伍失败!");
+			return JsonUtil.getJsonOtherError("已经申请组队!");
 		}
+		
+		
 	}
 	
 	@RequestMapping("joinTeam.act")
@@ -285,9 +306,9 @@ public class RaceController extends SController {
 		
 	}
 	
-	@RequestMapping("test/page/detail")
-	public View getTeamList() {
-		return new View("home", "race", "detail01", "test");
-	}
+//	@RequestMapping("test/page/detail")
+//	public View getTeamList() {
+//		return new View("home", "race", "detail01", "test");
+//	}
 	
 }
