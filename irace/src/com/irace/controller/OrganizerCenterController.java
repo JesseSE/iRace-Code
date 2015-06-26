@@ -6,11 +6,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.irace.aop.LoginVerify;
 import com.irace.entity.OrganizerEntity;
+import com.irace.entity.RaceEntity;
 import com.irace.entity.UserEntity;
 import com.irace.service.OrganizerService;
 import com.irace.service.RaceService;
@@ -207,6 +210,18 @@ public class OrganizerCenterController extends SController {
 			}else{
 				return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"操作失败，请重新操作！");
 			}
+		}
+	}
+	
+	@RequestMapping("publishRace/{rid}")
+	@ResponseBody
+	public String publishRace(@PathVariable("rid")Integer rid) {
+		RaceEntity race = raceService.getRace(rid);
+		race.setStatus(1);
+		if(raceService.updateRace(race)) {
+			return JsonUtil.getJsonInfoOK();
+		} else {
+			return JsonUtil.getJsonInfo(InfoCode.UNKNOWN,"比赛发布失败！");
 		}
 	}
 
