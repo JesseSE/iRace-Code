@@ -15,6 +15,15 @@
     }
 </style>
     <div class="header-top">
+    
+    
+<!--                网站标题logo-->
+<%if(!request.getServletPath().equals("/index.jsp")){ %>
+				<div class="logo">
+					<a href="<%=request.getContextPath() %>"><img  style="height:30px;margin-top:5px;margin-left:60px;" src="<%=request.getContextPath() %>/public/images/logo_2.png" alt=""/></a>
+				</div>
+    <%} %>
+    
 	   <div class="wrap"> 
 <!--           登录注册菜单模块-->
 			<div class="cssmenu">
