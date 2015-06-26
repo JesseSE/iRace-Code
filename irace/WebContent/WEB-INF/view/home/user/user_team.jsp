@@ -286,8 +286,13 @@
 		for(var number = 0;number < apply.length;number++){
 			htmlCreate = htmlCreate + "<a name = 'i_create'></a>"+
 			"<div class = 'panel-body'>"+
-			"<div class ='list-group'>" +
-		    "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + ", 1 );'  href='##' >" +
+			"<div class ='list-group'>" ;
+			if(apply[number].teamStatus == 0){
+				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + ", 1 );'  href='##' >" ;
+			}else{
+				htmlCreate = htmlCreate + "<a class='list-group-item list-group-item-success' onclick='upDown("+apply[number].teamId + ", 2 );'  href='##' >" ;
+			}
+			htmlCreate = htmlCreate +
 			"<h3 style='display:inline;'>"+apply[number].teamName+"</h3></a>"+
 			"<a class='list-group-item'>"+
 			"<div id ='"+apply[number].teamId +"' style='display:none'>"+"</div>"+
