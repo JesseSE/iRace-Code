@@ -91,7 +91,7 @@ public class UserTeamController extends SController{
 	public @ResponseBody String getTeamchooseRefuse(
 			@RequestParam(value="applyID",required=true)int applyID,
 			@RequestParam(value="teamID",required=true)int teamID){
-		ApplyEntity apply = new ApplyEntity();
+		ApplyEntity apply = applyService.getApply(applyID);
 		apply.setId(applyID);
 		System.out.println("applyID"+applyID+"teamID"+teamID);
 		apply.setStatus(InfoCode.APPLY_STATUS_REGISTERED);
@@ -104,7 +104,7 @@ public class UserTeamController extends SController{
 	public @ResponseBody String getTeamchooseDelete(
 			@RequestParam(value="applyID",required=true)int applyID,
 			@RequestParam(value="teamID",required=true)int teamID){
-		ApplyEntity apply = new ApplyEntity();
+		ApplyEntity apply = applyService.getApply(applyID);
 		apply.setId(applyID);
 		apply.setStatus(InfoCode.APPLY_STATUS_REGISTERED);
 		applyService.updateApply(apply);
